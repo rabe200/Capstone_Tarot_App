@@ -5,7 +5,6 @@ const nextConfig = {
   },
   reactStrictMode: true,
   webpack(config) {
-    // console.log(options.webpack.version);
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
@@ -17,21 +16,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-// module.exports = (phase, { defaultConfig }) => {
-//   return {
-//     ...defaultConfig,
-
-//     webpack: (config) => {
-//       config.resolve = {
-//         ...config.resolve,
-//         fallback: {
-//           fs: false,
-//           path: false,
-//           os: false,
-//         },
-//       };
-//       return config;
-//     },
-//   };
-// };
