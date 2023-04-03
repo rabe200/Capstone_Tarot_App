@@ -29,19 +29,20 @@ export const NameBanner = styled.h2`
   text-align: center;
 `;
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-export default function KartenAnzeige() {
+export default function KartenAnzeige({ fetcher }) {
   const [randomNumber, setRandomNumber] = useState("0");
   const router = useRouter();
   const { id } = router.query;
-  const { data, isLoading, error } = useSWR(`/api/tarot/${id}`, fetcher);
+  const { data, isLoading, error } = useSWR(
+    id ? `/api/tarot/${id}` : null,
+    fetcher
+  );
 
   function RandomCard() {
     {
       getAllCards();
     }
-    setRandomNumber(Math.floor(Math.random() * 77 + 1));
+    setRandomNumber(Math.floor(Math.random() * 77 + 0));
     router.push(`${randomNumber}`);
   }
 

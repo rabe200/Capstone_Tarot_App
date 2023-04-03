@@ -11,7 +11,6 @@ export default createGlobalStyle`
     margin: 0;
     font-family: system-ui;
     width: 375px;
-    height: 667px;
     position: relative;
     display: flex;
     align-items: center;

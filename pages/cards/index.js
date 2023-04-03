@@ -1,8 +1,6 @@
 import useSWR from "swr";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-export default function HomePage() {
+export default function HomePage({ fetcher }) {
   const { data, error, isLoading } = useSWR("/api/tarot", fetcher);
 
   if (isLoading) {
