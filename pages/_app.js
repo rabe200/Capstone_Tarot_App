@@ -1,24 +1,26 @@
 import GlobalStyle from "../styles";
-import { SWRConfig } from "swr";
-
-const fetcher = async (url) => {
-  const res = await fetch(url);
-  if (!res.ok) {
-    const error = new Error("An error occurred while fetching the data.");
-    error.info = await res.json();
-    error.status = res.status;
-    throw error;
-  }
-  return res.json();
-};
+import { cards } from "../lib/data";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
+  const [randomNumber, setRandomNumber] = useState(undefined);
+  function RandomNumber() {
+    useEffect(() => {
+      setRandomNumber(Math.floor(Math.random() * 77 + 0));
+    }, []);
+    return { randomNumber };
+  }
+
   return (
     <>
       <GlobalStyle />
-      <SWRConfig value={{ fetcher }}>
-        <Component {...pageProps} />
-      </SWRConfig>
+      <Component
+        {...pageProps}
+        cards={cards}
+        onClick={RandomNumber()}
+        randomNumber={randomNumber}
+      />
     </>
   );
 }

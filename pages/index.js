@@ -1,15 +1,11 @@
 import Link from "next/link";
 
-let randomNr = Math.floor(Math.random() * 77 + 1);
-
-export default function HomePage() {
+export default function HomePage({ randomNumber }) {
   return (
-    <div>
-      <>
-        <Link href={{ pathname: "./cards/[id]", query: { id: `${randomNr}` } }}>
-          RANDOM CARD
-        </Link>
-      </>
-    </div>
+    <>
+      <Link href={`/cards/${randomNumber}`}>DAILY CARD </Link>
+      <p></p>
+      <Link href="/cards">CARDLIST</Link>
+    </>
   );
 }
