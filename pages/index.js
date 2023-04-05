@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-export default function HomePage({ randomNumber }) {
+export default function HomePage() {
   return (
     <>
-      <Link href={`/cards/${randomNumber}`}>DAILY CARD </Link>
+      <Link href={`/cards/dailycard`}>DAILY CARD</Link>
       <p></p>
-      <Link href="/cards">CARDLIST</Link>
+      <Link href="/cards/">CARDLIST</Link>
     </>
   );
 }

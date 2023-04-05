@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Link from "next/link";
+
 export const CardBody = styled.div`
   height: 500px;
   width: 300px;
@@ -17,22 +18,27 @@ export const NameBanner = styled.h2`
   text-align: center;
 `;
 
-export default function ShowCard({ cards }) {
-  const router = useRouter();
-  const { id } = router.query;
-  if (id) {
+export default function ShowCard({ dailyCard }) {
+  if (dailyCard) {
     return (
       <>
         <CardBody>
-          <h1>{cards[id].value}</h1>
+          <h1>{dailyCard.value}</h1>
           <Image
-            src={cards[id].image}
+            src={dailyCard.image}
             width="200"
             height="350"
             alt="tarotcard"
           />
-          <NameBanner>{cards[id].name}</NameBanner>
+          <NameBanner>{dailyCard.name}</NameBanner>
         </CardBody>
+        <Link
+          href={{
+            pathname: "/cards/dailycard/detail",
+          }}
+        >
+          <button type="button">more details</button>
+        </Link>
       </>
     );
   } else {
