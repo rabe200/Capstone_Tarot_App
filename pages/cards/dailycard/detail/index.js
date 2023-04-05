@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import BackButton from "../../../../components/navigation/backbutton/backbutton";
 
 export default function Details({ dailyCard }) {
   if (dailyCard) {
@@ -24,6 +25,14 @@ export default function Details({ dailyCard }) {
           }}
         >
           <button type="button">more details</button>
+        </Link>
+
+        <Link
+          href={{
+            pathname: "/cards/dailycard/detail/notes",
+          }}
+        >
+          <button type="button">make notes</button>
         </Link>
       </>
     );

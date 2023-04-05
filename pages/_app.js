@@ -7,7 +7,7 @@ import { getCardById } from "../lib/data";
 export default function App({ Component, pageProps }) {
   const [id, setId] = useState(undefined);
   useEffect(() => {
-    setId(Math.floor(Math.random() * 77 + 0));
+    setId(Math.floor(Math.random() * 77));
   }, []);
 
   const dailyCard = getCardById(id);
