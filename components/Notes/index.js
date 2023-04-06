@@ -20,8 +20,6 @@ export default function NoteFormular({ dailyCard, id }) {
 
   return (
     <>
-      <p>{console.log(id)}</p>
-      <p>{console.log(dailyCard)}</p>
       <form
         aria-label="form"
         onSubmit={(event) => {
