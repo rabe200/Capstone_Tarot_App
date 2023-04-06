@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-
 export default function Details({ dailyCard }) {
   if (dailyCard) {
     return (
@@ -18,12 +17,20 @@ export default function Details({ dailyCard }) {
           </figcaption>
         </figure>
         <article>{dailyCard.desc}</article>
+
         <Link
           href={{
             pathname: "/cards/dailycard/detail",
           }}
         >
           <button type="button">less details</button>
+        </Link>
+        <Link
+          href={{
+            pathname: "/cards/dailycard/detail/notes",
+          }}
+        >
+          <button type="button">make notes</button>
         </Link>
       </>
     );

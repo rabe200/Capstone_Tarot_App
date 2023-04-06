@@ -42,6 +42,6 @@ export default function ShowCard({ dailyCard }) {
       </>
     );
   } else {
-    return <p>loading</p>;
+    return null;
   }
 }

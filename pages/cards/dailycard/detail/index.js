@@ -25,6 +25,14 @@ export default function Details({ dailyCard }) {
         >
           <button type="button">more details</button>
         </Link>
+
+        <Link
+          href={{
+            pathname: "/cards/dailycard/detail/notes",
+          }}
+        >
+          <button type="button">make notes</button>
+        </Link>
       </>
     );
   } else {
