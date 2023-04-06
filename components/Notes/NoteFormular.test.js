@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import NoteFormular from ".";
+import NoteFormular from "../../pages/cards/dailycard/detail/notes";
 
 jest.mock("next/router", () => ({
   useRouter() {
