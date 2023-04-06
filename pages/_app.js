@@ -10,13 +10,13 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   const dailyCard = getCardById(id);
-  return (
-    <>
-      <GlobalStyle />
-      <Component {...pageProps} dailyCard={dailyCard} cards={cards} id={id} />
-    </>
-  );
+
+  if (dailyCard)
+    return (
+      <>
+        <GlobalStyle />
+        <Component {...pageProps} dailyCard={dailyCard} cards={cards} id={id} />
+      </>
+    );
+  else return null;
 }
-// const [randomNumber, setRandomNumber] = useLocalStorageState("randomNumber", {
-//   defaultValue: 2,
-// });
