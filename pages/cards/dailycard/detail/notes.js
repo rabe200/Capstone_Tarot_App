@@ -55,18 +55,18 @@ export default function NoteFormular({ dailyCard }) {
           />
         </label>
         note
-        <button type="submit" name="submit">
+        <button type="submit" name="submit" aria-label="submit button">
           submit
         </button>
       </form>
 
-      <BackButton name="Back" />
+      <BackButton name="Back" aria-label="back button" />
       <Link
         href={{
           pathname: "/",
         }}
       >
-        <button type="button" name="end">
+        <button type="button" name="end" aria-label="end session">
           end
         </button>
       </Link>

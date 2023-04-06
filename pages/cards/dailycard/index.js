@@ -28,7 +28,7 @@ export default function ShowCard({ dailyCard }) {
             src={dailyCard.image}
             width="200"
             height="350"
-            alt="tarotcard"
+            alt={dailyCard.name}
           />
           <NameBanner>{dailyCard.name}</NameBanner>
         </CardBody>
