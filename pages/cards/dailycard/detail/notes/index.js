@@ -1,5 +1,5 @@
 import Link from "next/link";
-import BackButton from "../../../../../components/Navigation/Backbutton/Backbutton";
+import BackButton from "../../../../../components/Backbutton/Backbutton";
 import { useRef, useEffect } from "react";
 import useLocalStorage from "use-local-storage";
 import useLocalStorageState from "use-local-storage";
