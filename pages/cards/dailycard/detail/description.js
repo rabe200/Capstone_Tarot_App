@@ -23,14 +23,18 @@ export default function Details({ dailyCard }) {
             pathname: "/cards/dailycard/detail",
           }}
         >
-          <button type="button">less details</button>
+          <button type="button" aria-label="less details button">
+            less details
+          </button>
         </Link>
         <Link
           href={{
             pathname: "/cards/dailycard/detail/notes",
           }}
         >
-          <button type="button">make notes</button>
+          <button type="button" aria-label="take notes">
+            take notes
+          </button>
         </Link>
       </>
     );

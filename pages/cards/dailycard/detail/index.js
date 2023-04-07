@@ -23,7 +23,9 @@ export default function Details({ dailyCard }) {
             pathname: "/cards/dailycard/detail/description",
           }}
         >
-          <button type="button">more details</button>
+          <button type="button" aria-label="more details button">
+            more details
+          </button>
         </Link>
 
         <Link
@@ -31,7 +33,9 @@ export default function Details({ dailyCard }) {
             pathname: "/cards/dailycard/detail/notes",
           }}
         >
-          <button type="button">make notes</button>
+          <button type="button" aria-label="take notes button">
+            take notes
+          </button>
         </Link>
       </>
     );

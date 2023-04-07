@@ -2,6 +2,7 @@ import GlobalStyle from "../styles";
 import { cards } from "../lib/data";
 import { useState, useEffect } from "react";
 import { getCardById } from "../lib/data";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
   const [id, setId] = useState(undefined);
@@ -9,13 +10,36 @@ export default function App({ Component, pageProps }) {
     setId(Math.floor(Math.random() * 77));
   }, []);
 
+  const [mood, setMood] = useLocalStorageState(`${id}.mood`, 0);
+  const [clicks, setClicks] = useLocalStorageState(`${id}.clicks`, 0);
+  const [averageMood, setAverageMood] = useLocalStorageState(
+    `${id}.averageMood`,
+    0
+  );
   const dailyCard = getCardById(id);
+
+  useEffect(() => {
+    setAverageMood(mood / clicks);
+    clicks ? setClicks(clicks) : setClicks(0);
+    mood ? setMood(mood) : setMood(0);
+  });
 
   if (dailyCard)
     return (
       <>
         <GlobalStyle />
-        <Component {...pageProps} dailyCard={dailyCard} cards={cards} id={id} />
+        <Component
+          {...pageProps}
+          dailyCard={dailyCard}
+          cards={cards}
+          id={id}
+          setMood={setMood}
+          setClicks={setClicks}
+          setAverageMood={setAverageMood}
+          averageMood={averageMood}
+          mood={mood}
+          clicks={clicks}
+        />
       </>
     );
   else return null;
