@@ -6,7 +6,7 @@ export default function HomePage() {
       <Link href={`/cards/dailycard/moodmeter`}>DAILY CARD</Link>
       <p></p>
       <Link href="/cards/">CARDLIST</Link>
-      <Link href="/history/">History</Link>
+      <Link href="/cards/history/">History</Link>
     </>
   );
 }

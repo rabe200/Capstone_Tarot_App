@@ -3,17 +3,17 @@ import BackButton from "../../../../components/Backbutton/backbutton";
 import { useRef, useEffect } from "react";
 import useLocalStorage from "use-local-storage";
 import useLocalStorageState from "use-local-storage";
-import { v4 as uuidv4 } from "uuid";
 
 function setItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-export default function NoteFormular({ dailyCard, id }) {
+export default function NoteFormular({ dailyCard, id, setUsedIds, usedIds }) {
   const [inputValue, setInputValue] = useLocalStorage();
-  const [notes, setNotes] = useLocalStorageState(`${id}.notes`, []);
+  const [notes, setNotes] = useLocalStorageState(`${id}`, []);
 
   const inputReference = useRef(null);
+
   useEffect(() => {
     inputReference.current.focus();
   }, []);
@@ -24,19 +24,26 @@ export default function NoteFormular({ dailyCard, id }) {
         aria-label="form"
         onSubmit={(event) => {
           event.preventDefault();
-
+          const currentMood = JSON.parse(
+            localStorage.getItem(`${id}.averageMood`)
+          );
           const newNotes = [
             ...notes,
             {
-              text: inputValue,
+              note: inputValue,
               id: dailyCard.id,
               date: new Date(),
               cardname: dailyCard.name,
+              mood: currentMood,
             },
           ];
           setNotes(newNotes);
-          setItem(`${id}.notes`, newNotes);
+          setItem(`${id}`, newNotes);
           setInputValue("");
+
+          const newUsedId = [...usedIds, id];
+          setUsedIds(newUsedId);
+          setItem(`usedIds`, newUsedId);
         }}
       >
         <label htmlFor="note">
