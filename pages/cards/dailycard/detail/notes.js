@@ -9,9 +9,9 @@ function setItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-export default function NoteFormular({ dailyCard }) {
+export default function NoteFormular({ dailyCard, id }) {
   const [inputValue, setInputValue] = useLocalStorage();
-  const [notes, setNotes] = useLocalStorageState("text", []);
+  const [notes, setNotes] = useLocalStorageState(`${id}.notes`, []);
 
   const inputReference = useRef(null);
   useEffect(() => {
@@ -29,13 +29,13 @@ export default function NoteFormular({ dailyCard }) {
             ...notes,
             {
               text: inputValue,
-              id: uuidv4(),
+              id: dailyCard.id,
               date: new Date(),
               cardname: dailyCard.name,
             },
           ];
           setNotes(newNotes);
-          setItem("text", newNotes);
+          setItem(`${id}.notes`, newNotes);
           setInputValue("");
         }}
       >
