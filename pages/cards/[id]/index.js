@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
-
 export default function Details({ cards }) {
   const router = useRouter();
   const id = router ? router.query.id : null;
@@ -11,7 +10,7 @@ export default function Details({ cards }) {
 
   function handleClickNext() {
     if (id < 77) {
-      setCurrentPage(parseInt(currentPage) + 1);
+      setCurrentPage(parseInt(id) + 1);
       console.log(currentPage);
       router.push(`/cards/${parseInt(id) + 1}`);
     } else {
@@ -22,7 +21,7 @@ export default function Details({ cards }) {
 
   function handleClickPrev() {
     if (id > 0) {
-      setCurrentPage(parseInt(currentPage) - 1);
+      setCurrentPage(parseInt(id) - 1);
       console.log(currentPage);
       router.push(`/cards/${parseInt(id) - 1}`);
     } else {
@@ -30,10 +29,12 @@ export default function Details({ cards }) {
       router.push(`/cards/77`);
     }
   }
+
   useEffect(() => {
     setCurrentPage(currentPage);
     console.log("useEffect: ", currentPage);
   }, [currentPage]);
+
   return (
     id < 78 && (
       <>
