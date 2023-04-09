@@ -30,8 +30,6 @@ export default function App({ Component, pageProps }) {
     setAverageMood(mood / clicks);
     clicks ? setClicks(clicks) : setClicks(0);
     mood ? setMood(mood) : setMood(0);
-
-    // usedIds ? setUsedIds(usedIds) : setUsedIds([id]);
   });
 
   if (dailyCard)
