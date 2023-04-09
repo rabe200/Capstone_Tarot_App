@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useEffect } from "react";
-export default function Details({ cards }) {
+import { getCardById } from "../../../lib/data";
+
+export default function Details() {
   const router = useRouter();
   const id = router ? router.query.id : null;
   const [currentPage, setCurrentPage] = useState(id);
@@ -11,7 +12,6 @@ export default function Details({ cards }) {
   function handleClickNext() {
     if (id < 77) {
       setCurrentPage(parseInt(id) + 1);
-      console.log(currentPage);
       router.push(`/cards/${parseInt(id) + 1}`);
     } else {
       setCurrentPage(0);
@@ -22,7 +22,6 @@ export default function Details({ cards }) {
   function handleClickPrev() {
     if (id > 0) {
       setCurrentPage(parseInt(id) - 1);
-      console.log(currentPage);
       router.push(`/cards/${parseInt(id) - 1}`);
     } else {
       setCurrentPage(77);
@@ -30,11 +29,7 @@ export default function Details({ cards }) {
     }
   }
 
-  useEffect(() => {
-    setCurrentPage(currentPage);
-    console.log("useEffect: ", currentPage);
-  }, [currentPage]);
-
+  const card = getCardById(id);
   return (
     id < 78 && (
       <>
@@ -42,13 +37,13 @@ export default function Details({ cards }) {
           <Image
             width={100}
             height={180}
-            src={cards[currentPage].image}
-            alt={cards[currentPage].name}
+            src={card.image}
+            alt={card.name}
             priority={true}
           />
-          <figcaption>{cards[currentPage].name}</figcaption>
+          <figcaption>{card.name}</figcaption>
         </figure>
-        <Link href={`/cards/${currentPage}/detail`}>
+        <Link href={`/cards/${card.id}/detail`}>
           <button type="button" aria-label="more details button">
             more details
           </button>

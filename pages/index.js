@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function HomePage(id) {
-  console.log("id:", id);
   return (
     <>
       <Link href={`/cards/dailycard/moodmeter`}>DAILY CARD</Link>
