@@ -42,6 +42,11 @@ export default function Details() {
             priority={true}
           />
           <figcaption>{card.name}</figcaption>
+          <Link href={`/cards/${card.id}/notes`}>
+            <button type="button" aria-label="go to notes">
+              notes
+            </button>
+          </Link>
         </figure>
         <Link href={`/cards/${card.id}/detail`}>
           <button type="button" aria-label="more details button">
