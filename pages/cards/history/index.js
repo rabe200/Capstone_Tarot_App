@@ -27,7 +27,6 @@ export default function History({ usedIds }) {
 
   return filteredUsedIds.map((id) => {
     const filteredStoredElements = getElementsfromLocalStorage([id]);
-    console.log(filteredStoredElements);
     return (
       <Fragment key={uuidv4()}>
         {filteredStoredElements.map((element) => (

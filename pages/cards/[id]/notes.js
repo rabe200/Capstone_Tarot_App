@@ -6,7 +6,6 @@ import { getCardById } from "../../../lib/data";
 export default function History() {
   const router = useRouter();
   const id = router ? router.query.id : null;
-  console.log(id);
   function getElementsFromLocalStorage(id) {
     let elements = [];
     if (localStorage.getItem(id)) {
@@ -15,9 +14,8 @@ export default function History() {
     return elements;
   }
 
-  let elements = getElementsFromLocalStorage(id);
+  const elements = getElementsFromLocalStorage(id);
   const card = getCardById(id);
-  console.log("elements:", elements);
 
   return (
     card && (
