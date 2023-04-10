@@ -1,41 +1,59 @@
 import { Fragment, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-export default function History({ usedIds }) {
-  const [elements, setElements] = useState([]);
+import { getCardById } from "../../../lib/data";
+import { v4 } from "uuid";
+export default function History({ cards }) {
+  function getStats() {
+    let localStorageDataStats = [];
+    for (let i = 0; i < 78; i++) {
+      const statsKey = `stats.${i}`;
 
-  function getElementsfromLocalStorage(ids) {
-    let elements = [];
-    ids.forEach((id) => {
-      const storedElements = JSON.parse(localStorage.getItem(id));
-      if (storedElements) {
-        elements = elements.concat(storedElements);
+      if (localStorage.getItem(statsKey)) {
+        const statsData = JSON.parse(localStorage.getItem(statsKey));
+        localStorageDataStats.push(statsData);
       }
-    });
-    return elements;
+    }
+    return localStorageDataStats;
   }
 
-  const filteredUsedIds = usedIds.filter(
-    (value, index) => usedIds.indexOf(value) === index
-  );
-
-  useEffect(() => {
-    const storedElements = localStorage.getItem("elements");
-    if (storedElements) {
-      setElements(JSON.parse(storedElements));
+  function getNotes() {
+    let localStorageDataNotes = [];
+    for (let i = 0; i < 78; i++) {
+      const notesKey = `notes.${i}`;
+      const notesData = localStorage.getItem(notesKey);
+      if (notesData) {
+        localStorageDataNotes.push(JSON.parse(notesData));
+      }
     }
-  }, []);
+    return localStorageDataNotes;
+  }
 
-  return filteredUsedIds.map((id) => {
-    const filteredStoredElements = getElementsfromLocalStorage([id]);
-    return (
-      <Fragment key={uuidv4()}>
-        {filteredStoredElements.map((element) => (
-          <p key={element.date}>
-            {element.date}__ {element.cardname}__{element.note}__ mood:{" "}
-            {element.mood}
-          </p>
-        ))}
-      </Fragment>
-    );
-  });
+  function forNotesLength() {
+    for (let i = 0; i < notes.length; i++) {
+      return <p>what</p>;
+    }
+  }
+
+  const [stats] = getStats();
+  const notes = getNotes();
+  const card = getCardById(stats.id);
+
+  return (
+    <Fragment key={v4()}>
+      <section>
+        {notes.map((note) => {
+          return (
+            <>
+              {note.map((note) => (
+                <ul key={v4()}>
+                  <h1>{new Date(note.date).toLocaleDateString()}</h1>
+                  <li>{note.name}</li>
+                  <li> {note.notes}</li>
+                </ul>
+              ))}
+            </>
+          );
+        })}
+      </section>
+    </Fragment>
+  );
 }
