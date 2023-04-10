@@ -1,8 +1,8 @@
 import Link from "next/link";
 import BackButton from "../../../../components/Backbutton/backbutton";
 import { useRef, useEffect } from "react";
-import useLocalStorage from "use-local-storage";
 import useLocalStorageState from "use-local-storage";
+import useLocalStorage from "use-local-storage";
 
 function setItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
@@ -10,9 +10,27 @@ function setItem(key, value) {
 
 export default function NoteFormular({ dailyCard, id, setUsedIds, usedIds }) {
   const [inputValue, setInputValue] = useLocalStorage();
-  const [notes, setNotes] = useLocalStorageState(`${id}`, []);
-
   const inputReference = useRef(null);
+  const [notes, setNotes] = useLocalStorageState(`notes.${id}`, []);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const newNote = [
+      ...notes,
+      {
+        id: dailyCard.id,
+        date: new Date(),
+        notes: inputValue,
+        name: dailyCard.name,
+      },
+    ];
+    setNotes(newNote);
+    const newUsedId = [...usedIds, id];
+    setUsedIds(newUsedId);
+    setItem(`usedIds`, newUsedId);
+    setInputValue("");
+  }
 
   useEffect(() => {
     inputReference.current.focus();
@@ -20,32 +38,7 @@ export default function NoteFormular({ dailyCard, id, setUsedIds, usedIds }) {
 
   return (
     <>
-      <form
-        aria-label="form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          const currentMood = JSON.parse(
-            localStorage.getItem(`${id}.averageMood`)
-          );
-          const newNotes = [
-            ...notes,
-            {
-              note: inputValue,
-              id: dailyCard.id,
-              date: new Date(),
-              cardname: dailyCard.name,
-              mood: currentMood,
-            },
-          ];
-          setNotes(newNotes);
-          setItem(`${id}`, newNotes);
-          setInputValue("");
-
-          const newUsedId = [...usedIds, id];
-          setUsedIds(newUsedId);
-          setItem(`usedIds`, newUsedId);
-        }}
-      >
+      <form aria-label="formular" onSubmit={handleSubmit}>
         <label htmlFor="note">
           <textarea
             required
