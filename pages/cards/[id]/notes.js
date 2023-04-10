@@ -2,37 +2,43 @@ import { Fragment } from "react";
 import { useRouter } from "next/router";
 import BackButton from "../../../components/Backbutton/backbutton";
 import { getCardById } from "../../../lib/data";
+import { v4 } from "uuid";
 
-export default function History() {
+export default function CardNotes() {
   const router = useRouter();
   const id = router ? router.query.id : null;
-  function getElementsFromLocalStorage(id) {
-    let elements = [];
-    if (localStorage.getItem(id)) {
-      elements = JSON.parse(localStorage.getItem(id));
+
+  function getNotes(id) {
+    let localStorageDataNotes = [];
+    {
+      const notesKey = `notes.${id}`;
+      const notesData = localStorage.getItem(notesKey);
+      if (notesData) {
+        localStorageDataNotes.push(JSON.parse(notesData));
+      }
     }
-    return elements;
+    return localStorageDataNotes;
   }
-
-  const elements = getElementsFromLocalStorage(id);
+  const notes = getNotes(id);
   const card = getCardById(id);
-
+  console.log(notes[0]);
   return (
-    card && (
-      <>
-        <h1>notes for {card.name}</h1>
-        {elements.length > 0 ? (
-          elements.map((item) => (
-            <Fragment key={item.date}>
-              <p>{item.date}</p>
-              <p>{item.note} </p>
-            </Fragment>
-          ))
-        ) : (
-          <p>no notes</p>
-        )}
-        <BackButton />
-      </>
-    )
+    <Fragment key={v4()}>
+      <h1>{card ? card.name : "loading"}</h1>
+      <section>
+        {notes.map((note) => {
+          return (
+            <>
+              {note.map((note) => (
+                <ul key={v4()}>
+                  <h1>{new Date(note.date).toLocaleDateString()}</h1>
+                  <li> {note.notes}</li>
+                </ul>
+              ))}
+            </>
+          );
+        })}
+      </section>
+    </Fragment>
   );
 }

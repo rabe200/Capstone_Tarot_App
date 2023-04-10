@@ -1,20 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
-import { getCardById } from "../../../lib/data";
 import { v4 } from "uuid";
-export default function History({ cards }) {
-  function getStats() {
-    let localStorageDataStats = [];
-    for (let i = 0; i < 78; i++) {
-      const statsKey = `stats.${i}`;
-
-      if (localStorage.getItem(statsKey)) {
-        const statsData = JSON.parse(localStorage.getItem(statsKey));
-        localStorageDataStats.push(statsData);
-      }
-    }
-    return localStorageDataStats;
-  }
-
+export default function History() {
   function getNotes() {
     let localStorageDataNotes = [];
     for (let i = 0; i < 78; i++) {
@@ -27,15 +13,7 @@ export default function History({ cards }) {
     return localStorageDataNotes;
   }
 
-  function forNotesLength() {
-    for (let i = 0; i < notes.length; i++) {
-      return <p>what</p>;
-    }
-  }
-
-  const [stats] = getStats();
   const notes = getNotes();
-  const card = getCardById(stats.id);
 
   return (
     <Fragment key={v4()}>
