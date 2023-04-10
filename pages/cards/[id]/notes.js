@@ -26,19 +26,18 @@ export default function CardNotes() {
     <Fragment key={v4()}>
       <h1>{card ? card.name : "loading"}</h1>
       <section>
-        {notes.map((note) => {
-          return (
-            <>
-              {note.map((note) => (
-                <ul key={v4()}>
-                  <h1>{new Date(note.date).toLocaleDateString()}</h1>
-                  <li> {note.notes}</li>
-                </ul>
-              ))}
-            </>
-          );
-        })}
+        {notes.map((note) => (
+          <Fragment key={v4()}>
+            {note.map((n) => (
+              <ul key={v4()}>
+                <h1 key={v4()}>{new Date(n.date).toLocaleDateString()}</h1>
+                <li key={v4()}>{n.notes}</li>
+              </ul>
+            ))}
+          </Fragment>
+        ))}
       </section>
+      <BackButton />
     </Fragment>
   );
 }
