@@ -21,7 +21,6 @@ export default function CardNotes() {
   }
   const notes = getNotes(id);
   const card = getCardById(id);
-  console.log(notes[0]);
   return (
     <Fragment key={v4()}>
       <h1>{card ? card.name : "loading"}</h1>
