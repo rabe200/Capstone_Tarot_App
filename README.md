@@ -1,6 +1,6 @@
 # New Project
 
-This project was created from the neue fische next template.
+This project focusses on uniting a notebook with a tarot app. Being able to set a mood when receiving the daily card gives the possibilty to make connections between mood and an individual card. Further there will be different reading layouts and users will be able to set their own artworks as cards. I want this app to grow. It is my capstone project for an webdev bootcamp, but will be developed afterwards also. 
 
 ## Development
 
