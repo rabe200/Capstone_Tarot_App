@@ -1,6 +1,8 @@
 # Tarot App (Capstone neue fische webdev bootcamp)
 
-This project focusses on uniting a notebook with a tarot app. Being able to set a mood when receiving the daily card gives the possibilty to make connections between mood and an individual card. Further there will be different reading layouts and users will be able to set their own artworks as cards. I want this app to grow. It is my capstone project for an webdev bootcamp, but will be developed afterwards also. 
+This project focusses on uniting a notebook with a tarot app. Being able to set a mood when receiving the daily card gives the possibilty to make connections between mood and an individual card. The user can take a note that gets saved to localstorage and is connected to the card by id. Also how often the card got played is saved. In the history those stats are available.
+
+Longterm there will be different reading layouts and users will be able to set their own artworks as cards. I want this app to grow. It is my capstone project for an webdev bootcamp, but will be developed afterwards also. 
 
 ## Development
 
