@@ -3,11 +3,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { getCardById } from "../../../lib/data";
+import useLocalStorageState from "use-local-storage";
+import NextCardButton from "../../../components/NextCardButton";
+import PreviousCardButton from "../../../components/PreviousCardButton";
+import DetailsButton from "../../../components/DetailsButton";
+import NotesButton from "../../../components/NotesButton";
 
-export default function Details({ cards }) {
+export default function Details({ cards, searchQuery, setSearchQuery }) {
   const router = useRouter();
   const id = router ? router.query.id : null;
   const [currentPage, setCurrentPage] = useState(id);
+  const [input, setInput] = useState("");
 
   function getNotes() {
     let localStorageDataNotes = [];
@@ -23,26 +29,6 @@ export default function Details({ cards }) {
 
   const notes = getNotes();
 
-  function handleClickNext() {
-    if (id < 77) {
-      setCurrentPage(parseInt(id) + 1);
-      router.push(`/cards/${parseInt(id) + 1}`);
-    } else {
-      setCurrentPage(0);
-      router.push(`/cards/0`);
-    }
-  }
-
-  function handleClickPrev() {
-    if (id > 0) {
-      setCurrentPage(parseInt(id) - 1);
-      router.push(`/cards/${parseInt(id) - 1}`);
-    } else {
-      setCurrentPage(77);
-      router.push(`/cards/77`);
-    }
-  }
-  const [searchQuery, setSearchQuery] = useState("");
   //name search
   let query3 = "";
   //description search
@@ -66,7 +52,7 @@ export default function Details({ cards }) {
   function searchForInput(event) {
     const { value } = event.target;
 
-    setSearchQuery(value);
+    setInput(value);
 
     if (value) {
       query3 = cards.filter((card) => {
@@ -135,8 +121,16 @@ export default function Details({ cards }) {
       console.log("meaning_down", query8);
       console.log("date", query12);
       console.log("notes", query13);
+      const results = query3.concat(query5, query6, query8, query12, query13);
+      console.log("results", results);
+      setSearchQuery === results;
+      console.log(searchQuery);
     }
   }
+
+  useState(() => {
+    setSearchQuery === searchQuery;
+  });
 
   const card = getCardById(id);
   return (
@@ -151,40 +145,27 @@ export default function Details({ cards }) {
             priority={true}
           />
           <figcaption>{card.name}</figcaption>
-          <Link href={`/cards/${card.id}/notes`}>
-            <button type="button" aria-label="go to notes">
-              notes
+          <NotesButton card={card} />
+        </figure>
+        <DetailsButton card={card} />
+        <PreviousCardButton />
+        <NextCardButton />
+        <form>
+          <input
+            onChange={searchForInput}
+            id="searchbar"
+            type="search"
+            name="searchbar"
+            value={input}
+            placeholder="search..."
+            aria-label="search bar"
+          />
+          <Link href="/cards/search">
+            <button type="submit" aria-label="submit search query">
+              search
             </button>
           </Link>
-        </figure>
-        <Link href={`/cards/${card.id}/detail`}>
-          <button type="button" aria-label="more details button">
-            more details
-          </button>
-        </Link>
-        <button
-          type="button"
-          aria-label="previous card"
-          onClick={handleClickPrev}
-        >
-          PREV
-        </button>
-        <button type="button" aria-label="next card" onClick={handleClickNext}>
-          NEXT
-        </button>
-        <Link href="/">
-          <button type="button" aria-label="back to menu">
-            back to menu
-          </button>
-        </Link>
-        <input
-          onChange={searchForInput}
-          id="searchbar"
-          type="search"
-          name="searchbar"
-          value={searchQuery}
-          placeholder="search..."
-        />
+        </form>
       </>
     )
   );
