@@ -1,18 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import { getCardById } from "../../lib/data";
+import { useState } from "react";
 import GetNotes from "../GetNotes";
 import { cards } from "../../lib/data";
 import useLocalStorageState from "use-local-storage";
+
 export default function SearchBar({}) {
-  const searchOptionSelector = document.getElementById("searchOptionsSelect");
   const router = useRouter();
   const id = router ? router.query.id : null;
   const [input, setInput] = useState("");
-  const [hydrated, setHydrated] = useState(true);
-  const card = getCardById(id);
   const [searchOptionSelect, setSearchOptionSelect] = useState("resultsByName");
   const notes = GetNotes();
   const [searchResults, setSearchResults] = useLocalStorageState(
@@ -21,9 +17,6 @@ export default function SearchBar({}) {
   );
 
   function searchForInput(event) {
-    // setSearchOptionSelect(`resultsBy${searchOptionSelector.value}`);
-    // console.log(searchOptionSelector.value);
-    // console.log("option", searchOptionSelect);
     const { value } = event.target;
     setInput(value);
     let results = "";
@@ -40,7 +33,6 @@ export default function SearchBar({}) {
           )
         );
         setSearchResults(results);
-        console.log("name", searchResults);
         setSearchOptionSelect("resultsByName");
       } else if (searchOptionSelect === "resultsByDescription") {
         results = cards.filter((card) =>
@@ -51,7 +43,6 @@ export default function SearchBar({}) {
           )
         );
         setSearchResults(results);
-        console.log("desc", searchResults);
       } else if (searchOptionSelect === "resultsByMeaningUp") {
         results = cards.filter((card) =>
           queryWords.every(
@@ -61,7 +52,6 @@ export default function SearchBar({}) {
           )
         );
         setSearchResults(results);
-        console.log("meaningUp", searchResults);
       } else if (searchOptionSelect === "resultsByMeaningDown") {
         results = cards.filter((card) =>
           queryWords.every(
@@ -71,7 +61,6 @@ export default function SearchBar({}) {
           )
         );
         setSearchResults(results);
-        console.log("meaningDown", searchResults);
       } else if (searchOptionSelect === "resultsByNotes") {
         results = notes.filter((card) =>
           queryWords.every(
@@ -82,7 +71,6 @@ export default function SearchBar({}) {
         );
 
         setSearchResults(results);
-        console.log("notes", searchResults);
       } else if (searchOptionSelect === "resultsByDate") {
         results = notes.filter((card) =>
           queryWords.every(
@@ -92,14 +80,13 @@ export default function SearchBar({}) {
           )
         );
         setSearchResults(results);
-        console.log("date", searchResults);
       }
     }
   }
 
   function logOptions(event) {
     setSearchOptionSelect(`resultsBy${event.target.value}`);
-    console.log(event.target.value);
+    setInput("");
   }
 
   return (
@@ -121,7 +108,9 @@ export default function SearchBar({}) {
           onChange={logOptions}
           required
         >
-          <option value="Name">name</option>
+          <option value="Name" selected="selected">
+            name
+          </option>
           <option value="Date">date</option>
           <option value="Description">description</option>
           <option value="MeaningUp">meaningUp</option>

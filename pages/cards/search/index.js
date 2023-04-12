@@ -6,19 +6,16 @@ export default function Details({}) {
   const [searchquery] = useLocalStorage("searchquery");
   return (
     <>
-      {console.log("searchResultsPage:", searchquery)}
-      <>
-        {searchquery.map((result) => {
-          return (
-            <>
-              <p>
-                <b>{result.name}</b>, <DetailsButton id={result.id} />
-              </p>
-            </>
-          );
-        })}
-        <BackButton />
-      </>
+      {searchquery.map((result) => {
+        return (
+          <>
+            <p>
+              <b>{result.name}</b> <DetailsButton id={result.id} />
+            </p>
+          </>
+        );
+      })}
+      <BackButton />
     </>
   );
 }
