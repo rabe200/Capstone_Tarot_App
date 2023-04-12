@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import BackButton from "../../../components/Backbutton/backbutton";
 import { getCardById } from "../../../lib/data";
 import { v4 } from "uuid";
-
+import Link from "next/link";
 export default function CardNotes() {
   const router = useRouter();
   const id = router ? router.query.id : null;

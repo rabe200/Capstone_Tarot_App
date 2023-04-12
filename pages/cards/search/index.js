@@ -1,11 +1,24 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { getCardById } from "../../../lib/data";
+import useLocalStorage from "use-local-storage";
+import DetailsButton from "../../../components/DetailsButton";
+import BackButton from "../../../components/Backbutton/backbutton";
 
-export default function Details({ searchQuery, setSearchQuery }) {
-  const router = useRouter();
-  const id = router ? router.query?.id : null;
-  const card = getCardById(id);
-  return searchQuery && console.log(searchQuery);
+export default function Details({}) {
+  const [searchquery] = useLocalStorage("searchquery");
+  return (
+    <>
+      {console.log("searchResultsPage:", searchquery)}
+      <>
+        {searchquery.map((result) => {
+          return (
+            <>
+              <p>
+                <b>{result.name}</b>, <DetailsButton id={result.id} />
+              </p>
+            </>
+          );
+        })}
+        <BackButton />
+      </>
+    </>
+  );
 }

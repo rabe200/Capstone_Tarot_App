@@ -30,11 +30,6 @@ export default function NextCardButton({}) {
       >
         NEXT
       </button>
-      <Link href="/">
-        <button type="button" aria-label="back to menu">
-          back to menu
-        </button>
-      </Link>
     </>
   );
 }

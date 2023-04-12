@@ -5,7 +5,7 @@ export default function BackButton() {
 
   return (
     <button type="button" onClick={() => router.back()}>
-      Click here to go back
+      back
     </button>
   );
 }

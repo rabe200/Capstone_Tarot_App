@@ -9,7 +9,9 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     setId(Math.floor(Math.random() * 77));
   }, []);
+
   const [searchQuery, setSearchQuery] = useLocalStorageState("");
+
   const [usedIds, setUsedIds] = useLocalStorageState("usedIds", {
     defaultValue: [],
   });

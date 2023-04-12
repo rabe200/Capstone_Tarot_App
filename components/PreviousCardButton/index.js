@@ -31,11 +31,6 @@ export default function PreviousCardButton({}) {
       >
         PREV
       </button>
-      <Link href="/">
-        <button type="button" aria-label="back to menu">
-          back to menu
-        </button>
-      </Link>
     </>
   );
 }
