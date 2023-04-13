@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getCardById } from "../../../lib/data";
+import NotesButton from "../../../components/NotesButton";
 
 export default function Details() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function Details() {
             more details
           </button>
         </Link>
+        <NotesButton card={card} />
         <Link href={`/cards/${id}/`}>
           <button type="button" aria-label="back">
             back

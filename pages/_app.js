@@ -10,6 +10,8 @@ export default function App({ Component, pageProps }) {
     setId(Math.floor(Math.random() * 77));
   }, []);
 
+  const [searchQuery, setSearchQuery] = useLocalStorageState("");
+
   const [usedIds, setUsedIds] = useLocalStorageState("usedIds", {
     defaultValue: [],
   });
@@ -31,6 +33,8 @@ export default function App({ Component, pageProps }) {
           id={id}
           usedIds={usedIds}
           setUsedIds={setUsedIds}
+          setSearchQuery={setSearchQuery}
+          searchQuery={searchQuery}
         />
       </>
     );

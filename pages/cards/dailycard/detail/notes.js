@@ -1,17 +1,18 @@
 import Link from "next/link";
 import BackButton from "../../../../components/Backbutton/backbutton";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage";
 import useLocalStorage from "use-local-storage";
-
-function setItem(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
+import GetStatsById from "../../../../components/GetStatsById";
+import GetNotesById from "../../../../components/GetNotesById";
 
 export default function NoteFormular({ dailyCard, id, setUsedIds, usedIds }) {
   const [inputValue, setInputValue] = useLocalStorage();
   const inputReference = useRef(null);
   const [notes, setNotes] = useLocalStorageState(`notes.${id}`, []);
+  const [ID, setID] = useLocalStorageState(`${id}`, []);
+  const statsById = GetStatsById(id);
+  const notesById = GetNotesById(id);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -26,11 +27,10 @@ export default function NoteFormular({ dailyCard, id, setUsedIds, usedIds }) {
       },
     ];
     setNotes(newNote);
-    const newUsedId = [...usedIds, id];
-    setUsedIds(newUsedId);
-    setItem(`usedIds`, newUsedId);
     setInputValue("");
+    if (notes.length > 0) setID(statsById.concat(notesById));
   }
+  console.log(ID);
 
   useEffect(() => {
     inputReference.current.focus();
