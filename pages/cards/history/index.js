@@ -7,23 +7,21 @@ export default function History() {
   const [notes, setNotes] = useState(GetNotes());
 
   return (
-    <Fragment key={v4()}>
+    <Fragment>
       <section>
-        <>
-          {notes.map((note) => (
-            <ul key={note.date}>
-              <h1>{new Date(note.date).toLocaleDateString()}</h1>
-              <li>{note.name}</li>
-              <li> {note.notes}</li>
-              <DeleteButton
-                itemDate={note.date}
-                itemId={note.id}
-                notes={notes}
-                setNotes={setNotes}
-              />
-            </ul>
-          ))}
-        </>
+        {notes.map((note) => (
+          <ul key={note.date}>
+            <h1>{new Date(note.date).toLocaleDateString()}</h1>
+            <li>{note.name}</li>
+            <li> {note.notes}</li>
+            <DeleteButton
+              itemDate={note.date}
+              itemId={note.id}
+              notes={notes}
+              setNotes={setNotes}
+            />
+          </ul>
+        ))}
       </section>
       <Link href="/">
         <button type="button">back</button>
