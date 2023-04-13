@@ -34,6 +34,7 @@ export default function MoodMeter({ dailyCard, id }) {
         name: dailyCard.name,
       };
       setCalculation(newCalculationStats);
+      setDisableButton(true);
     } else {
       const newCalculationStats = {
         id: dailyCard.id,
