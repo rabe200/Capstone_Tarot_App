@@ -26,10 +26,10 @@ export default function CardNotes() {
       <section>
         {notes.map((note) => (
           <Fragment key={v4()}>
-            {note.map((n) => (
+            {note.map((note) => (
               <ul key={v4()}>
-                <h1 key={v4()}>{new Date(n.date).toLocaleDateString()}</h1>
-                <li key={v4()}>{n.notes}</li>
+                <h1 key={v4()}>{new Date(note.date).toLocaleDateString()}</h1>
+                <li key={v4()}>{note.notes}</li>
               </ul>
             ))}
           </Fragment>
