@@ -6,18 +6,18 @@ export default function MoodMeter({ dailyCard, id }) {
   const [disableButton, setDisableButton] = useState(false);
   const [calculation, setCalculation] = useLocalStorageState(`stats.${id}`, {
     id: dailyCard.id,
-    mood: 1,
-    clicks: 1,
-    averageMood: 1,
+    mood: 0,
+    clicks: 0,
+    averageMood: 0.5,
     name: dailyCard.name,
   });
 
   function addMood() {
-    const newCalculationStats = {
+    let newCalculationStats = {};
+    newCalculationStats = {
       id: dailyCard.id,
       mood: calculation.mood + 1,
       clicks: calculation.clicks + 1,
-      averageMood: (calculation.mood + 1) / (calculation.clicks + 1),
       name: dailyCard.name,
     };
     setCalculation(newCalculationStats);
@@ -25,27 +25,36 @@ export default function MoodMeter({ dailyCard, id }) {
   }
 
   function decreaseMood() {
-    if (calculation.mood > 0) {
-      const newCalculationStats = {
-        id: dailyCard.id,
-        mood: calculation.mood - 1,
-        clicks: calculation.clicks + 1,
-        averageMood: (calculation.mood - 1) / (calculation.clicks + 1),
-        name: dailyCard.name,
-      };
-      setCalculation(newCalculationStats);
-    } else {
-      const newCalculationStats = {
-        id: dailyCard.id,
-        mood: calculation.mood,
-        clicks: calculation.clicks + 1,
-        averageMood: calculation.mood / (calculation.clicks + 1),
-        name: dailyCard.name,
-      };
-      setCalculation(newCalculationStats);
-      setDisableButton(true);
-    }
+    let newCalculationStats = {};
+    newCalculationStats = {
+      id: dailyCard.id,
+      mood: calculation.mood,
+      clicks: calculation.clicks + 1,
+      name: dailyCard.name,
+    };
+    setCalculation(newCalculationStats);
+    setDisableButton(true);
   }
+
+  useEffect(() => {
+    const averageMood = calculation.mood / calculation.clicks;
+    console.log(averageMood);
+    let newCalculationStats = {};
+    newCalculationStats = {
+      id: dailyCard.id,
+      mood: calculation.mood,
+      clicks: calculation.clicks,
+      name: dailyCard.name,
+      averageMood: calculation.mood / calculation.clicks,
+    };
+    setCalculation(newCalculationStats);
+  }, [
+    calculation.mood,
+    calculation.clicks,
+    dailyCard.id,
+    dailyCard.name,
+    setCalculation,
+  ]);
 
   return (
     <>
