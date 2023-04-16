@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
-import { useStore } from "../../store";
+import useStore from "../../../src/store/store";
 import Link from "next/link";
 
 import DeleteButton from "../../../components/DeleteButton";

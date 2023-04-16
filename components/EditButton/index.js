@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { useStore } from "../../pages/store";
-
+import useStore from "../../src/store/store";
 export default function EditButton({ card }) {
   const [hasMounted, setHasMounted] = React.useState(false);
   const [editThis, setEditThis] = useState([]);
@@ -19,7 +18,6 @@ export default function EditButton({ card }) {
       return item.date === card.uuid;
     });
     setEditThis(itemToEdit);
-    // console.log(itemToEdit);
     setClicked("true");
     setHidden("text");
     setHiddenButton(false);
@@ -28,7 +26,6 @@ export default function EditButton({ card }) {
 
   useEffect(() => {
     const item = document.getElementById(card.uuid);
-    // item.value = editThis.map((item) => item.drawnCards);
   });
 
   React.useEffect(() => {

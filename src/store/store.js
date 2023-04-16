@@ -1,9 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { getCardById } from "../lib/data";
+import { getCardById } from "../../lib/data";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4, v4 } from "uuid";
-import { cards } from "../lib/data";
+import { cards } from "../../lib/data";
 
 function randomNumber() {
   return Math.floor(Math.random() * 77);

@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { useStore } from "../../../store";
-
+import useStore from "../../../../src/store/store";
 export default function Details() {
   const [hasMounted, setHasMounted] = React.useState(false);
   const currentCard = useStore((state) => state.currentCard);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import { useStore } from "../../store";
+import useStore from "../../../src/store/store";
 import React from "react";
 
 export const CardBody = styled.div`

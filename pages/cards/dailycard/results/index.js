@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useStore } from "../../../store";
+import useStore from "../../../../src/store/store";
 import Link from "next/link";
 export default function Results() {
   const [hasMounted, setHasMounted] = React.useState(false);
   const currentCard = useStore((state) => state.currentCard);
 
-  // React.useEffect(() => {
-  //   setHasMounted(true);
-  // }, []);
-  // if (!hasMounted) {
-  //   return null;
-  // }
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
   return (
     <ul>
       <li>Results</li>

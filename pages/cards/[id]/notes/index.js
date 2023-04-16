@@ -1,8 +1,7 @@
 import { Fragment } from "react";
 import { useRouter } from "next/router";
 import BackButton from "../../../../components/Backbutton/backbutton";
-import { v4 } from "uuid";
-import { useStore } from "../../../store";
+import useStore from "../../../../src/store/store";
 
 export default function CardNotes() {
   const getDrawnCardById = useStore((state) => state.getDrawnCardById);
@@ -10,7 +9,6 @@ export default function CardNotes() {
   const router = useRouter();
   const id = router ? router.query.id : null;
 
-  const notes = useStore((state) => state.getAllNotes);
   const card = getDrawnCardById(id);
   console.log("notes.js", card);
   return (

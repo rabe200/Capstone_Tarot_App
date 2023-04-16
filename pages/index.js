@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { useStore } from "./store";
+import useStore from "../src/store/store";
 
-export default function HomePage(itemID) {
+export default function HomePage() {
   const [hasMounted, setHasMounted] = React.useState(false);
   const currentCard = useStore((state) => state.currentCard);
   React.useEffect(() => {

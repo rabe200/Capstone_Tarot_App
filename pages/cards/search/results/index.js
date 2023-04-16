@@ -1,6 +1,6 @@
 import DetailsButton from "../../../../components/DetailsButton";
 import BackButton from "../../../../components/Backbutton/backbutton";
-import { useStore } from "../../../store";
+import { useStore } from "../../../../src/store/store";
 import React, { useEffect, useState } from "react";
 import SearchResults from "../../../../components/SearchResults";
 

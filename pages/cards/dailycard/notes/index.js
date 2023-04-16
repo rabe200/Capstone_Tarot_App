@@ -1,7 +1,7 @@
 import Link from "next/link";
 import BackButton from "../../../../components/Backbutton/backbutton";
 import React, { useState, useEffect, useRef } from "react";
-import { useStore } from "../../../store";
+import useStore from "../../../../src/store/store";
 
 export default function NoteFormular() {
   const [hasMounted, setHasMounted] = React.useState(false);

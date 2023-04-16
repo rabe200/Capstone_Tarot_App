@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useStore } from "../../pages/store";
+import useStore from "../../src/store/store";
 
 export default function DeleteButton({ uuid }) {
   const [hasMounted, setHasMounted] = React.useState(false);

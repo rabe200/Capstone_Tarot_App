@@ -1,4 +1,4 @@
-import { useStore } from "../../pages/store";
+import { useStore } from "../../src/store/store";
 import React, { useEffect, useState } from "react";
 import { cards } from "../../lib/data";
 
