@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { createStore } from "zustand";
 import { persist } from "zustand/middleware";
 import { getCardById } from "../lib/data";
 import { useState, useEffect } from "react";
