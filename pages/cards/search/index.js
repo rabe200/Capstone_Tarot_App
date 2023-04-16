@@ -1,11 +1,11 @@
-import useLocalStorage from "use-local-storage";
 import DetailsButton from "../../../components/DetailsButton";
 import BackButton from "../../../components/Backbutton/backbutton";
+import { useStore } from "../../store";
 
-export default function SearchResult({}) {
-  const [searchquery] = useLocalStorage("searchquery");
-
-  if (!Array.isArray(searchquery) || searchquery.length === 0) {
+export default function SearchResult() {
+  // const [searchquery] = useLocalStorage("searchquery");
+  const searchQuery = useStore((state) => state.searchQuery);
+  if (searchQuery === "") {
     return (
       <>
         <p>no results</p>
@@ -16,15 +16,7 @@ export default function SearchResult({}) {
 
   return (
     <>
-      {searchquery.map((result) => {
-        return (
-          <>
-            <p>
-              <b>{result.name}</b> <DetailsButton id={result.id} />
-            </p>
-          </>
-        );
-      })}
+      {searchQuery}
       <BackButton />
     </>
   );

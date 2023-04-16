@@ -1,17 +1,26 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { getCardById } from "../../../lib/data";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { getCardById } from "../../../../lib/data";
 
-export default function Details({}) {
+export default function description() {
+  const [hasMounted, setHasMounted] = React.useState(false);
   const router = useRouter();
   const id = router.query.id;
 
   const card = getCardById(id);
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+
   return (
     id < 78 && (
       <>
-        <h1>detailpage{card.name}</h1>
+        <h1>DESCRIPTION</h1>
         <figure>
           <Image
             width={100}

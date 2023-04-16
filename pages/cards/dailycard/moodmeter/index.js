@@ -22,7 +22,7 @@ export default function MoodMeter() {
     increaseCardsDrawn();
   }
 
-  useEffect(() => setCurrentCard());
+  useEffect(() => setCurrentCard(-1));
 
   // console.log(currentCard);
 

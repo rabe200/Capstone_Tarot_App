@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 import { getCardById } from "../lib/data";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4, v4 } from "uuid";
+import { cards } from "../lib/data";
 
 function randomNumber() {
   return Math.floor(Math.random() * 77);
@@ -19,9 +20,15 @@ export const useStore = createLocalStorageStore(
     clicks: 0,
     currentCard: {},
     currentNote: "",
-
-    setCurrentCard: () =>
-      set((state) => ({ currentCard: state.drawnCards[state.cardsDrawn - 1] })),
+    searchQuery: "testString",
+    getAllNotes: () => {
+      get().drawnCards((card) => console.log("note", card.notes));
+    },
+    setSearchQuery: (input) => set(() => ({ searchQuery: input })),
+    setCurrentCard: (difference) =>
+      set((state) => ({
+        currentCard: state.drawnCards[state.cardsDrawn + difference],
+      })),
     increaseCardsDrawn: () =>
       set((state) => ({ cardsDrawn: state.cardsDrawn + 1 })),
     addClick: () => set((state) => ({ clicks: state.clicks + 1 })),
@@ -35,17 +42,40 @@ export const useStore = createLocalStorageStore(
     findCardByUuid: (input) => {
       const card = get().drawnCards.filter((prop) => prop.uuid === input);
     },
+    getCardById: (id) => {
+      let card;
+      card = cards.filter((prop) => prop.id === id);
+      return card;
+    },
+    getDrawnCardById: (input) => {
+      let card;
+      card = get().drawnCards.filter((prop) => prop.id === input);
+      return card;
+    },
     filterCardFromArray: (input) => {
       const newArray = get().drawnCards.filter((item) => item.uuid !== input);
       return newArray;
     },
+    updateCurrentCardByNote: () => {
+      set((state) => ({
+        currentCard: state.drawnCards
+          .filter((card) => card.uuid === state.currentCard.uuid)
+          .reduce((acc) => acc),
+      }));
+    },
     copyCurrentNote: () => {
+      const filteredArray = get().drawnCards.filter(
+        (card) => card.uuid !== get().currentCard.uuid
+      );
       const newArray = get()
-        .drawnCards.filter((note) => note.arrayIndex === get().cardsDrawn - 1)
+        .drawnCards.filter(
+          (note) => note.arrayIndex === get().currentCard.arrayIndex
+        )
         .map(
           (props) =>
             (props = {
-              uuid: v4(),
+              arrayIndex: get().currentCard.arrayIndex,
+              uuid: get().currentCard.uuid,
               id: get().currentCard.id,
               name: get().currentCard.name,
               image: get().currentCard.image,
@@ -55,11 +85,13 @@ export const useStore = createLocalStorageStore(
               notes: get().currentNote,
             })
         )
-        .reduce((acc, currentValue) => acc);
-      set((state) => {
-        return {
-          drawnCards: [...get().drawnCards, newArray],
-        };
+        .reduce((acc) => acc);
+      console.log("new", newArray);
+      console.log("filteredArray", filteredArray);
+      const newDrawnCards = filteredArray.concat(newArray);
+      console.log("newDrawnCards", newDrawnCards);
+      set(() => {
+        return { drawnCards: newDrawnCards };
       });
     },
     drawCard: (

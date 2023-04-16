@@ -3,6 +3,7 @@ import { useStore } from "../../store";
 import Link from "next/link";
 
 import DeleteButton from "../../../components/DeleteButton";
+import EditButton from "../../../components/EditButton";
 export default function History() {
   const [hasMounted, setHasMounted] = React.useState(false);
   const drawnCards = useStore((state) => state.drawnCards);
@@ -21,7 +22,9 @@ export default function History() {
             return (
               <Fragment key={card.uuid}>
                 <li>{card.name}</li>
-                <DeleteButton uuid={card.uuid}></DeleteButton>
+                <section>{card.note}</section>
+                <EditButton uuid={card.uuid} card={card} />
+                <DeleteButton uuid={card.uuid} />
               </Fragment>
             );
           })}

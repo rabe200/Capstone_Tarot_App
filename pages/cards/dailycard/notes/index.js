@@ -11,6 +11,10 @@ export default function NoteFormular() {
   const setCurrentNote = useStore((state) => state.setCurrentNote);
   const copyCurrentNote = useStore((state) => state.copyCurrentNote);
   const setCardNote = useStore((state) => state.setCardNote);
+  const updateCurrentCardByNote = useStore(
+    (state) => state.updateCurrentCardByNote
+  );
+  const drawnCards = useStore((state) => state.drawnCards);
   function handleSubmit(event) {
     event.preventDefault();
     setCurrentNote(inputValue);
@@ -21,6 +25,10 @@ export default function NoteFormular() {
   useEffect(() => {
     inputReference.current.focus();
   }, []);
+
+  // useEffect(() => {
+  //   updateCurrentCardByNote();
+  // }, [copyCurrentNote]);
 
   return (
     <>
@@ -53,7 +61,12 @@ export default function NoteFormular() {
           pathname: "/cards/dailycard/results",
         }}
       >
-        <button type="button" name="end" aria-label="end session">
+        <button
+          type="button"
+          name="end"
+          aria-label="end session"
+          onClick={updateCurrentCardByNote}
+        >
           results
         </button>
       </Link>

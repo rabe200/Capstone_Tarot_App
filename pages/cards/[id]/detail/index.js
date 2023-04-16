@@ -1,17 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getCardById } from "../../../lib/data";
-import NotesButton from "../../../components/NotesButton";
+import NotesButton from "../../../../components/NotesButton";
+import React, { useState, useEffect } from "react";
+import { getCardById } from "../../../../lib/data";
 
 export default function Details() {
+  const [hasMounted, setHasMounted] = React.useState(false);
   const router = useRouter();
   const id = router ? router.query?.id : null;
   const card = getCardById(id);
+  console.log(card);
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
   return (
     id < 78 && (
       <>
-        <h1>detailpage{card.name}</h1>
+        <h1>DETAILPAGE</h1>
         <figure>
           <Image
             width={100}
@@ -26,12 +35,11 @@ export default function Details() {
         </figure>
         <section>{card.meaning_up}</section>
 
-        <Link href={`/cards/${id}/description`}>
+        <Link href={`/cards/${id}/desc/`}>
           <button type="button" aria-label="more details">
             more details
           </button>
         </Link>
-        <NotesButton card={card} />
         <Link href={`/cards/${id}/`}>
           <button type="button" aria-label="back">
             back

@@ -2,17 +2,17 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { cards } from "../../lib/data";
+import { useStore } from "../../pages/store";
 
 export default function SearchBar({}) {
   const router = useRouter();
   const id = router ? router.query.id : null;
   const [input, setInput] = useState("");
   const [searchOptionSelect, setSearchOptionSelect] = useState("resultsByName");
-  const notes = GetNotes();
-  const [searchResults, setSearchResults] = useLocalStorageState(
-    "searchquery",
-    { defaultValue: [] }
-  );
+  // const notes = GetNotes();
+  const [searchResults, setSearchResults] = useState("searchquery", {
+    defaultValue: [],
+  });
 
   function searchForInput(event) {
     const { value } = event.target;
@@ -105,10 +105,9 @@ export default function SearchBar({}) {
           id="searchOptionsSelect"
           onChange={logOptions}
           required
+          value="Name"
         >
-          <option value="Name" selected="selected">
-            name
-          </option>
+          <option value="Name">name</option>
           <option value="Date">date</option>
           <option value="Description">description</option>
           <option value="MeaningUp">meaningUp</option>
