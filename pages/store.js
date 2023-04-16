@@ -19,6 +19,7 @@ export const useStore = createLocalStorageStore(
     clicks: 0,
     currentCard: {},
     currentNote: "",
+
     setCurrentCard: () =>
       set((state) => ({ currentCard: state.drawnCards[state.cardsDrawn - 1] })),
     increaseCardsDrawn: () =>
@@ -27,9 +28,16 @@ export const useStore = createLocalStorageStore(
     minusClick: () => set((state) => ({ clicks: state.clicks - 1 })),
     resetClicks: () => set(() => ({ clicks: 0 })),
     setCurrentNote: (input) => set(() => ({ currentNote: input })),
+    setDrawnCardsByInput: (input) =>
+      set((state) => {
+        return { drawnCards: input };
+      }),
     findCardByUuid: (input) => {
       const card = get().drawnCards.filter((prop) => prop.uuid === input);
-      console.log("storeScope", card);
+    },
+    filterCardFromArray: (input) => {
+      const newArray = get().drawnCards.filter((item) => item.uuid !== input);
+      return newArray;
     },
     copyCurrentNote: () => {
       const newArray = get()
@@ -48,7 +56,6 @@ export const useStore = createLocalStorageStore(
             })
         )
         .reduce((acc, currentValue) => acc);
-      console.log(newArray);
       set((state) => {
         return {
           drawnCards: [...get().drawnCards, newArray],

@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import GetNotes from "../GetNotes";
 import { cards } from "../../lib/data";
-import useLocalStorageState from "use-local-storage";
 
 export default function SearchBar({}) {
   const router = useRouter();

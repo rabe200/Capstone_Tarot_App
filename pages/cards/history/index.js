@@ -19,10 +19,10 @@ export default function History() {
         <ul>
           {drawnCards.map((card) => {
             return (
-              <>
-                <li key={card.uuid}>{card.name}</li>
+              <Fragment key={card.uuid}>
+                <li>{card.name}</li>
                 <DeleteButton uuid={card.uuid}></DeleteButton>
-              </>
+              </Fragment>
             );
           })}
         </ul>

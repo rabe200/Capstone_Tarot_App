@@ -24,7 +24,6 @@ export default function ShowCard() {
   const currentCard = useStore((state) => state.currentCard);
   const [hasMounted, setHasMounted] = React.useState(false);
   const drawnCard = currentCard;
-  console.log(currentCard);
   React.useEffect(() => {
     setHasMounted(true);
   }, []);

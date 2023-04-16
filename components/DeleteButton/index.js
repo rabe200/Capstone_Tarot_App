@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useStore } from "../../pages/store";
 
 export default function DeleteButton({ uuid }) {
-  const [clicked, setClicked] = useState("false");
   const [hasMounted, setHasMounted] = React.useState(false);
-  const findCardByUuid = useStore((state) => state.findCardByUuid);
+  const filterCardFromArray = useStore((state) => state.filterCardFromArray);
+  const setDrawnCardsByInput = useStore((state) => state.setDrawnCardsByInput);
+  function deleteCard(input) {
+    const newArray = filterCardFromArray(input);
+    setDrawnCardsByInput(newArray);
+  }
+
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -14,8 +19,8 @@ export default function DeleteButton({ uuid }) {
 
   if (uuid)
     return (
-      <button type="button" onClick={findCardByUuid(uuid)} clicked={clicked}>
-        delete{}
+      <button type="button" onClick={() => deleteCard(uuid)}>
+        delete
       </button>
     );
   else {

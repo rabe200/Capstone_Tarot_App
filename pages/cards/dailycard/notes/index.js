@@ -16,24 +16,12 @@ export default function NoteFormular() {
     setCurrentNote(inputValue);
     setInputValue("");
     copyCurrentNote();
-    // copyCurrentCard();
   }
 
   useEffect(() => {
     inputReference.current.focus();
-    // copyCurrentNote();
-    // console.log("useEffect1", inputValue);
   }, []);
 
-  // useEffect(() => {
-  //   copyCurrentNote();
-  // });
-  // React.useEffect(() => {
-  //   setHasMounted(true);
-  // }, []);
-  // if (!hasMounted) {
-  //   return null;
-  // }
   return (
     <>
       <form aria-label="formular" onSubmit={handleSubmit}>
