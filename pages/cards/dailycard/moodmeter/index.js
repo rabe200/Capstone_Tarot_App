@@ -1,60 +1,37 @@
 import { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import useLocalStorageState from "use-local-storage";
-
-export default function MoodMeter({ dailyCard, id }) {
+import { useStore } from "../../../store";
+import { useRouter } from "next/router";
+export default function MoodMeter() {
   const [disableButton, setDisableButton] = useState(false);
-  const [calculation, setCalculation] = useLocalStorageState(`stats.${id}`, {
-    id: dailyCard.id,
-    mood: 0,
-    clicks: 0,
-    averageMood: 0.5,
-    name: dailyCard.name,
-  });
-
-  function addMood() {
-    let newCalculationStats = {};
-    newCalculationStats = {
-      id: dailyCard.id,
-      mood: calculation.mood + 1,
-      clicks: calculation.clicks + 1,
-      name: dailyCard.name,
-    };
-    setCalculation(newCalculationStats);
-    setDisableButton(true);
+  const cardStore = useStore((state) => state.drawnCards);
+  const router = useRouter();
+  const [hasMounted, setHasMounted] = React.useState(false);
+  const addCard = useStore((state) => state.drawCard);
+  const cardsDrawn = useStore((state) => state.cardsDrawn);
+  const addClick = useStore((state) => state.addClick);
+  const minusClick = useStore((state) => state.minusClick);
+  const resetClicks = useStore((state) => state.resetClicks);
+  const increaseCardsDrawn = useStore((state) => state.increaseCardsDrawn);
+  const setCurrentCard = useStore((state) => state.setCurrentCard);
+  const currentCard = useStore((state) => state.currentCard);
+  const copyCurrentNote = useStore((state) => state.copyCurrentNote);
+  function addCardAndIncreaseCardsDrawn() {
+    addCard();
+    increaseCardsDrawn();
   }
 
-  function decreaseMood() {
-    let newCalculationStats = {};
-    newCalculationStats = {
-      id: dailyCard.id,
-      mood: calculation.mood,
-      clicks: calculation.clicks + 1,
-      name: dailyCard.name,
-    };
-    setCalculation(newCalculationStats);
-    setDisableButton(true);
-  }
+  useEffect(() => setCurrentCard());
 
-  useEffect(() => {
-    const averageMood = calculation.mood / calculation.clicks;
-    console.log(averageMood);
-    let newCalculationStats = {};
-    newCalculationStats = {
-      id: dailyCard.id,
-      mood: calculation.mood,
-      clicks: calculation.clicks,
-      name: dailyCard.name,
-      averageMood: calculation.mood / calculation.clicks,
-    };
-    setCalculation(newCalculationStats);
-  }, [
-    calculation.mood,
-    calculation.clicks,
-    dailyCard.id,
-    dailyCard.name,
-    setCalculation,
-  ]);
+  // console.log(currentCard);
+
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
 
   return (
     <>
@@ -62,23 +39,32 @@ export default function MoodMeter({ dailyCard, id }) {
         disabled={disableButton}
         type="button"
         aria-label="minus button"
-        onClick={() => decreaseMood()}
+        onClick={() => addCardAndIncreaseCardsDrawn()}
       >
-        -
+        + card
       </button>
-      <button
-        disabled={disableButton}
-        type="button"
-        aria-label="plus-button"
-        onClick={() => addMood()}
-      >
-        +
+      <button type="button" onClick={() => addClick()}>
+        click +++
       </button>
-      <p>card: {dailyCard.name}</p>
-      {calculation.averageMood >= 0 ? (
-        <p>Mood: {Math.round(calculation.averageMood * 100)} %</p>
+      <button type="button" onClick={() => minusClick()}>
+        click ---
+      </button>
+      <button type="button" onClick={() => resetClicks()}>
+        resetClicks
+      </button>
+      <p></p>
+      <button type="button" onClick={() => copyCurrentNote()}>
+        copyCurrentNote
+      </button>
+      {currentCard ? (
+        <p>card: {currentCard.name}</p>
+      ) : (
+        <p>waiting for action</p>
+      )}
+      {/* {drawnCards.averageMood >= 0 ? (
+        <p>Mood: {Math.round(drawnCards.averageMood * 100)} %</p>
       ) : null}
-      <p>{calculation.averageMood >= 0.5 ? ":)" : ":("}</p>{" "}
+      <p>{drawnCards.averageMood >= 0.5 ? ":)" : ":("}</p>{" "} */}
       <Link href="../dailycard">
         <button type="button">next</button>
       </Link>

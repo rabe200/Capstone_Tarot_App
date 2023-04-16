@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import { useStore } from "../../store";
+import React from "react";
 
 export const CardBody = styled.div`
   height: 500px;
@@ -18,23 +20,33 @@ export const NameBanner = styled.h2`
   text-align: center;
 `;
 
-export default function ShowCard({ dailyCard }) {
-  if (dailyCard) {
+export default function ShowCard() {
+  const currentCard = useStore((state) => state.currentCard);
+  const [hasMounted, setHasMounted] = React.useState(false);
+  const drawnCard = currentCard;
+  console.log(currentCard);
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+  if (drawnCard) {
     return (
       <>
         <CardBody>
-          <h1>{dailyCard.value}</h1>
+          <h1>{drawnCard.name}</h1>
           <Image
-            src={dailyCard.image}
+            src={drawnCard.image}
             width="200"
             height="350"
-            alt={dailyCard.name}
+            alt={drawnCard.name}
           />
-          <NameBanner>{dailyCard.name}</NameBanner>
+          <NameBanner>{drawnCard.name}</NameBanner>
         </CardBody>
         <Link
           href={{
-            pathname: "/cards/dailycard/detail",
+            pathname: "/cards/dailycard/description",
           }}
         >
           <button type="button">more details</button>

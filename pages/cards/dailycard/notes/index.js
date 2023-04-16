@@ -1,41 +1,39 @@
 import Link from "next/link";
 import BackButton from "../../../../components/Backbutton/backbutton";
-import { useRef, useEffect, useState } from "react";
-import useLocalStorageState from "use-local-storage";
-import useLocalStorage from "use-local-storage";
-import GetStatsById from "../../../../components/GetStatsById";
-import GetNotesById from "../../../../components/GetNotesById";
+import React, { useState, useEffect, useRef } from "react";
+import { useStore } from "../../../store";
 
-export default function NoteFormular({ dailyCard, id, setUsedIds, usedIds }) {
-  const [inputValue, setInputValue] = useLocalStorage();
+export default function NoteFormular() {
+  const [hasMounted, setHasMounted] = React.useState(false);
+  const currentCard = useStore((state) => state.currentCard);
+  const [inputValue, setInputValue] = useState();
   const inputReference = useRef(null);
-  const [notes, setNotes] = useLocalStorageState(`notes.${id}`, []);
-  const [ID, setID] = useLocalStorageState(`${id}`, []);
-  const statsById = GetStatsById(id);
-  const notesById = GetNotesById(id);
-
+  const setCurrentNote = useStore((state) => state.setCurrentNote);
+  const copyCurrentNote = useStore((state) => state.copyCurrentNote);
+  const setCardNote = useStore((state) => state.setCardNote);
   function handleSubmit(event) {
     event.preventDefault();
-
-    const newNote = [
-      ...notes,
-      {
-        id: dailyCard.id,
-        date: new Date(),
-        notes: inputValue,
-        name: dailyCard.name,
-      },
-    ];
-    setNotes(newNote);
+    setCurrentNote(inputValue);
     setInputValue("");
-    if (notes.length > 0) setID(statsById.concat(notesById));
+    copyCurrentNote();
+    // copyCurrentCard();
   }
-  console.log(ID);
 
   useEffect(() => {
     inputReference.current.focus();
+    // copyCurrentNote();
+    // console.log("useEffect1", inputValue);
   }, []);
 
+  // useEffect(() => {
+  //   copyCurrentNote();
+  // });
+  // React.useEffect(() => {
+  //   setHasMounted(true);
+  // }, []);
+  // if (!hasMounted) {
+  //   return null;
+  // }
   return (
     <>
       <form aria-label="formular" onSubmit={handleSubmit}>
@@ -61,13 +59,14 @@ export default function NoteFormular({ dailyCard, id, setUsedIds, usedIds }) {
       </form>
 
       <BackButton name="Back" aria-label="back button" />
+
       <Link
         href={{
-          pathname: "/",
+          pathname: "/cards/dailycard/results",
         }}
       >
         <button type="button" name="end" aria-label="end session">
-          end
+          results
         </button>
       </Link>
     </>
