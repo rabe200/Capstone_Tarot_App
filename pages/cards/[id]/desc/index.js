@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { getCardById } from "../../../../lib/data";
 
-export default function description() {
+export default function Description() {
   const [hasMounted, setHasMounted] = React.useState(false);
   const router = useRouter();
   const id = router.query.id;
