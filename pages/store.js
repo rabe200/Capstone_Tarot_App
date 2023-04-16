@@ -152,3 +152,5 @@ function createLocalStorageStore(initialStore, name) {
 
   return useStore;
 }
+
+export default useStore;
