@@ -27,6 +27,10 @@ export const useStore = createLocalStorageStore(
     minusClick: () => set((state) => ({ clicks: state.clicks - 1 })),
     resetClicks: () => set(() => ({ clicks: 0 })),
     setCurrentNote: (input) => set(() => ({ currentNote: input })),
+    findCardByUuid: (input) => {
+      const card = get().drawnCards.filter((prop) => prop.uuid === input);
+      console.log("storeScope", card);
+    },
     copyCurrentNote: () => {
       const newArray = get()
         .drawnCards.filter((note) => note.arrayIndex === get().cardsDrawn - 1)
@@ -42,11 +46,12 @@ export const useStore = createLocalStorageStore(
               meaning_rev: get().currentCard.meaning_rev,
               notes: get().currentNote,
             })
-        );
+        )
+        .reduce((acc, currentValue) => acc);
       console.log(newArray);
       set((state) => {
         return {
-          drawnCards: [...get().drawnCards, newArray.flat()],
+          drawnCards: [...get().drawnCards, newArray],
         };
       });
     },
