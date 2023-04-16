@@ -4,10 +4,7 @@ import { useStore } from "./store";
 
 export default function HomePage(itemID) {
   const [hasMounted, setHasMounted] = React.useState(false);
-
   const currentCard = useStore((state) => state.currentCard);
-  const addCount = useStore((state) => state.addCount);
-  const decreaseCount = useStore((state) => state.decreaseCount);
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -24,14 +21,8 @@ export default function HomePage(itemID) {
         <Link href={`/cards/${currentCard.id}`}>overview</Link>
       ) : null}
       <p></p>
-      <Link href="/search">search</Link>
+      <Link href="cards/search">search</Link>
       <p></p>
     </>
   );
 }
-
-// addClick: (increment) => {
-//             set((state) => {
-//               return { clicks: state.clicks + increment };
-//             });
-//           },
