@@ -12,7 +12,7 @@ export default function SearchResults() {
     let results;
     results = cards.filter((card) =>
       queryWords.every((queryWord) => {
-        let propertyValue = card[property] || ""; // use empty string if property is undefined
+        let propertyValue = card[property] || "";
         return (
           propertyValue.toLowerCase().split(" ").includes(queryWord) ||
           propertyValue.toLowerCase().includes(queryWord)
