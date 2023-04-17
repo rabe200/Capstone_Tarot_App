@@ -1,34 +1,45 @@
-import React, { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import useStore from "../../src/store/store";
 export default function EditButton({ card }) {
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const [editThis, setEditThis] = useState([]);
   const [clicked, setClicked] = useState("false");
   const [hidden, setHidden] = useState("hidden");
   const [hiddenButton, setHiddenButton] = useState(true);
   const drawnCards = useStore((state) => state.drawnCards);
+  const [hiddenToggle, setHiddenToggle] = useState(true);
+  const setCurrentNote = useStore((state) => state.setCurrentNote);
+  const [inputValue, setInputValue] = useState("");
+  const editSelectedNote = useStore((state) => state.editSelectedNote);
+  const [displayedNote, setDisplayedNote] = useState("");
 
   function closeInputHideButton() {
     setHidden("hidden");
     setHiddenButton(true);
   }
 
-  function findItemByDate() {
-    const itemToEdit = drawnCards.filter((item) => {
-      return item.date === card.uuid;
-    });
-    setEditThis(itemToEdit);
+  function toggleEditButton() {
     setClicked("true");
     setHidden("text");
     setHiddenButton(false);
-    return itemToEdit;
+    setHiddenToggle(false);
   }
 
-  useEffect(() => {
-    const item = document.getElementById(card.uuid);
+  function handleSubmit(event) {
+    event.preventDefault();
+    setHidden("hidden");
+    setHiddenButton(true);
+    setCurrentNote(inputValue);
+    setDisplayedNote(inputValue);
+    editSelectedNote(card);
+  }
+
+  useEffect((event) => {
+    setInputValue(inputValue);
+    console.log(inputValue);
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -40,28 +51,32 @@ export default function EditButton({ card }) {
       <button
         type="button"
         aria-label={`edit entry ${card.name}`}
-        onClick={findItemByDate}
+        onClick={toggleEditButton}
       >
         edit
       </button>
-      <form>
-        <label forhtml={`input for drawnCards.${card.name}}`}>
-          edit:
-          <input
-            type={hidden}
-            name={`drawnCards.${card.uuid}`}
-            value={editThis.drawnCards}
-            id={card.uuid}
-            defaultValue={editThis.drawnCards}
-          ></input>
-          <button
-            type="button"
-            hidden={hiddenButton}
-            onClick={closeInputHideButton}
-          >
-            close
-          </button>
-        </label>
+      <form hidden={hiddenToggle} onSubmit={handleSubmit}>
+        <input
+          type={hidden}
+          name={"inputfield"}
+          placeholder={card.notes}
+          id={card.uuid}
+          value={inputValue}
+          aria-label={"input field"}
+          onChange={(event) => {
+            setInputValue(event.target.value);
+            console.log(inputValue);
+          }}
+        ></input>
+        <button
+          id={card.uuid}
+          type="submit"
+          hidden={hiddenButton}
+          onClick={closeInputHideButton}
+          aria-label="save changes"
+        >
+          save
+        </button>
       </form>
     </Fragment>
   );

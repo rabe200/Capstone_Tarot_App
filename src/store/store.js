@@ -33,7 +33,7 @@ export const useStore = createLocalStorageStore(
       const filteredArray = get().cardMoods.filter(
         (card) => card.name !== newEntry.name
       );
-      newEntry.avgMood < 1
+      newEntry.mood / newEntry.clicks <= 1
         ? (newEntry = {
             ...newEntry,
             mood: newEntry.mood + 1,
@@ -44,7 +44,7 @@ export const useStore = createLocalStorageStore(
             ...newEntry,
             mood: newEntry.mood + 1,
             clicks: newEntry.clicks + 1,
-            avgMood: newEntry.mood,
+            avgMood: 1,
           });
       set(() => ({ cardMoods: [newEntry].concat(filteredArray) }));
       console.log(get().cardMoods);
@@ -54,7 +54,7 @@ export const useStore = createLocalStorageStore(
       const filteredArray = get().cardMoods.filter(
         (card) => card.name !== newEntry.name
       );
-      newEntry.avgMood > 0
+      newEntry.mood / newEntry.clicks > 1
         ? (newEntry = {
             ...newEntry,
             mood: newEntry.mood - 1,
@@ -63,7 +63,7 @@ export const useStore = createLocalStorageStore(
           })
         : (newEntry = {
             ...newEntry,
-            mood: newEntry.mood - 1,
+            mood: 0,
             clicks: newEntry.clicks + 1,
             avgMood: 0,
           });
@@ -134,6 +134,32 @@ export const useStore = createLocalStorageStore(
     },
     updateCardsDrawn: () =>
       set((state) => ({ difference: state.cardsDrawn - state.cardsDeleted })),
+    editSelectedNote: (card) => {
+      const itemToEdit = get().drawnCards.find((item) => {
+        return item.uuid === card.uuid;
+      });
+      const filteredArray = get().drawnCards.filter(
+        (card) => card.uuid !== itemToEdit.uuid
+      );
+      const newArray = {
+        arrayIndex: itemToEdit.arrayIndex,
+        uuid: itemToEdit.uuid,
+        id: itemToEdit.id,
+        name: itemToEdit.name,
+        image: itemToEdit.image,
+        description: itemToEdit.desc,
+        meaning_up: itemToEdit.meaning_up,
+        meaning_rev: itemToEdit.meaning_rev,
+        notes: get().currentNote,
+        type: itemToEdit.type,
+        value: itemToEdit.value,
+      };
+      const newDrawnCards = filteredArray.concat(newArray);
+      set(() => {
+        return { drawnCards: newDrawnCards };
+      });
+      console.log("newDrawnCards", get().drawnCards);
+    },
     copyCurrentNote: () => {
       if (get().difference > 0) {
         const filteredArray = get().drawnCards.filter(
