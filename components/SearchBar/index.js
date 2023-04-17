@@ -14,7 +14,6 @@ export default function SearchBar() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(inputValue);
     setSearchQuery(inputValue);
     setInputValue("");
     router.push("./search/results");

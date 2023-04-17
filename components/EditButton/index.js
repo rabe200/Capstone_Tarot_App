@@ -2,11 +2,9 @@ import { Fragment, useState, useEffect } from "react";
 import useStore from "../../src/store/store";
 export default function EditButton({ card }) {
   const [hasMounted, setHasMounted] = useState(false);
-  const [editThis, setEditThis] = useState([]);
   const [clicked, setClicked] = useState("false");
   const [hidden, setHidden] = useState("hidden");
   const [hiddenButton, setHiddenButton] = useState(true);
-  const drawnCards = useStore((state) => state.drawnCards);
   const [hiddenToggle, setHiddenToggle] = useState(true);
   const setCurrentNote = useStore((state) => state.setCurrentNote);
   const [inputValue, setInputValue] = useState("");
@@ -36,7 +34,6 @@ export default function EditButton({ card }) {
 
   useEffect((event) => {
     setInputValue(inputValue);
-    console.log(inputValue);
   });
 
   useEffect(() => {
@@ -65,7 +62,6 @@ export default function EditButton({ card }) {
           aria-label={"input field"}
           onChange={(event) => {
             setInputValue(event.target.value);
-            console.log(inputValue);
           }}
         ></input>
         <button

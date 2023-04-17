@@ -2,11 +2,8 @@ import Link from "next/link";
 import BackButton from "../../../../components/Backbutton/backbutton";
 import { useState, useEffect, useRef } from "react";
 import useStore from "../../../../src/store/store";
-import { useRouter } from "next/router";
 
 export default function NoteFormular() {
-  // const [hasMounted, setHasMounted] = React.useState(false);
-  const router = useRouter();
   const [inputValue, setInputValue] = useState();
   const inputReference = useRef(null);
   const setCurrentCard = useStore((state) => state.setCurrentCard);

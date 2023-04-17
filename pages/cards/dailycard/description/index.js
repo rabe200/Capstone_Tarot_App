@@ -1,13 +1,12 @@
-import Image from "next/image";
+import CardPreviewImage from "../../../../components/CardPreviewImage";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useStore from "../../../../src/store/store";
 export default function Description() {
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   const currentCard = useStore((state) => state.currentCard);
-  console.log(currentCard);
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -16,21 +15,7 @@ export default function Description() {
   return (
     <>
       <h1>{currentCard.name}</h1>
-      <figure>
-        <Image
-          width="100"
-          height="180"
-          decoding="async"
-          data-nimg="1"
-          loading="lazy"
-          src={currentCard.image}
-          alt={currentCard.name}
-        />
-        <figcaption>
-          {console.log(currentCard)}
-          {currentCard.type} {currentCard.value_int}
-        </figcaption>
-      </figure>
+      <CardPreviewImage card={currentCard} />
       <article>{currentCard.desc}</article>
       <Link href={{ pathname: "/cards/dailycard/detail" }}>
         <button type="button" aria-label="less details button">

@@ -1,12 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useStore from "../../../../src/store/store";
+import CardPreviewImage from "../../../../components/CardPreviewImage";
+
 export default function Details() {
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const currentCard = useStore((state) => state.currentCard);
-  console.log(currentCard);
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -17,14 +17,7 @@ export default function Details() {
     return (
       <>
         <h1>{currentCard.cardname}</h1>
-        <figure>
-          <Image
-            width="100"
-            height="180"
-            src={currentCard.image}
-            alt={currentCard.name}
-          />
-        </figure>
+        <CardPreviewImage card={currentCard} />
         <section>{currentCard.meaning_up}</section>
         <Link
           href={{

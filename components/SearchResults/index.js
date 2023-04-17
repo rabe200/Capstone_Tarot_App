@@ -1,5 +1,5 @@
 import { useStore } from "../../src/store/store";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { cards } from "../../lib/data";
 
 export default function SearchResults() {
@@ -27,7 +27,7 @@ export default function SearchResults() {
   const cardByMeaningUp = getCardByProp(searchQuery, "meaning_up");
   const cardByMeaningRev = getCardByProp(searchQuery, "meaning_rev");
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {

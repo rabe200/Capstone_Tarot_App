@@ -10,7 +10,6 @@ export default function CardNotes() {
   const id = router ? router.query.id : null;
 
   const card = getDrawnCardById(id);
-  console.log("notes.js", card);
   return (
     <Fragment key={card.uuid}>
       <h1>{card ? card.name : "loading"}</h1>

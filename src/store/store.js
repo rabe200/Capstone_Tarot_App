@@ -47,7 +47,6 @@ export const useStore = createLocalStorageStore(
             avgMood: 1,
           });
       set(() => ({ cardMoods: [newEntry].concat(filteredArray) }));
-      console.log(get().cardMoods);
     },
     setCardMoodMinusOne: (name) => {
       let newEntry = get().cardMoods.find((card) => card.name === name);
@@ -68,7 +67,6 @@ export const useStore = createLocalStorageStore(
             avgMood: 0,
           });
       set(() => ({ cardMoods: [newEntry].concat(filteredArray) }));
-      console.log(get().cardMoods);
     },
     setCardAvgMood: () => set((state) => ({})),
     setCardsDeleted: () =>
@@ -118,7 +116,6 @@ export const useStore = createLocalStorageStore(
       return newArray;
     },
     updateCurrentCardByNote: () => {
-      console.log("mep");
       if (
         get().drawnCards.length > 0 &&
         get().currentNote !== "" &&
@@ -129,7 +126,6 @@ export const useStore = createLocalStorageStore(
             .filter((card) => card.uuid === state.currentCard.uuid)
             .reduce((acc) => acc),
         }));
-        console.log(get().currentCard);
       } else alert("conditions not met");
     },
     updateCardsDrawn: () =>
@@ -158,14 +154,12 @@ export const useStore = createLocalStorageStore(
       set(() => {
         return { drawnCards: newDrawnCards };
       });
-      console.log("newDrawnCards", get().drawnCards);
     },
     copyCurrentNote: () => {
       if (get().difference > 0) {
         const filteredArray = get().drawnCards.filter(
           (card) => card.uuid !== get().currentCard.uuid
         );
-        console.log("filteredArray", filteredArray);
         const newArray = {
           arrayIndex: get().currentCard.arrayIndex,
           uuid: get().currentCard.uuid,
@@ -179,15 +173,12 @@ export const useStore = createLocalStorageStore(
           type: get().currentCard.type,
           value: get().currentCard.value,
         };
-        console.log("newArray", newArray);
         const newDrawnCards = filteredArray.concat(newArray);
         set(() => {
           return { drawnCards: newDrawnCards };
         });
-        console.log("newDrawnCards", get().drawnCards);
       } else {
         alert("no cards in history - add some cards to enable saving");
-        console.log("no cards in history - add some cards to save note");
       }
     },
     drawCard: (
