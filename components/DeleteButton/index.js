@@ -1,40 +1,37 @@
-import GetNotes from "../GetNotes";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import useStore from "../../src/store/store";
 
-export default function DeleteButton({ itemDate, itemId, notes, setNotes }) {
-  const [deleteThis, setDeleteThis] = useState([]);
-  const [clicked, setClicked] = useState("false");
-
-  function findItemByDate() {
-    const itemToDelete = notes.filter((item) => {
-      return item.date === itemDate;
-    });
-    setDeleteThis(itemToDelete);
-    setClicked("true");
+export default function DeleteButton({ uuid }) {
+  const [hasMounted, setHasMounted] = useState(false);
+  const filterCardFromArray = useStore((state) => state.filterCardFromArray);
+  const setDrawnCardsByInput = useStore((state) => state.setDrawnCardsByInput);
+  const setCardsDeleted = useStore((state) => state.setCardsDeleted);
+  function deleteCard(input) {
+    const newArray = filterCardFromArray(input);
+    setDrawnCardsByInput(newArray);
   }
 
   useEffect(() => {
-    if (clicked === "true") {
-      deleteThisItemFromLocalStorage();
-      setClicked("false");
-    }
-  }, [clicked]);
-
-  useEffect(() => {
-    const notes = GetNotes();
-  }),
-    [];
-
-  function deleteThisItemFromLocalStorage() {
-    const deleteBy = deleteThis.map((item) => item.date);
-    const filteredNotes = notes.filter((item) => !deleteBy.includes(item.date));
-    localStorage.setItem(`notes.${itemId}`, JSON.stringify(filteredNotes));
-    setNotes(filteredNotes);
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+  function deleteCardAndRaiseDeletedCardsCounter(uuid) {
+    deleteCard(uuid);
+    setCardsDeleted();
   }
 
-  return (
-    <button type="button" onClick={findItemByDate} clicked={clicked}>
-      delete
-    </button>
-  );
+  if (uuid)
+    return (
+      <button
+        type="button"
+        onClick={() => deleteCardAndRaiseDeletedCardsCounter(uuid)}
+      >
+        delete
+      </button>
+    );
+  else {
+    return <button type="button">loading</button>;
+  }
 }

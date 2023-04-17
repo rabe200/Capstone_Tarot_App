@@ -1,26 +1,27 @@
-import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import useStore from "../../../../src/store/store";
+import CardPreviewImage from "../../../../components/CardPreviewImage";
 
-export default function Details({ dailyCard }) {
-  if (dailyCard) {
+export default function Details() {
+  const [hasMounted, setHasMounted] = useState(false);
+  const currentCard = useStore((state) => state.currentCard);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+
+  if (currentCard) {
     return (
       <>
-        <h1>{dailyCard.name}</h1>
-        <figure>
-          <Image
-            width="100"
-            height="180"
-            src={dailyCard.image}
-            alt={dailyCard.name}
-          />
-          <figcaption>
-            {dailyCard.type} {dailyCard.value_int}
-          </figcaption>
-        </figure>
-        <section>{dailyCard.meaning_up}</section>
+        <h1>{currentCard.cardname}</h1>
+        <CardPreviewImage card={currentCard} />
+        <section>{currentCard.meaning_up}</section>
         <Link
           href={{
-            pathname: "/cards/dailycard/detail/description",
+            pathname: "/cards/dailycard/description",
           }}
         >
           <button type="button" aria-label="more details button">
@@ -30,7 +31,7 @@ export default function Details({ dailyCard }) {
 
         <Link
           href={{
-            pathname: "/cards/dailycard/detail/notes",
+            pathname: "/cards/dailycard/notes",
           }}
         >
           <button type="button" aria-label="take notes button">

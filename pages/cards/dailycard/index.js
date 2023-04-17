@@ -1,44 +1,34 @@
 import styled from "styled-components";
-import Image from "next/image";
 import Link from "next/link";
+import useStore from "../../../src/store/store";
+import React from "react";
+import CardPreviewImage from "../../../components/CardPreviewImage";
 
-export const CardBody = styled.div`
-  height: 500px;
-  width: 300px;
-  background-color: crimson;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const StyledLink = styled(Link)`
+  background-color: hotpink;
 `;
 
-export const NameBanner = styled.h2`
-  background-color: white;
-  width: 90%;
-  text-align: center;
-`;
+export default function ShowCard() {
+  const currentCard = useStore((state) => state.currentCard);
+  const [hasMounted, setHasMounted] = React.useState(false);
 
-export default function ShowCard({ dailyCard }) {
-  if (dailyCard) {
+  React.useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+  if (currentCard) {
     return (
       <>
-        <CardBody>
-          <h1>{dailyCard.value}</h1>
-          <Image
-            src={dailyCard.image}
-            width="200"
-            height="350"
-            alt={dailyCard.name}
-          />
-          <NameBanner>{dailyCard.name}</NameBanner>
-        </CardBody>
-        <Link
+        <CardPreviewImage card={currentCard} />
+        <StyledLink
           href={{
-            pathname: "/cards/dailycard/detail",
+            pathname: "/cards/dailycard/description",
           }}
         >
-          <button type="button">more details</button>
-        </Link>
+          more Details
+        </StyledLink>
       </>
     );
   } else {

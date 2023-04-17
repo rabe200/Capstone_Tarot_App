@@ -1,27 +1,52 @@
-import { Fragment, useEffect, useState } from "react";
-import { v4 } from "uuid";
+import { Fragment, useState, useEffect, useRef } from "react";
+import useStore from "../../../src/store/store";
 import Link from "next/link";
-import GetNotes from "../../../components/GetNotes";
-import DeleteButton from "../../../components/DeleteButton";
-export default function History() {
-  const [notes, setNotes] = useState(GetNotes());
 
+import DeleteButton from "../../../components/DeleteButton";
+import EditButton from "../../../components/EditButton";
+export default function History() {
+  const [hasMounted, setHasMounted] = useState(false);
+  const drawnCards = useStore((state) => state.drawnCards);
+  const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
+  const difference = useStore((state) => state.difference);
+  const cardsDrawn = useStore((state) => state.cardsDrawn);
+  const cardsDeleted = useStore((state) => state.cardsDeleted);
+  useEffect(() => {
+    updateCardsDrawn();
+  });
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
   return (
     <Fragment>
+      <span>
+        {cardsDrawn ? (
+          <>
+            <b>total number of drawn cards: {cardsDrawn}</b>
+            <br />
+            <b>total number of deleted cards: {cardsDeleted}</b>
+          </>
+        ) : (
+          "noDrawnCards"
+        )}
+      </span>
       <section>
-        {notes.map((note) => (
-          <ul key={note.date}>
-            <h1>{new Date(note.date).toLocaleDateString()}</h1>
-            <li>{note.name}</li>
-            <li> {note.notes}</li>
-            <DeleteButton
-              itemDate={note.date}
-              itemId={note.id}
-              notes={notes}
-              setNotes={setNotes}
-            />
-          </ul>
-        ))}
+        <ul>
+          {drawnCards.map((card) => {
+            return (
+              <Fragment key={card.uuid}>
+                <li>{card.name}</li>
+                <section>{card.notes}</section>
+                <EditButton uuid={card.uuid} card={card} />
+                <DeleteButton uuid={card.uuid} />
+              </Fragment>
+            );
+          })}
+        </ul>
       </section>
       <Link href="/">
         <button type="button">back</button>
