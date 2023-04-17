@@ -25,7 +25,6 @@ export default function MoodMeter() {
     setCurrentCard(difference);
   }
   function handleMinusClick() {
-    console.log(randomCard);
     increaseCardsDrawn();
     setCardMoodMinusOne(randomCard.name);
     setRandomCard(randomCard);
