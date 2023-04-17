@@ -27,6 +27,50 @@ export const useStore = createLocalStorageStore(
     currentNote: "",
     searchQuery: "testString",
     cardMoods: cardMoodArray,
+    setCardClicks: () => set((state) => ({})),
+    setCardMoodPlusOne: (name) => {
+      let newEntry = get().cardMoods.find((card) => card.name === name);
+      const filteredArray = get().cardMoods.filter(
+        (card) => card.name !== newEntry.name
+      );
+      newEntry.avgMood < 1
+        ? (newEntry = {
+            ...newEntry,
+            mood: newEntry.mood + 1,
+            clicks: newEntry.clicks + 1,
+            avgMood: (newEntry.mood + 1) / (newEntry.clicks + 1),
+          })
+        : (newEntry = {
+            ...newEntry,
+            mood: newEntry.mood + 1,
+            clicks: newEntry.clicks + 1,
+            avgMood: newEntry.mood,
+          });
+      set(() => ({ cardMoods: [newEntry].concat(filteredArray) }));
+      console.log(get().cardMoods);
+    },
+    setCardMoodMinusOne: (name) => {
+      let newEntry = get().cardMoods.find((card) => card.name === name);
+      const filteredArray = get().cardMoods.filter(
+        (card) => card.name !== newEntry.name
+      );
+      newEntry.avgMood > 0
+        ? (newEntry = {
+            ...newEntry,
+            mood: newEntry.mood - 1,
+            clicks: newEntry.clicks + 1,
+            avgMood: (newEntry.mood + 1) / (newEntry.clicks + 1),
+          })
+        : (newEntry = {
+            ...newEntry,
+            mood: newEntry.mood - 1,
+            clicks: newEntry.clicks + 1,
+            avgMood: 0,
+          });
+      set(() => ({ cardMoods: [newEntry].concat(filteredArray) }));
+      console.log(get().cardMoods);
+    },
+    setCardAvgMood: () => set((state) => ({})),
     setCardsDeleted: () =>
       set((state) => ({ cardsDeleted: state.cardsDeleted + 1 })),
     setLastCard: () => set((state) => ({ lastCard: state.currentCard })),

@@ -11,10 +11,20 @@ export default function MoodMeter() {
   const currentCard = useStore((state) => state.currentCard);
   const setRandomCard = useStore((state) => state.setRandomCard);
   const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
-
-  function addCardAndIncreaseCardsDrawn() {
+  const setCardMoodPlusOne = useStore((state) => state.setCardMoodPlusOne);
+  const setCardMoodMinusOne = useStore((state) => state.setCardMoodMinusOne);
+  function handlePlusClick() {
     console.log(randomCard);
     increaseCardsDrawn();
+    setCardMoodPlusOne(randomCard.name);
+    setRandomCard(randomCard);
+    drawCard();
+    updateCardsDrawn();
+  }
+  function handleMinusClick() {
+    console.log(randomCard);
+    increaseCardsDrawn();
+    setCardMoodMinusOne(randomCard.name);
     setRandomCard(randomCard);
     drawCard();
     updateCardsDrawn();
@@ -41,7 +51,7 @@ export default function MoodMeter() {
         disabled={disableButton}
         type="button"
         aria-label="minus button"
-        onClick={() => addCardAndIncreaseCardsDrawn()}
+        onClick={() => handlePlusClick()}
       >
         good
       </button>
@@ -49,7 +59,7 @@ export default function MoodMeter() {
         disabled={disableButton}
         type="button"
         aria-label="minus button"
-        onClick={() => addCardAndIncreaseCardsDrawn()}
+        onClick={() => handleMinusClick()}
       >
         bad
       </button>
