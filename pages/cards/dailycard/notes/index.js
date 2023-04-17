@@ -25,7 +25,6 @@ export default function NoteFormular() {
       setCurrentNote(inputValue);
       setDisplayedNote(inputValue);
       setInputValue("");
-      console.log(difference);
       setCurrentCard(difference);
       console.log(currentCard);
       copyCurrentNote();
