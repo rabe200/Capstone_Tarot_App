@@ -17,7 +17,6 @@ export default function MoodMeter() {
   const difference = useStore((state) => state.difference);
 
   function handlePlusClick() {
-    console.log(randomCard);
     increaseCardsDrawn();
     setCardMoodPlusOne(randomCard.name);
     setRandomCard(randomCard);
