@@ -3,53 +3,33 @@ import Image from "next/image";
 import Link from "next/link";
 import useStore from "../../../src/store/store";
 import React from "react";
+import CardPreviewImage from "../../../components/CardPreviewImage";
 
-export const CardBody = styled.div`
-  height: 500px;
-  width: 300px;
-  background-color: crimson;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const NameBanner = styled.h2`
-  background-color: white;
-  width: 90%;
-  text-align: center;
+const StyledLink = styled(Link)`
+  background-color: hotpink;
 `;
 
 export default function ShowCard() {
   const currentCard = useStore((state) => state.currentCard);
   const [hasMounted, setHasMounted] = React.useState(false);
-  const drawnCard = currentCard;
+
   React.useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
     return null;
   }
-  if (drawnCard) {
+  if (currentCard) {
     return (
       <>
-        <CardBody>
-          <h1>{drawnCard.name}</h1>
-          <Image
-            src={drawnCard.image}
-            width="200"
-            height="350"
-            alt={drawnCard.name}
-          />
-          <NameBanner>{drawnCard.name}</NameBanner>
-        </CardBody>
-        <Link
+        <CardPreviewImage card={currentCard} />
+        <StyledLink
           href={{
             pathname: "/cards/dailycard/description",
           }}
         >
-          <button type="button">more details</button>
-        </Link>
+          more Details
+        </StyledLink>
       </>
     );
   } else {

@@ -2,33 +2,36 @@ import Link from "next/link";
 import BackButton from "../../../../components/Backbutton/backbutton";
 import React, { useState, useEffect, useRef } from "react";
 import useStore from "../../../../src/store/store";
+import { useRouter } from "next/router";
 
 export default function NoteFormular() {
-  const [hasMounted, setHasMounted] = React.useState(false);
-  const currentCard = useStore((state) => state.currentCard);
+  // const [hasMounted, setHasMounted] = React.useState(false);
+  const router = useRouter();
   const [inputValue, setInputValue] = useState();
   const inputReference = useRef(null);
+  const setCurrentCard = useStore((state) => state.setCurrentCard);
   const setCurrentNote = useStore((state) => state.setCurrentNote);
   const copyCurrentNote = useStore((state) => state.copyCurrentNote);
-  const setCardNote = useStore((state) => state.setCardNote);
   const updateCurrentCardByNote = useStore(
     (state) => state.updateCurrentCardByNote
   );
   const drawnCards = useStore((state) => state.drawnCards);
   function handleSubmit(event) {
     event.preventDefault();
-    setCurrentNote(inputValue);
-    setInputValue("");
-    copyCurrentNote();
+
+    if (drawnCards.length > 0) {
+      setCurrentNote(inputValue);
+      setInputValue("");
+      setCurrentCard(-1);
+      copyCurrentNote();
+    } else {
+      alert("no cards in history - add some cards to enable saving");
+    }
   }
 
   useEffect(() => {
     inputReference.current.focus();
   }, []);
-
-  // useEffect(() => {
-  //   updateCurrentCardByNote();
-  // }, [copyCurrentNote]);
 
   return (
     <>

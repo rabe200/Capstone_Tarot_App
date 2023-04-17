@@ -2,37 +2,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getCardById } from "../../../lib/data";
-import NextCardButton from "../../../components/NextCardButton";
-import PreviousCardButton from "../../../components/PreviousCardButton";
 import DetailsButton from "../../../components/DetailsButton";
 import NotesButton from "../../../components/NotesButton";
 import SearchBar from "../../../components/SearchBar";
+import CardSliderButton from "../../../components/CardSliderButton";
+import CardPreviewImage from "../../../components/CardPreviewImage";
 
-export default function Details({ cards, setSearchResults }) {
+export default function Details() {
   const router = useRouter();
   const id = router ? router.query.id : null;
   const card = getCardById(id);
   return (
     id < 78 && (
       <>
-        <figure>
-          {card.image ? (
-            <Image
-              width={100}
-              height={180}
-              src={card.image}
-              alt={card.name}
-              priority={true}
-            />
-          ) : (
-            isLoading
-          )}
-          <figcaption>{card.name}</figcaption>
-        </figure>
+        <CardPreviewImage card={card} />
         <DetailsButton card={card} />
         <NotesButton card={card} />
-        <PreviousCardButton cards={cards} setResults={setSearchResults} />
-        <NextCardButton />
+        <CardSliderButton />
         <Link href="/">
           <button type="button">back</button>
         </Link>

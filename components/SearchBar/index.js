@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useStore } from "../../src/store/store";
+import { useStore } from "../../pages/store";
 import { useRouter } from "next/router";
 
 export default function SearchBar() {

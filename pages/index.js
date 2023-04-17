@@ -1,11 +1,12 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useStore from "../src/store/store";
 
 export default function HomePage() {
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const currentCard = useStore((state) => state.currentCard);
-  React.useEffect(() => {
+
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -17,7 +18,7 @@ export default function HomePage() {
       <p></p>
       <Link href="/cards/history/">history</Link>
       <p></p>
-      {currentCard.id ? (
+      {currentCard.name ? (
         <Link href={`/cards/${currentCard.id}`}>overview</Link>
       ) : null}
       <p></p>

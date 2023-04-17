@@ -4,6 +4,7 @@ import Link from "next/link";
 export default function Results() {
   const [hasMounted, setHasMounted] = React.useState(false);
   const currentCard = useStore((state) => state.currentCard);
+  const drawnCards = useStore((state) => state.drawnCards);
 
   React.useEffect(() => {
     setHasMounted(true);
@@ -11,20 +12,33 @@ export default function Results() {
   if (!hasMounted) {
     return null;
   }
-  return (
-    <ul>
-      <li>Results</li>
-      <li>{currentCard.name}</li>
-      <li>Note: {currentCard.notes}</li>
-      <li>IndexInArray: {currentCard.arrayIndex}</li>
-      <li>Clicks: {currentCard.clicks}</li>
-      <li>
+
+  if (drawnCards.length > 0) {
+    return (
+      <ul>
+        <li>Results</li>
+        <li>{currentCard.name}</li>
+        <li>Note: {currentCard.notes}</li>
+        <li>Clicks: {currentCard.clicks}</li>
+        <li>
+          <Link href="/">
+            <button type="button" aria-label="end session">
+              end
+            </button>
+          </Link>
+        </li>
+      </ul>
+    );
+  } else {
+    return (
+      <>
+        <p>no cards to review</p>
         <Link href="/">
           <button type="button" aria-label="end session">
             end
           </button>
         </Link>
-      </li>
-    </ul>
-  );
+      </>
+    );
+  }
 }
