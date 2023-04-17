@@ -26,7 +26,6 @@ export default function NoteFormular() {
       setDisplayedNote(inputValue);
       setInputValue("");
       setCurrentCard(difference);
-      console.log(currentCard);
       copyCurrentNote();
     } else {
       alert("no cards in history - add some cards to enable saving");
