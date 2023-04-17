@@ -1,14 +1,20 @@
-import React, { Fragment, useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import useStore from "../../../src/store/store";
 import Link from "next/link";
 
 import DeleteButton from "../../../components/DeleteButton";
 import EditButton from "../../../components/EditButton";
 export default function History() {
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const drawnCards = useStore((state) => state.drawnCards);
+  const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
+  const difference = useStore((state) => state.difference);
+  useEffect(() => {
+    updateCardsDrawn();
+    console.log("difference between drawn and deleted card:", difference);
+  });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {

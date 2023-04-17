@@ -31,7 +31,7 @@ export default function Description() {
           {currentCard.type} {currentCard.value_int}
         </figcaption>
       </figure>
-      <article>{currentCard.description}</article>
+      <article>{currentCard.desc}</article>
       <Link href={{ pathname: "/cards/dailycard/detail" }}>
         <button type="button" aria-label="less details button">
           less details

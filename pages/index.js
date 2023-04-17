@@ -4,7 +4,7 @@ import useStore from "../src/store/store";
 
 export default function HomePage() {
   const [hasMounted, setHasMounted] = useState(false);
-  const currentCard = useStore((state) => state.currentCard);
+  const lastCard = useStore((state) => state.lastCard);
 
   useEffect(() => {
     setHasMounted(true);
@@ -18,9 +18,11 @@ export default function HomePage() {
       <p></p>
       <Link href="/cards/history/">history</Link>
       <p></p>
-      {currentCard.name ? (
-        <Link href={`/cards/${currentCard.id}`}>overview</Link>
-      ) : null}
+      {lastCard.name ? (
+        <Link href={`/cards/${lastCard.id}`}>overview</Link>
+      ) : (
+        <Link href={`/cards/0`}>overview</Link>
+      )}
       <p></p>
       <Link href="cards/search">search</Link>
       <p></p>

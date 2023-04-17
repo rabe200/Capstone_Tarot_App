@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import useStore from "../../../../src/store/store";
 import Link from "next/link";
 export default function Results() {
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
   const currentCard = useStore((state) => state.currentCard);
   const drawnCards = useStore((state) => state.drawnCards);
 
-  React.useEffect(() => {
+  const setLastCard = useStore((state) => state.setLastCard);
+
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -22,7 +24,11 @@ export default function Results() {
         <li>Clicks: {currentCard.clicks}</li>
         <li>
           <Link href="/">
-            <button type="button" aria-label="end session">
+            <button
+              type="button"
+              aria-label="end session"
+              onClick={setLastCard}
+            >
               end
             </button>
           </Link>

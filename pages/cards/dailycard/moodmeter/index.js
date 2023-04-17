@@ -10,18 +10,21 @@ export default function MoodMeter() {
   const increaseCardsDrawn = useStore((state) => state.increaseCardsDrawn);
   const currentCard = useStore((state) => state.currentCard);
   const setRandomCard = useStore((state) => state.setRandomCard);
+  const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
+
   function addCardAndIncreaseCardsDrawn() {
     console.log(randomCard);
     increaseCardsDrawn();
     setRandomCard(randomCard);
     drawCard();
+    updateCardsDrawn();
   }
 
   function randomIndex(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  const randomCardIndex = randomIndex(0, 78);
+  const randomCardIndex = randomIndex(0, 77);
   const randomCard = getCardById(randomCardIndex);
 
   useEffect(() => {

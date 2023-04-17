@@ -13,7 +13,6 @@ const cardMoodArray = cards.map((card) => {
     avgMood: 0.5,
   };
 });
-// console.log(cardMoodArray);
 
 export const useStore = createLocalStorageStore(
   (set, get) => ({
@@ -21,21 +20,31 @@ export const useStore = createLocalStorageStore(
     drawnCards: [],
     cardsDrawn: 0,
     cardsDeleted: 0,
+    difference: 0,
     clicks: 0,
     currentCard: { id: 0, name: "the fool" },
+    lastCard: { id: 0, name: "the fool" },
     currentNote: "",
     searchQuery: "testString",
     cardMoods: cardMoodArray,
     setCardsDeleted: () =>
       set((state) => ({ cardsDeleted: state.cardsDeleted + 1 })),
+    setLastCard: () => set((state) => ({ lastCard: state.currentCard })),
     getAllCards: () => {
       get().drawnCards;
     },
     setSearchQuery: (input) => set(() => ({ searchQuery: input })),
-    setCurrentCard: (difference) =>
-      set((state) => ({
-        currentCard: state.drawnCards[state.cardsDrawn + difference],
-      })),
+    setCurrentCard: (difference) => {
+      if (get().difference > 1) {
+        set((state) => ({
+          currentCard: state.drawnCards[difference - 1],
+        }));
+      } else {
+        set((state) => ({
+          currentCard: state.drawnCards[0],
+        }));
+      }
+    },
     setRandomCard: (randomCard) => set(() => ({ currentCard: randomCard })),
     increaseCardsDrawn: () =>
       set((state) => ({ cardsDrawn: state.cardsDrawn + 1 })),
@@ -65,19 +74,28 @@ export const useStore = createLocalStorageStore(
       return newArray;
     },
     updateCurrentCardByNote: () => {
-      if (get().drawnCards.length > 0 && get().currentNote !== "") {
+      console.log("mep");
+      if (
+        get().drawnCards.length > 0 &&
+        get().currentNote !== "" &&
+        get().difference > 0
+      ) {
         set((state) => ({
           currentCard: state.drawnCards
             .filter((card) => card.uuid === state.currentCard.uuid)
             .reduce((acc) => acc),
         }));
-      }
+        console.log(get().currentCard);
+      } else alert("conditions not met");
     },
+    updateCardsDrawn: () =>
+      set((state) => ({ difference: state.cardsDrawn - state.cardsDeleted })),
     copyCurrentNote: () => {
-      if (get().drawnCards.length > 0) {
+      if (get().difference > 0) {
         const filteredArray = get().drawnCards.filter(
           (card) => card.uuid !== get().currentCard.uuid
         );
+        console.log("filteredArray", filteredArray);
         const newArray = {
           arrayIndex: get().currentCard.arrayIndex,
           uuid: get().currentCard.uuid,
@@ -91,11 +109,12 @@ export const useStore = createLocalStorageStore(
           type: get().currentCard.type,
           value: get().currentCard.value,
         };
-        console.log(newArray);
+        console.log("newArray", newArray);
         const newDrawnCards = filteredArray.concat(newArray);
         set(() => {
           return { drawnCards: newDrawnCards };
         });
+        console.log("newDrawnCards", get().drawnCards);
       } else {
         alert("no cards in history - add some cards to enable saving");
         console.log("no cards in history - add some cards to save note");

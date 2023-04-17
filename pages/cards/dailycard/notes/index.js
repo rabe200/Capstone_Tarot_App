@@ -1,6 +1,6 @@
 import Link from "next/link";
 import BackButton from "../../../../components/Backbutton/backbutton";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import useStore from "../../../../src/store/store";
 import { useRouter } from "next/router";
 
@@ -16,13 +16,21 @@ export default function NoteFormular() {
     (state) => state.updateCurrentCardByNote
   );
   const drawnCards = useStore((state) => state.drawnCards);
+  const [hidden, setHidden] = useState(false);
+  const currentCard = useStore((state) => state.currentCard);
+  const [displayedNote, setDisplayedNote] = useState("");
+  const difference = useStore((state) => state.difference);
+
   function handleSubmit(event) {
     event.preventDefault();
-
     if (drawnCards.length > 0) {
+      setHidden(true);
       setCurrentNote(inputValue);
+      setDisplayedNote(inputValue);
       setInputValue("");
-      setCurrentCard(-1);
+      console.log(difference);
+      setCurrentCard(difference);
+      console.log(currentCard);
       copyCurrentNote();
     } else {
       alert("no cards in history - add some cards to enable saving");
@@ -35,7 +43,7 @@ export default function NoteFormular() {
 
   return (
     <>
-      <form aria-label="formular" onSubmit={handleSubmit}>
+      <form hidden={hidden} aria-label="formular" onSubmit={handleSubmit}>
         <label htmlFor="note">
           <textarea
             required
@@ -56,7 +64,11 @@ export default function NoteFormular() {
           submit
         </button>
       </form>
-
+      {hidden ? (
+        <p>
+          <b>{displayedNote}</b>
+        </p>
+      ) : null}
       <BackButton name="Back" aria-label="back button" />
 
       <Link
