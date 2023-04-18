@@ -72,10 +72,6 @@ export default function MoodMeter() {
       ) : (
         <p>waiting for action</p>
       )}
-      {/* {currentCard.averageMood >= 0 ? (
-        <p>Mood: {Math.round(drawnCards.averageMood * 100)} %</p>
-      ) : null}
-      <p>{currentCard.averageMood >= 0.5 ? ":)" : ":("}</p>{" "} */}
       <Link href="../dailycard">
         <button type="button">next</button>
       </Link>

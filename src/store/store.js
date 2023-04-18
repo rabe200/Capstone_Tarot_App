@@ -79,7 +79,7 @@ export const useStore = createLocalStorageStore(
     setCurrentCard: (difference) => {
       if (get().difference > 1) {
         set((state) => ({
-          currentCard: state.drawnCards[difference - 1],
+          currentCard: state.drawnCards[difference],
         }));
       } else {
         set((state) => ({
