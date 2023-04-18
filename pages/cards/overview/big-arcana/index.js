@@ -20,9 +20,7 @@ export default function Overview() {
           ))}
       </ul>
       <BackButton />
-      <Link href="/">
-        <button type="button">menu</button>
-      </Link>
+      <Link href="/">menu</Link>
     </>
   );
 }
