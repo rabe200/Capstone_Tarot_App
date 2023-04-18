@@ -7,6 +7,12 @@ import SearchBar from "../../../components/SearchBar";
 import CardSliderButton from "../../../components/CardSliderButton";
 import CardPreviewImage from "../../../components/CardPreviewImage";
 import { useState, useEffect } from "react";
+import BackButton from "../../../components/Backbutton/backbutton";
+import styled from "styled-components";
+
+const StyledMain = styled.main`
+  text-align: center;
+`;
 
 export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -21,16 +27,17 @@ export default function Details() {
   }
   return (
     id < 78 && (
-      <>
+      <StyledMain>
+        {" "}
         <CardPreviewImage card={card} />
         <DetailsButton card={card} />
         <NotesButton card={card} />
         <CardSliderButton />
-        <Link href="/">
-          <button type="button">back</button>
-        </Link>
+        <BackButton />
+        <Link href="/cards/overview">overview</Link>
+        <Link href="/">menu</Link>
         <SearchBar />
-      </>
+      </StyledMain>
     )
   );
 }

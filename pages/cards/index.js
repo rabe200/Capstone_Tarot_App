@@ -19,14 +19,16 @@ export default function Details() {
   }
   return (
     <>
-      <CardPreviewImage card={card} />
-      <DetailsButton card={card} />
-      <NotesButton card={card} />
-      <CardSliderButton />
-      <Link href="/">
-        <button type="button">back</button>
-      </Link>
-      <SearchBar />
+      <main>
+        <CardPreviewImage card={card} />
+        <DetailsButton card={card} />
+        <NotesButton card={card} />
+        <CardSliderButton />
+        <Link href="/">
+          <button type="button">back</button>
+        </Link>
+        <SearchBar />
+      </main>
     </>
   );
 }

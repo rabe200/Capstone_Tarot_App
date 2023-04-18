@@ -5,8 +5,9 @@ import styled from "styled-components";
 
 const StyledLinkGroup = styled.div`
   display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
+  justify-content: center;
+  gap: 20rem;
+  margin: 0.3rem 0;
 `;
 
 export default function CardSliderButton() {
