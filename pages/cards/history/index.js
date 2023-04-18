@@ -13,7 +13,6 @@ export default function History() {
   const cardsDeleted = useStore((state) => state.cardsDeleted);
   useEffect(() => {
     updateCardsDrawn();
-    console.log("difference between drawn and deleted card:", difference);
   });
 
   useEffect(() => {
