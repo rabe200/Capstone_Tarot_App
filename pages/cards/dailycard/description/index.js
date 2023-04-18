@@ -16,7 +16,9 @@ export default function Description() {
     <>
       <h1>{currentCard.name}</h1>
       <CardPreviewImage card={currentCard} />
-      <article>{currentCard.desc}</article>
+      <article>
+        {currentCard.desc ? currentCard.desc : currentCard.description}
+      </article>
       <Link href={{ pathname: "/cards/dailycard/detail" }}>
         <button type="button" aria-label="less details button">
           less details

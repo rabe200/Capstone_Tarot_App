@@ -14,7 +14,6 @@ export default function NoteFormular() {
   );
   const drawnCards = useStore((state) => state.drawnCards);
   const [hidden, setHidden] = useState(false);
-  const currentCard = useStore((state) => state.currentCard);
   const [displayedNote, setDisplayedNote] = useState("");
   const difference = useStore((state) => state.difference);
 
@@ -25,9 +24,7 @@ export default function NoteFormular() {
       setCurrentNote(inputValue);
       setDisplayedNote(inputValue);
       setInputValue("");
-      console.log(difference);
-      setCurrentCard(difference);
-      console.log(currentCard);
+      setCurrentCard(difference - 1);
       copyCurrentNote();
     } else {
       alert("no cards in history - add some cards to enable saving");
