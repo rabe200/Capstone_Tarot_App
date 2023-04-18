@@ -7,8 +7,9 @@ export default function Overview() {
 
   return (
     <>
+      <h1>big arcana</h1>
+
       <ul>
-        <h2>big arcana</h2>
         {cards
           .filter((card) => card.type === "major")
           .map((card) => (
