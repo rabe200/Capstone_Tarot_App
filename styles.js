@@ -8,12 +8,16 @@ export default createGlobalStyle`
   }
 
   body {
-    margin: 0;
+    /* margin: 0;
     font-family: system-ui;
     width: 375px;
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
+  }
+
+  main {
+    background-color: hotpink;
   }
 `;
