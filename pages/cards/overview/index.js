@@ -36,7 +36,7 @@ export default function Description() {
             </Link>
           </li>
           <li>
-            <Link href={{ pathname: "/cards/overview/minor-arcana/pemtacles" }}>
+            <Link href={{ pathname: "/cards/overview/minor-arcana/pentacles" }}>
               pentacles
             </Link>
           </li>
