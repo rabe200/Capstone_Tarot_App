@@ -27,6 +27,16 @@ export const useStore = createLocalStorageStore(
     currentNote: "",
     searchQuery: "testString",
     cardMoods: cardMoodArray,
+    getSuits: () => {
+      const cards = get().allCards;
+      const allSuits = cards.map((card) => card.suit);
+      const suits = allSuits
+        .filter((suit, index) => {
+          return allSuits.indexOf(suit) === index;
+        })
+        .filter((item) => item !== undefined);
+      return suits;
+    },
     setCardClicks: () => set((state) => ({})),
     setCardMoodPlusOne: (name) => {
       let newEntry = get().cardMoods.find((card) => card.name === name);
