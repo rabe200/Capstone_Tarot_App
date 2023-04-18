@@ -1,49 +1,32 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import BackButton from "../../../../components/Backbutton/backbutton";
+import useStore from "../../../../src/store/store";
 
 export default function Description() {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-  if (!hasMounted) {
-    return null;
-  }
+  const cards = useStore((state) => state.allCards);
+  const allSuits = cards.map((card) => card.suit);
+  const suits = allSuits
+    .filter((suit, index) => {
+      return allSuits.indexOf(suit) === index;
+    })
+    .filter((item) => item !== undefined);
   return (
     <>
       <ul>
         <h1>minor arcana</h1>
-        <li>
-          {" "}
-          <Link href={{ pathname: "/cards/overview/minor-arcana/wands" }}>
-            wands
-          </Link>
-        </li>
-        <li>
-          {" "}
-          <Link href={{ pathname: "/cards/overview/minor-arcana/cups" }}>
-            cups
-          </Link>
-        </li>
-        <li>
-          {" "}
-          <Link href={{ pathname: "/cards/overview/minor-arcana/pentacles" }}>
-            pentacles
-          </Link>
-        </li>
-        <li>
-          {" "}
-          <Link href={{ pathname: "/cards/overview/minor-arcana/swords" }}>
-            swords
-          </Link>
-        </li>
+        {console.log(suits)}
+        {suits.map((suit) => {
+          return (
+            <li key={suit}>
+              <Link href={{ pathname: `/cards/overview/minor-arcana/${suit}` }}>
+                {suit}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
       <BackButton />
-      <Link href="/">
-        <button type="button">menu</button>
-      </Link>
+      <Link href="/">menu</Link>
     </>
   );
 }

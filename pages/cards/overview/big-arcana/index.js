@@ -1,19 +1,10 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import BackButton from "../../../../components/Backbutton/backbutton";
 import useStore from "../../../../src/store/store";
 
 export default function Overview() {
-  const [hasMounted, setHasMounted] = useState(false);
-
   const cards = useStore((state) => state.allCards);
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-  if (!hasMounted) {
-    return null;
-  }
   return (
     <>
       <ul>

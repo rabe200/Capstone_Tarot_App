@@ -15,12 +15,18 @@ export default function Description() {
     <>
       <ul>
         <li>
-          <Link href={{ pathname: "/cards/overview/big-arcana" }}>
+          <Link
+            href={{ pathname: "/cards/overview/big-arcana" }}
+            arcana={"major"}
+          >
             big arcana
           </Link>
         </li>
         <li>
-          <Link href={{ pathname: "/cards/overview/minor-arcana" }}>
+          <Link
+            href={{ pathname: "/cards/overview/minor-arcana" }}
+            arcana={"minor"}
+          >
             minor arcana
           </Link>
         </li>
@@ -48,9 +54,7 @@ export default function Description() {
         </ul>
       </ul>
       <BackButton />
-      <Link href="/">
-        <button type="button">menu</button>
-      </Link>
+      <Link href="/">menu</Link>
     </>
   );
 }

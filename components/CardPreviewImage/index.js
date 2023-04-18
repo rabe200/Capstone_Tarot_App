@@ -2,8 +2,6 @@ import styled from "styled-components";
 import Image from "next/image";
 
 const CardBody = styled.figure`
-  /* height: 600px;
-  width: 375px; */
   background-color: crimson;
   display: flex;
   flex-direction: column;

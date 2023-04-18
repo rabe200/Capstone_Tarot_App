@@ -1,25 +1,19 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import BackButton from "../../../../../components/Backbutton/backbutton";
 import useStore from "../../../../../src/store/store";
+import { useRouter } from "next/router";
 
-export default function Pentacles() {
-  const [hasMounted, setHasMounted] = useState(false);
-
+export default function Cups() {
   const cards = useStore((state) => state.allCards);
+  const router = useRouter();
+  const { suit } = router.query;
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-  if (!hasMounted) {
-    return null;
-  }
   return (
     <>
       <ul>
-        <h2>pentacles</h2>
+        <h2>cups</h2>
         {cards
-          .filter((card) => card.suit === "pentacles")
+          .filter((card) => card.suit === suit)
           .map((card) => (
             <li key={card.id}>
               {" "}
@@ -28,9 +22,7 @@ export default function Pentacles() {
           ))}
       </ul>
       <BackButton />
-      <Link href="/">
-        <button type="button">menu</button>
-      </Link>
+      <Link href="/">menu</Link>
     </>
   );
 }

@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import BackButton from "../../../components/Backbutton/backbutton";
 import styled from "styled-components";
 
-const StyledMain = styled.div`
+const StyledMain = styled.main`
   text-align: center;
 `;
 
@@ -34,12 +34,8 @@ export default function Details() {
         <NotesButton card={card} />
         <CardSliderButton />
         <BackButton />
-        <Link href="/cards/overview">
-          <button type="button">overview</button>
-        </Link>
-        <Link href="/">
-          <button type="button">menu</button>
-        </Link>
+        <Link href="/cards/overview">overview</Link>
+        <Link href="/">menu</Link>
         <SearchBar />
       </StyledMain>
     )
