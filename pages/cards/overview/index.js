@@ -3,13 +3,7 @@ import useStore from "../../../src/store/store";
 import BackButton from "../../../components/Backbutton/backbutton";
 
 export default function Overview() {
-  const cards = useStore((state) => state.allCards);
-  const allSuits = cards.map((card) => card.suit);
-  const suits = allSuits
-    .filter((suit, index) => {
-      return allSuits.indexOf(suit) === index;
-    })
-    .filter((item) => item !== undefined);
+  const suits = useStore((state) => state.getSuits);
 
   return (
     <>
@@ -31,7 +25,7 @@ export default function Overview() {
           </Link>
         </li>
         <ul>
-          {suits.map((suit) => {
+          {suits().map((suit) => {
             return (
               <li key={suit}>
                 <Link
