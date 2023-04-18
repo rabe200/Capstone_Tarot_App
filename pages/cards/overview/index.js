@@ -9,18 +9,12 @@ export default function Overview() {
     <>
       <ul>
         <li>
-          <Link
-            href={{ pathname: "/cards/overview/big-arcana" }}
-            arcana={"major"}
-          >
+          <Link href={{ pathname: "/cards/overview/big-arcana" }}>
             big arcana
           </Link>
         </li>
         <li>
-          <Link
-            href={{ pathname: "/cards/overview/minor-arcana" }}
-            arcana={"minor"}
-          >
+          <Link href={{ pathname: "/cards/overview/minor-arcana" }}>
             minor arcana
           </Link>
         </li>
