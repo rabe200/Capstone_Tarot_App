@@ -21,8 +21,10 @@ export default function Results() {
         <li>Results</li>
         <li>{currentCard.name}</li>
         <li>Note: {currentCard.notes}</li>
-        <li>Drawn: {stats.clicks}x times</li>
-        <li>Mood: {stats.avgMood}</li>
+        <li>Drawn: {currentCard.clicks}x times</li>
+        <li>Mood: {currentCard.mood}</li>
+        <li>Date: {currentCard.date}</li>
+        <li>AvgMood: {currentCard.avgMood}</li>
         <li>
           <Link href="/">
             <button

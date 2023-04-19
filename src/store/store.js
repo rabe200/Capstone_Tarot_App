@@ -125,19 +125,19 @@ export const useStore = createLocalStorageStore(
       const newArray = get().drawnCards.filter((item) => item.uuid !== input);
       return newArray;
     },
-    updateCurrentCardByNote: () => {
-      if (
-        get().drawnCards.length > 0 &&
-        get().currentNote !== "" &&
-        get().difference > 0
-      ) {
-        set((state) => ({
-          currentCard: state.drawnCards
-            .filter((card) => card.uuid === state.currentCard.uuid)
-            .reduce((acc) => acc),
-        }));
-      } else alert("conditions not met");
-    },
+    // updateCurrentCardByNote: () => {
+    //   if (
+    //     get().drawnCards.length > 0 &&
+    //     get().currentNote !== "" &&
+    //     get().difference > 0
+    //   ) {
+    //     set((state) => ({
+    //       currentCard: state.drawnCards
+    //         .filter((card) => card.uuid === state.currentCard.uuid)
+    //         .reduce((acc) => acc),
+    //     }));
+    //   } else alert("conditions not met");
+    // },
     updateCardsDrawn: () =>
       set((state) => ({ difference: state.cardsDrawn - state.cardsDeleted })),
     editSelectedNote: (card) => {
@@ -182,6 +182,9 @@ export const useStore = createLocalStorageStore(
           notes: get().currentNote,
           type: get().currentCard.type,
           value: get().currentCard.value,
+          avgMood: get().currentCard.mood,
+          clicks: get().currentCard.clicks,
+          date: get().currentCard.date,
         };
         const newDrawnCards = filteredArray.concat(newArray);
         set(() => {
@@ -201,7 +204,7 @@ export const useStore = createLocalStorageStore(
               id: get().currentCard.id,
               name: get().currentCard.name,
               mood: get().cardMoods.find((card) => card.id === randomCard.id)
-                .mood,
+                .avgMood,
               clicks: get().cardMoods.find((card) => card.id === randomCard.id)
                 .clicks,
               averageMood: get().cardMoods.find(
