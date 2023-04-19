@@ -47,12 +47,14 @@ export const useStore = createLocalStorageStore(
         ? (newEntry = {
             ...newEntry,
             mood: newEntry.mood + 1,
+            currentMood: 1,
             clicks: newEntry.clicks + 1,
             averageMood: (newEntry.mood + 1) / (newEntry.clicks + 1),
           })
         : (newEntry = {
             ...newEntry,
             mood: newEntry.mood + 1,
+            currentMood: 1,
             clicks: newEntry.clicks + 1,
             averageMood: 1,
           });
@@ -67,12 +69,14 @@ export const useStore = createLocalStorageStore(
         ? (newEntry = {
             ...newEntry,
             mood: newEntry.mood - 1,
+            currentMood: 0,
             clicks: newEntry.clicks + 1,
             averageMood: (newEntry.mood + 1) / (newEntry.clicks + 1),
           })
         : (newEntry = {
             ...newEntry,
             mood: 0,
+            currentMood: 0,
             clicks: newEntry.clicks + 1,
             averageMood: 0,
           });
@@ -148,6 +152,7 @@ export const useStore = createLocalStorageStore(
         value: itemToEdit.value,
         date: itemToEdit.date,
         mood: itemToEdit.mood,
+        currentMood: itemToEdit.currentMood,
         averageMood: itemToEdit.averageMood,
         clicks: itemToEdit.clicks,
       };
@@ -173,8 +178,9 @@ export const useStore = createLocalStorageStore(
           notes: get().currentNote,
           type: get().currentCard.type,
           value: get().currentCard.value,
-          averageMood: get().currentCard.averageMood,
           mood: get().currentCard.mood,
+          currentMood: get().currentCard.currentMood,
+          averageMood: get().currentCard.averageMood,
           clicks: get().currentCard.clicks,
           date: get().currentCard.date,
         };
@@ -195,10 +201,13 @@ export const useStore = createLocalStorageStore(
               uuid: v4(),
               id: get().currentCard.id,
               name: get().currentCard.name,
-              mood: get().cardMoods.find((card) => card.id === randomCard.id)
-                .mood,
               clicks: get().cardMoods.find((card) => card.id === randomCard.id)
                 .clicks,
+              mood: get().cardMoods.find((card) => card.id === randomCard.id)
+                .mood,
+              currentMood: get().cardMoods.find(
+                (card) => card.id === randomCard.id
+              ).currentMood,
               averageMood: get().cardMoods.find(
                 (card) => card.id === randomCard.id
               ).averageMood,

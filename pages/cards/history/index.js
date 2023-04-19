@@ -45,8 +45,8 @@ export default function History() {
                 </li>
                 <li>Drawn: {card.clicks} times</li>
                 <li>AverageMood: {card.averageMood}</li>
-                <li>mood: {card.mood}</li>
-                <li>mood clicked: {card.moodClicked}</li>
+                <li>TotalMood: {card.mood}</li>
+                <li>moodClicked: {card.currentMood}</li>
                 <section>{card.notes}</section>
                 <EditButton uuid={card.uuid} card={card} />
                 <DeleteButton uuid={card.uuid} />
