@@ -173,7 +173,8 @@ export const useStore = createLocalStorageStore(
           notes: get().currentNote,
           type: get().currentCard.type,
           value: get().currentCard.value,
-          averageMood: get().currentCard.mood,
+          averageMood: get().currentCard.averageMood,
+          mood: get().currentCard.mood,
           clicks: get().currentCard.clicks,
           date: get().currentCard.date,
         };
@@ -195,7 +196,7 @@ export const useStore = createLocalStorageStore(
               id: get().currentCard.id,
               name: get().currentCard.name,
               mood: get().cardMoods.find((card) => card.id === randomCard.id)
-                .averageMood,
+                .mood,
               clicks: get().cardMoods.find((card) => card.id === randomCard.id)
                 .clicks,
               averageMood: get().cardMoods.find(
