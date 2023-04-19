@@ -43,6 +43,10 @@ export default function History() {
                 <li>
                   {card.date} : {card.name}
                 </li>
+                <li>Drawn: {card.clicks} times</li>
+                <li>AverageMood: {card.averageMood}</li>
+                <li>mood: {card.mood}</li>
+                <li>mood clicked: {card.moodClicked}</li>
                 <section>{card.notes}</section>
                 <EditButton uuid={card.uuid} card={card} />
                 <DeleteButton uuid={card.uuid} />

@@ -24,7 +24,7 @@ export default function Results() {
         <li>Drawn: {currentCard.clicks}x times</li>
         <li>Mood: {currentCard.mood}</li>
         <li>Date: {currentCard.date}</li>
-        <li>AvgMood: {currentCard.avgMood}</li>
+        <li>AvergeMood: {currentCard.averageMood}</li>
         <li>
           <Link href="/">
             <button

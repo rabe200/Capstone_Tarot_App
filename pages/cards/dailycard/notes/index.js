@@ -24,7 +24,6 @@ export default function NoteFormular() {
       setCurrentNote(inputValue);
       setDisplayedNote(inputValue);
       setInputValue("");
-
       copyCurrentNote();
       setCurrentCard(difference - 1);
     } else {
