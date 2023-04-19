@@ -191,20 +191,7 @@ export const useStore = createLocalStorageStore(
         alert("no cards in history - add some cards to enable saving");
       }
     },
-    drawCard: (
-      uuid,
-      id,
-      name,
-      mood,
-      clicks,
-      averageMood,
-      date,
-      description,
-      meaning_up,
-      meaning_rev,
-      notes,
-      arrayIndex
-    ) => {
+    drawCard: (randomCard) => {
       set((state) => {
         return {
           drawnCards: [
@@ -213,10 +200,19 @@ export const useStore = createLocalStorageStore(
               uuid: v4(),
               id: get().currentCard.id,
               name: get().currentCard.name,
-              mood,
-              clicks: state.clicks,
-              averageMood,
-              date,
+              mood: get().cardMoods.find((card) => card.id === randomCard.id)
+                .mood,
+              clicks: get().cardMoods.find((card) => card.id === randomCard.id)
+                .clicks,
+              averageMood: get().cardMoods.find(
+                (card) => card.id === randomCard.id
+              ).averageMood,
+              date: new Date().toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              }),
               image: get().currentCard.image,
               description: get().currentCard.desc,
               meaning_up: get().currentCard.meaning_up,

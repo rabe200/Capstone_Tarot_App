@@ -40,7 +40,9 @@ export default function History() {
           {drawnCards.map((card) => {
             return (
               <Fragment key={card.uuid}>
-                <li>{card.name}</li>
+                <li>
+                  {card.date} : {card.name}
+                </li>
                 <section>{card.notes}</section>
                 <EditButton uuid={card.uuid} card={card} />
                 <DeleteButton uuid={card.uuid} />
