@@ -5,9 +5,7 @@ export default function Results() {
   const [hasMounted, setHasMounted] = useState(false);
   const currentCard = useStore((state) => state.currentCard);
   const drawnCards = useStore((state) => state.drawnCards);
-  const cardMoods = useStore((state) => state.cardMoods);
   const setLastCard = useStore((state) => state.setLastCard);
-  const stats = cardMoods.find((card) => card.name === currentCard.name);
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -19,10 +17,16 @@ export default function Results() {
     return (
       <ul>
         <li>Results</li>
+        <li>Day: {currentCard.day}</li>
+        <li>Hour: {currentCard.hour}</li>
+        <li>Minute: {currentCard.minute}</li>
+        <li>Second: {currentCard.second}</li>
         <li>{currentCard.name}</li>
         <li>Note: {currentCard.notes}</li>
-        <li>Drawn: {stats.clicks}x times</li>
-        <li>Mood: {stats.avgMood}</li>
+        <li>Drawn: {currentCard.clicks}x times</li>
+        <li>Mood: {currentCard.mood}</li>
+        <li>currentMood: {currentCard.currentMood}</li>
+        <li>AverageMood: {currentCard.averageMood}</li>
         <li>
           <Link href="/">
             <button

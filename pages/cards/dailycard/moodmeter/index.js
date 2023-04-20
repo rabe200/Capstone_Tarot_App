@@ -20,7 +20,7 @@ export default function MoodMeter() {
     increaseCardsDrawn();
     setCardMoodPlusOne(randomCard.name);
     setRandomCard(randomCard);
-    drawCard();
+    drawCard(randomCard);
     updateCardsDrawn();
     setCurrentCard(difference);
   }
@@ -28,7 +28,7 @@ export default function MoodMeter() {
     increaseCardsDrawn();
     setCardMoodMinusOne(randomCard.name);
     setRandomCard(randomCard);
-    drawCard();
+    drawCard(randomCard);
     updateCardsDrawn();
     setCurrentCard(difference);
   }

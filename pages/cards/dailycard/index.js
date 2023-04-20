@@ -27,8 +27,11 @@ export default function ShowCard() {
             pathname: "/cards/dailycard/description",
           }}
         >
-          more Details
+          Details
         </StyledLink>
+        <p>
+          <Link href={{ pathname: "/cards/dailycard/notes" }}>skip</Link>
+        </p>
       </>
     );
   } else {

@@ -24,8 +24,8 @@ export default function NoteFormular() {
       setCurrentNote(inputValue);
       setDisplayedNote(inputValue);
       setInputValue("");
-      setCurrentCard(difference - 1);
       copyCurrentNote();
+      setCurrentCard(difference - 1);
     } else {
       alert("no cards in history - add some cards to enable saving");
     }

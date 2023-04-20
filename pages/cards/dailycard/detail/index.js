@@ -18,26 +18,24 @@ export default function Details() {
       <>
         <h1>{currentCard.cardname}</h1>
         <CardPreviewImage card={currentCard} />
-        <section>{currentCard.meaning_up}</section>
+        <section>upside: {currentCard.meaning_up}</section>
+        <section>reversed: {currentCard.meaning_rev}</section>
         <Link
           href={{
             pathname: "/cards/dailycard/description",
           }}
         >
-          <button type="button" aria-label="more details button">
-            more details
-          </button>
+          card description
         </Link>
-
-        <Link
-          href={{
-            pathname: "/cards/dailycard/notes",
-          }}
-        >
-          <button type="button" aria-label="take notes button">
-            take notes
-          </button>
-        </Link>
+        <p>
+          <Link
+            href={{
+              pathname: "/cards/dailycard/notes",
+            }}
+          >
+            next
+          </Link>
+        </p>
       </>
     );
   } else {
