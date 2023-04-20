@@ -1,18 +1,23 @@
+import useStore from "../../../src/store/store";
+import CardPreviewImage from "../../../components/CardPreviewImage";
+import StyledMenuBar from "../../../components/Styled/StyledMenuBar";
+import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import Link from "next/link";
-import useStore from "../../../src/store/store";
-import React from "react";
-import CardPreviewImage from "../../../components/CardPreviewImage";
+import { useState, useEffect } from "react";
 
-const StyledLink = styled(Link)`
-  background-color: hotpink;
+const StyledMenuLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  font-style: italic;
+  font-size: 2rem;
 `;
 
 export default function ShowCard() {
   const currentCard = useStore((state) => state.currentCard);
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -21,17 +26,16 @@ export default function ShowCard() {
   if (currentCard) {
     return (
       <>
-        <CardPreviewImage card={currentCard} />
-        <StyledLink
-          href={{
-            pathname: "/cards/dailycard/description",
-          }}
+        <StyledCardContainer>
+          <CardPreviewImage card={currentCard}></CardPreviewImage>
+        </StyledCardContainer>
+        <StyledMenuBar
+          query1={"/cards/dailycard/moodmeter"}
+          query2={"/cards/dailycard/notes/"}
         >
-          Details
-        </StyledLink>
-        <p>
-          <Link href={{ pathname: "/cards/dailycard/notes" }}>skip</Link>
-        </p>
+          {" "}
+          <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
+        </StyledMenuBar>
       </>
     );
   } else {

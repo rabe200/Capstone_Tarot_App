@@ -2,8 +2,35 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import useStore from "../../../../src/store/store";
 import { getCardById } from "../../../../lib/data";
+import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
+import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
+import styled from "styled-components";
+import { useRouter } from "next/router";
+import GoodMoodIcon from "../../../../components/Styled/GoodMoodIcon";
+import BadMoodIcon from "../../../../components/Styled/BadMoodIcon";
+
+const StyledMenuLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  font-style: italic;
+  font-size: 2rem;
+`;
+
+const MoodButtonGood = styled.div`
+  width: 290px;
+  height: 215px;
+  background-color: black;
+  /* border: 3px yellow solid; */
+`;
+
+const MoodButtonBad = styled.div`
+  width: 290px;
+  height: 260px;
+  background-color: black;
+`;
 
 export default function MoodMeter() {
+  const router = useRouter();
   const [disableButton, setDisableButton] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
   const drawCard = useStore((state) => state.drawCard);
@@ -24,6 +51,7 @@ export default function MoodMeter() {
     drawCard(randomCard);
     updateCardsDrawn();
     setCurrentCard(difference);
+    router.push(`/cards/dailycard/`);
   }
   function handleMinusClick() {
     console.log(randomCard);
@@ -33,6 +61,7 @@ export default function MoodMeter() {
     drawCard(randomCard);
     updateCardsDrawn();
     setCurrentCard(difference);
+    router.push(`/cards/dailycard/`);
   }
 
   function randomIndex(min, max) {
@@ -51,32 +80,28 @@ export default function MoodMeter() {
 
   return (
     <>
-      <h4>how is your mood right now?</h4>
-      <button
-        disabled={disableButton}
-        type="button"
-        aria-label="minus button"
-        onClick={() => handlePlusClick()}
-      >
-        good
-      </button>
-      <button
-        disabled={disableButton}
-        type="button"
-        aria-label="minus button"
-        onClick={() => handleMinusClick()}
-      >
-        bad
-      </button>
-      <p></p>
-      {currentCard ? (
-        <p>card: {currentCard.name}</p>
-      ) : (
-        <p>waiting for action</p>
-      )}
-      <Link href="../dailycard">
-        <button type="button">next</button>
-      </Link>
+      <StyledCardContainer>
+        <h4>how is your mood right now?</h4>
+        <MoodButtonGood
+          disabled={disableButton}
+          type="button"
+          aria-label="plus button"
+          onClick={() => handlePlusClick()}
+        >
+          <GoodMoodIcon />
+        </MoodButtonGood>
+        <MoodButtonBad
+          disabled={disableButton}
+          type="button"
+          aria-label="minus button"
+          onClick={() => handleMinusClick()}
+        >
+          <BadMoodIcon />
+        </MoodButtonBad>
+      </StyledCardContainer>
+      <StyledMenuBar query1={"/"} query2={`cards/${currentCard.id}`}>
+        <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
+      </StyledMenuBar>
     </>
   );
 }

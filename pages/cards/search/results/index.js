@@ -1,14 +1,24 @@
-import DetailsButton from "../../../../components/DetailsButton";
 import BackButton from "../../../../components/Backbutton/backbutton";
 import { useStore } from "../../../../src/store/store";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchResults from "../../../../components/SearchResults";
+import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
+import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
+import styled from "styled-components";
+import Link from "next/link";
+
+const StyledMenuLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  font-style: italic;
+  font-size: 2rem;
+`;
 
 export default function SearchResult() {
   const [hasMounted, setHasMounted] = useState(false);
   const searchQuery = useStore((state) => state.searchQuery);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -26,10 +36,13 @@ export default function SearchResult() {
 
   return (
     <>
-      <h1>RESULTS</h1>
-      <SearchResults />
-      <p />
-      <BackButton />
+      <StyledCardContainer>
+        <h1>RESULTS</h1>
+        <SearchResults />
+      </StyledCardContainer>
+      <StyledMenuBar query1={"/"} query2={"/"}>
+        <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
+      </StyledMenuBar>
     </>
   );
 }

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 const CardBody = styled.figure`
-  background-color: crimson;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,24 +10,41 @@ const CardBody = styled.figure`
   left: 0;
 `;
 
-const NameBanner = styled.figcaption`
+const NameBanner = styled.div`
   background-color: white;
   width: 90%;
   text-align: center;
+  overflow-y: auto;
+  height: 145px;
 `;
 
-const StyledDiv = styled.div`
-  background-color: darkgrey;
-`;
-
-export default function CardPreviewImage({ card }) {
+export default function CardPreviewImage({ card, clickable }) {
   return (
-    <StyledDiv>
-      <CardBody>
-        <h1>{card.name}</h1>
-        <Image src={card.image} width="200" height="350" alt={card.name} />
-        <NameBanner>{card.name}</NameBanner>
-      </CardBody>
-    </StyledDiv>
+    <div>
+      {clickable === true ? (
+        <>
+          <CardBody>
+            <Link href={`/cards/${card.id}/detail`}>
+              {" "}
+              <Image
+                src={card.image}
+                width="200"
+                height="350"
+                alt={card.name}
+              />
+            </Link>
+            <NameBanner>{card.desc}</NameBanner>
+          </CardBody>
+        </>
+      ) : (
+        <CardBody>
+          <Image src={card.image} width="200" height="350" alt={card.name} />
+          <NameBanner>
+            <b>up: </b>
+            {card.meaning_up} <b>rev:</b> {card.meaning_rev}
+          </NameBanner>
+        </CardBody>
+      )}
+    </div>
   );
 }

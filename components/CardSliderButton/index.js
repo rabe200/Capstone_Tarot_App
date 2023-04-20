@@ -1,14 +1,6 @@
 import { useRouter } from "next/router";
 import useStore from "../../src/store/store";
 import Link from "next/link";
-import styled from "styled-components";
-
-const StyledLinkGroup = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 20rem;
-  margin: 0.3rem 0;
-`;
 
 export default function CardSliderButton() {
   const router = useRouter();
@@ -23,9 +15,9 @@ export default function CardSliderButton() {
   const previousCardSlug =
     currentCardIndex === 0 ? cards.length - 1 : currentCardIndex - 1;
   return (
-    <StyledLinkGroup>
+    <Link>
       <Link href={`/cards/${previousCardSlug}`}>prev</Link>
       <Link href={`/cards/${nextCardSlug}`}>next</Link>
-    </StyledLinkGroup>
+    </Link>
   );
 }

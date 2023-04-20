@@ -1,9 +1,19 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import useStore from "../../../src/store/store";
 import Link from "next/link";
-
+import StyledMenuBar from "../../../components/Styled/StyledMenuBar";
 import DeleteButton from "../../../components/DeleteButton";
 import EditButton from "../../../components/EditButton";
+import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
+import styled from "styled-components";
+
+const StyledMenuLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  font-style: italic;
+  font-size: 2rem;
+`;
+
 export default function History() {
   const [hasMounted, setHasMounted] = useState(false);
   const drawnCards = useStore((state) => state.drawnCards);
@@ -72,79 +82,87 @@ export default function History() {
 
   return (
     <Fragment>
-      <span>
-        {cardsDrawn ? (
-          <>
-            <b>total number of drawn cards: {cardsDrawn}</b>
-            <br />
-            <b>total number of deleted cards: {cardsDeleted}</b>
-          </>
-        ) : (
-          "noDrawnCards"
-        )}
-      </span>
-      <section>
-        <form>
-          <select
-            name="filter results by"
-            multiple
-            size="4"
-            onChange={handleSelectChange}
-          >
-            <optgroup label="time">
-              <option value="dateUp">date up</option>
-              <option value="dateDown">date down</option>
-              <option value="yearUp">year Up</option>
-              <option value="yearDown">year Down</option>
-              <option value="monthUp">month Up</option>
-              <option value="monthDown">month Down</option>
-              <option value="dayUp">dayUp</option>
-              <option value="dayDown">day Down</option>
-              <option value="hourUp">hourUp</option>
-              <option value="hourDown">hour Down</option>
-              <option value="minuteUp">minuteUp</option>
-              <option value="minuteDown">minute Down</option>
-              <option value="secondUp">secondsUp</option>
-              <option value="secondDown">secondsDown</option>
-            </optgroup>
-            <optgroup label="name">
-              <option value="up">up</option>
-              <option value="down">down</option>
-            </optgroup>
-          </select>
-          <button onClick={(event) => refreshList(event)}>refresh</button>
-        </form>
-        <ul>
-          {displayedCards.map((card) => {
-            return (
-              <Fragment key={card.uuid}>
-                <hr />
-                <li>
-                  <b>{new Date(card.date).toLocaleDateString()}</b>
-                </li>
-                <li>{card.name}</li>
-                <li>Drawn: {card.clicks} times</li>
-                <li>AverageMood: {card.averageMood}</li>
-                <li>TotalMood: {card.mood}</li>
-                <li>moodClicked: {card.currentMood}</li>
+      <StyledCardContainer>
+        <span>
+          {cardsDrawn ? (
+            <>
+              <b>total number of drawn cards: {cardsDrawn}</b>
+              <br />
+              <b>total number of deleted cards: {cardsDeleted}</b>
+            </>
+          ) : (
+            "noDrawnCards"
+          )}
+        </span>
+        <section>
+          <form>
+            <select
+              name="filter results by"
+              multiple
+              size="4"
+              onChange={handleSelectChange}
+            >
+              <optgroup label="time">
+                <option value="dateUp">date up</option>
+                <option value="dateDown">date down</option>
+                <option value="yearUp">year Up</option>
+                <option value="yearDown">year Down</option>
+                <option value="monthUp">month Up</option>
+                <option value="monthDown">month Down</option>
+                <option value="dayUp">dayUp</option>
+                <option value="dayDown">day Down</option>
+                <option value="hourUp">hourUp</option>
+                <option value="hourDown">hour Down</option>
+                <option value="minuteUp">minuteUp</option>
+                <option value="minuteDown">minute Down</option>
+                <option value="secondUp">secondsUp</option>
+                <option value="secondDown">secondsDown</option>
+              </optgroup>
+              <optgroup label="name">
+                <option value="up">up</option>
+                <option value="down">down</option>
+              </optgroup>
+            </select>
+            <button onClick={(event) => refreshList(event)}>refresh</button>
+          </form>
+          <ul>
+            {displayedCards.map((card) => {
+              return (
+                <Fragment key={card.uuid}>
+                  <hr />
+                  <li>
+                    <b>{new Date(card.date).toLocaleDateString()}</b>
+                  </li>
+                  <li>{card.name}</li>
+                  <li>Drawn: {card.clicks} times</li>
+                  <li>AverageMood: {card.averageMood}</li>
+                  <li>TotalMood: {card.mood}</li>
+                  <li>moodClicked: {card.currentMood}</li>
 
-                <li>second: {card.second}</li>
-                <li>minute: {card.minute}</li>
-                <li>hour: {card.hour}</li>
-                <li>day: {card.day}</li>
-                <section>
-                  note: <i>{card.notes}</i>
-                </section>
-                <EditButton uuid={card.uuid} card={card} />
-                <DeleteButton uuid={card.uuid} onClick={() => updateCards()} />
-              </Fragment>
-            );
-          })}
-        </ul>
-      </section>
-      <Link href="/">
-        <button type="button">back</button>
-      </Link>
+                  <li>second: {card.second}</li>
+                  <li>minute: {card.minute}</li>
+                  <li>hour: {card.hour}</li>
+                  <li>day: {card.day}</li>
+                  <section>
+                    note: <i>{card.notes}</i>
+                  </section>
+                  <EditButton uuid={card.uuid} card={card} />
+                  <DeleteButton
+                    uuid={card.uuid}
+                    onClick={() => updateCards()}
+                  />
+                </Fragment>
+              );
+            })}
+          </ul>
+        </section>
+        <Link href="/">
+          <button type="button">back</button>
+        </Link>
+        <StyledMenuBar query1={"/"} query2={"/"}>
+          <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
+        </StyledMenuBar>
+      </StyledCardContainer>
     </Fragment>
   );
 }

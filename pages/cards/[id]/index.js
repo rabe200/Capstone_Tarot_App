@@ -1,24 +1,34 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { getCardById } from "../../../lib/data";
-import DetailsButton from "../../../components/DetailsButton";
-import NotesButton from "../../../components/NotesButton";
-import SearchBar from "../../../components/SearchBar";
-import CardSliderButton from "../../../components/CardSliderButton";
 import CardPreviewImage from "../../../components/CardPreviewImage";
 import { useState, useEffect } from "react";
-import BackButton from "../../../components/Backbutton/backbutton";
+import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
+import StyledMenuBar from "../../../components/Styled/StyledMenuBar";
+import useStore from "../../../src/store/store";
 import styled from "styled-components";
+import Link from "next/link";
 
-const StyledMain = styled.main`
-  text-align: center;
+const StyledMenuLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  font-style: italic;
+  font-size: 2rem;
 `;
 
 export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
   const id = router ? router.query.id : null;
-  const card = getCardById(id);
+  console.log(id);
+  const cards = useStore((state) => state.allCards);
+  const card = cards.find((card) => card.id === `${id}`);
+  const currentCardIndex = cards.indexOf(card);
+  const nextCardId =
+    currentCardIndex === cards.length - 1 ? 0 : currentCardIndex + 1;
+  const nextPage = `/cards/${nextCardId}`;
+  console.log(nextPage);
+  const previousCardId =
+    currentCardIndex === 0 ? cards.length - 1 : currentCardIndex - 1;
+  const previousPage = `/cards/${previousCardId}`;
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -27,17 +37,14 @@ export default function Details() {
   }
   return (
     id < 78 && (
-      <StyledMain>
-        {" "}
-        <CardPreviewImage card={card} />
-        <DetailsButton card={card} />
-        <NotesButton card={card} />
-        <CardSliderButton />
-        <BackButton />
-        <Link href="/cards/overview">overview</Link>
-        <Link href="/">menu</Link>
-        <SearchBar />
-      </StyledMain>
+      <>
+        <StyledCardContainer>
+          <CardPreviewImage card={card} clickable={true} />
+        </StyledCardContainer>
+        <StyledMenuBar query1={previousPage} query2={nextPage}>
+          <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
+        </StyledMenuBar>
+      </>
     )
   );
 }
