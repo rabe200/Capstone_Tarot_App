@@ -19,16 +19,10 @@ export default function Description() {
       <article>
         {currentCard.desc ? currentCard.desc : currentCard.description}
       </article>
-      <Link href={{ pathname: "/cards/dailycard/detail" }}>
-        <button type="button" aria-label="less details button">
-          less details
-        </button>
-      </Link>
-      <Link href={{ pathname: "/cards/dailycard/notes" }}>
-        <button type="button" aria-label="take notes">
-          take notes
-        </button>
-      </Link>
+      <Link href={{ pathname: "/cards/dailycard/detail" }}>card meaning </Link>
+      <p>
+        <Link href={{ pathname: "/cards/dailycard/notes" }}>next</Link>
+      </p>
     </>
   );
 }

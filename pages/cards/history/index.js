@@ -44,13 +44,20 @@ export default function History() {
     if (selectedOption in sortingFunctions) {
       const sortingFunction = sortingFunctions[selectedOption];
       const sortedCards = drawnCards.slice().sort(sortingFunction);
+      updateCardsDrawn();
       setDisplayedCards(sortedCards);
     }
   }
 
   useEffect(() => {
+    setDisplayedCards(drawnCards);
+  }, [drawnCards, setDisplayedCards]);
+
+  function updateCards(event) {
+    event.preventDefault();
+    refreshList();
     updateCardsDrawn();
-  });
+  }
 
   useEffect(() => {
     setHasMounted(true);
@@ -62,6 +69,7 @@ export default function History() {
   function handleSelectChange(event) {
     setSelectedOption(event.target.value);
   }
+
   return (
     <Fragment>
       <span>
@@ -128,7 +136,7 @@ export default function History() {
                   note: <i>{card.notes}</i>
                 </section>
                 <EditButton uuid={card.uuid} card={card} />
-                <DeleteButton uuid={card.uuid} />
+                <DeleteButton uuid={card.uuid} onClick={() => updateCards()} />
               </Fragment>
             );
           })}

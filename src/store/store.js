@@ -82,7 +82,6 @@ export const useStore = createLocalStorageStore(
           });
       set(() => ({ cardMoods: [newEntry].concat(filteredArray) }));
     },
-    // setCardAvgMood: () => set((state) => ({})),
     setCardsDeleted: () =>
       set((state) => ({ cardsDeleted: state.cardsDeleted + 1 })),
     setLastCard: () => set((state) => ({ lastCard: state.currentCard })),
