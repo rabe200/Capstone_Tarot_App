@@ -12,7 +12,6 @@ export default function History() {
   const cardsDeleted = useStore((state) => state.cardsDeleted);
   const [selectedOption, setSelectedOption] = useState(null);
   const [displayedCards, setDisplayedCards] = useState(drawnCards);
-  let sortedCards = drawnCards.slice();
 
   function refreshList(event) {
     event.preventDefault();
@@ -23,6 +22,13 @@ export default function History() {
         new Date(a.date).getSeconds() - new Date(b.date).getSeconds(),
       secondDown: (a, b) =>
         new Date(b.date).getSeconds() - new Date(a.date).getSeconds(),
+
+      minuteUp: (a, b) =>
+        new Date(a.date).getMinutes() - new Date(b.date).getMinutes(),
+
+      minuteDown: (a, b) =>
+        new Date(b.date).getMinutes() - new Date(a.date).getMinutes(),
+
       up: (a, b) => a.name.localeCompare(b.name),
       down: (a, b) => b.name.localeCompare(a.name),
       yearUp: (a, b) =>
@@ -89,7 +95,7 @@ export default function History() {
               <option value="hourUp">hourUp</option>
               <option value="hourDown">hour Down</option>
               <option value="minuteUp">minuteUp</option>
-              <option value="minute">minute Down</option>
+              <option value="minuteDown">minute Down</option>
               <option value="secondUp">secondsUp</option>
               <option value="secondDown">secondsDown</option>
             </optgroup>
@@ -104,7 +110,7 @@ export default function History() {
           {displayedCards.map((card) => {
             return (
               <Fragment key={card.uuid}>
-                <hr></hr>
+                <hr />
                 <li>
                   <b>{new Date(card.date).toLocaleDateString()}</b>
                 </li>
