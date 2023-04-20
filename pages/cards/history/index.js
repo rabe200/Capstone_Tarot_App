@@ -184,14 +184,23 @@ export default function History() {
           {displayedCards.map((card) => {
             return (
               <Fragment key={card.uuid}>
-                {/* <li>{card.date}</li> */}
+                <hr></hr>
+                <li>
+                  <b>{new Date(card.date).toLocaleDateString()}</b>
+                </li>
                 <li>{card.name}</li>
                 <li>Drawn: {card.clicks} times</li>
                 <li>AverageMood: {card.averageMood}</li>
                 <li>TotalMood: {card.mood}</li>
                 <li>moodClicked: {card.currentMood}</li>
+
                 <li>second: {card.second}</li>
-                <section>{card.notes}</section>
+                <li>minute: {card.minute}</li>
+                <li>hour: {card.hour}</li>
+                <li>day: {card.day}</li>
+                <section>
+                  note: <i>{card.notes}</i>
+                </section>
                 <EditButton uuid={card.uuid} card={card} />
                 <DeleteButton uuid={card.uuid} />
               </Fragment>
