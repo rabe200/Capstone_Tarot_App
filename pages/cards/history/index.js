@@ -11,9 +11,10 @@ export default function History() {
   const difference = useStore((state) => state.difference);
   const cardsDrawn = useStore((state) => state.cardsDrawn);
   const cardsDeleted = useStore((state) => state.cardsDeleted);
-  useEffect(() => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  useEffect((event) => {
     updateCardsDrawn();
-    console.log("difference between drawn and deleted card:", difference);
   });
 
   useEffect(() => {
@@ -22,6 +23,13 @@ export default function History() {
   if (!hasMounted) {
     return null;
   }
+
+  function handleSelectChange(event) {
+    setSelectedOption(event.target.value);
+  }
+
+  console.log(selectedOption);
+
   return (
     <Fragment>
       <span>
@@ -36,7 +44,12 @@ export default function History() {
         )}
       </span>
       <section>
-        <select name="filter results by" multiple size="4">
+        <select
+          name="filter results by"
+          multiple
+          size="4"
+          onChange={handleSelectChange}
+        >
           <optgroup label="time">
             <option value="year">year</option>
             <option value="date">date</option>
@@ -46,8 +59,8 @@ export default function History() {
             <option value="second">second</option>
           </optgroup>
           <optgroup label="name">
-            <option value="ascending">in order</option>
-            <option value="ascending">reversed</option>
+            <option value="up">up</option>
+            <option value="down">down</option>
           </optgroup>
         </select>
         <ul>
