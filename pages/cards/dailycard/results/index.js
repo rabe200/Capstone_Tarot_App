@@ -20,6 +20,10 @@ export default function Results() {
       <ul>
         <li>Results</li>
         <li>Date: {currentCard.date}</li>
+        <li>Day: {currentCard.day}</li>
+        <li>Hour: {currentCard.hour}</li>
+        <li>Minute: {currentCard.minute}</li>
+        <li>Second: {currentCard.second}</li>
         <li>{currentCard.name}</li>
         <li>Note: {currentCard.notes}</li>
         <li>Drawn: {currentCard.clicks}x times</li>

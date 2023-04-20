@@ -36,13 +36,26 @@ export default function History() {
         )}
       </span>
       <section>
+        <select name="filter results by" multiple size="4">
+          <optgroup label="time">
+            <option value="year">year</option>
+            <option value="date">date</option>
+            <option value="day">day</option>
+            <option value="hour">hour</option>
+            <option value="minute">minute</option>
+            <option value="second">second</option>
+          </optgroup>
+          <optgroup label="name">
+            <option value="ascending">in order</option>
+            <option value="ascending">reversed</option>
+          </optgroup>
+        </select>
         <ul>
           {drawnCards.map((card) => {
             return (
               <Fragment key={card.uuid}>
-                <li>
-                  {card.date} : {card.name}
-                </li>
+                <li>{card.date}</li>
+                <li>{card.name}</li>
                 <li>Drawn: {card.clicks} times</li>
                 <li>AverageMood: {card.averageMood}</li>
                 <li>TotalMood: {card.mood}</li>

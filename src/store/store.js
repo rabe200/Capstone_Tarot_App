@@ -183,6 +183,10 @@ export const useStore = createLocalStorageStore(
           averageMood: get().currentCard.averageMood,
           clicks: get().currentCard.clicks,
           date: get().currentCard.date,
+          day: get().currentCard.day,
+          hour: get().currentCard.hour,
+          minute: get().currentCard.minute,
+          second: get().currentCard.second,
         };
         const newDrawnCards = filteredArray.concat(newArray);
         set(() => {
@@ -216,7 +220,14 @@ export const useStore = createLocalStorageStore(
                 year: "numeric",
                 month: "long",
                 day: "numeric",
+                hour: "2-digit",
+                minute: "numeric",
+                second: "2-digit",
               }),
+              day: new Date().getDay(),
+              hour: new Date().getHours(),
+              minute: new Date().getMinutes(),
+              second: new Date().getSeconds(),
               image: get().currentCard.image,
               description: get().currentCard.desc,
               meaning_up: get().currentCard.meaning_up,
