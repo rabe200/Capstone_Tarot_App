@@ -215,15 +215,7 @@ export const useStore = createLocalStorageStore(
               averageMood: get().cardMoods.find(
                 (card) => card.id === randomCard.id
               ).averageMood,
-              date: new Date().toLocaleDateString("en-US", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "numeric",
-                second: "2-digit",
-              }),
+              date: new Date(),
               day: new Date().getDay(),
               hour: new Date().getHours(),
               minute: new Date().getMinutes(),
