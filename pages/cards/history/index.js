@@ -59,6 +59,7 @@ export default function History() {
     updateCardsDrawn();
   }
 
+
   useEffect(() => {
     setHasMounted(true);
   }, []);
