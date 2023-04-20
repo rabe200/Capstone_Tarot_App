@@ -14,112 +14,32 @@ export default function History() {
   const [displayedCards, setDisplayedCards] = useState(drawnCards);
   let sortedCards = drawnCards.slice();
 
-  function sortCards() {
-    if (selectedOption === "dateUp") {
-      sortedCards = drawnCards
-        .slice()
-        .sort((a, b) => new Date(a.date) - new Date(b.date));
-    } else if (selectedOption === "dateDown") {
-      sortedCards = drawnCards
-        .slice()
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
-    } else if (selectedOption === "secondUp") {
-      sortedCards = drawnCards
-        .slice()
-        .map((card) => {
-          const seconds = new Date(card.date).getSeconds();
-          return { card, seconds };
-        })
-        .sort((a, b) => a.seconds - b.seconds)
-        .map((item) => item.card);
-    } else if (selectedOption === "secondDown") {
-      sortedCards = drawnCards
-        .slice()
-        .map((card) => {
-          const seconds = new Date(card.date).getSeconds();
-          return { card, seconds };
-        })
-        .sort((a, b) => b.seconds - a.seconds)
-        .map((item) => item.card);
-    } else if (selectedOption === "up") {
-      sortedCards = drawnCards
-        .slice()
-        .sort((a, b) => a.name.localeCompare(b.name));
-    } else if (selectedOption === "down") {
-      sortedCards = drawnCards
-        .slice()
-        .sort((a, b) => b.name.localeCompare(a.name));
-    } else if (selectedOption === "yearUp") {
-      sortedCards = drawnCards
-        .slice()
-        .map((card) => {
-          const year = new Date(card.date).getFullYear();
-          return { card, year };
-        })
-        .sort((a, b) => a.year - b.year)
-        .map((item) => item.card);
-    } else if (selectedOption === "yearDown") {
-      sortedCards = drawnCards
-        .slice()
-        .map((card) => {
-          const year = new Date(card.date).getFullYear();
-          return { card, year };
-        })
-        .sort((a, b) => b.year - a.year)
-        .map((item) => item.card);
-    } else if (selectedOption === "monthUp") {
-      sortedCards = drawnCards
-        .slice()
-        .map((card) => {
-          const month = new Date(card.date).getMonth();
-          return { card, month };
-        })
-        .sort((a, b) => a.month - b.month)
-        .map((item) => item.card);
-    } else if (selectedOption === "monthDown") {
-      sortedCards = drawnCards
-        .slice()
-        .map((card) => {
-          const month = new Date(card.date).getMonth();
-          return { card, month };
-        })
-        .sort((a, b) => b.month - a.month)
-        .map((item) => item.card);
-    } else if (selectedOption === "secondUp") {
-      sortedCards = drawnCards
-        .slice()
-        .map((card) => {
-          const seconds = new Date(card.date).getSeconds();
-          return { card, seconds };
-        })
-        .sort((a, b) => a.seconds - b.seconds)
-        .map((item) => item.card);
-    } else if (selectedOption === "secondDown") {
-      sortedCards = drawnCards
-        .slice()
-        .map((card) => {
-          const seconds = new Date(card.date).getSeconds();
-          return { card, seconds };
-        })
-        .sort((a, b) => b.seconds - a.seconds)
-        .map((item) => item.card);
-    } else if (selectedOption === "up") {
-      sortedCards = drawnCards
-        .slice()
-        .sort((a, b) => a.name.localeCompare(b.name));
-    } else if (selectedOption === "down") {
-      sortedCards = drawnCards
-        .slice()
-        .sort((a, b) => b.name.localeCompare(a.name));
-    } else {
-    }
-    return setDisplayedCards(sortedCards);
-  }
-
   function refreshList(event) {
     event.preventDefault();
-    sortCards();
-    setDisplayedCards(sortedCards);
+    const sortingFunctions = {
+      dateUp: (a, b) => new Date(a.date) - new Date(b.date),
+      dateDown: (a, b) => new Date(b.date) - new Date(a.date),
+      secondUp: (a, b) =>
+        new Date(a.date).getSeconds() - new Date(b.date).getSeconds(),
+      secondDown: (a, b) =>
+        new Date(b.date).getSeconds() - new Date(a.date).getSeconds(),
+      up: (a, b) => a.name.localeCompare(b.name),
+      down: (a, b) => b.name.localeCompare(a.name),
+      yearUp: (a, b) =>
+        new Date(a.date).getFullYear() - new Date(b.date).getFullYear(),
+      yearDown: (a, b) =>
+        new Date(b.date).getFullYear() - new Date(a.date).getFullYear(),
+      monthUp: (a, b) =>
+        new Date(a.date).getMonth() - new Date(b.date).getMonth(),
+      monthDown: (a, b) =>
+        new Date(b.date).getMonth() - new Date(a.date).getMonth(),
+    };
+
+    if (selectedOption in sortingFunctions) {
+      const sortingFunction = sortingFunctions[selectedOption];
+      const sortedCards = drawnCards.slice().sort(sortingFunction);
+      setDisplayedCards(sortedCards);
+    }
   }
 
   useEffect(() => {
