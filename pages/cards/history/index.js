@@ -7,100 +7,58 @@ import EditButton from "../../../components/EditButton";
 import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 
-const StyledMenuLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  font-style: italic;
-  font-size: 2rem;
+const StyledForm = styled.form`
+  width: 210px;
+  height: 40px;
+  position: relative;
 `;
 
-const StyledSelect = styled.select`
-  select {
-    /* styling */
-    background-color: white;
-    border: thin solid blue;
-    border-radius: 4px;
-    display: inline-block;
-    font: inherit;
-    line-height: 1.5em;
-    padding: 0.5em 3.5em 0.5em 1em;
+const StyledList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: black;
+  color: white;
+`;
 
-    /* reset */
-
-    margin: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  gap: 20rem;
+  margin: 0.3rem 0;
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: magenta;
   }
 `;
 
 export default function History() {
+  const cardsDeleted = useStore((state) => state.cardsDeleted);
+  const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
   const [hasMounted, setHasMounted] = useState(false);
   const drawnCards = useStore((state) => state.drawnCards);
-  const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
   const cardsDrawn = useStore((state) => state.cardsDrawn);
-  const cardsDeleted = useStore((state) => state.cardsDeleted);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [displayedCards, setDisplayedCards] = useState(drawnCards);
 
-  function refreshList(event) {
-    event.preventDefault();
-    const sortingFunctions = {
-      dateUp: (a, b) => new Date(a.date) - new Date(b.date),
-      dateDown: (a, b) => new Date(b.date) - new Date(a.date),
-      secondUp: (a, b) =>
-        new Date(a.date).getSeconds() - new Date(b.date).getSeconds(),
-      secondDown: (a, b) =>
-        new Date(b.date).getSeconds() - new Date(a.date).getSeconds(),
+  const [selectedOption, setSelectedOption] = useState("nameUp");
 
-      minuteUp: (a, b) =>
-        new Date(a.date).getMinutes() - new Date(b.date).getMinutes(),
-
-      minuteDown: (a, b) =>
-        new Date(b.date).getMinutes() - new Date(a.date).getMinutes(),
-
-      up: (a, b) => a.name.localeCompare(b.name),
-      down: (a, b) => b.name.localeCompare(a.name),
-      yearUp: (a, b) =>
-        new Date(a.date).getFullYear() - new Date(b.date).getFullYear(),
-      yearDown: (a, b) =>
-        new Date(b.date).getFullYear() - new Date(a.date).getFullYear(),
-      monthUp: (a, b) =>
-        new Date(a.date).getMonth() - new Date(b.date).getMonth(),
-      monthDown: (a, b) =>
-        new Date(b.date).getMonth() - new Date(a.date).getMonth(),
-    };
-
-    if (selectedOption in sortingFunctions) {
-      const sortingFunction = sortingFunctions[selectedOption];
-      const sortedCards = drawnCards.slice().sort(sortingFunction);
-      updateCardsDrawn();
-      setDisplayedCards(sortedCards);
+  const sortedItems = drawnCards.sort((a, b) => {
+    if (selectedOption === "nameUp") {
+      return a.name.trim().localeCompare(b.name);
+    } else if (selectedOption === "nameDown") {
+      return b.name.trim().localeCompare(a.name);
     }
-  }
+  });
 
   useEffect(() => {
-    setDisplayedCards(drawnCards);
-  }, [drawnCards, setDisplayedCards]);
-
-  function updateCards(event) {
-    event.preventDefault();
-    refreshList();
     updateCardsDrawn();
-  }
+  });
 
   useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
     return null;
-  }
-
-  function handleSelectChange(event) {
-    setSelectedOption(event.target.value);
-    refreshList(event);
   }
 
   return (
@@ -118,67 +76,54 @@ export default function History() {
           )}
         </span>
         <section>
-          <ul>
-            {displayedCards.map((card) => {
+          {" "}
+          <StyledList>
+            {sortedItems.map((card) => {
               return (
                 <Fragment key={card.uuid}>
                   <hr />
                   <li>
                     <b>{new Date(card.date).toLocaleDateString()}</b>
                   </li>
-                  <li>{card.name}</li>
-                  <li>Drawn: {card.clicks} times</li>
-                  <li>AverageMood: {card.averageMood}</li>
-                  <li>TotalMood: {card.mood}</li>
-                  <li>moodClicked: {card.currentMood}</li>
+                  <li>
+                    <StyledLink href={`/cards/${card.id}`}>
+                      {card.name}
+                    </StyledLink>
+                  </li>
 
-                  <li>second: {card.second}</li>
-                  <li>minute: {card.minute}</li>
-                  <li>hour: {card.hour}</li>
-                  <li>day: {card.day}</li>
                   <section>
                     note: <i>{card.notes}</i>
                   </section>
                   <EditButton uuid={card.uuid} card={card} />
-                  <DeleteButton
-                    uuid={card.uuid}
-                    onClick={() => updateCards()}
-                  />
+                  <DeleteButton uuid={card.uuid} />
                 </Fragment>
               );
             })}
-          </ul>
+          </StyledList>
         </section>
-        <Link href="/">
-          <button type="button">back</button>
-        </Link>
-        <StyledMenuBar query1={"/"} query2={"/"}>
-          {/* <form> */}
-          <StyledSelect name="filter results by" onChange={handleSelectChange}>
-            <option value="dateUp">date up</option>
 
-            <option value="dateDown">date down</option>
-            {/* <option value="yearUp">year Up</option> */}
-            {/* <option value="yearDown">year Down</option> */}
-            {/* <option value="monthUp">month Up</option> */}
-            {/* <option value="monthDown">month Down</option> */}
-            {/* <option value="dayUp">dayUp</option> */}
-            {/* <option value="dayDown">day Down</option> */}
-            {/* <option value="hourUp">hourUp</option> */}
-            {/* <option value="hourDown">hour Down</option> */}
-            {/* <option value="minuteUp">minuteUp</option> */}
-            {/* <option value="minuteDown">minute Down</option> */}
-            {/* <option value="secondUp">secondsUp</option> */}
-            {/* <option value="secondDown">secondsDown</option> */}
-            <option value="up" onClick={(event) => refreshList(event)}>
-              name up
-            </option>
-            <option value="down" onClick={(event) => refreshList(event)}>
-              name down
-            </option>
-          </StyledSelect>
-          {/* <button onClick={(event) => refreshList(event)}>refresh</button> */}
-          {/* </form> */}
+        <StyledMenuBar query1={"/"} query2={"/"}>
+          <StyledForm>
+            <select
+              style={{
+                width: "100%",
+                height: "100%",
+                textAlign: "center",
+                fontSize: "1.3rem",
+              }}
+              name="filter results by"
+              onChange={(event) => setSelectedOption(event.target.value)}
+            >
+              <option value="dateUp">date up</option>
+              <option value="dateDown">date down</option>
+              <option value="nameUp" onClick={(event) => refreshList(event)}>
+                name up
+              </option>
+              <option value="nameDown" onClick={(event) => refreshList(event)}>
+                name down
+              </option>
+            </select>
+          </StyledForm>
         </StyledMenuBar>
       </StyledCardContainer>
     </Fragment>

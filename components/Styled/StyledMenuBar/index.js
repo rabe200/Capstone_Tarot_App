@@ -7,7 +7,10 @@ import ArrowIconRight from "../StyledArrowRight";
 
 const StyledMenu = styled.div`
   box-sizing: border-box;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   width: 301px;
   height: 48px;

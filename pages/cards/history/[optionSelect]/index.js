@@ -17,7 +17,6 @@ const StyledMenuLink = styled(Link)`
 
 const StyledSelect = styled.select`
   select {
-    /* styling */
     background-color: white;
     border: thin solid blue;
     border-radius: 4px;
@@ -25,9 +24,6 @@ const StyledSelect = styled.select`
     font: inherit;
     line-height: 1.5em;
     padding: 0.5em 3.5em 0.5em 1em;
-
-    /* reset */
-
     margin: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -40,7 +36,6 @@ const StyledSelect = styled.select`
 export default function History() {
   const router = useRouter();
   const { optionSelect } = router.query;
-  console.log(optionSelect);
   const [hasMounted, setHasMounted] = useState(false);
   const drawnCards = useStore((state) => state.drawnCards);
   const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
@@ -83,21 +78,24 @@ export default function History() {
     if (selectedOption in sortingFunctions) {
       const sortingFunction = sortingFunctions[selectedOption];
       const sortedCards = drawnCards.slice().sort(sortingFunction);
-      updateCardsDrawn();
-      setDisplayedCards(sortedCards);
-      createLocalSortedHistory();
       console.log("lol");
     }
+    console.log("lol");
   }
 
   useEffect(() => {
     setDisplayedCards(drawnCards);
   }, [drawnCards, setDisplayedCards]);
 
+  useEffect(() => {
+    router.push(`./${selectedOption}`);
+  });
+
   function updateCards(event) {
     event.preventDefault();
     refreshList();
     updateCardsDrawn();
+    router.push(`./${event.target.value}`);
   }
 
   useEffect(() => {
@@ -108,9 +106,17 @@ export default function History() {
   }
 
   function handleSelectChange(event) {
+    // console.log(event.target.value);
     setSelectedOption(event.target.value);
-    refreshList(event);
-    router.push(`./${event.target.value}`);
+    // console.log(selectedOption);
+    // refreshList(event);
+    router.push(`./${router.query}`);
+
+    // refreshList(event);
+    // console.log("lol");
+    // updateCardsDrawn();
+    // setDisplayedCards(sortedCards);
+    // createLocalSortedHistory();
   }
 
   return (
@@ -141,7 +147,6 @@ export default function History() {
                   <li>AverageMood: {card.averageMood}</li>
                   <li>TotalMood: {card.mood}</li>
                   <li>moodClicked: {card.currentMood}</li>
-
                   <li>second: {card.second}</li>
                   <li>minute: {card.minute}</li>
                   <li>hour: {card.hour}</li>
@@ -163,22 +168,13 @@ export default function History() {
           <button type="button">back</button>
         </Link>
         <StyledMenuBar query1={"/"} query2={"/"}>
-          {/* <form> */}
-          <StyledSelect name="filter results by" onChange={handleSelectChange}>
+          <StyledSelect
+            name="filter results by"
+            onChange={(event) => handleSelectChange(event)}
+          >
             <option value="dateUp">date up</option>
             <option value="dateDown">date down</option>
-            {/* <option value="yearUp">year Up</option> */}
-            {/* <option value="yearDown">year Down</option> */}
-            {/* <option value="monthUp">month Up</option> */}
-            {/* <option value="monthDown">month Down</option> */}
-            {/* <option value="dayUp">dayUp</option> */}
-            {/* <option value="dayDown">day Down</option> */}
-            {/* <option value="hourUp">hourUp</option> */}
-            {/* <option value="hourDown">hour Down</option> */}
-            {/* <option value="minuteUp">minuteUp</option> */}
-            {/* <option value="minuteDown">minute Down</option> */}
-            {/* <option value="secondUp">secondsUp</option> */}
-            {/* <option value="secondDown">secondsDown</option> */}
+
             <option value="up" onClick={(event) => refreshList(event)}>
               name up
             </option>
@@ -186,8 +182,6 @@ export default function History() {
               name down
             </option>
           </StyledSelect>
-          {/* <button onClick={(event) => refreshList(event)}>refresh</button> */}
-          {/* </form> */}
         </StyledMenuBar>
       </StyledCardContainer>
     </Fragment>
