@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Link from "next/link";
-import ArrowIcon from "../StyledArrow1";
+import ArrowIcon from "../ArrowIconLeft";
 import StyledArrowContainerLeft from "../StyledArrowContainerLeft";
 import StyledArrowContainerRight from "../StyledArrowContainerRight";
-import ArrowIconRight from "../StyledArrowRight";
+import ArrowIconRight from "../ArrowIconRight";
 
 const StyledMenu = styled.div`
   box-sizing: border-box;

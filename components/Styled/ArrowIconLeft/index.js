@@ -1,4 +1,4 @@
-function ArrowIcon(props) {
+function ArrowIconLeft(props) {
   return (
     <svg
       width={21}
@@ -15,4 +15,4 @@ function ArrowIcon(props) {
   );
 }
 
-export default ArrowIcon;
+export default ArrowIconLeft;

@@ -43,10 +43,18 @@ export default function History() {
   const [selectedOption, setSelectedOption] = useState("nameUp");
 
   const sortedItems = drawnCards.sort((a, b) => {
-    if (selectedOption === "nameUp") {
-      return a.name.trim().localeCompare(b.name);
+    if (selectedOption === "dateUp") {
+      return a.date - b.date;
+    } else if (selectedOption === "dateDown") {
+      return b.date - a.date;
     } else if (selectedOption === "nameDown") {
+      return a.name.trim().localeCompare(b.name);
+    } else if (selectedOption === "nameUp") {
       return b.name.trim().localeCompare(a.name);
+    } else if (selectedOption === "secondDown") {
+      return b.second - a.second;
+    } else if (selectedOption === "secondUp") {
+      return a.second - b.second;
     }
   });
 
@@ -90,7 +98,7 @@ export default function History() {
                       {card.name}
                     </StyledLink>
                   </li>
-
+                  <li>second: {card.second} sec</li>
                   <section>
                     note: <i>{card.notes}</i>
                   </section>
@@ -122,6 +130,8 @@ export default function History() {
               <option value="nameDown" onClick={(event) => refreshList(event)}>
                 name down
               </option>
+              <option value="secondUp">second up</option>
+              <option value="secondDown">second down</option>
             </select>
           </StyledForm>
         </StyledMenuBar>

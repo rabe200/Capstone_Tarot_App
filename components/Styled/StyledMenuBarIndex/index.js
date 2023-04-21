@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Link from "next/link";
-import ArrowIcon from "../StyledArrow1";
+import ArrowIconLeft from "../ArrowIconLeft";
 import StyledArrowContainerLeft from "../StyledArrowContainerLeft";
 import StyledArrowContainerRight from "../StyledArrowContainerRight";
-import ArrowIconRight from "../StyledArrowRight";
+import ArrowIconRight from "../ArrowIconRight";
 const StyledMenu = styled.div`
   box-sizing: border-box;
 
@@ -38,25 +38,21 @@ export const Arrow = styled.div`
   border: 3px solid #000000;
 `;
 
-export default function StyledMenuBarIndex({
-  children,
-  query1,
-  query2,
-  onClick1,
-  onClick2,
-}) {
+export default function StyledMenuBarIndex({ children, onClick1, onClick2 }) {
   return (
     <StyledMenu>
       {" "}
       <div onClick={onClick1}>
         <StyledArrowContainerLeft>
-          <ArrowIcon />
+          <ArrowIconLeft />
         </StyledArrowContainerLeft>
       </div>
       {children}
       <div onClick={onClick2}>
         <StyledArrowContainerRight>
-          <ArrowIconRight />
+          <div>
+            <ArrowIconRight />
+          </div>
         </StyledArrowContainerRight>
       </div>
     </StyledMenu>

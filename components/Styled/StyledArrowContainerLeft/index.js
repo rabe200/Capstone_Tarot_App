@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const ContainerLeft = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   position: absolute;
   bottom: -5px;

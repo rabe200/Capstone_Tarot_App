@@ -8,6 +8,7 @@ const CardBody = styled.figure`
   justify-content: center;
   align-items: center;
   left: 0;
+  height: 475px;
 `;
 
 const NameBanner = styled.div`
