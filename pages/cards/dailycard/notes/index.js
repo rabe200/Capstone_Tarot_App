@@ -15,10 +15,20 @@ export default function NoteFormular() {
   const difference = useStore((state) => state.difference);
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
-  const SubmitButton = styled.button`
-    background-color: hotpink;
-    width: 250px;
+
+  const StyledSubmitButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: hotpink;
+    text-align: center;
     height: 40px;
+    border-radius: 8px;
+    font-size: 2rem;
+    &:hover {
+      background-color: red;
+    }
   `;
 
   function handleSubmit(event) {
@@ -43,43 +53,40 @@ export default function NoteFormular() {
 
   return (
     <>
-      <StyledMenuBar
-        query1={"/cards/dailycard/"}
-        query2={"/cards/dailycard/results"}
-      >
-        <SubmitButton
+      <div>
+        <StyledCardContainer>
+          <form id="textInput" aria-label="formular" onSubmit={handleSubmit}>
+            <label htmlFor="note">
+              <textarea
+                required
+                type="text"
+                id="note"
+                name="note"
+                placeholder="type here"
+                aria-label="note"
+                value={inputValue}
+                onChange={(event) => {
+                  setInputValue(event.target.value);
+                }}
+                style={{
+                  width: 290,
+                  height: 517,
+                  fontSize: "2rem",
+                  borderRadius: 8,
+                }}
+              />
+            </label>
+          </form>
+        </StyledCardContainer>
+        <StyledSubmitButton
           form="textInput"
           type="submit"
           name="submit"
           aria-label="submit button"
         >
-          submit
-        </SubmitButton>
-      </StyledMenuBar>
-      <StyledCardContainer>
-        <form id="textInput" aria-label="formular" onSubmit={handleSubmit}>
-          <label htmlFor="note">
-            <textarea
-              required
-              type="text"
-              id="note"
-              name="note"
-              placeholder="type here"
-              aria-label="note"
-              value={inputValue}
-              onChange={(event) => {
-                setInputValue(event.target.value);
-              }}
-              style={{
-                width: 290,
-                height: 517,
-                fontSize: "2rem",
-                borderRadius: 8,
-              }}
-            />
-          </label>
-        </form>
-      </StyledCardContainer>
+          SUBMIT
+        </StyledSubmitButton>
+      </div>
     </>
   );
 }

@@ -1,16 +1,38 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import useStore from "../../../src/store/store";
 import Link from "next/link";
-import StyledMenuBar from "../../../components/Styled/StyledMenuBar";
 import DeleteButton from "../../../components/DeleteButton";
 import EditButton from "../../../components/EditButton";
 import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
+import AppContainer from "../../../components/Styled/StyledAppContainer";
+import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
+import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
 
-const StyledForm = styled.form`
-  width: 210px;
-  height: 40px;
-  position: relative;
+const StyledSpacer = styled.div`
+  display: grid;
+  grid-template-columns: 3.5fr 1fr;
+  grid-template-rows: 20px;
+  gap: 0px 0px;
+  grid-template-areas: ". .";
+  color: white;
+  width: 100%;
+`;
+
+const StyledNavbar = styled.div`
+  display: grid;
+  grid-template-columns: 3.5fr 1.5fr;
+  grid-template-rows: 20px;
+  gap: 0px 0px;
+  grid-template-areas: ". .";
+  width: 100%;
+  background: none;
+`;
+
+const StyledFormular = styled.form`
+  height: 100%;
+  background: orange;
+  width: 100%;
 `;
 
 const StyledList = styled.ul`
@@ -19,18 +41,44 @@ const StyledList = styled.ul`
   margin: 0;
   background-color: black;
   color: white;
+  height: 100%;
+  overflow: scroll;
 `;
 
 const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
-  gap: 20rem;
   margin: 0.3rem 0;
-  color: white;
+  color: yellow;
   text-decoration: none;
   &:hover {
     color: magenta;
   }
+`;
+
+const StyledBarContainer = styled.div`
+  background: none;
+  width: 100%;
+`;
+
+const StyledFooter = styled.footer`
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  bottom: 0;
+  font-size: 1rem;
+  width: 100%;
+  bottom: 0px;
+`;
+
+const StyledFooterLeft = styled.div`
+  font-size: 0.8em;
+`;
+
+const StyledFooterRight = styled.div`
+  font-size: 0.8em;
 `;
 
 export default function History() {
@@ -44,19 +92,29 @@ export default function History() {
 
   const sortedItems = drawnCards.sort((a, b) => {
     if (selectedOption === "dateUp") {
-      return a.date - b.date;
+      return new Date(a.date) - new Date(b.date);
     } else if (selectedOption === "dateDown") {
-      return b.date - a.date;
+      return new Date(b.date) - new Date(a.date);
     } else if (selectedOption === "nameDown") {
-      return a.name.trim().localeCompare(b.name);
-    } else if (selectedOption === "nameUp") {
       return b.name.trim().localeCompare(a.name);
+    } else if (selectedOption === "nameUp") {
+      return a.name.trim().localeCompare(b.name);
     } else if (selectedOption === "secondDown") {
       return b.second - a.second;
     } else if (selectedOption === "secondUp") {
       return a.second - b.second;
     }
   });
+
+  const [hidden, setHiddenToggle] = useState(false);
+
+  function toggle() {
+    if (hidden === false) {
+      setHiddenToggle(true);
+    } else {
+      setHiddenToggle(false);
+    }
+  }
 
   useEffect(() => {
     updateCardsDrawn();
@@ -70,21 +128,11 @@ export default function History() {
   }
 
   return (
-    <Fragment>
+    <AppContainer>
+      <TopMenuBar card={"null"} />
+
       <StyledCardContainer>
-        <span>
-          {cardsDrawn ? (
-            <>
-              <b>total number of drawn cards: {cardsDrawn}</b>
-              <br />
-              <b>total number of deleted cards: {cardsDeleted}</b>
-            </>
-          ) : (
-            "noDrawnCards"
-          )}
-        </span>
-        <section>
-          {" "}
+        <GridLayout3Columns query1={"null"} query2={"null"}>
           <StyledList>
             {sortedItems.map((card) => {
               return (
@@ -108,10 +156,16 @@ export default function History() {
               );
             })}
           </StyledList>
-        </section>
+        </GridLayout3Columns>
+      </StyledCardContainer>
 
-        <StyledMenuBar query1={"/"} query2={"/"}>
-          <StyledForm>
+      <StyledSpacer>
+        <div>switch</div>
+        <div onClick={() => toggle()}>sort</div>
+      </StyledSpacer>
+      <StyledBarContainer>
+        <StyledNavbar>
+          <StyledFormular hidden={hidden}>
             <select
               style={{
                 width: "100%",
@@ -133,9 +187,13 @@ export default function History() {
               <option value="secondUp">second up</option>
               <option value="secondDown">second down</option>
             </select>
-          </StyledForm>
-        </StyledMenuBar>
-      </StyledCardContainer>
-    </Fragment>
+          </StyledFormular>
+        </StyledNavbar>
+        <StyledFooter>
+          <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>{" "}
+          <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
+        </StyledFooter>
+      </StyledBarContainer>
+    </AppContainer>
   );
 }

@@ -8,25 +8,24 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import GoodMoodIcon from "../../../../components/Styled/GoodMoodIcon";
 import BadMoodIcon from "../../../../components/Styled/BadMoodIcon";
+import AppContainer from "../../../../components/Styled/StyledAppContainer";
 
-const StyledMenuLink = styled(Link)`
-  text-decoration: none;
+const StyledBanner = styled.div`
+  text-align: center;
+  width: 300px;
   color: white;
-  font-style: italic;
-  font-size: 2rem;
 `;
 
 const MoodButtonGood = styled.div`
   width: 290px;
   height: 215px;
-  background-color: black;
-  /* border: 3px yellow solid; */
+  background-color: palevioletred;
 `;
 
 const MoodButtonBad = styled.div`
   width: 290px;
   height: 231px;
-  background-color: black;
+  background-color: palegreen;
   bottom: 0;
 `;
 
@@ -36,7 +35,6 @@ export default function MoodMeter() {
   const [hasMounted, setHasMounted] = useState(false);
   const drawCard = useStore((state) => state.drawCard);
   const increaseCardsDrawn = useStore((state) => state.increaseCardsDrawn);
-  const currentCard = useStore((state) => state.currentCard);
   const setRandomCard = useStore((state) => state.setRandomCard);
   const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
   const setCardMoodPlusOne = useStore((state) => state.setCardMoodPlusOne);
@@ -80,7 +78,7 @@ export default function MoodMeter() {
   }
 
   return (
-    <>
+    <AppContainer>
       <StyledCardContainer>
         <h4>how is your mood right now?</h4>
         <MoodButtonGood
@@ -100,9 +98,7 @@ export default function MoodMeter() {
           <BadMoodIcon />
         </MoodButtonBad>
       </StyledCardContainer>
-      <StyledMenuBar query1={"/"} query2={`/`}>
-        <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
-      </StyledMenuBar>
-    </>
+      <StyledBanner>DON'T THINK</StyledBanner>
+    </AppContainer>
   );
 }

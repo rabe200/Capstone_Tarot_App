@@ -1,34 +1,43 @@
 import { useRouter } from "next/router";
-import CardPreviewImage from "../../../../components/CardPreviewImage";
 import { useState, useEffect } from "react";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
 import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
 import useStore from "../../../../src/store/store";
 import styled from "styled-components";
-import Link from "next/link";
+import SearchBar from "../../../../components/SearchBar";
+import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
+import AppContainer from "../../../../components/Styled/StyledAppContainer";
+import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 
-const StyledMenuLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  font-style: italic;
+const StyledCategories = styled.div`
+  display: block;
+  flex-direction: column;
+  background: white;
+  height: 100%;
+  overflow: auto;
+`;
+
+const StyledCategoryName = styled.u`
   font-size: 2rem;
+`;
+
+const StyledCategoryContent = styled.section`
+  margin-bottom: 1em;
 `;
 
 export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
   const id = router ? router.query.id : null;
-  console.log(id);
   const cards = useStore((state) => state.allCards);
   const card = cards.find((card) => card.id === `${id}`);
   const currentCardIndex = cards.indexOf(card);
   const nextCardId =
     currentCardIndex === cards.length - 1 ? 0 : currentCardIndex + 1;
-  const nextPage = `/cards/${nextCardId}`;
-  console.log(nextPage);
+  const nextPage = `/cards/${nextCardId}/detail`;
   const previousCardId =
     currentCardIndex === 0 ? cards.length - 1 : currentCardIndex - 1;
-  const previousPage = `/cards/${previousCardId}`;
+  const previousPage = `/cards/${previousCardId}/detail`;
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -37,22 +46,26 @@ export default function Details() {
   }
   return (
     id < 78 && (
-      <>
+      <AppContainer>
+        <TopMenuBar card={card} />
         <StyledCardContainer>
-          <p>
-            <u>meaning up</u>
-            <section>{card.meaning_up}</section>
-          </p>
-
-          <p>
-            <u>meaning down</u>
-            <section>{card.meaning_rev}</section>
-          </p>
+          <GridLayout3Columns query1={previousPage} query2={nextPage}>
+            <StyledCategories>
+              <div>
+                <StyledCategoryName>meaning upside</StyledCategoryName>
+                <StyledCategoryContent>{card.meaning_up}</StyledCategoryContent>
+              </div>
+              <div>
+                <StyledCategoryName>meaning reversed</StyledCategoryName>
+                <StyledCategoryContent>
+                  {card.meaning_rev}
+                </StyledCategoryContent>
+              </div>
+            </StyledCategories>
+          </GridLayout3Columns>
         </StyledCardContainer>
-        <StyledMenuBar query1={previousPage} query2={nextPage}>
-          <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
-        </StyledMenuBar>
-      </>
+        <SearchBar />
+      </AppContainer>
     )
   );
 }

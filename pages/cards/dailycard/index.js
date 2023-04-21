@@ -13,6 +13,27 @@ const StyledMenuLink = styled(Link)`
   font-size: 2rem;
 `;
 
+const StyledContinueButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: hotpink;
+  text-align: center;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 2rem;
+  &:hover {
+    background-color: red;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    color: black;
+  }
+`;
 export default function ShowCard() {
   const currentCard = useStore((state) => state.currentCard);
   const [hasMounted, setHasMounted] = useState(false);
@@ -26,16 +47,15 @@ export default function ShowCard() {
   if (currentCard) {
     return (
       <>
-        <StyledCardContainer>
-          <CardPreviewImage card={currentCard}></CardPreviewImage>
-        </StyledCardContainer>
-        <StyledMenuBar
-          query1={"/cards/dailycard/moodmeter"}
-          query2={"/cards/dailycard/notes/"}
-        >
+        <div>
           {" "}
-          <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
-        </StyledMenuBar>
+          <StyledCardContainer>
+            <CardPreviewImage card={currentCard}></CardPreviewImage>
+          </StyledCardContainer>
+          <StyledLink href={"/cards/dailycard/notes"}>
+            <StyledContinueButton>CONTINUE</StyledContinueButton>
+          </StyledLink>
+        </div>
       </>
     );
   } else {

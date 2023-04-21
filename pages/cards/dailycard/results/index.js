@@ -5,18 +5,32 @@ import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 
+const StyledMenuLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+  font-style: italic;
+  font-size: 2rem;
+`;
+
+const StyledSubmitButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: hotpink;
+  text-align: center;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 2rem;
+  &:hover {
+    background-color: red;
+  }
+`;
 export default function Results() {
   const [hasMounted, setHasMounted] = useState(false);
   const currentCard = useStore((state) => state.currentCard);
   const drawnCards = useStore((state) => state.drawnCards);
   const setLastCard = useStore((state) => state.setLastCard);
-
-  const StyledMenuLink = styled(Link)`
-    text-decoration: none;
-    color: white;
-    font-style: italic;
-    font-size: 2rem;
-  `;
 
   useEffect(() => {
     setHasMounted(true);
@@ -27,7 +41,7 @@ export default function Results() {
 
   if (drawnCards.length > 0) {
     return (
-      <>
+      <div>
         <StyledCardContainer>
           <ul>
             <li>Results</li>
@@ -54,10 +68,10 @@ export default function Results() {
             </li>
           </ul>
         </StyledCardContainer>
-        <StyledMenuBar query1={"/cards/dailycard/notes"} query2={`/`}>
-          <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
-        </StyledMenuBar>
-      </>
+        <Link href={"/"}>
+          <StyledSubmitButton>END SESSION</StyledSubmitButton>
+        </Link>
+      </div>
     );
   } else {
     return (

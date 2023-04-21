@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Link from "next/link";
-const StyledLink = styled(Link)`
+
+const StyledArticle = styled.article`
   display: flex;
   justify-content: center;
   gap: 20rem;
@@ -14,6 +14,11 @@ const StyledLink = styled(Link)`
   }
 `;
 
-export default function StyledMenuBarContent(query, queryName) {
-  return <StyledLink href={`${query.query}`}>{query.queryName}</StyledLink>;
+export default function StyledMenuBarContent(query, queryName, children) {
+  return (
+    <StyledArticle>
+      {query.queryName}
+      {children}
+    </StyledArticle>
+  );
 }

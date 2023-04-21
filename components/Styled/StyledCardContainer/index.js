@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 const StyledCardContainer1 = styled.div`
-  position: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   width: 300px;
   height: 517px;
   overflow-y: auto;
-
   background: #fcfcfc;
   border: 5px solid #000000;
   border-radius: 13px;

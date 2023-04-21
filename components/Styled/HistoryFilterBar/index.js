@@ -1,11 +1,11 @@
 import { useState } from "react";
-import useStore from "../../src/store/store";
+import useStore from "../../../src/store/store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const StyledSpacer = styled.div`
   display: grid;
-  grid-template-columns: 1;
+  grid-template-columns: 3.5fr 1fr;
   grid-template-rows: 20px;
   gap: 0px 0px;
   grid-template-areas: ". .";
@@ -19,7 +19,7 @@ const StyledFormular = styled.form`
 `;
 
 const StyledSearchContainer = styled.div`
-  background: none;
+  background: red;
   width: 100%;
 `;
 
@@ -35,7 +35,7 @@ const StyledButton = styled.button`
 const StyledSwitch = styled.div`
   width: 100%;
   height: 100%;
-  background: none;
+  background: white;
 `;
 
 const Navbar = styled.div`
@@ -46,7 +46,18 @@ const Navbar = styled.div`
   grid-template-areas: ". .";
 `;
 
-export default function SearchBar() {
+const StyledSelect = styled.select`
+  background: palegreen;
+`;
+
+const StyledDiv = styled.div`
+  background: aqua;
+  &:hover {
+    background: red;
+  }
+`;
+
+export default function HistoryFilterBar() {
   const [inputValue, setInputValue] = useState("");
   const setSearchQuery = useStore((state) => state.setSearchQuery);
   const router = useRouter();
@@ -70,40 +81,43 @@ export default function SearchBar() {
   return (
     <>
       <StyledSpacer>
-        <div onClick={() => toggle()}>search</div>
+        <div>switch</div>
+        <div onClick={() => toggle()}>collapse</div>
       </StyledSpacer>
-      <StyledSearchContainer>
+      <StyledSearchContainer hidden={hidden}>
         <Navbar>
-          <StyledFormular
-            hidden={hidden}
-            id="searchFormular"
-            aria-label="search formular"
-          >
-            <input
-              onChange={(event) => {
-                return (
-                  event.preventDefault(), setInputValue(event.target.value)
-                );
+          <StyledFormular>
+            <select
+              style={{
+                width: "100%",
+                height: "100%",
+                textAlign: "center",
+                fontSize: "1.3rem",
               }}
-              type="text"
-              id="searchbar"
-              name="searchbar"
-              placeholder="search..."
-              aria-label="search bar"
-              value={inputValue}
-              style={{ height: "100%", fontSize: "2rem", width: "100%" }}
-            />
+              name="filter results by"
+              onChange={(event) => setSelectedOption(event.target.value)}
+            >
+              <option value="dateUp">date up</option>
+              <option value="dateDown">date down</option>
+              <option value="nameUp" onClick={(event) => refreshList(event)}>
+                name up
+              </option>
+              <option value="nameDown" onClick={(event) => refreshList(event)}>
+                name down
+              </option>
+              <option value="secondUp">second up</option>
+              <option value="secondDown">second down</option>
+            </select>
           </StyledFormular>
           <StyledSwitch>
             <StyledButton
-              hidden={hidden}
               form="searchFormular"
               type="submit"
               name="submit"
               aria-label="submit search query"
               onClick={handleSubmit}
             >
-              submit
+              search
             </StyledButton>
           </StyledSwitch>
           {/* <StyledDiv onClick={() => toggle()}>Collapse</StyledDiv>
