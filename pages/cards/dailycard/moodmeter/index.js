@@ -25,8 +25,9 @@ const MoodButtonGood = styled.div`
 
 const MoodButtonBad = styled.div`
   width: 290px;
-  height: 260px;
+  height: 231px;
   background-color: black;
+  bottom: 0;
 `;
 
 export default function MoodMeter() {
@@ -99,7 +100,7 @@ export default function MoodMeter() {
           <BadMoodIcon />
         </MoodButtonBad>
       </StyledCardContainer>
-      <StyledMenuBar query1={"/"} query2={`cards/${currentCard.id}`}>
+      <StyledMenuBar query1={"/"} query2={`/`}>
         <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
       </StyledMenuBar>
     </>

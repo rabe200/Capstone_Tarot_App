@@ -54,7 +54,7 @@ export default function Results() {
             </li>
           </ul>
         </StyledCardContainer>
-        <StyledMenuBar query1={"/dailycard/notes"} query2={`/`}>
+        <StyledMenuBar query1={"/cards/dailycard/notes"} query2={`/`}>
           <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
         </StyledMenuBar>
       </>

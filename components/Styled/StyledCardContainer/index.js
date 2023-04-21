@@ -6,7 +6,7 @@ const StyledCardContainer1 = styled.div`
   justify-content: center;
   text-align: center;
   width: 300px;
-  height: 527px;
+  height: 517px;
   overflow-y: auto;
 
   background: #fcfcfc;

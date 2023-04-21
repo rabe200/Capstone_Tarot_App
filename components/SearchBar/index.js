@@ -20,19 +20,17 @@ export default function SearchBar() {
     router.push("/cards/search/results");
   }
 
-  const StyledList = styled.ul`
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  `;
-
   return (
     <>
       <form>
-        <StyledList>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
           <li>
             <input
-              onChange={handleChange}
+              onChange={(event) => {
+                return (
+                  event.preventDefault(), setInputValue(event.target.value)
+                );
+              }}
               id="searchbar"
               type="search"
               name="searchbar"
@@ -51,7 +49,7 @@ export default function SearchBar() {
               search
             </button>
           </li>
-        </StyledList>
+        </ul>
       </form>
     </>
   );
