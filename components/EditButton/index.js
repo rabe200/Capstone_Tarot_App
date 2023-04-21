@@ -32,7 +32,7 @@ export default function EditButton({ card }) {
     editSelectedNote(card);
   }
 
-  useEffect((event) => {
+  useEffect(() => {
     setInputValue(inputValue);
   });
 

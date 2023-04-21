@@ -27,6 +27,10 @@ export const useStore = createLocalStorageStore(
     currentNote: "",
     searchQuery: "testString",
     cardMoods: cardMoodArray,
+    localSortedHistory: [],
+    createLocalSortedHistory: () => {
+      localSortedHistory: "ff";
+    },
     getSuits: () => {
       const cards = get().allCards;
       const allSuits = cards.map((card) => card.suit);
@@ -154,6 +158,10 @@ export const useStore = createLocalStorageStore(
         currentMood: itemToEdit.currentMood,
         averageMood: itemToEdit.averageMood,
         clicks: itemToEdit.clicks,
+        second: itemToEdit.second,
+        minute: itemToEdit.minute,
+        hour: itemToEdit.hour,
+        day: itemToEdit.day,
       };
       const newDrawnCards = filteredArray.concat(newArray);
       set(() => {

@@ -1,11 +1,12 @@
 import { Fragment, useState, useEffect, useRef } from "react";
-import useStore from "../../../src/store/store";
+import useStore from "../../../../src/store/store";
 import Link from "next/link";
-import StyledMenuBar from "../../../components/Styled/StyledMenuBar";
-import DeleteButton from "../../../components/DeleteButton";
-import EditButton from "../../../components/EditButton";
-import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
+import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
+import DeleteButton from "../../../../components/DeleteButton";
+import EditButton from "../../../../components/EditButton";
+import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const StyledMenuLink = styled(Link)`
   text-decoration: none;
@@ -37,13 +38,19 @@ const StyledSelect = styled.select`
 `;
 
 export default function History() {
+  const router = useRouter();
+  const { optionSelect } = router.query;
+  console.log(optionSelect);
   const [hasMounted, setHasMounted] = useState(false);
   const drawnCards = useStore((state) => state.drawnCards);
   const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
   const cardsDrawn = useStore((state) => state.cardsDrawn);
   const cardsDeleted = useStore((state) => state.cardsDeleted);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(optionSelect);
   const [displayedCards, setDisplayedCards] = useState(drawnCards);
+  const createLocalSortedHistory = useStore(
+    (state) => state.createLocalSortedHistory
+  );
 
   function refreshList(event) {
     event.preventDefault();
@@ -61,8 +68,8 @@ export default function History() {
       minuteDown: (a, b) =>
         new Date(b.date).getMinutes() - new Date(a.date).getMinutes(),
 
-      up: (a, b) => a.name.localeCompare(b.name),
-      down: (a, b) => b.name.localeCompare(a.name),
+      up: (a, b) => a.name.trim().localeCompare(b.name),
+      down: (a, b) => b.name.trim().localeCompare(a.name),
       yearUp: (a, b) =>
         new Date(a.date).getFullYear() - new Date(b.date).getFullYear(),
       yearDown: (a, b) =>
@@ -78,6 +85,8 @@ export default function History() {
       const sortedCards = drawnCards.slice().sort(sortingFunction);
       updateCardsDrawn();
       setDisplayedCards(sortedCards);
+      createLocalSortedHistory();
+      console.log("lol");
     }
   }
 
@@ -101,6 +110,7 @@ export default function History() {
   function handleSelectChange(event) {
     setSelectedOption(event.target.value);
     refreshList(event);
+    router.push(`./${event.target.value}`);
   }
 
   return (
@@ -156,7 +166,6 @@ export default function History() {
           {/* <form> */}
           <StyledSelect name="filter results by" onChange={handleSelectChange}>
             <option value="dateUp">date up</option>
-
             <option value="dateDown">date down</option>
             {/* <option value="yearUp">year Up</option> */}
             {/* <option value="yearDown">year Down</option> */}
