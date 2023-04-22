@@ -1,4 +1,3 @@
-import BackButton from "../../../../components/Backbutton/backbutton";
 import { useStore } from "../../../../src/store/store";
 import { useEffect, useState } from "react";
 import SearchResults from "../../../../components/SearchResults";
@@ -29,7 +28,6 @@ export default function SearchResult() {
     return (
       <>
         <p>no results</p>
-        <BackButton />
       </>
     );
   }

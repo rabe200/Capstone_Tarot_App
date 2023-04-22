@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { useRouter } from "next/router";
-import BackButton from "../../../../components/Backbutton/backbutton";
 import useStore from "../../../../src/store/store";
 
 export default function CardNotes() {
@@ -14,7 +13,6 @@ export default function CardNotes() {
     <Fragment key={card.uuid}>
       <h1>{card ? card.name : "loading"}</h1>
       <section>{card.map((prop) => prop.notes)}</section>
-      <BackButton />
     </Fragment>
   );
 }
