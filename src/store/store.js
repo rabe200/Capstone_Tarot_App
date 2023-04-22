@@ -30,8 +30,11 @@ export const useStore = createLocalStorageStore(
     localSortedHistory: [],
     lastPageVisited: "",
     currentPage: "",
-    setLastPageVisited: (input) => set(() => ({ lastPageVisited: input })),
-    setCurrentPage: (input) => set(() => ({ currentPage: input })),
+    comingFromHistory: false,
+    setComingFromHistory: (boolean) =>
+      set(() => ({ comingFromHistory: boolean })),
+    setLastPageVisited: (string) => set(() => ({ lastPageVisited: string })),
+    setCurrentPage: (string) => set(() => ({ currentPage: string })),
     getSuits: () => {
       const cards = get().allCards;
       const allSuits = cards.map((card) => card.suit);

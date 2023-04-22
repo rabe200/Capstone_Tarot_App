@@ -1,5 +1,4 @@
 import Link from "next/link";
-import BackButton from "../../../../components/Backbutton/backbutton";
 import useStore from "../../../../src/store/store";
 
 export default function MinorArcana() {
@@ -19,7 +18,6 @@ export default function MinorArcana() {
           );
         })}
       </ul>
-      <BackButton />
       <Link href="/">menu</Link>
     </>
   );

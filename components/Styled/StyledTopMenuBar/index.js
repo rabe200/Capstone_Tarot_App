@@ -54,14 +54,16 @@ export default function TopMenuBar({ menu, mid, back }) {
   const router = useRouter();
   const currentPage = router.pathname;
 
-  const lastPageVisited = useStore((state) => state.lastPageVisited);
-  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
+  const comingFromHistory = useStore((state) => state.comingFromHistory);
 
-  if (lastPageVisited === "/cards/history") {
+  if (comingFromHistory === true) {
     back = "/cards/history";
+  } else {
+    back = back;
   }
+
   if (currentPage === "/cards/history") {
-    back = "/dailycard";
+    back = "/DailyCard";
   }
 
   return (
@@ -71,7 +73,9 @@ export default function TopMenuBar({ menu, mid, back }) {
       </StyledTopBarLeft>
       <StyledTopBarMiddle> {mid}</StyledTopBarMiddle>
       <StyledTopBarRight>
-        <StyledMenuLink href={`${back}`}>BACK</StyledMenuLink>{" "}
+        <StyledMenuLink href={`${back}`}>
+          {comingFromHistory ? "CLOSE" : "BACK"}
+        </StyledMenuLink>{" "}
       </StyledTopBarRight>
     </StyledTopBarContainer>
   );

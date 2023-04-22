@@ -83,9 +83,10 @@ const StyledFooterRight = styled.div`
 `;
 
 export default function History() {
+  const [hasMounted, setHasMounted] = useState(false);
+
   const cardsDeleted = useStore((state) => state.cardsDeleted);
   const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
-  const [hasMounted, setHasMounted] = useState(false);
   const drawnCards = useStore((state) => state.drawnCards);
   const cardsDrawn = useStore((state) => state.cardsDrawn);
   const setLastPageVisited = useStore((state) => state.setLastPageVisited);
@@ -111,6 +112,8 @@ export default function History() {
   });
 
   const [hidden, setHiddenToggle] = useState(false);
+
+  const setComingFromHistory = useStore((state) => state.setComingFromHistory);
 
   function toggle() {
     if (hidden === false) {
@@ -150,7 +153,10 @@ export default function History() {
                     <b>{new Date(card.date).toLocaleDateString()}</b>
                   </li>
                   <li>
-                    <StyledLink href={`/cards/${card.id}`}>
+                    <StyledLink
+                      href={`/cards/${card.id}`}
+                      onClick={setComingFromHistory(true)}
+                    >
                       {card.name}
                     </StyledLink>
                   </li>

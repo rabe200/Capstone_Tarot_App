@@ -25,9 +25,7 @@ export default function Details() {
   const previousCardId =
     currentCardIndex === 0 ? cards.length - 1 : currentCardIndex - 1;
   const previousPage = `/cards/${previousCardId}`;
-  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
 
-  // useEffect(() => setLastPageVisited(""), []);
   useEffect(() => {
     setHasMounted(true);
   }, []);

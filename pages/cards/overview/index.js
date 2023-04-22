@@ -1,6 +1,5 @@
 import Link from "next/link";
 import useStore from "../../../src/store/store";
-import BackButton from "../../../components/Backbutton/backbutton";
 
 export default function Overview() {
   const suits = useStore((state) => state.getSuits);
@@ -32,7 +31,6 @@ export default function Overview() {
           })}
         </ul>
       </ul>
-      <BackButton />
       <Link href="/">menu</Link>
     </>
   );

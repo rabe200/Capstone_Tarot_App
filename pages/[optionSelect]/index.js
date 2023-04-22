@@ -19,7 +19,8 @@ export default function HomePage() {
   const router = useRouter();
   const queryName = router.query.optionSelect;
   const setLastPageVisited = useStore((state) => state.setLastPageVisited);
-
+  const setComingFromHistory = useStore((state) => state.setComingFromHistory);
+  setComingFromHistory(false);
   setLastPageVisited(queryName);
 
   function countAndSetMenu(input) {
