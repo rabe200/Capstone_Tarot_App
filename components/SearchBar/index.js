@@ -105,6 +105,7 @@ export default function SearchBar() {
                 background: "black",
                 border: "1px solid white",
                 textAlign: "center",
+                color: "white",
               }}
             />
           </StyledFormular>
