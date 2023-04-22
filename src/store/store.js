@@ -28,9 +28,10 @@ export const useStore = createLocalStorageStore(
     searchQuery: "testString",
     cardMoods: cardMoodArray,
     localSortedHistory: [],
-    createLocalSortedHistory: () => {
-      localSortedHistory: "ff";
-    },
+    lastPageVisited: "",
+    currentPage: "",
+    setLastPageVisited: (input) => set(() => ({ lastPageVisited: input })),
+    setCurrentPage: (input) => set(() => ({ currentPage: input })),
     getSuits: () => {
       const cards = get().allCards;
       const allSuits = cards.map((card) => card.suit);

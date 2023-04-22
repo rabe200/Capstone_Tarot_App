@@ -43,9 +43,6 @@ export default function History() {
   const cardsDeleted = useStore((state) => state.cardsDeleted);
   const [selectedOption, setSelectedOption] = useState(optionSelect);
   const [displayedCards, setDisplayedCards] = useState(drawnCards);
-  const createLocalSortedHistory = useStore(
-    (state) => state.createLocalSortedHistory
-  );
 
   function refreshList(event) {
     event.preventDefault();

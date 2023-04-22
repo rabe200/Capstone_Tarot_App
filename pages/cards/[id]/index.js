@@ -25,7 +25,9 @@ export default function Details() {
   const previousCardId =
     currentCardIndex === 0 ? cards.length - 1 : currentCardIndex - 1;
   const previousPage = `/cards/${previousCardId}`;
+  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
 
+  // useEffect(() => setLastPageVisited(""), []);
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -36,7 +38,7 @@ export default function Details() {
   return (
     id < 78 && (
       <AppContainer>
-        <TopMenuBar card={card} />
+        <TopMenuBar mid={card.name} />
         <StyledCardContainer>
           <GridLayout3Columns query1={previousPage} query2={nextPage}>
             <CardPreviewImage card={card} clickable={true} />

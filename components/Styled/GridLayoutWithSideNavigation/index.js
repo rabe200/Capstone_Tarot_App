@@ -18,11 +18,12 @@ export default function GridLayout3Columns({
   query2,
   onClick1,
   onClick2,
+  navigation,
 }) {
   return (
     <Styled3Grid>
       <div onClick={onClick1}>
-        <Link href={query1}>
+        <Link href={query1} hidden={navigation}>
           <ArrowIconLeft />
         </Link>
       </div>
@@ -30,7 +31,7 @@ export default function GridLayout3Columns({
       {children}
 
       <div onClick={onClick2}>
-        <Link href={query2}>
+        <Link href={query2} hidden={navigation}>
           <ArrowIconRight />
         </Link>
       </div>

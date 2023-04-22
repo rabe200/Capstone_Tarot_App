@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import useStore from "../../src/store/store";
 import StyledCardContainer from "../../components/Styled/StyledCardContainer";
-import SearchBar from "../../components/SearchBar";
 import StyledMenuBarIndex from "../../components/Styled/StyledMenuBarIndex";
 import StyledMenuBarContent from "../../components/Styled/StyledMenuBarContent";
 import { useRouter } from "next/router";
@@ -18,6 +17,10 @@ export default function HomePage() {
   const lastCard = useStore((state) => state.currentCard);
   const [counter, setCounter] = useState(0);
   const router = useRouter();
+  const queryName = router.query.optionSelect;
+  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
+
+  setLastPageVisited(queryName);
 
   function countAndSetMenu(input) {
     if (input === "plus") {
@@ -50,26 +53,21 @@ export default function HomePage() {
     }
   }, [counter]);
 
-  const queryName = router.query.optionSelect;
-
   function getQuery(input) {
     let query;
 
     if (queryName) {
-      console.log("input", input);
       if (input === "DailyCard") {
-        console.log("input is DailyCard");
         return (query = "/cards/dailycard/moodmeter");
       } else if (input === "History") {
         return (query = `/cards/history`);
       } else if (input === "collection") {
         return (query = "/cards/0");
       }
-    } else console.log("no query in render");
+    } else null;
   }
 
   const query = getQuery(queryName);
-  console.log("return query", query);
 
   useEffect(() => {
     setHasMounted(true);
@@ -81,7 +79,7 @@ export default function HomePage() {
     <AppContainer>
       {" "}
       <div>
-        <TopMenuBar card={"null"} />
+        <TopMenuBar menu={"/"} back={"/"} />
         <StyledCardContainer>
           <GridLayout3Columns
             query1={"null"}

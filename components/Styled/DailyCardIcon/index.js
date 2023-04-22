@@ -1,6 +1,14 @@
+import styled from "styled-components";
+
+const StyledSvg = styled.svg`
+  &:hover {
+    fill: yellow;
+  }
+`;
+
 export default function DailyCardIcon(props) {
   return (
-    <svg
+    <StyledSvg
       width="100%"
       height="100%"
       viewBox="0 0 420 420"
@@ -24,6 +32,6 @@ export default function DailyCardIcon(props) {
         strokeWidth={7}
         strokeLinecap="round"
       />
-    </svg>
+    </StyledSvg>
   );
 }

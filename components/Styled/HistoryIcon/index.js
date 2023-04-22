@@ -1,6 +1,14 @@
+import styled from "styled-components";
+
+const StyledSvg = styled.svg`
+  &:hover {
+    fill: yellow;
+  }
+`;
+
 export default function HistoryIcon(props) {
   return (
-    <svg
+    <StyledSvg
       width="90%"
       height="90%"
       viewBox="0 0 378 607"
@@ -14,6 +22,6 @@ export default function HistoryIcon(props) {
         strokeWidth={10}
         strokeLinecap="round"
       />
-    </svg>
+    </StyledSvg>
   );
 }

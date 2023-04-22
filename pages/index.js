@@ -1,10 +1,9 @@
 import StyledCardContainer from "../components/Styled/StyledCardContainer";
 import SearchBar from "../components/SearchBar";
-import StyledMenuBar from "../components/Styled/StyledMenuBar";
-import StyledMenuBarContent from "../components/Styled/StyledMenuBarContent";
 import styled from "styled-components";
 import Link from "next/link";
 import AppContainer from "../components/Styled/StyledAppContainer";
+import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 
 const MenuLink = styled(Link)`
     font-size: 2rem;
@@ -38,8 +37,10 @@ const StyledLinkContainer = styled.div`
 `;
 
 export default function HomePage() {
+  const mid = "version 0.2";
   return (
     <AppContainer>
+      <TopMenuBar menu={"/"} mid={mid} back={"/"} />
       <StyledCardContainer>
         <StyledLinkContainer>
           <StyledHeadline>TAROT</StyledHeadline>

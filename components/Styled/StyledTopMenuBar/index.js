@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
+import useStore from "../../../src/store/store";
 import { useRouter } from "next/router";
 
 const StyledMenuLink = styled(Link)`
@@ -9,11 +10,6 @@ const StyledMenuLink = styled(Link)`
   font-size: 1rem;
 `;
 
-const StyledMenuText = styled.div`
-  color: white;
-  font-style: italic;
-  font-size: 1rem;
-`;
 const StyledTopBarContainer = styled.div`
   width: 100%;
   display: grid;
@@ -48,22 +44,34 @@ const StyledTopBarRight = styled.div`
   justify-content: center;
 `;
 
-export default function TopMenuBar(card) {
+export default function TopMenuBar({ menu, mid, back }) {
+  if (!menu) {
+    menu = "/";
+  }
+  if (!back) {
+    back = "/DailyCard";
+  }
   const router = useRouter();
-  if (!card) {
-    const card = null;
+  const currentPage = router.pathname;
+
+  const lastPageVisited = useStore((state) => state.lastPageVisited);
+  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
+
+  if (lastPageVisited === "/cards/history") {
+    back = "/cards/history";
+  }
+  if (currentPage === "/cards/history") {
+    back = "/dailycard";
   }
 
   return (
     <StyledTopBarContainer>
       <StyledTopBarLeft>
-        <StyledMenuLink href={"/"}>MENU</StyledMenuLink>{" "}
+        <StyledMenuLink href={`${menu}`}>MENU</StyledMenuLink>{" "}
       </StyledTopBarLeft>
-      <StyledTopBarMiddle>
-        {card !== null ? card.card.name : null}
-      </StyledTopBarMiddle>
+      <StyledTopBarMiddle> {mid}</StyledTopBarMiddle>
       <StyledTopBarRight>
-        <StyledMenuText onClick={() => router.back()}>BACK</StyledMenuText>{" "}
+        <StyledMenuLink href={`${back}`}>BACK</StyledMenuLink>{" "}
       </StyledTopBarRight>
     </StyledTopBarContainer>
   );

@@ -8,6 +8,7 @@ import styled from "styled-components";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
+import { useRouter } from "next/router";
 
 const StyledSpacer = styled.div`
   display: grid;
@@ -87,8 +88,11 @@ export default function History() {
   const [hasMounted, setHasMounted] = useState(false);
   const drawnCards = useStore((state) => state.drawnCards);
   const cardsDrawn = useStore((state) => state.cardsDrawn);
-
+  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
+  const router = useRouter();
   const [selectedOption, setSelectedOption] = useState("nameUp");
+
+  setLastPageVisited(router.pathname);
 
   const sortedItems = drawnCards.sort((a, b) => {
     if (selectedOption === "dateUp") {
@@ -132,7 +136,11 @@ export default function History() {
       <TopMenuBar card={"null"} />
 
       <StyledCardContainer>
-        <GridLayout3Columns query1={"null"} query2={"null"}>
+        <GridLayout3Columns
+          query1={"null"}
+          query2={"null"}
+          navigation={"hidden"}
+        >
           <StyledList>
             {sortedItems.map((card) => {
               return (
@@ -171,7 +179,7 @@ export default function History() {
                 width: "100%",
                 height: "100%",
                 textAlign: "center",
-                fontSize: "1.3rem",
+                fontSize: "1.05rem",
               }}
               name="filter results by"
               onChange={(event) => setSelectedOption(event.target.value)}

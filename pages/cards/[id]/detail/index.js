@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
-import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
 import useStore from "../../../../src/store/store";
 import styled from "styled-components";
 import SearchBar from "../../../../components/SearchBar";
@@ -28,6 +27,11 @@ const StyledCategoryContent = styled.section`
 export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
+
+  const queryName = router.query.optionSelect;
+  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
+
+  setLastPageVisited(queryName);
   const id = router ? router.query.id : null;
   const cards = useStore((state) => state.allCards);
   const card = cards.find((card) => card.id === `${id}`);
@@ -47,7 +51,7 @@ export default function Details() {
   return (
     id < 78 && (
       <AppContainer>
-        <TopMenuBar card={card} />
+        <TopMenuBar mid={card.name} back={`/cards/${card.id}`} />
         <StyledCardContainer>
           <GridLayout3Columns query1={previousPage} query2={nextPage}>
             <StyledCategories>
