@@ -100,7 +100,7 @@ export default function SearchBar() {
               value={inputValue}
               style={{
                 height: "100%",
-                fontSize: "1.2rem",
+                fontSize: "0.8rem",
                 width: "100%",
                 background: "black",
                 border: "1px solid white",

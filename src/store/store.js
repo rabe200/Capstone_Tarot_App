@@ -45,7 +45,6 @@ export const useStore = createLocalStorageStore(
         .filter((item) => item !== undefined);
       return suits;
     },
-    setCardClicks: () => set((state) => ({})),
     setCardMoodPlusOne: (name) => {
       let newEntry = get().cardMoods.find((card) => card.name === name);
       const filteredArray = get().cardMoods.filter(
@@ -93,9 +92,7 @@ export const useStore = createLocalStorageStore(
     setCardsDeleted: () =>
       set((state) => ({ cardsDeleted: state.cardsDeleted + 1 })),
     setLastCard: () => set((state) => ({ lastCard: state.currentCard })),
-    getAllCards: () => {
-      get().drawnCards;
-    },
+
     setSearchQuery: (input) => set(() => ({ searchQuery: input })),
     setCurrentCard: (difference) => {
       if (get().difference > 1) {
@@ -113,15 +110,12 @@ export const useStore = createLocalStorageStore(
       set((state) => ({ cardsDrawn: state.cardsDrawn + 1 })),
     addClick: () => set((state) => ({ clicks: state.clicks + 1 })),
     minusClick: () => set((state) => ({ clicks: state.clicks - 1 })),
-    resetClicks: () => set(() => ({ clicks: 0 })),
     setCurrentNote: (input) => set(() => ({ currentNote: input })),
     setDrawnCardsByInput: (input) =>
       set((state) => {
         return { drawnCards: input };
       }),
-    findCardByUuid: (input) => {
-      const card = get().drawnCards.filter((prop) => prop.uuid === input);
-    },
+
     getCardById: (id) => {
       let card;
       card = cards.filter((prop) => prop.id === id);
