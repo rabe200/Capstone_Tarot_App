@@ -2,16 +2,11 @@ import { useStore } from "../../../../src/store/store";
 import { useEffect, useState } from "react";
 import SearchResults from "../../../../components/SearchResults";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
-import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
-import styled from "styled-components";
-import Link from "next/link";
-
-const StyledMenuLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  font-style: italic;
-  font-size: 2rem;
-`;
+import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
+import AppContainer from "../../../../components/Styled/StyledAppContainer";
+import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
+import SearchBar from "../../../../components/SearchBar";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
 export default function SearchResult() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -33,14 +28,20 @@ export default function SearchResult() {
   }
 
   return (
-    <>
+    <AppContainer>
+      <TopMenuBar mid={"searchResults"}></TopMenuBar>
       <StyledCardContainer>
-        <h1>RESULTS</h1>
-        <SearchResults />
+        <GridLayout3Columns
+          query1={"null"}
+          query2={"null"}
+          navigation={"hidden"}
+        >
+          {" "}
+          <SearchResults />
+        </GridLayout3Columns>
       </StyledCardContainer>
-      <StyledMenuBar query1={"/"} query2={"/"}>
-        <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
-      </StyledMenuBar>
-    </>
+      <SearchBar />
+      <StyledNavbar />
+    </AppContainer>
   );
 }

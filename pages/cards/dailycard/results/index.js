@@ -1,16 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import useStore from "../../../../src/store/store";
 import Link from "next/link";
-import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
-
-const StyledMenuLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  font-style: italic;
-  font-size: 2rem;
-`;
 
 const StyledSubmitButton = styled.button`
   display: flex;
@@ -77,12 +69,6 @@ export default function Results() {
     return (
       <>
         <p>no cards to review</p>
-        <StyledMenuBar
-          query1={"/dailycard/moodmeter/"}
-          query2={`cards/${currentCard.id}`}
-        >
-          <StyledMenuLink href={`/`}>menu</StyledMenuLink>{" "}
-        </StyledMenuBar>
       </>
     );
   }

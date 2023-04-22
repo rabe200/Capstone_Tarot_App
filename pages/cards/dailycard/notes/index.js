@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import useStore from "../../../../src/store/store";
-import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
 
 import styled from "styled-components";

@@ -4,31 +4,36 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const StyledSpacer = styled.div`
-  display: grid;
-  grid-template-columns: 1;
-  grid-template-rows: 20px;
-  gap: 0px 0px;
-  grid-template-areas: ". .";
+  display: flex;
+  color: white;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+`;
+
+const StyledToggle = styled.div`
   color: white;
 `;
 
 const StyledFormular = styled.form`
   height: 100%;
-  background: orange;
   width: 100%;
 `;
 
 const StyledSearchContainer = styled.div`
   background: none;
   width: 100%;
+  position: relative;
 `;
 
 const StyledButton = styled.button`
-  background: orange;
+  background: black;
+  border: 1px white solid;
+  color: crimson;
   height: 100%;
   width: 100%;
   &:hover {
-    background: red;
+    background: yellow;
   }
 `;
 
@@ -70,7 +75,9 @@ export default function SearchBar() {
   return (
     <>
       <StyledSpacer>
-        <div onClick={() => toggle()}>search</div>
+        <StyledToggle hidden={!hidden} onClick={() => toggle()}>
+          search
+        </StyledToggle>
       </StyledSpacer>
       <StyledSearchContainer>
         <Navbar>
@@ -91,7 +98,14 @@ export default function SearchBar() {
               placeholder="search..."
               aria-label="search bar"
               value={inputValue}
-              style={{ height: "100%", fontSize: "2rem", width: "100%" }}
+              style={{
+                height: "100%",
+                fontSize: "1.2rem",
+                width: "100%",
+                background: "black",
+                border: "1px solid white",
+                textAlign: "center",
+              }}
             />
           </StyledFormular>
           <StyledSwitch>
@@ -106,13 +120,6 @@ export default function SearchBar() {
               submit
             </StyledButton>
           </StyledSwitch>
-          {/* <StyledDiv onClick={() => toggle()}>Collapse</StyledDiv>
-          <StyledSelect>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </StyledSelect> */}
         </Navbar>
       </StyledSearchContainer>
     </>

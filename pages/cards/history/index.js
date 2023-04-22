@@ -9,6 +9,7 @@ import AppContainer from "../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
 import { useRouter } from "next/router";
+import StyledNavbar from "../../../components/Styled/StyledNavbar";
 
 const StyledSpacer = styled.div`
   display: grid;
@@ -20,14 +21,9 @@ const StyledSpacer = styled.div`
   width: 100%;
 `;
 
-const StyledNavbar = styled.div`
-  display: grid;
-  grid-template-columns: 3.5fr 1.5fr;
-  grid-template-rows: 20px;
-  gap: 0px 0px;
-  grid-template-areas: ". .";
+const StyledNavi = styled.div`
+  display: flex;
   width: 100%;
-  background: none;
 `;
 
 const StyledFormular = styled.form`
@@ -111,17 +107,7 @@ export default function History() {
     }
   });
 
-  const [hidden, setHiddenToggle] = useState(false);
-
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
-
-  function toggle() {
-    if (hidden === false) {
-      setHiddenToggle(true);
-    } else {
-      setHiddenToggle(false);
-    }
-  }
 
   useEffect(() => {
     updateCardsDrawn();
@@ -136,7 +122,7 @@ export default function History() {
 
   return (
     <AppContainer>
-      <TopMenuBar card={"null"} />
+      <TopMenuBar mid={"history"} />
 
       <StyledCardContainer>
         <GridLayout3Columns
@@ -172,14 +158,9 @@ export default function History() {
           </StyledList>
         </GridLayout3Columns>
       </StyledCardContainer>
-
-      <StyledSpacer>
-        <div>switch</div>
-        <div onClick={() => toggle()}>sort</div>
-      </StyledSpacer>
       <StyledBarContainer>
-        <StyledNavbar>
-          <StyledFormular hidden={hidden}>
+        <StyledNavi>
+          <StyledFormular>
             <select
               style={{
                 width: "100%",
@@ -202,12 +183,13 @@ export default function History() {
               <option value="secondDown">second down</option>
             </select>
           </StyledFormular>
-        </StyledNavbar>
+        </StyledNavi>
         <StyledFooter>
           <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>{" "}
           <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
         </StyledFooter>
       </StyledBarContainer>
+      <StyledNavbar />
     </AppContainer>
   );
 }

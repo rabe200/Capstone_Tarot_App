@@ -2,8 +2,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import useStore from "../../src/store/store";
 import StyledCardContainer from "../../components/Styled/StyledCardContainer";
-import StyledMenuBarIndex from "../../components/Styled/StyledMenuBarIndex";
-import StyledMenuBarContent from "../../components/Styled/StyledMenuBarContent";
 import { useRouter } from "next/router";
 import HistoryIcon from "../../components/Styled/HistoryIcon";
 import CardsIcon from "../../components/Styled/CardsIcon";
@@ -11,7 +9,8 @@ import DailyCardIcon from "../../components/Styled/DailyCardIcon";
 import TopMenuBar from "../../components/Styled/StyledTopMenuBar";
 import GridLayout3Columns from "../../components/Styled/GridLayoutWithSideNavigation";
 import AppContainer from "../../components/Styled/StyledAppContainer";
-
+import SearchBar from "../../components/SearchBar";
+import StyledNavbar from "../../components/Styled/StyledNavbar";
 export default function HomePage() {
   const [hasMounted, setHasMounted] = useState(false);
   const lastCard = useStore((state) => state.currentCard);
@@ -63,7 +62,7 @@ export default function HomePage() {
       } else if (input === "History") {
         return (query = `/cards/history`);
       } else if (input === "collection") {
-        return (query = "/cards/0");
+        return (query = "/cards/");
       }
     } else null;
   }
@@ -76,47 +75,47 @@ export default function HomePage() {
   if (!hasMounted) {
     return null;
   }
-  return (
-    <AppContainer>
-      {" "}
-      <div>
-        <TopMenuBar menu={"/"} back={"/"} />
-        <StyledCardContainer>
-          <GridLayout3Columns
-            query1={"null"}
-            query2={"null"}
-            onClick1={() => countAndSetMenu("minus")}
-            onClick2={() => countAndSetMenu("plus")}
-          >
-            <div>
-              {queryName === "DailyCard" ? (
-                <Link href={"cards/dailycard/moodmeter"}>
-                  <DailyCardIcon />
-                </Link>
-              ) : null}
-              {queryName === "collection" ? (
-                <Link href={`/cards/${lastCard.id}`}>
-                  <CardsIcon />
-                </Link>
-              ) : null}
-              {queryName === "History" ? (
-                <Link href={"/cards/history"}>
-                  <HistoryIcon />
-                </Link>
-              ) : null}
-            </div>
-          </GridLayout3Columns>
-        </StyledCardContainer>
-      </div>
-      <StyledMenuBarIndex
-        onClick1={() => countAndSetMenu("minus")}
-        onClick2={() => countAndSetMenu("plus")}
-      >
-        <StyledMenuBarContent
-          query={query}
-          queryName={queryName}
-        ></StyledMenuBarContent>
-      </StyledMenuBarIndex>
-    </AppContainer>
-  );
+
+  if (router.query.optionSelect) {
+    return (
+      <AppContainer>
+        {console.log(router.query.optionSelect)}
+        <div>
+          <TopMenuBar
+            menu={"/"}
+            mid={router.query.optionSelect.toLocaleLowerCase()}
+            back={"/"}
+          />
+          <StyledCardContainer>
+            <GridLayout3Columns
+              query1={"null"}
+              query2={"null"}
+              onClick1={() => countAndSetMenu("minus")}
+              onClick2={() => countAndSetMenu("plus")}
+            >
+              <div>
+                {queryName === "DailyCard" ? (
+                  <Link href={"cards/dailycard/moodmeter"}>
+                    <DailyCardIcon />
+                  </Link>
+                ) : null}
+                {queryName === "collection" ? (
+                  <Link href={`/cards/${lastCard.id}`}>
+                    <CardsIcon />
+                  </Link>
+                ) : null}
+                {queryName === "History" ? (
+                  <Link href={"/cards/history"}>
+                    <HistoryIcon />
+                  </Link>
+                ) : null}
+              </div>
+            </GridLayout3Columns>
+          </StyledCardContainer>
+        </div>
+        <SearchBar />
+        <StyledNavbar />
+      </AppContainer>
+    );
+  }
 }

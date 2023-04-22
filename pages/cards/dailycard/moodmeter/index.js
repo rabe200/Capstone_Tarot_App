@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import useStore from "../../../../src/store/store";
 import { getCardById } from "../../../../lib/data";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
-import StyledMenuBar from "../../../../components/Styled/StyledMenuBar";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import GoodMoodIcon from "../../../../components/Styled/GoodMoodIcon";
 import BadMoodIcon from "../../../../components/Styled/BadMoodIcon";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
+import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 
 const StyledBanner = styled.div`
   text-align: center;
@@ -79,6 +78,7 @@ export default function MoodMeter() {
 
   return (
     <AppContainer>
+      <TopMenuBar mid={"moodmeter"} />
       <StyledCardContainer>
         <h4>how is your mood right now?</h4>
         <MoodButtonGood

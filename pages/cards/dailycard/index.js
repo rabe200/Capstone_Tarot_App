@@ -1,17 +1,9 @@
 import useStore from "../../../src/store/store";
 import CardPreviewImage from "../../../components/CardPreviewImage";
-import StyledMenuBar from "../../../components/Styled/StyledMenuBar";
 import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-
-const StyledMenuLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-  font-style: italic;
-  font-size: 2rem;
-`;
 
 const StyledContinueButton = styled.div`
   display: flex;
