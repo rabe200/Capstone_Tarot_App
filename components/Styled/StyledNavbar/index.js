@@ -3,11 +3,17 @@ import Link from "next/link";
 import useStore from "../../../src/store/store";
 import { useState } from "react";
 
-const StyledMenu = styled.div`
+const StyledSpace = styled.div`
   position: relative;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 45px;
+`;
+
+const StyledMenu = styled.div`
+  bottom: 0;
   width: 100%;
-  margin: 0;
   background: #6f6f6f;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -17,6 +23,7 @@ const StyledMenu = styled.div`
   align-content: space-evenly;
   justify-items: center;
   align-items: center;
+  padding-bottom: 10px;
 `;
 
 const MenuLink1 = styled(Link)`
@@ -82,6 +89,8 @@ const StyledSpacer = styled.div`
   bottom: 0;
 `;
 
+const StyledToggle = styled.div``;
+
 export default function StyledNavbar() {
   const lastCard = useStore((state) => state.lastCard);
   const [hidden, setHiddenToggle] = useState(true);
@@ -95,7 +104,7 @@ export default function StyledNavbar() {
   }
 
   return (
-    <>
+    <StyledSpace>
       <div hidden={hidden}>
         <StyledMenu>
           <MenuLink1 hidden={"hidden"} href={`/cards/${lastCard.id}`}>
@@ -106,8 +115,8 @@ export default function StyledNavbar() {
         </StyledMenu>
       </div>
       <StyledSpacer>
-        <div onClick={() => toggle()}>menu</div>
+        <StyledToggle onClick={() => toggle()}>toggle</StyledToggle>
       </StyledSpacer>
-    </>
+    </StyledSpace>
   );
 }

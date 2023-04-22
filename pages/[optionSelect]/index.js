@@ -53,22 +53,6 @@ export default function HomePage() {
     }
   }, [counter]);
 
-  function getQuery(input) {
-    let query;
-
-    if (queryName) {
-      if (input === "DailyCard") {
-        return (query = "/cards/dailycard/moodmeter");
-      } else if (input === "History") {
-        return (query = `/cards/history`);
-      } else if (input === "collection") {
-        return (query = "/cards/");
-      }
-    } else null;
-  }
-
-  const query = getQuery(queryName);
-
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -79,7 +63,6 @@ export default function HomePage() {
   if (router.query.optionSelect) {
     return (
       <AppContainer>
-        {console.log(router.query.optionSelect)}
         <div>
           <TopMenuBar
             menu={"/"}

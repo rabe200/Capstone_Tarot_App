@@ -14,8 +14,11 @@ export default function SearchResults() {
       queryWords.every((queryWord) => {
         let propertyValue = card[property] || "";
         return (
-          propertyValue.toLowerCase().split(" ").includes(queryWord) ||
-          propertyValue.toLowerCase().includes(queryWord)
+          propertyValue
+            .toLowerCase()
+            .split(" ")
+            .includes(queryWord.toLowerCase()) ||
+          propertyValue.toLowerCase().includes(queryWord.toLowerCase())
         );
       })
     );
