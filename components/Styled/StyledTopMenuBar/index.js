@@ -14,6 +14,8 @@ const StyledTopBarContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  margin: 0;
+  padding: 0;
 `;
 
 const StyledTopBarLeft = styled.div`

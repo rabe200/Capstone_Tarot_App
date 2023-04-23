@@ -8,24 +8,39 @@ import GoodMoodIcon from "../../../../components/Styled/GoodMoodIcon";
 import BadMoodIcon from "../../../../components/Styled/BadMoodIcon";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
+import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 
 const StyledBanner = styled.div`
   text-align: center;
-  width: 300px;
+  width: 100%;
   color: white;
 `;
 
 const MoodButtonGood = styled.div`
-  width: 290px;
-  height: 215px;
-  background-color: palevioletred;
+  width: 100%;
+  height: 100%;
 `;
 
 const MoodButtonBad = styled.div`
-  width: 290px;
-  height: 231px;
-  background-color: palegreen;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+const MoodContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15% 33fr 33fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "."
+    "."
+    ".";
+  justify-content: center;
+  align-content: space-evenly;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
 `;
 
 export default function MoodMeter() {
@@ -80,25 +95,34 @@ export default function MoodMeter() {
     <AppContainer>
       <TopMenuBar mid={"moodmeter"} />
       <StyledCardContainer>
-        <h4>how is your mood right now?</h4>
-        <MoodButtonGood
-          disabled={disableButton}
-          type="button"
-          aria-label="plus button"
-          onClick={() => handlePlusClick()}
+        <GridLayout3Columns
+          query1={"null"}
+          query2={"null"}
+          navigation={"hidden"}
         >
-          <GoodMoodIcon />
-        </MoodButtonGood>
-        <MoodButtonBad
-          disabled={disableButton}
-          type="button"
-          aria-label="minus button"
-          onClick={() => handleMinusClick()}
-        >
-          <BadMoodIcon />
-        </MoodButtonBad>
+          <MoodContainer>
+            <h4>how is your mood right now?</h4>
+            <MoodButtonGood
+              disabled={disableButton}
+              type="button"
+              aria-label="plus button"
+              onClick={() => handlePlusClick()}
+            >
+              <GoodMoodIcon />
+            </MoodButtonGood>
+            <MoodButtonBad
+              disabled={disableButton}
+              type="button"
+              aria-label="minus button"
+              onClick={() => handleMinusClick()}
+            >
+              <BadMoodIcon />
+            </MoodButtonBad>
+          </MoodContainer>
+        </GridLayout3Columns>
       </StyledCardContainer>
       <StyledBanner>DON'T THINK</StyledBanner>
+      <StyledNavbar />
     </AppContainer>
   );
 }

@@ -11,16 +11,6 @@ import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNav
 import { useRouter } from "next/router";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
 
-const StyledSpacer = styled.div`
-  display: grid;
-  grid-template-columns: 3.5fr 1fr;
-  grid-template-rows: 20px;
-  gap: 0px 0px;
-  grid-template-areas: ". .";
-  color: white;
-  width: 100%;
-`;
-
 const StyledNavi = styled.div`
   display: flex;
   width: 100%;
@@ -65,7 +55,7 @@ const StyledFooter = styled.footer`
   flex-direction: row;
   justify-content: space-between;
   bottom: 0;
-  font-size: 1rem;
+  font-size: 1.4rem;
   width: 100%;
   bottom: 0px;
 `;
@@ -173,12 +163,8 @@ export default function History() {
             >
               <option value="dateUp">date up</option>
               <option value="dateDown">date down</option>
-              <option value="nameUp" onClick={(event) => refreshList(event)}>
-                name up
-              </option>
-              <option value="nameDown" onClick={(event) => refreshList(event)}>
-                name down
-              </option>
+              <option value="nameUp">name up</option>
+              <option value="nameDown">name down</option>
               <option value="secondUp">second up</option>
               <option value="secondDown">second down</option>
             </select>

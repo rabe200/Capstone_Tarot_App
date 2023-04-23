@@ -36,7 +36,6 @@ export default function SearchResult() {
           query2={"null"}
           navigation={"hidden"}
         >
-          {" "}
           <SearchResults />
         </GridLayout3Columns>
       </StyledCardContainer>

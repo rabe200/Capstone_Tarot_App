@@ -7,13 +7,15 @@ import SearchBar from "../../../../components/SearchBar";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
 const StyledCategories = styled.div`
-  display: block;
+  display: flex;
   flex-direction: column;
   background: white;
   height: 100%;
   overflow: auto;
+  justify-content: center;
 `;
 
 const StyledCategoryName = styled.u`
@@ -69,6 +71,7 @@ export default function Details() {
           </GridLayout3Columns>
         </StyledCardContainer>
         <SearchBar />
+        <StyledNavbar />
       </AppContainer>
     )
   );

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyledSvg = styled.svg`
+  fill: magenta;
   &:hover {
     fill: yellow;
   }

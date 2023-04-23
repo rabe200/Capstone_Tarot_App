@@ -5,14 +5,15 @@ import styled from "styled-components";
 
 const StyledSpacer = styled.div`
   display: flex;
-  color: white;
+  height: 20px;
   width: 100%;
   text-align: center;
   justify-content: center;
 `;
 
 const StyledToggle = styled.div`
-  color: white;
+  color: #fcffec;
+  font-size: 1.2em;
 `;
 
 const StyledFormular = styled.form`
@@ -21,34 +22,33 @@ const StyledFormular = styled.form`
 `;
 
 const StyledSearchContainer = styled.div`
-  background: none;
+  /* background: none; */
   width: 100%;
   position: relative;
 `;
 
-const StyledButton = styled.button`
-  background: black;
-  border: 1px white solid;
-  color: crimson;
-  height: 100%;
-  width: 100%;
-  &:hover {
-    background: yellow;
-  }
-`;
-
-const StyledSwitch = styled.div`
-  width: 100%;
-  height: 100%;
-  background: none;
-`;
-
 const Navbar = styled.div`
   display: grid;
-  grid-template-columns: 3.5fr 1.5fr;
-  grid-template-rows: 20px;
-  gap: 0px 0px;
-  grid-template-areas: ". .";
+  grid-template-columns: 4fr 1fr;
+  height: 40px;
+  width: 100%;
+`;
+
+const StyledButton = styled.button`
+  background: #293133;
+  border: 1px white solid;
+  color: #fcffec;
+  height: 100%;
+  width: 100%;
+  font-size: 1em;
+  weight: 400;
+  margin: 0;
+  padding: 0;
+  font-family: pixelOperator;
+  &:hover {
+    background: yellow;
+    color: #293133;
+  }
 `;
 
 export default function SearchBar() {
@@ -75,9 +75,7 @@ export default function SearchBar() {
   return (
     <>
       <StyledSpacer>
-        <StyledToggle hidden={!hidden} onClick={() => toggle()}>
-          search
-        </StyledToggle>
+        <StyledToggle onClick={() => toggle()}>search</StyledToggle>
       </StyledSpacer>
       <StyledSearchContainer>
         <Navbar>
@@ -99,28 +97,28 @@ export default function SearchBar() {
               aria-label="search bar"
               value={inputValue}
               style={{
-                height: "100%",
                 fontSize: "0.8rem",
-                width: "100%",
-                background: "black",
+                width: "99%",
+                height: "95%",
+                margin: 0,
+                padding: 0,
+                background: "#293133",
                 border: "1px solid white",
                 textAlign: "center",
                 color: "white",
               }}
             />
           </StyledFormular>
-          <StyledSwitch>
-            <StyledButton
-              hidden={hidden}
-              form="searchFormular"
-              type="submit"
-              name="submit"
-              aria-label="submit search query"
-              onClick={handleSubmit}
-            >
-              submit
-            </StyledButton>
-          </StyledSwitch>
+          <StyledButton
+            hidden={hidden}
+            form="searchFormular"
+            type="submit"
+            name="submit"
+            aria-label="submit search query"
+            onClick={handleSubmit}
+          >
+            SUBMIT{" "}
+          </StyledButton>
         </Navbar>
       </StyledSearchContainer>
     </>

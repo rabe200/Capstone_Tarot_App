@@ -10,14 +10,14 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
-    "@next/font": "^13.0.6",
+    "@next/font": "^13.3.1",
     "eslint": "8.29.0",
-    "eslint-config-next": "13.0.6",
-    "next": "13.0.6",
+    "eslint-config-next": "^13.3.1",
+    "next": "^13.3.1",
     "node-http": "^0.0.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "styled-components": "^5.3.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.10",
     "uuid": "^9.0.0",
     "zustand": "^4.3.7",
     "zustand-persist": "^0.4.0"

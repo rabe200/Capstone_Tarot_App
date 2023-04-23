@@ -11,6 +11,8 @@ import GridLayout3Columns from "../../components/Styled/GridLayoutWithSideNaviga
 import AppContainer from "../../components/Styled/StyledAppContainer";
 import SearchBar from "../../components/SearchBar";
 import StyledNavbar from "../../components/Styled/StyledNavbar";
+import styled from "styled-components";
+
 export default function HomePage() {
   const [hasMounted, setHasMounted] = useState(false);
   const lastCard = useStore((state) => state.currentCard);
@@ -21,6 +23,11 @@ export default function HomePage() {
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
   setComingFromHistory(false);
   setLastPageVisited(queryName);
+
+  const ContentContainer = styled.div`
+    height: 50%;
+    align-self: end;
+  `;
 
   function countAndSetMenu(input) {
     if (input === "plus") {
@@ -63,39 +70,37 @@ export default function HomePage() {
   if (router.query.optionSelect) {
     return (
       <AppContainer>
-        <div>
-          <TopMenuBar
-            menu={"/"}
-            mid={router.query.optionSelect.toLocaleLowerCase()}
-            back={"/"}
-          />
-          <StyledCardContainer>
-            <GridLayout3Columns
-              query1={"null"}
-              query2={"null"}
-              onClick1={() => countAndSetMenu("minus")}
-              onClick2={() => countAndSetMenu("plus")}
-            >
-              <div>
-                {queryName === "DailyCard" ? (
-                  <Link href={"cards/dailycard/moodmeter"}>
-                    <DailyCardIcon />
-                  </Link>
-                ) : null}
-                {queryName === "collection" ? (
-                  <Link href={`/cards/${lastCard.id}`}>
-                    <CardsIcon />
-                  </Link>
-                ) : null}
-                {queryName === "History" ? (
-                  <Link href={"/cards/history"}>
-                    <HistoryIcon />
-                  </Link>
-                ) : null}
-              </div>
-            </GridLayout3Columns>
-          </StyledCardContainer>
-        </div>
+        <TopMenuBar
+          menu={"/"}
+          mid={router.query.optionSelect.toLocaleLowerCase()}
+          back={"/"}
+        />
+        <StyledCardContainer>
+          <GridLayout3Columns
+            query1={"null"}
+            query2={"null"}
+            onClick1={() => countAndSetMenu("minus")}
+            onClick2={() => countAndSetMenu("plus")}
+          >
+            <ContentContainer>
+              {queryName === "DailyCard" ? (
+                <Link href={"cards/dailycard/moodmeter"}>
+                  <DailyCardIcon />
+                </Link>
+              ) : null}
+              {queryName === "collection" ? (
+                <Link href={`/cards/${lastCard.id}`}>
+                  <CardsIcon />
+                </Link>
+              ) : null}
+              {queryName === "History" ? (
+                <Link href={"/cards/history"}>
+                  <HistoryIcon />
+                </Link>
+              ) : null}
+            </ContentContainer>
+          </GridLayout3Columns>
+        </StyledCardContainer>
         <SearchBar />
         <StyledNavbar />
       </AppContainer>

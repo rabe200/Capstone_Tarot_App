@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import useStore from "../../../../src/store/store";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
-
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
+import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
+import AppContainer from "../../../../components/Styled/StyledAppContainer";
 
 export default function NoteFormular() {
   const [inputValue, setInputValue] = useState();
@@ -25,9 +27,17 @@ export default function NoteFormular() {
     height: 40px;
     border-radius: 8px;
     font-size: 2rem;
+    font-family: pixelOperator;
     &:hover {
       background-color: red;
     }
+  `;
+
+  const FormContainer = styled.div`
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
   `;
 
   function handleSubmit(event) {
@@ -52,30 +62,51 @@ export default function NoteFormular() {
 
   return (
     <>
-      <div>
+      <AppContainer>
+        <TopMenuBar mid={"how do you feel"} />
         <StyledCardContainer>
-          <form id="textInput" aria-label="formular" onSubmit={handleSubmit}>
-            <label htmlFor="note">
-              <textarea
-                required
-                type="text"
-                id="note"
-                name="note"
-                placeholder="type here"
-                aria-label="note"
-                value={inputValue}
-                onChange={(event) => {
-                  setInputValue(event.target.value);
-                }}
-                style={{
-                  width: 290,
-                  height: 517,
-                  fontSize: "2rem",
-                  borderRadius: 8,
-                }}
-              />
-            </label>
-          </form>
+          <GridLayout3Columns
+            query1={"null"}
+            query2={"null"}
+            navigation={"hidden"}
+          >
+            <div
+              style={{
+                display: "flex",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <form
+                id="textInput"
+                aria-label="formular"
+                onSubmit={handleSubmit}
+                style={{ height: "80%" }}
+              >
+                <label htmlFor="note">
+                  <textarea
+                    required
+                    type="text"
+                    id="note"
+                    name="note"
+                    placeholder="type here"
+                    aria-label="note"
+                    value={inputValue}
+                    onChange={(event) => {
+                      setInputValue(event.target.value);
+                    }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      fontSize: "2rem",
+                      borderRadius: 8,
+                    }}
+                  />
+                </label>
+              </form>
+            </div>
+          </GridLayout3Columns>
         </StyledCardContainer>
         <StyledSubmitButton
           form="textInput"
@@ -85,7 +116,7 @@ export default function NoteFormular() {
         >
           SUBMIT
         </StyledSubmitButton>
-      </div>
+      </AppContainer>
     </>
   );
 }

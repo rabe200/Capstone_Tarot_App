@@ -8,7 +8,8 @@ const Styled3Grid = styled.div`
   grid-template-columns: 50px 200px 50px;
   background: palevioletred;
   justify-content: center;
-  align-items: center;
+  align-items: end;
+
   height: 100%;
 `;
 

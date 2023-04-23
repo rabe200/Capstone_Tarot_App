@@ -5,12 +5,15 @@ const StyledCardContainer1 = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  width: 300px;
-  height: 517px;
+  width: 95%;
+  height: 95%;
   overflow-y: auto;
   background: #fcfcfc;
   border: 5px solid #000000;
   border-radius: 13px;
+  position: relative;
+  margin: 0;
+  padding: 0;
 `;
 
 export default function StyledCardContainer({ children }) {

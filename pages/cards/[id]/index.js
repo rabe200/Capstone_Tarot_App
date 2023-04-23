@@ -9,6 +9,7 @@ import SearchBar from "../../../components/SearchBar";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
+import StyledNavbar from "../../../components/Styled/StyledNavbar";
 
 export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -43,6 +44,7 @@ export default function Details() {
           </GridLayout3Columns>
         </StyledCardContainer>
         <SearchBar />
+        <StyledNavbar />
       </AppContainer>
     )
   );

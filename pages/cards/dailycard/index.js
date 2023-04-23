@@ -4,6 +4,7 @@ import StyledCardContainer from "../../../components/Styled/StyledCardContainer"
 import styled from "styled-components";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import AppContainer from "../../../components/Styled/StyledAppContainer";
 
 const StyledContinueButton = styled.div`
   display: flex;
@@ -39,15 +40,15 @@ export default function ShowCard() {
   if (currentCard) {
     return (
       <>
-        <div>
-          {" "}
+        <AppContainer>
           <StyledCardContainer>
+            <h1>{currentCard.name}</h1>
             <CardPreviewImage card={currentCard}></CardPreviewImage>
           </StyledCardContainer>
           <StyledLink href={"/cards/dailycard/notes"}>
             <StyledContinueButton>CONTINUE</StyledContinueButton>
           </StyledLink>
-        </div>
+        </AppContainer>
       </>
     );
   } else {

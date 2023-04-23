@@ -1,6 +1,17 @@
+import styled from "styled-components";
+
+const StyledSvg = styled.svg`
+  fill: white;
+  stroke: #fcffec;
+  &:hover {
+    stroke: yellow;
+    fill: white;
+  }
+`;
+
 export default function ArrowIconRight(props) {
   return (
-    <svg
+    <StyledSvg
       width={21}
       height={24}
       fill="none"
@@ -11,8 +22,9 @@ export default function ArrowIconRight(props) {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M20.06 13.06a1.5 1.5 0 000-2.12l-9.545-9.547a1.5 1.5 0 10-2.122 2.122L16.88 12l-8.486 8.485a1.5 1.5 0 102.122 2.122l9.546-9.546zM0 13.5h19v-3H0v3z"
-        fill="#fff"
+        strokeWidth={2}
+        strokeLinecap="round"
       />
-    </svg>
+    </StyledSvg>
   );
 }

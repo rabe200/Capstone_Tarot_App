@@ -2,13 +2,15 @@ import styled from "styled-components";
 import Link from "next/link";
 import useStore from "../../../src/store/store";
 import { useState } from "react";
-
+import { useRouter } from "next/router";
 const StyledSpace = styled.div`
   position: relative;
   bottom: 0;
   display: flex;
   flex-direction: column;
   height: 45px;
+  margin: 0;
+  padding: 0;
 `;
 
 const StyledMenu = styled.div`
@@ -62,7 +64,7 @@ const MenuLink2 = styled(Link)`
 `;
 
 const MenuLink3 = styled(Link)`
-  background: palevioletred;
+  background: magenta;
   text-decoration: none;
   width: 100%;
   height: 100%;
@@ -93,7 +95,16 @@ const StyledToggle = styled.div``;
 
 export default function StyledNavbar() {
   const lastCard = useStore((state) => state.lastCard);
-  const [hidden, setHiddenToggle] = useState(true);
+  const [hidden, setHiddenToggle] = useState(false);
+  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
+  const setComingFromHistory = useStore((state) => state.setComingFromHistory);
+  const router = useRouter();
+  const queryName = router.query.optionSelect;
+
+  function resetComingFromHistory() {
+    setComingFromHistory(false);
+    setLastPageVisited(queryName);
+  }
 
   function toggle() {
     if (hidden === false) {
@@ -107,10 +118,19 @@ export default function StyledNavbar() {
     <StyledSpace>
       <div hidden={hidden}>
         <StyledMenu>
-          <MenuLink1 hidden={"hidden"} href={`/cards/${lastCard.id}`}>
+          <MenuLink2
+            onClick={() => resetComingFromHistory()}
+            href={"/cards/dailycard/moodmeter"}
+          >
+            PLAY
+          </MenuLink2>
+          <MenuLink1
+            onClick={() => resetComingFromHistory()}
+            hidden={"hidden"}
+            href={`/cards/${lastCard.id}`}
+          >
             CARDS
           </MenuLink1>
-          <MenuLink2 href={"/cards/dailycard/moodmeter"}>PLAY</MenuLink2>
           <MenuLink3 href={"/cards/history"}>STATS</MenuLink3>
         </StyledMenu>
       </div>
