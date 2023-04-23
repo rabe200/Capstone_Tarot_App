@@ -31,6 +31,16 @@ const Container = styled.div`
 `;
 
 const StyledImage = styled(Image)`
+  &:hover {
+    border: black solid 6px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    padding: 12px;
+    margin-left: ${(props) => (props.active ? "64px" : "24px")};
+    background: ${(props) => (props.active ? "#333" : "#f2f2f2")};
+    color: ${(props) => (props.active ? "#f2f2f2" : "#333")};
+  }
+
   @media only screen and (min-width: 360px) {
     width: 200px;
     height: 350px;

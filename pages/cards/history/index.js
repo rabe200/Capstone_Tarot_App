@@ -41,6 +41,8 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   &:hover {
     color: magenta;
+    transition: all 0.2s;
+    transform: scale(1.5);
   }
 `;
 

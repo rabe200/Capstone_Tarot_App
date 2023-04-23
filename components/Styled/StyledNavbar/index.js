@@ -26,6 +26,7 @@ const StyledMenu = styled.div`
   align-content: space-evenly;
   justify-items: center;
   align-items: center;
+  border-radius: 8px;
 `;
 
 const MenuLink1 = styled(Link)`
@@ -39,6 +40,7 @@ const MenuLink1 = styled(Link)`
   font-size: 2rem;
   margin: 0.3rem 0;
   color: #04120e;
+
   &:hover,
   &:focus {
     color: magenta;
@@ -57,6 +59,9 @@ const MenuLink2 = styled(Link)`
   gap: 20rem;
   margin: 0.3rem 0;
   color: #04120e;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
   &:hover,
   &:focus {
     color: yellow;
@@ -75,6 +80,10 @@ const MenuLink3 = styled(Link)`
   gap: 20rem;
   margin: 0.3rem 0;
   color: #04120e;
+  border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+
   &:hover,
   &:focus {
     color: yellow;

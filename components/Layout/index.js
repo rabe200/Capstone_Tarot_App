@@ -10,6 +10,7 @@ const StyledMain = styled.main`
   align-items: center;
   margin: 0;
   padding: 0;
+  border-radius: 8px;
   @media only screen and (min-width: 360px) {
     width: 360px;
     height: 740px;
@@ -48,10 +49,6 @@ const StyledMain = styled.main`
   @media only screen and (min-width: 768px) {
     width: 768px;
     height: 1024px;
-  }
-
-  @media only screen and (min-width: 820px) {
-    height: 80vh;
   }
 `;
 

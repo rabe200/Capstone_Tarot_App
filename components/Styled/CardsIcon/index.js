@@ -4,6 +4,9 @@ const StyledSvg = styled.svg`
   fill: white;
   &:hover {
     fill: yellow;
+    transition: all 0.2s;
+    padding: 12px;
+    margin-left: ${(props) => (props.active ? "64px" : "24px")};
   }
 `;
 

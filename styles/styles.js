@@ -19,11 +19,11 @@ export default createGlobalStyle`
     align-items: center;
     justify-content: center;
     font-family: pixelOperator;
-    background: black;
     overflow: auto;
     @media only screen and (min-width: 360px) {
     width: 360px;
     height: 740px;
+    border-radius: 8px;
   }
 
     @media only screen and (min-width: 375px) {

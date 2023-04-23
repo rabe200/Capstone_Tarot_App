@@ -4,14 +4,17 @@ const StyledSvg = styled.svg`
   fill: magenta;
   &:hover {
     fill: yellow;
+    transition: all 0.2s;
+    padding: 12px;
+    margin-left: ${(props) => (props.active ? "64px" : "24px")};
   }
 `;
 
 export default function HistoryIcon(props) {
   return (
     <StyledSvg
-      width="90%"
-      height="90%"
+      width="80%"
+      height="80%"
       viewBox="0 0 378 607"
       fill="white"
       xmlns="http://www.w3.org/2000/svg"

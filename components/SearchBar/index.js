@@ -25,7 +25,6 @@ const StyledFormular = styled.form`
 const StyledSearchContainer = styled.div`
   width: 90%;
   position: relative;
-  border-radius: 8px;
 `;
 
 const Navbar = styled.div`
@@ -45,7 +44,8 @@ const StyledButton = styled.button`
   weight: 400;
   margin: 0;
   padding: 0;
-  border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   font-family: pixelOperator;
   &:hover {
     background: yellow;
@@ -100,15 +100,16 @@ export default function SearchBar() {
               value={inputValue}
               style={{
                 fontSize: "0.8rem",
-                width: "99%",
-                height: "95%",
+                width: "100%",
+                height: "100%",
                 margin: 0,
                 padding: 0,
                 background: "#293133",
                 border: "1px solid white",
                 textAlign: "center",
                 color: "white",
-                borderRadius: "8px",
+                borderTopLeftRadius: "8px",
+                borderBottomLeftRadius: "8px",
               }}
             />
           </StyledFormular>
