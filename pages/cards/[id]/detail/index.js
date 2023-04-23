@@ -12,7 +12,8 @@ import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 const StyledCategories = styled.div`
   display: flex;
   flex-direction: column;
-  background: white;
+  background: black;
+  color: white;
   height: 100%;
   overflow: auto;
   justify-content: center;
