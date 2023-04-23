@@ -57,7 +57,6 @@ export default function MoodMeter() {
   const setLastCard = useStore((state) => state.setLastCard);
 
   function handlePlusClick() {
-    console.log(randomCard);
     increaseCardsDrawn();
     setCardMoodPlusOne(randomCard.name);
     setRandomCard(randomCard);
@@ -68,7 +67,6 @@ export default function MoodMeter() {
     router.push(`/cards/dailycard/`);
   }
   function handleMinusClick() {
-    console.log(randomCard);
     increaseCardsDrawn();
     setCardMoodMinusOne(randomCard.name);
     setRandomCard(randomCard);

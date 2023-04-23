@@ -14,14 +14,12 @@ export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
   const id = router ? router.query.id : null;
-  console.log(id);
   const cards = useStore((state) => state.allCards);
   const card = cards.find((card) => card.id === `${id}`);
   const currentCardIndex = cards.indexOf(card);
   const nextCardId =
     currentCardIndex === cards.length - 1 ? 0 : currentCardIndex + 1;
   const nextPage = `/cards/${nextCardId}`;
-  console.log(nextPage);
   const previousCardId =
     currentCardIndex === 0 ? cards.length - 1 : currentCardIndex - 1;
   const previousPage = `/cards/${previousCardId}`;

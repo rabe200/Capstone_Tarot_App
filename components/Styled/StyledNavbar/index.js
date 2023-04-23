@@ -123,9 +123,6 @@ export default function StyledNavbar() {
           <MenuLink3 href={"/cards/history"}>STATS</MenuLink3>
         </StyledMenu>
       </div>
-      {/* <StyledSpacer>
-        <StyledToggle onClick={() => toggle()}>toggle</StyledToggle>
-      </StyledSpacer> */}
     </StyledSpace>
   );
 }
