@@ -55,6 +55,7 @@ export default function MoodMeter() {
   const setCardMoodMinusOne = useStore((state) => state.setCardMoodMinusOne);
   const setCurrentCard = useStore((state) => state.setCurrentCard);
   const difference = useStore((state) => state.difference);
+  const setLastCard = useStore((state) => state.setLastCard);
 
   function handlePlusClick() {
     console.log(randomCard);
@@ -64,6 +65,7 @@ export default function MoodMeter() {
     drawCard(randomCard);
     updateCardsDrawn();
     setCurrentCard(difference);
+    setLastCard();
     router.push(`/cards/dailycard/`);
   }
   function handleMinusClick() {
@@ -74,6 +76,7 @@ export default function MoodMeter() {
     drawCard(randomCard);
     updateCardsDrawn();
     setCurrentCard(difference);
+    setLastCard();
     router.push(`/cards/dailycard/`);
   }
 
