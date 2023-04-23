@@ -5,7 +5,7 @@ import ArrowIconRight from "../ArrowIconRight";
 
 const Styled3Grid = styled.div`
   display: grid;
-  grid-template-columns: 50px 200px 50px;
+  grid-template-columns: 0.1fr 0.8fr 0.1fr;
   background: palevioletred;
   justify-content: center;
   align-items: center;

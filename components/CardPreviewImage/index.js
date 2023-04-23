@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import StyledList from "../Styled/StyledList";
 
 const CardBody = styled.figure`
   display: flex;
@@ -8,20 +9,30 @@ const CardBody = styled.figure`
   justify-content: center;
   align-items: center;
   left: 0;
-  height: 475px;
+  height: 100%;
+  width: 100%;
 `;
 
-const NameBanner = styled.div`
-  background-color: white;
-  width: 90%;
-  text-align: center;
-  overflow-y: auto;
-  height: 145px;
+const DescriptionContainer = styled.div`
+  height: 100%;
+  background: black;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 `;
 
 export default function CardPreviewImage({ card, clickable }) {
   return (
-    <div>
+    <Container>
       {clickable === true ? (
         <>
           <CardBody>
@@ -34,18 +45,20 @@ export default function CardPreviewImage({ card, clickable }) {
                 alt={card.name}
               />
             </Link>
-            <NameBanner>{card.desc}</NameBanner>
+            <StyledList>
+              <DescriptionContainer>{card.desc}</DescriptionContainer>
+            </StyledList>
           </CardBody>
         </>
       ) : (
         <CardBody>
           <Image src={card.image} width="200" height="350" alt={card.name} />
-          <NameBanner>
+          <StyledList>
             <b>up: </b>
             {card.meaning_up} <b>rev:</b> {card.meaning_rev}
-          </NameBanner>
+          </StyledList>
         </CardBody>
       )}
-    </div>
+    </Container>
   );
 }
