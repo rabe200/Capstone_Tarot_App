@@ -45,7 +45,6 @@ const MoodContainer = styled.div`
 
 export default function MoodMeter() {
   const router = useRouter();
-  const [disableButton, setDisableButton] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
   const drawCard = useStore((state) => state.drawCard);
   const increaseCardsDrawn = useStore((state) => state.increaseCardsDrawn);
@@ -106,7 +105,6 @@ export default function MoodMeter() {
           <MoodContainer>
             <h4>how is your mood right now?</h4>
             <MoodButtonGood
-              disabled={disableButton}
               type="button"
               aria-label="plus button"
               onClick={() => handlePlusClick()}
@@ -114,7 +112,6 @@ export default function MoodMeter() {
               <GoodMoodIcon />
             </MoodButtonGood>
             <MoodButtonBad
-              disabled={disableButton}
               type="button"
               aria-label="minus button"
               onClick={() => handleMinusClick()}
