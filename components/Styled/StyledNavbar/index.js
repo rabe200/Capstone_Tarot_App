@@ -26,7 +26,6 @@ const StyledMenu = styled.div`
   align-content: space-evenly;
   justify-items: center;
   align-items: center;
-  padding-bottom: 10px;
 `;
 
 const MenuLink1 = styled(Link)`

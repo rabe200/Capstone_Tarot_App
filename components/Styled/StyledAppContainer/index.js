@@ -33,42 +33,25 @@ const StyledAppContainer = styled.div`
   @media only screen and (min-width: 412px) {
     width: 412px;
     height: 915px;
+    font-size: 1.2em;
   }
 
   @media only screen and (min-width: 414px) {
     width: 414px;
     height: 896px;
+    font-size: 1.2em;
   }
 
   @media only screen and (min-width: 540px) {
     width: 540px;
     height: 720px;
+    font-size: 1.4em;
   }
 
   @media only screen and (min-width: 768px) {
     width: 768px;
     height: 1024px;
     font-size: 1.8em;
-  }
-
-  @media only screen and (min-width: 820px) {
-    width: 820px;
-    height: 1180px;
-  }
-
-  @media only screen and (min-width: 912px) {
-    width: 912px;
-    height: 1368px;
-  }
-
-  @media only screen and (min-width: 1024px) {
-    width: 1024px;
-    height: 768px;
-  }
-
-  @media only screen and (min-width: 1440px) {
-    width: 1440px;
-    height: 900px;
   }
 `;
 

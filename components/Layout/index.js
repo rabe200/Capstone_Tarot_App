@@ -51,23 +51,7 @@ const StyledMain = styled.main`
   }
 
   @media only screen and (min-width: 820px) {
-    width: 820px;
-    height: 1180px;
-  }
-
-  @media only screen and (min-width: 912px) {
-    width: 912px;
-    height: 1368px;
-  }
-
-  @media only screen and (min-width: 1024px) {
-    width: 1024px;
-    height: 768px;
-  }
-
-  @media only screen and (min-width: 1440px) {
-    width: 1440px;
-    height: 900px;
+    height: 80vh;
   }
 `;
 

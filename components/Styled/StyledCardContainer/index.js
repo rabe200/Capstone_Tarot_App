@@ -5,8 +5,8 @@ const StyledCardContainer1 = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  width: 95%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
   background: #fcfcfc;
   border: 5px solid #000000;
@@ -14,6 +14,7 @@ const StyledCardContainer1 = styled.div`
   position: relative;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 `;
 
 export default function StyledCardContainer({ children }) {

@@ -30,6 +30,23 @@ const Container = styled.div`
   padding: 0;
 `;
 
+const StyledImage = styled(Image)`
+  @media only screen and (min-width: 360px) {
+    width: 200px;
+    height: 350px;
+  }
+
+  @media only screen and (min-width: 540px) {
+    width: 250px;
+    height: 400px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    width: 350px;
+    height: 650px;
+  }
+`;
+
 export default function CardPreviewImage({ card, clickable }) {
   return (
     <Container>
@@ -38,10 +55,10 @@ export default function CardPreviewImage({ card, clickable }) {
           <CardBody>
             <Link href={`/cards/${card.id}/detail`}>
               {" "}
-              <Image
+              <StyledImage
                 src={card.image}
-                width="200"
-                height="350"
+                width="150"
+                height="220"
                 alt={card.name}
               />
             </Link>

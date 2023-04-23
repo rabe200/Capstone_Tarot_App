@@ -25,8 +25,8 @@ export default function HomePage() {
   setLastPageVisited(queryName);
 
   const ContentContainer = styled.div`
-    height: 50%;
-    align-self: end;
+    height: 100%;
+    width: 100%;
   `;
 
   function countAndSetMenu(input) {
