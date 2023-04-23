@@ -95,7 +95,6 @@ export default function MoodMeter() {
 
   return (
     <AppContainer>
-      <TopMenuBar mid={"moodmeter"} />
       <StyledCardContainer>
         <GridLayout3Columns
           query1={"null"}
@@ -103,7 +102,7 @@ export default function MoodMeter() {
           navigation={"hidden"}
         >
           <MoodContainer>
-            <h4>how is your mood right now?</h4>
+            <h4>pick ya mood now</h4>
             <MoodButtonGood
               type="button"
               aria-label="plus button"
@@ -121,7 +120,7 @@ export default function MoodMeter() {
           </MoodContainer>
         </GridLayout3Columns>
       </StyledCardContainer>
-      <StyledBanner>DON'T THINK</StyledBanner>
+      <TopMenuBar mid={"moodmeter"} />
       <StyledNavbar />
     </AppContainer>
   );

@@ -3,7 +3,6 @@ import CardPreviewImage from "../../../components/CardPreviewImage";
 import { useState, useEffect } from "react";
 import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import useStore from "../../../src/store/store";
-import styled from "styled-components";
 
 import SearchBar from "../../../components/SearchBar";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
@@ -37,13 +36,15 @@ export default function Details() {
   return (
     id < 78 && (
       <AppContainer>
-        <TopMenuBar mid={card.name} />
+        <SearchBar />
+
         <StyledCardContainer>
           <GridLayout3Columns query1={previousPage} query2={nextPage}>
             <CardPreviewImage card={card} clickable={true} />
           </GridLayout3Columns>
         </StyledCardContainer>
-        <SearchBar />
+        <TopMenuBar mid={card.name} />
+
         <StyledNavbar />
       </AppContainer>
     )

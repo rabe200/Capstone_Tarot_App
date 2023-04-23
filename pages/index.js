@@ -45,7 +45,7 @@ export default function HomePage() {
   const mid = "version 0.2";
   return (
     <AppContainer>
-      <TopMenuBar menu={"/"} mid={mid} back={"/"} />
+      {" "}
       <StyledCardContainer>
         <StyledLinkContainer>
           <StyledHeadline>TAROT</StyledHeadline>
@@ -54,7 +54,7 @@ export default function HomePage() {
           <MenuLink href={"/credits"}>CREDITS</MenuLink>
         </StyledLinkContainer>
       </StyledCardContainer>
-      <SearchBar />
+      <TopMenuBar menu={"/"} mid={mid} back={"/"} />
     </AppContainer>
   );
 }

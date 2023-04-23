@@ -11,6 +11,7 @@ const StyledSpace = styled.div`
   height: 45px;
   margin: 0;
   padding: 0;
+  width: 100%;
 `;
 
 const StyledMenu = styled.div`
@@ -19,7 +20,7 @@ const StyledMenu = styled.div`
   background: #6f6f6f;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 30px;
+  grid-template-rows: 100%;
   grid-template-areas: ". . .";
   justify-content: center;
   align-content: space-evenly;
@@ -81,18 +82,6 @@ const MenuLink3 = styled(Link)`
   }
 `;
 
-const StyledSpacer = styled.div`
-  display: flex;
-  color: white;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0;
-`;
-
-const StyledToggle = styled.div``;
-
 export default function StyledNavbar() {
   const lastCard = useStore((state) => state.lastCard);
   const [hidden, setHiddenToggle] = useState(false);
@@ -134,9 +123,9 @@ export default function StyledNavbar() {
           <MenuLink3 href={"/cards/history"}>STATS</MenuLink3>
         </StyledMenu>
       </div>
-      <StyledSpacer>
+      {/* <StyledSpacer>
         <StyledToggle onClick={() => toggle()}>toggle</StyledToggle>
-      </StyledSpacer>
+      </StyledSpacer> */}
     </StyledSpace>
   );
 }

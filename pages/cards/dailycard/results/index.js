@@ -108,8 +108,8 @@ export default function Results() {
     return (
       <AppContainer>
         <StyledCardContainer>
-          <TopMenuBar />
           no cards to review
+          <TopMenuBar />
           <StyledNavbar />
         </StyledCardContainer>
       </AppContainer>

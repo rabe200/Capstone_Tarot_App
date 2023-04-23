@@ -53,7 +53,8 @@ export default function Details() {
   return (
     id < 78 && (
       <AppContainer>
-        <TopMenuBar mid={card.name} back={`/cards/${card.id}`} />
+        <SearchBar />
+
         <StyledCardContainer>
           <GridLayout3Columns query1={previousPage} query2={nextPage}>
             <StyledCategories>
@@ -70,7 +71,8 @@ export default function Details() {
             </StyledCategories>
           </GridLayout3Columns>
         </StyledCardContainer>
-        <SearchBar />
+        <TopMenuBar mid={card.name} back={`/cards/${card.id}`} />
+
         <StyledNavbar />
       </AppContainer>
     )

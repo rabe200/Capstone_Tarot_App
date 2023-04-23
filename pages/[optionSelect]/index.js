@@ -70,11 +70,8 @@ export default function HomePage() {
   if (router.query.optionSelect) {
     return (
       <AppContainer>
-        <TopMenuBar
-          menu={"/"}
-          mid={router.query.optionSelect.toLocaleLowerCase()}
-          back={"/"}
-        />
+        <SearchBar />
+
         <StyledCardContainer>
           <GridLayout3Columns
             query1={"null"}
@@ -101,7 +98,11 @@ export default function HomePage() {
             </ContentContainer>
           </GridLayout3Columns>
         </StyledCardContainer>
-        <SearchBar />
+        <TopMenuBar
+          menu={"/"}
+          mid={router.query.optionSelect.toLocaleLowerCase()}
+          back={"/"}
+        />
         <StyledNavbar />
       </AppContainer>
     );

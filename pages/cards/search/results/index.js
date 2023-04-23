@@ -29,7 +29,7 @@ export default function SearchResult() {
 
   return (
     <AppContainer>
-      <TopMenuBar mid={"searchResults"}></TopMenuBar>
+      <SearchBar />
       <StyledCardContainer>
         <GridLayout3Columns
           query1={"null"}
@@ -39,7 +39,7 @@ export default function SearchResult() {
           <SearchResults />
         </GridLayout3Columns>
       </StyledCardContainer>
-      <SearchBar />
+      <TopMenuBar mid={"searchResults"}></TopMenuBar>
       <StyledNavbar />
     </AppContainer>
   );

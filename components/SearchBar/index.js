@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const StyledSpacer = styled.div`
-  display: flex;
+  display: none;
   height: 20px;
   width: 100%;
   text-align: center;
@@ -12,6 +12,7 @@ const StyledSpacer = styled.div`
 `;
 
 const StyledToggle = styled.div`
+  display: none;
   color: #fcffec;
   font-size: 1.2em;
 `;
@@ -22,9 +23,9 @@ const StyledFormular = styled.form`
 `;
 
 const StyledSearchContainer = styled.div`
-  /* background: none; */
-  width: 100%;
+  width: 90%;
   position: relative;
+  border-radius: 8px;
 `;
 
 const Navbar = styled.div`
@@ -44,6 +45,7 @@ const StyledButton = styled.button`
   weight: 400;
   margin: 0;
   padding: 0;
+  border-radius: 8px;
   font-family: pixelOperator;
   &:hover {
     background: yellow;
@@ -106,6 +108,7 @@ export default function SearchBar() {
                 border: "1px solid white",
                 textAlign: "center",
                 color: "white",
+                borderRadius: "8px",
               }}
             />
           </StyledFormular>

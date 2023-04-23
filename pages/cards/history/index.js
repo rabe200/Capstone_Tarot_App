@@ -28,8 +28,9 @@ const StyledList = styled.ul`
   margin: 0;
   background-color: black;
   color: white;
-  height: 100%;
+  height: 90%;
   overflow: scroll;
+  border-radius: 8px;
 `;
 
 const StyledLink = styled(Link)`
@@ -112,42 +113,10 @@ export default function History() {
 
   return (
     <AppContainer>
-      <TopMenuBar mid={"history"} />
-
-      <StyledCardContainer>
-        <GridLayout3Columns
-          query1={"null"}
-          query2={"null"}
-          navigation={"hidden"}
-        >
-          <StyledList>
-            {sortedItems.map((card) => {
-              return (
-                <Fragment key={card.uuid}>
-                  <hr />
-                  <li>
-                    <b>{new Date(card.date).toLocaleDateString()}</b>
-                  </li>
-                  <li>
-                    <StyledLink
-                      href={`/cards/${card.id}`}
-                      onClick={setComingFromHistory(true)}
-                    >
-                      {card.name}
-                    </StyledLink>
-                  </li>
-                  <li>second: {card.second} sec</li>
-                  <section>
-                    note: <i>{card.notes}</i>
-                  </section>
-                  <EditButton uuid={card.uuid} card={card} />
-                  <DeleteButton uuid={card.uuid} />
-                </Fragment>
-              );
-            })}
-          </StyledList>
-        </GridLayout3Columns>
-      </StyledCardContainer>
+      <StyledFooter>
+        <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>{" "}
+        <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
+      </StyledFooter>
       <StyledBarContainer>
         <StyledNavi>
           <StyledFormular>
@@ -170,11 +139,45 @@ export default function History() {
             </select>
           </StyledFormular>
         </StyledNavi>
-        <StyledFooter>
-          <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>{" "}
-          <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
-        </StyledFooter>
       </StyledBarContainer>
+
+      <StyledCardContainer>
+        <GridLayout3Columns
+          query1={"null"}
+          query2={"null"}
+          navigation={"hidden"}
+        >
+          <StyledList>
+            {sortedItems.map((card) => {
+              return (
+                <Fragment key={card.uuid}>
+                  <li>
+                    <b>{new Date(card.date).toLocaleDateString()}</b>
+                  </li>
+                  <li>
+                    <StyledLink
+                      href={`/cards/${card.id}`}
+                      onClick={setComingFromHistory(true)}
+                    >
+                      {card.name}
+                    </StyledLink>
+                  </li>
+                  <li>second: {card.second} sec</li>
+                  <section>
+                    note: <i>{card.notes}</i>
+                  </section>
+                  <EditButton uuid={card.uuid} card={card} />
+                  <DeleteButton uuid={card.uuid} />
+                  <hr />
+                </Fragment>
+              );
+            })}
+          </StyledList>
+        </GridLayout3Columns>
+      </StyledCardContainer>
+
+      <TopMenuBar mid={"history"} />
+
       <StyledNavbar />
     </AppContainer>
   );

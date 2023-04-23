@@ -8,9 +8,15 @@ const Styled3Grid = styled.div`
   grid-template-columns: 50px 200px 50px;
   background: palevioletred;
   justify-content: center;
-  align-items: end;
-
+  align-items: center;
   height: 100%;
+`;
+
+const ArrowContainer = styled.div`
+  display: grid;
+  grid-template-rows: 70% 30%;
+  height: 100%;
+  align-items: center;
 `;
 
 export default function GridLayout3Columns({
@@ -23,19 +29,21 @@ export default function GridLayout3Columns({
 }) {
   return (
     <Styled3Grid>
-      <div onClick={onClick1}>
+      <ArrowContainer onClick={onClick1}>
+        <div></div>
         <Link href={query1} hidden={navigation}>
           <ArrowIconLeft />
         </Link>
-      </div>
+      </ArrowContainer>
 
       {children}
 
-      <div onClick={onClick2}>
+      <ArrowContainer onClick={onClick2}>
+        <div></div>
         <Link href={query2} hidden={navigation}>
           <ArrowIconRight />
         </Link>
-      </div>
+      </ArrowContainer>
     </Styled3Grid>
   );
 }

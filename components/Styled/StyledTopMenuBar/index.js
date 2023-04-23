@@ -14,6 +14,7 @@ const StyledTopBarContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  height: 40px;
   margin: 0;
   padding: 0;
 `;
@@ -22,7 +23,6 @@ const StyledTopBarLeft = styled.div`
   width: 100%;
   display: flex;
   background-color: black;
-  height: 20px;
   justify-content: center;
   align-items: center;
 `;
@@ -31,7 +31,6 @@ const StyledTopBarMiddle = styled.div`
   width: 100%;
   display: flex;
   background-color: black;
-  height: 20px;
   justify-content: center;
   align-items: center;
   color: white;
@@ -41,7 +40,6 @@ const StyledTopBarRight = styled.div`
   width: 100%;
   display: flex;
   background-color: black;
-  height: 20px;
   align-items: center;
   justify-content: center;
 `;
