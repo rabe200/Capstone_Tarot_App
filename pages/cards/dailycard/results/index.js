@@ -7,7 +7,7 @@ import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
-
+import StyledList from "../../../../components/Styled/StyledList";
 const StyledSubmitButton = styled.button`
   display: flex;
   justify-content: center;
@@ -31,19 +31,6 @@ const ListContainer = styled.div`
   justify-content: center;
   align-items: center;
   align-self: center;
-`;
-
-const StyledList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 1.6em;
-  min-height: 50%;
-  height: auto;
-  width: 100%;
-  overflow: auto;
-  overflow-wrap: break-word;
-  background: white;
 `;
 
 const dayNames = [
