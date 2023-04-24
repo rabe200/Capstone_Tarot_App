@@ -35,7 +35,6 @@ export default function CardNotes() {
 
   const getDrawnCardById = useStore((state) => state.getDrawnCardById);
   const cards = useStore((state) => state.allCards);
-  console.log(cards);
   const router = useRouter();
   const id = router ? router.query.id : null;
 
