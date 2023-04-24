@@ -1,5 +1,4 @@
 import Link from "next/link";
-import BackButton from "../../../../../components/Backbutton/backbutton";
 import useStore from "../../../../../src/store/store";
 import { useRouter } from "next/router";
 
@@ -21,7 +20,6 @@ export default function Cups() {
             </li>
           ))}
       </ul>
-      <BackButton />
       <Link href="/">menu</Link>
     </>
   );

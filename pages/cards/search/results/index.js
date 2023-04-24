@@ -1,14 +1,18 @@
-import DetailsButton from "../../../../components/DetailsButton";
-import BackButton from "../../../../components/Backbutton/backbutton";
 import { useStore } from "../../../../src/store/store";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchResults from "../../../../components/SearchResults";
+import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
+import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
+import AppContainer from "../../../../components/Styled/StyledAppContainer";
+import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
+import SearchBar from "../../../../components/SearchBar";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
 export default function SearchResult() {
   const [hasMounted, setHasMounted] = useState(false);
   const searchQuery = useStore((state) => state.searchQuery);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -19,17 +23,24 @@ export default function SearchResult() {
     return (
       <>
         <p>no results</p>
-        <BackButton />
       </>
     );
   }
 
   return (
-    <>
-      <h1>RESULTS</h1>
-      <SearchResults />
-      <p />
-      <BackButton />
-    </>
+    <AppContainer>
+      <SearchBar />
+      <StyledCardContainer>
+        <GridLayout3Columns
+          query1={"null"}
+          query2={"null"}
+          navigation={"hidden"}
+        >
+          <SearchResults />
+        </GridLayout3Columns>
+      </StyledCardContainer>
+      <TopMenuBar mid={"searchResults"}></TopMenuBar>
+      <StyledNavbar />
+    </AppContainer>
   );
 }

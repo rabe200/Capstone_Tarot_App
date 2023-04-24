@@ -1,63 +1,109 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import useStore from "../../../src/store/store";
 import Link from "next/link";
-
 import DeleteButton from "../../../components/DeleteButton";
 import EditButton from "../../../components/EditButton";
+import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
+import styled from "styled-components";
+import AppContainer from "../../../components/Styled/StyledAppContainer";
+import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
+import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
+import { useRouter } from "next/router";
+import StyledNavbar from "../../../components/Styled/StyledNavbar";
+
+const StyledNavi = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const StyledFormular = styled.form`
+  height: 100%;
+  width: 100%;
+`;
+
+const StyledList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: black;
+  color: white;
+  height: 90%;
+  overflow: scroll;
+  border-radius: 8px;
+`;
+
+const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  margin: 0.3rem 0;
+  color: yellow;
+  text-decoration: none;
+  &:hover {
+    color: magenta;
+    transition: all 0.2s;
+    transform: scale(1.5);
+  }
+`;
+
+const StyledBarContainer = styled.div`
+  background: none;
+  width: 100%;
+`;
+
+const StyledFooter = styled.footer`
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  bottom: 0;
+  font-size: 1.4rem;
+  width: 100%;
+  bottom: 0px;
+`;
+
+const StyledFooterLeft = styled.div`
+  font-size: 0.8em;
+`;
+
+const StyledFooterRight = styled.div`
+  font-size: 0.8em;
+`;
+
 export default function History() {
   const [hasMounted, setHasMounted] = useState(false);
-  const drawnCards = useStore((state) => state.drawnCards);
-  const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
-  const cardsDrawn = useStore((state) => state.cardsDrawn);
+
   const cardsDeleted = useStore((state) => state.cardsDeleted);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [displayedCards, setDisplayedCards] = useState(drawnCards);
+  const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
+  const drawnCards = useStore((state) => state.drawnCards);
+  const cardsDrawn = useStore((state) => state.cardsDrawn);
+  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
+  const router = useRouter();
+  const [selectedOption, setSelectedOption] = useState("nameUp");
 
-  function refreshList(event) {
-    event.preventDefault();
-    const sortingFunctions = {
-      dateUp: (a, b) => new Date(a.date) - new Date(b.date),
-      dateDown: (a, b) => new Date(b.date) - new Date(a.date),
-      secondUp: (a, b) =>
-        new Date(a.date).getSeconds() - new Date(b.date).getSeconds(),
-      secondDown: (a, b) =>
-        new Date(b.date).getSeconds() - new Date(a.date).getSeconds(),
+  setLastPageVisited(router.pathname);
 
-      minuteUp: (a, b) =>
-        new Date(a.date).getMinutes() - new Date(b.date).getMinutes(),
-
-      minuteDown: (a, b) =>
-        new Date(b.date).getMinutes() - new Date(a.date).getMinutes(),
-
-      up: (a, b) => a.name.localeCompare(b.name),
-      down: (a, b) => b.name.localeCompare(a.name),
-      yearUp: (a, b) =>
-        new Date(a.date).getFullYear() - new Date(b.date).getFullYear(),
-      yearDown: (a, b) =>
-        new Date(b.date).getFullYear() - new Date(a.date).getFullYear(),
-      monthUp: (a, b) =>
-        new Date(a.date).getMonth() - new Date(b.date).getMonth(),
-      monthDown: (a, b) =>
-        new Date(b.date).getMonth() - new Date(a.date).getMonth(),
-    };
-
-    if (selectedOption in sortingFunctions) {
-      const sortingFunction = sortingFunctions[selectedOption];
-      const sortedCards = drawnCards.slice().sort(sortingFunction);
-      updateCardsDrawn();
-      setDisplayedCards(sortedCards);
+  const sortedItems = drawnCards.sort((a, b) => {
+    if (selectedOption === "dateUp") {
+      return new Date(a.date) - new Date(b.date);
+    } else if (selectedOption === "dateDown") {
+      return new Date(b.date) - new Date(a.date);
+    } else if (selectedOption === "nameDown") {
+      return b.name.trim().localeCompare(a.name);
+    } else if (selectedOption === "nameUp") {
+      return a.name.trim().localeCompare(b.name);
+    } else if (selectedOption === "secondDown") {
+      return b.second - a.second;
+    } else if (selectedOption === "secondUp") {
+      return a.second - b.second;
     }
-  }
+  });
+
+  const setComingFromHistory = useStore((state) => state.setComingFromHistory);
 
   useEffect(() => {
-    setDisplayedCards(drawnCards);
-  }, [drawnCards, setDisplayedCards]);
-
-  function updateCards(event) {
-    event.preventDefault();
-    refreshList();
     updateCardsDrawn();
-  }
+  });
 
 
   useEffect(() => {
@@ -67,85 +113,74 @@ export default function History() {
     return null;
   }
 
-  function handleSelectChange(event) {
-    setSelectedOption(event.target.value);
-  }
-
   return (
-    <Fragment>
-      <span>
-        {cardsDrawn ? (
-          <>
-            <b>total number of drawn cards: {cardsDrawn}</b>
-            <br />
-            <b>total number of deleted cards: {cardsDeleted}</b>
-          </>
-        ) : (
-          "noDrawnCards"
-        )}
-      </span>
-      <section>
-        <form>
-          <select
-            name="filter results by"
-            multiple
-            size="4"
-            onChange={handleSelectChange}
-          >
-            <optgroup label="time">
+    <AppContainer>
+      <StyledFooter>
+        <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>{" "}
+        <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
+      </StyledFooter>
+      <StyledBarContainer>
+        <StyledNavi>
+          <StyledFormular>
+            <select
+              style={{
+                width: "100%",
+                height: "100%",
+                textAlign: "center",
+                fontSize: "1.05rem",
+              }}
+              name="filter results by"
+              onChange={(event) => setSelectedOption(event.target.value)}
+            >
               <option value="dateUp">date up</option>
               <option value="dateDown">date down</option>
-              <option value="yearUp">year Up</option>
-              <option value="yearDown">year Down</option>
-              <option value="monthUp">month Up</option>
-              <option value="monthDown">month Down</option>
-              <option value="dayUp">dayUp</option>
-              <option value="dayDown">day Down</option>
-              <option value="hourUp">hourUp</option>
-              <option value="hourDown">hour Down</option>
-              <option value="minuteUp">minuteUp</option>
-              <option value="minuteDown">minute Down</option>
-              <option value="secondUp">secondsUp</option>
-              <option value="secondDown">secondsDown</option>
-            </optgroup>
-            <optgroup label="name">
-              <option value="up">up</option>
-              <option value="down">down</option>
-            </optgroup>
-          </select>
-          <button onClick={(event) => refreshList(event)}>refresh</button>
-        </form>
-        <ul>
-          {displayedCards.map((card) => {
-            return (
-              <Fragment key={card.uuid}>
-                <hr />
-                <li>
-                  <b>{new Date(card.date).toLocaleDateString()}</b>
-                </li>
-                <li>{card.name}</li>
-                <li>Drawn: {card.clicks} times</li>
-                <li>AverageMood: {card.averageMood}</li>
-                <li>TotalMood: {card.mood}</li>
-                <li>moodClicked: {card.currentMood}</li>
+              <option value="nameUp">name up</option>
+              <option value="nameDown">name down</option>
+              <option value="secondUp">second up</option>
+              <option value="secondDown">second down</option>
+            </select>
+          </StyledFormular>
+        </StyledNavi>
+      </StyledBarContainer>
 
-                <li>second: {card.second}</li>
-                <li>minute: {card.minute}</li>
-                <li>hour: {card.hour}</li>
-                <li>day: {card.day}</li>
-                <section>
-                  note: <i>{card.notes}</i>
-                </section>
-                <EditButton uuid={card.uuid} card={card} />
-                <DeleteButton uuid={card.uuid} onClick={() => updateCards()} />
-              </Fragment>
-            );
-          })}
-        </ul>
-      </section>
-      <Link href="/">
-        <button type="button">back</button>
-      </Link>
-    </Fragment>
+      <StyledCardContainer>
+        <GridLayout3Columns
+          query1={"null"}
+          query2={"null"}
+          navigation={"hidden"}
+        >
+          <StyledList>
+            {sortedItems.map((card) => {
+              return (
+                <Fragment key={card.uuid}>
+                  <li>
+                    <b>{new Date(card.date).toLocaleDateString()}</b>
+                  </li>
+                  <li>
+                    <StyledLink
+                      href={`/cards/${card.id}`}
+                      onClick={setComingFromHistory(true)}
+                    >
+                      {card.name}
+                    </StyledLink>
+                  </li>
+                  <li>second: {card.second} sec</li>
+                  <section>
+                    note: <i>{card.notes}</i>
+                  </section>
+                  <EditButton uuid={card.uuid} card={card} />
+                  <DeleteButton uuid={card.uuid} />
+                  <hr />
+                </Fragment>
+              );
+            })}
+          </StyledList>
+        </GridLayout3Columns>
+      </StyledCardContainer>
+
+      <TopMenuBar mid={"history"} />
+
+      <StyledNavbar />
+    </AppContainer>
   );
 }

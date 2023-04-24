@@ -2,14 +2,12 @@ import { Fragment, useState, useEffect } from "react";
 import useStore from "../../src/store/store";
 export default function EditButton({ card }) {
   const [hasMounted, setHasMounted] = useState(false);
-  const [clicked, setClicked] = useState("false");
   const [hidden, setHidden] = useState("hidden");
   const [hiddenButton, setHiddenButton] = useState(true);
   const [hiddenToggle, setHiddenToggle] = useState(true);
   const setCurrentNote = useStore((state) => state.setCurrentNote);
   const [inputValue, setInputValue] = useState("");
   const editSelectedNote = useStore((state) => state.editSelectedNote);
-  const [displayedNote, setDisplayedNote] = useState("");
 
   function closeInputHideButton() {
     setHidden("hidden");
@@ -17,7 +15,6 @@ export default function EditButton({ card }) {
   }
 
   function toggleEditButton() {
-    setClicked("true");
     setHidden("text");
     setHiddenButton(false);
     setHiddenToggle(false);
@@ -28,11 +25,10 @@ export default function EditButton({ card }) {
     setHidden("hidden");
     setHiddenButton(true);
     setCurrentNote(inputValue);
-    setDisplayedNote(inputValue);
     editSelectedNote(card);
   }
 
-  useEffect((event) => {
+  useEffect(() => {
     setInputValue(inputValue);
   });
 

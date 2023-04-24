@@ -1,18 +1,37 @@
+import useStore from "../../../src/store/store";
+import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import Link from "next/link";
-import useStore from "../../../src/store/store";
-import React from "react";
-import CardPreviewImage from "../../../components/CardPreviewImage";
+import { useState, useEffect } from "react";
+import AppContainer from "../../../components/Styled/StyledAppContainer";
+import FlipCard from "../../../components/FlipCard";
 
-const StyledLink = styled(Link)`
-  background-color: hotpink;
+const StyledContinueButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: hotpink;
+  text-align: center;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 2rem;
+  &:hover {
+    background-color: red;
+  }
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    color: black;
+  }
+`;
 export default function ShowCard() {
   const currentCard = useStore((state) => state.currentCard);
-  const [hasMounted, setHasMounted] = React.useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -21,17 +40,14 @@ export default function ShowCard() {
   if (currentCard) {
     return (
       <>
-        <CardPreviewImage card={currentCard} />
-        <StyledLink
-          href={{
-            pathname: "/cards/dailycard/description",
-          }}
-        >
-          Details
-        </StyledLink>
-        <p>
-          <Link href={{ pathname: "/cards/dailycard/notes" }}>skip</Link>
-        </p>
+        <AppContainer>
+          <StyledCardContainer>
+            <FlipCard card={currentCard} />
+          </StyledCardContainer>
+          <StyledLink href={"/cards/dailycard/notes"}>
+            <StyledContinueButton>CONTINUE</StyledContinueButton>
+          </StyledLink>
+        </AppContainer>
       </>
     );
   } else {
