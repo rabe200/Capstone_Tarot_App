@@ -18,7 +18,6 @@ const StyledNavi = styled.div`
 
 const StyledFormular = styled.form`
   height: 100%;
-  background: orange;
   width: 100%;
 `;
 

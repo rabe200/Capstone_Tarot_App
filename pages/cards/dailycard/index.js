@@ -1,10 +1,10 @@
 import useStore from "../../../src/store/store";
-import CardPreviewImage from "../../../components/CardPreviewImage";
 import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
+import FlipCard from "../../../components/FlipCard";
 
 const StyledContinueButton = styled.div`
   display: flex;
@@ -42,8 +42,7 @@ export default function ShowCard() {
       <>
         <AppContainer>
           <StyledCardContainer>
-            <h1>{currentCard.name}</h1>
-            <CardPreviewImage card={currentCard}></CardPreviewImage>
+            <FlipCard card={currentCard} />
           </StyledCardContainer>
           <StyledLink href={"/cards/dailycard/notes"}>
             <StyledContinueButton>CONTINUE</StyledContinueButton>

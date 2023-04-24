@@ -4,8 +4,11 @@ const StyledSvg = styled.svg`
   fill: white;
   stroke: black;
   &:hover {
-    stroke: yellow;
+    stroke: black;
     fill: red;
+    transition: 0.2s ease;
+    transform: scale(1.5);
+    transform: rotate(15deg);
   }
 `;
 

@@ -9,6 +9,7 @@ const Styled3Grid = styled.div`
   background: palevioletred;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 100%;
 `;
 

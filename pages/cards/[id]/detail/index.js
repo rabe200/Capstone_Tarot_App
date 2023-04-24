@@ -8,7 +8,7 @@ import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
-
+import Link from "next/link";
 const StyledCategories = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,6 +67,12 @@ export default function Details() {
                 <StyledCategoryName>meaning reversed</StyledCategoryName>
                 <StyledCategoryContent>
                   {card.meaning_rev}
+                </StyledCategoryContent>
+              </div>
+              <div>
+                <StyledCategoryName>notes</StyledCategoryName>
+                <StyledCategoryContent>
+                  <Link href={`/cards/${card.id}/notes/`}>click</Link>
                 </StyledCategoryContent>
               </div>
             </StyledCategories>

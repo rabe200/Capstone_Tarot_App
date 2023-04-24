@@ -8,6 +8,7 @@ import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import StyledList from "../../../../components/Styled/StyledList";
+
 const StyledSubmitButton = styled.button`
   display: flex;
   justify-content: center;
@@ -28,6 +29,7 @@ const ListContainer = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
+
   justify-content: center;
   align-items: center;
   align-self: center;

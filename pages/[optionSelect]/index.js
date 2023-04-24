@@ -29,6 +29,12 @@ export default function HomePage() {
     width: 100%;
   `;
 
+  const BackGround = styled.div`
+    height: 100%;
+    width: 100%;
+    background: palevioletred;
+  `;
+
   function countAndSetMenu(input) {
     if (input === "plus") {
       if (counter !== 2) setCounter(counter + 1);
@@ -73,30 +79,32 @@ export default function HomePage() {
         <SearchBar />
 
         <StyledCardContainer>
-          <GridLayout3Columns
-            query1={"null"}
-            query2={"null"}
-            onClick1={() => countAndSetMenu("minus")}
-            onClick2={() => countAndSetMenu("plus")}
-          >
-            <ContentContainer>
-              {queryName === "DailyCard" ? (
-                <Link href={"cards/dailycard/moodmeter"}>
-                  <DailyCardIcon />
-                </Link>
-              ) : null}
-              {queryName === "collection" ? (
-                <Link href={`/cards/${lastCard.id}`}>
-                  <CardsIcon />
-                </Link>
-              ) : null}
-              {queryName === "History" ? (
-                <Link href={"/cards/history"}>
-                  <HistoryIcon />
-                </Link>
-              ) : null}
-            </ContentContainer>
-          </GridLayout3Columns>
+          <BackGround>
+            <GridLayout3Columns
+              query1={"null"}
+              query2={"null"}
+              onClick1={() => countAndSetMenu("minus")}
+              onClick2={() => countAndSetMenu("plus")}
+            >
+              <ContentContainer>
+                {queryName === "DailyCard" ? (
+                  <Link href={"cards/dailycard/moodmeter"}>
+                    <DailyCardIcon />
+                  </Link>
+                ) : null}
+                {queryName === "collection" ? (
+                  <Link href={`/cards/${lastCard.id}`}>
+                    <CardsIcon />
+                  </Link>
+                ) : null}
+                {queryName === "History" ? (
+                  <Link href={"/cards/history"}>
+                    <HistoryIcon />
+                  </Link>
+                ) : null}
+              </ContentContainer>
+            </GridLayout3Columns>
+          </BackGround>
         </StyledCardContainer>
         <TopMenuBar
           menu={"/"}

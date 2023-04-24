@@ -6,6 +6,12 @@ const StyledSvg = styled.svg`
   &:hover {
     stroke: lime;
     fill: lime;
+    transition: 0.2s ease;
+    transform: scale(1.5);
+    transform: rotate(-15deg);
+  }
+  &:after {
+    stroke: black;
   }
 `;
 

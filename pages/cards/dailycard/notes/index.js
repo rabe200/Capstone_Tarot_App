@@ -33,13 +33,6 @@ export default function NoteFormular() {
     }
   `;
 
-  const FormContainer = styled.div`
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-  `;
-
   function handleSubmit(event) {
     event.preventDefault();
     if (drawnCards.length > 0) {

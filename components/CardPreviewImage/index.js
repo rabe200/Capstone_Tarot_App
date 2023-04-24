@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import StyledList from "../Styled/StyledList";
+import CardDescription from "../CardDescription";
 
 const CardBody = styled.figure`
   display: flex;
@@ -11,11 +12,6 @@ const CardBody = styled.figure`
   left: 0;
   height: 100%;
   width: 100%;
-`;
-
-const DescriptionContainer = styled.div`
-  height: 100%;
-  background: black;
 `;
 
 const Container = styled.div`
@@ -28,6 +24,7 @@ const Container = styled.div`
   align-items: center;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 `;
 
 const StyledImage = styled(Image)`
@@ -72,18 +69,17 @@ export default function CardPreviewImage({ card, clickable }) {
                 alt={card.name}
               />
             </Link>
-            <StyledList>
-              <DescriptionContainer>{card.desc}</DescriptionContainer>
-            </StyledList>
+            <CardDescription card={card}></CardDescription>
           </CardBody>
         </>
       ) : (
         <CardBody>
-          <Image src={card.image} width="200" height="350" alt={card.name} />
-          <StyledList>
-            <b>up: </b>
-            {card.meaning_up} <b>rev:</b> {card.meaning_rev}
-          </StyledList>
+          <StyledImage
+            src={card.image}
+            width="200"
+            height="350"
+            alt={card.name}
+          />
         </CardBody>
       )}
     </Container>

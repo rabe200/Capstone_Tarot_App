@@ -32,6 +32,7 @@ const StyledLinkContainer = styled.div`
   flex-direction: column;
   border: 1px hotpink solid;
   height: 100%;
+  width: 100%;
   position: relative;
   justify-content: center;
   align-items: center;

@@ -11,12 +11,6 @@ import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 
-const StyledBanner = styled.div`
-  text-align: center;
-  width: 100%;
-  color: white;
-`;
-
 const MoodButtonGood = styled.div`
   width: 100%;
   height: 100%;
