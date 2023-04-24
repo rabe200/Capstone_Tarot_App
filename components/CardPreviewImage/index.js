@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import StyledList from "../Styled/StyledList";
 import CardDescription from "../CardDescription";
 
 const CardBody = styled.figure`
@@ -58,20 +57,17 @@ export default function CardPreviewImage({ card, clickable }) {
   return (
     <Container>
       {clickable === true ? (
-        <>
-          <CardBody>
-            <Link href={`/cards/${card.id}/detail`}>
-              {" "}
-              <StyledImage
-                src={card.image}
-                width="150"
-                height="220"
-                alt={card.name}
-              />
-            </Link>
-            <CardDescription card={card}></CardDescription>
-          </CardBody>
-        </>
+        <CardBody>
+          <Link href={`/cards/${card.id}/detail`}>
+            <StyledImage
+              src={card.image}
+              width="150"
+              height="220"
+              alt={card.name}
+            />
+          </Link>
+          <CardDescription card={card} desc={true}></CardDescription>
+        </CardBody>
       ) : (
         <CardBody>
           <StyledImage

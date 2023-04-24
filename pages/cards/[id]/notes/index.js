@@ -24,7 +24,7 @@ export default function CardNotes() {
               <u>{card ? card.map((prop) => prop.name) : "loading"}</u>
               <ul>
                 {card.length > 0 ? (
-                  card.map((prop) => <li>{prop.notes}</li>)
+                  card.map((prop) => <li key={prop.date}>{prop.notes}</li>)
                 ) : (
                   <li>no data</li>
                 )}

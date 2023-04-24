@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 
 const CardBody = styled.figure`
   display: flex;
@@ -7,8 +6,8 @@ const CardBody = styled.figure`
   justify-content: center;
   align-items: center;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 60%;
+  width: 60%;
 `;
 
 const DescriptionContainer = styled.div`
@@ -18,10 +17,6 @@ const DescriptionContainer = styled.div`
   background: black;
   color: white;
   overflow: auto;
-  border-radius: 8px;
-  &:hover: {
-    color: pink;
-  }
 `;
 
 const Container = styled.div`
@@ -41,13 +36,9 @@ export default function CardDescription({ card, desc }) {
   return (
     <Container>
       {desc === true ? (
-        <>
-          <CardBody>
-            <div>
-              <DescriptionContainer>{card.desc}</DescriptionContainer>
-            </div>
-          </CardBody>
-        </>
+        <CardBody>
+          <DescriptionContainer>{card.desc}</DescriptionContainer>
+        </CardBody>
       ) : (
         <CardBody>
           <DescriptionContainer>
