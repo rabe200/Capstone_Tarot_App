@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import useStore from "../../../src/store/store";
 import { useRouter } from "next/router";
+import NoteNotifier from "../../NoteNotifier";
 
 const StyledMenuLink = styled(Link)`
   text-decoration: none;
@@ -30,7 +31,6 @@ const StyledTopBarLeft = styled.div`
 const StyledTopBarMiddle = styled.div`
   width: 100%;
   display: flex;
-  background-color: black;
   justify-content: center;
   align-items: center;
   color: white;
@@ -44,7 +44,7 @@ const StyledTopBarRight = styled.div`
   justify-content: center;
 `;
 
-export default function TopMenuBar({ menu, mid, back }) {
+export default function TopMenuBar({ menu, mid, back, card }) {
   if (!menu) {
     menu = "/";
   }
@@ -66,12 +66,26 @@ export default function TopMenuBar({ menu, mid, back }) {
     back = "/DailyCard";
   }
 
-  return (
+  return card ? (
     <StyledTopBarContainer>
       <StyledTopBarLeft>
         <StyledMenuLink href={`${menu}`}>MENU</StyledMenuLink>{" "}
       </StyledTopBarLeft>
-      <StyledTopBarMiddle> {mid}</StyledTopBarMiddle>
+      <StyledTopBarMiddle>
+        {mid} <NoteNotifier currentCard={card} />
+      </StyledTopBarMiddle>
+      <StyledTopBarRight>
+        <StyledMenuLink href={`${back}`}>
+          {comingFromHistory ? "CLOSE" : "BACK"}
+        </StyledMenuLink>{" "}
+      </StyledTopBarRight>
+    </StyledTopBarContainer>
+  ) : (
+    <StyledTopBarContainer>
+      <StyledTopBarLeft>
+        <StyledMenuLink href={`${menu}`}>MENU</StyledMenuLink>{" "}
+      </StyledTopBarLeft>
+      <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
       <StyledTopBarRight>
         <StyledMenuLink href={`${back}`}>
           {comingFromHistory ? "CLOSE" : "BACK"}

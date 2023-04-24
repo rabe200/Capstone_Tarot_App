@@ -7,7 +7,7 @@ const StyledCardContainer1 = styled.div`
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 100%;
+  height: 80%;
   overflow: hidden;
   background: #fcfcfc;
   border: 5px solid #000000;

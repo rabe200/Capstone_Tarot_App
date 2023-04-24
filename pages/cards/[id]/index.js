@@ -41,8 +41,7 @@ export default function Details() {
             <CardPreviewImage card={card} clickable={true} />
           </GridLayout3Columns>
         </StyledCardContainer>
-        <TopMenuBar mid={card.name} />
-
+        <TopMenuBar mid={card.name} card={card} />
         <StyledNavbar />
       </AppContainer>
     )
