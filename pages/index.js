@@ -1,5 +1,4 @@
 import StyledCardContainer from "../components/Styled/StyledCardContainer";
-import SearchBar from "../components/SearchBar";
 import styled from "styled-components";
 import Link from "next/link";
 import AppContainer from "../components/Styled/StyledAppContainer";

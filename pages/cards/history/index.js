@@ -10,6 +10,7 @@ import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
 import { useRouter } from "next/router";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
+import { useCallback } from "react";
 
 const StyledNavi = styled.div`
   display: flex;
@@ -74,7 +75,9 @@ export default function History() {
   const [hasMounted, setHasMounted] = useState(false);
 
   const cardsDeleted = useStore((state) => state.cardsDeleted);
-  const updateCardsDrawn = useStore((state) => state.updateCardsDrawn);
+  const updateCardsDrawn = useStore(
+    useCallback((state) => state.updateCardsDrawn, [])
+  );
   const drawnCards = useStore((state) => state.drawnCards);
   const cardsDrawn = useStore((state) => state.cardsDrawn);
   const setLastPageVisited = useStore((state) => state.setLastPageVisited);
@@ -103,8 +106,7 @@ export default function History() {
 
   useEffect(() => {
     updateCardsDrawn();
-  });
-
+  }, [cardsDeleted]);
 
   useEffect(() => {
     setHasMounted(true);

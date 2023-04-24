@@ -78,7 +78,7 @@ export default function Details() {
             </StyledCategories>
           </GridLayout3Columns>
         </StyledCardContainer>
-        <TopMenuBar mid={card.name} back={`/cards/${card.id}`} />
+        <TopMenuBar card={card} mid={card.name} back={`/cards/${card.id}`} />
 
         <StyledNavbar />
       </AppContainer>

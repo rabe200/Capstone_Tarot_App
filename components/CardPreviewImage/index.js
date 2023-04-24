@@ -5,17 +5,24 @@ import CardDescription from "../CardDescription";
 
 const CardBody = styled.figure`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   left: 0;
-  height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 420px;
   width: 100%;
+  @media only screen and (min-height: 896px) {
+    height: 900px;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -48,8 +55,8 @@ const StyledImage = styled(Image)`
   }
 
   @media only screen and (min-width: 768px) {
-    width: 350px;
-    height: 650px;
+    width: 300px;
+    height: 500px;
   }
 `;
 
@@ -66,6 +73,7 @@ export default function CardPreviewImage({ card, clickable }) {
               alt={card.name}
             />
           </Link>
+
           <CardDescription card={card} desc={true}></CardDescription>
         </CardBody>
       ) : (
