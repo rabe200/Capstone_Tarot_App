@@ -22,6 +22,7 @@ const CardFront = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  transform: scaleX(-1);
 `;
 
 const CardBack = styled.div`
@@ -29,8 +30,8 @@ const CardBack = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   color: black;
-  transform: rotateY(180deg);
 `;
 
 const CardImage = styled.img`
@@ -45,29 +46,28 @@ const CardFlip = ({ card }) => {
   };
 
   return (
-    <>
-      <CardContainer onClick={handleFlip}>
+    <div onClick={handleFlip}>
+      <CardContainer>
         <CardInner isFlipped={isFlipped}>
           <CardFront>
-            <CardImage
-              src={"/images/CardBacks.png"}
-              alt={"cardback"}
-              width={200}
-              height={350}
-            />{" "}
-          </CardFront>
-          <CardBack>
             <CardImage
               src={card.image}
               alt={card.name}
               width={200}
               height={350}
+            />
+          </CardFront>
+          <CardBack>
+            <CardImage
+              src={"/images/CardBacks.png"}
+              alt={"cardback"}
+              width={200}
+              height={350}
             ></CardImage>
-            <div>{card.name}</div>
           </CardBack>
         </CardInner>
       </CardContainer>
-    </>
+    </div>
   );
 };
 
