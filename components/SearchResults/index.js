@@ -171,18 +171,16 @@ export default function SearchResults() {
         searchresults for input: <StyledBoldText>{searchQuery}</StyledBoldText>
         <StyledSearchStats>
           <i>
-            Name: <StyledBoldText>{cardByName.length}</StyledBoldText>{" "}
+            Name: <StyledBoldText>{cardByName.length}</StyledBoldText>
           </i>
           <i>
             Description: <StyledBoldText>{cardByDesc.length}</StyledBoldText>
           </i>
           <i>
-            {" "}
-            Meaning reversed:{" "}
+            Meaning reversed:
             <StyledBoldText>{cardByMeaningRev.length}</StyledBoldText>
           </i>
           <i>
-            {" "}
             Meaning upside:
             <StyledBoldText>{cardByMeaningUp.length}</StyledBoldText>
           </i>
