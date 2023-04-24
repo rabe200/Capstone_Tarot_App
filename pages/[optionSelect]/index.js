@@ -13,6 +13,17 @@ import SearchBar from "../../components/SearchBar";
 import StyledNavbar from "../../components/Styled/StyledNavbar";
 import styled from "styled-components";
 
+const ContentContainer = styled.div`
+  height: 100%;
+  width: 100%;
+`;
+
+const BackGround = styled.div`
+  height: 100%;
+  width: 100%;
+  background: palevioletred;
+`;
+
 export default function HomePage() {
   const [hasMounted, setHasMounted] = useState(false);
   const lastCard = useStore((state) => state.currentCard);
@@ -23,17 +34,6 @@ export default function HomePage() {
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
   setComingFromHistory(false);
   setLastPageVisited(queryName);
-
-  const ContentContainer = styled.div`
-    height: 100%;
-    width: 100%;
-  `;
-
-  const BackGround = styled.div`
-    height: 100%;
-    width: 100%;
-    background: palevioletred;
-  `;
 
   function countAndSetMenu(input) {
     if (input === "plus") {
