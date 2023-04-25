@@ -217,7 +217,6 @@ export default function SearchResults() {
                     </StyledLink>
                   </StyledResultHeader>
                 </li>
-                <li>{card.name}</li>
                 <li>
                   <Link href={`/cards/${card.id}`}>
                     <Image
