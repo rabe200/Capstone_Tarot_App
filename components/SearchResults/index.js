@@ -6,7 +6,7 @@ import StyledNavbar from "../Styled/StyledNavbar";
 import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
-import CardPreviewImage from "../CardPreviewImage";
+
 const ListContainer = styled.ul`
   display: flex;
   flex-direction: column;
@@ -21,7 +21,7 @@ const ListContainer = styled.ul`
   font-size: 1.2em;
 `;
 
-const StyledList = styled.div`
+const StyledResults = styled.div`
   height: 100%;
   margin: 0;
   padding: 0;
@@ -185,7 +185,7 @@ export default function SearchResults() {
           </option>
         </select>
         <ListContainer>
-          <StyledList id="resultsByDescription" hidden={hidden.desc}>
+          <StyledResults id="resultsByDescription" hidden={hidden.desc}>
             {cardByShortDesc.map((card) => {
               return (
                 <Fragment key={card.name}>
@@ -205,9 +205,9 @@ export default function SearchResults() {
                 </Fragment>
               );
             })}
-          </StyledList>
+          </StyledResults>
 
-          <StyledList id="resultsByName" hidden={hidden.name}>
+          <StyledResults id="resultsByName" hidden={hidden.name}>
             {cardByName.map((card) => (
               <Fragment key={card.name}>
                 <li>
@@ -230,9 +230,9 @@ export default function SearchResults() {
                 </li>
               </Fragment>
             ))}
-          </StyledList>
+          </StyledResults>
 
-          <StyledList id="resultsMeaningUp" hidden={hidden.meaningUp}>
+          <StyledResults id="resultsMeaningUp" hidden={hidden.meaningUp}>
             {cardByMeaningUp.map((card) => (
               <Fragment key={card.name}>
                 <li>
@@ -245,9 +245,9 @@ export default function SearchResults() {
                 <li>{card.meaning_up}</li>
               </Fragment>
             ))}
-          </StyledList>
+          </StyledResults>
 
-          <StyledList id="resultsMeaningRev" hidden={hidden.meaningRev}>
+          <StyledResults id="resultsMeaningRev" hidden={hidden.meaningRev}>
             {cardByMeaningRev.map((card) => (
               <Fragment key={card.name}>
                 <li>
@@ -260,7 +260,7 @@ export default function SearchResults() {
                 <li>{card.meaning_rev}</li>
               </Fragment>
             ))}
-          </StyledList>
+          </StyledResults>
         </ListContainer>
       </div>
     </>
