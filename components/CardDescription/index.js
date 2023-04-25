@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
-import useStore from "../../src/store/store";
 
 const CardBody = styled.figure`
   display: flex;
@@ -47,24 +45,19 @@ const Container = styled.div`
 `;
 
 export default function CardDescription({ card, desc }) {
-  const localTheme = useStore((state) => state.theme);
   return (
     <Container>
       {desc === true ? (
-        <ThemeProvider theme={localTheme}>
-          <CardBody>
-            <DescriptionContainer>{card.desc}</DescriptionContainer>
-          </CardBody>
-        </ThemeProvider>
+        <CardBody>
+          <DescriptionContainer>{card.desc}</DescriptionContainer>
+        </CardBody>
       ) : (
-        <ThemeProvider theme={localTheme}>
-          <CardBody>
-            <DescriptionContainer>
-              <b>up: </b>
-              {card.meaning_up} <b>rev:</b> {card.meaning_rev}
-            </DescriptionContainer>
-          </CardBody>
-        </ThemeProvider>
+        <CardBody>
+          <DescriptionContainer>
+            <b>up: </b>
+            {card.meaning_up} <b>rev:</b> {card.meaning_rev}
+          </DescriptionContainer>
+        </CardBody>
       )}
     </Container>
   );

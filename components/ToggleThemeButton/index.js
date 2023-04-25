@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
 import useStore from "../../src/store/store";
 
 const ToggleButton = styled.div`
@@ -60,12 +59,10 @@ export default function ButtonThemeToggle() {
   }
 
   return (
-    <ThemeProvider theme={localTheme}>
-      <StyledWrapper>
-        <ToggleButton onClick={() => handleThemeToggle()}>
-          <ToggleText>TOGGLE THEME</ToggleText>
-        </ToggleButton>
-      </StyledWrapper>
-    </ThemeProvider>
+    <StyledWrapper>
+      <ToggleButton onClick={() => handleThemeToggle()}>
+        <ToggleText>TOGGLE THEME</ToggleText>
+      </ToggleButton>
+    </StyledWrapper>
   );
 }

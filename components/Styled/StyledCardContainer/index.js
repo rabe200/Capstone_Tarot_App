@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
-import useStore from "../../../src/store/store";
+
 const StyledCardContainer1 = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,11 +21,5 @@ const StyledCardContainer1 = styled.div`
 `;
 
 export default function StyledCardContainer({ children }) {
-  const localTheme = useStore((state) => state.theme);
-
-  return (
-    <ThemeProvider theme={localTheme}>
-      <StyledCardContainer1>{children}</StyledCardContainer1>
-    </ThemeProvider>
-  );
+  return <StyledCardContainer1>{children}</StyledCardContainer1>;
 }
