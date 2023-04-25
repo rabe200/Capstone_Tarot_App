@@ -1,5 +1,6 @@
 import styled from "styled-components";
-
+import { ThemeProvider } from "styled-components";
+import useStore from "../../../src/store/store";
 const StyledCardContainer1 = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,13 +11,22 @@ const StyledCardContainer1 = styled.div`
   height: 80%;
   overflow: hidden;
   background: #fcfcfc;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   border: 5px solid #000000;
-  border-radius: 13px;
+  border-top-right-radius: 13px;
+  border-top-left-radius: 13px;
   position: relative;
   margin: 0;
   padding: 0;
 `;
 
 export default function StyledCardContainer({ children }) {
-  return <StyledCardContainer1>{children}</StyledCardContainer1>;
+  const localTheme = useStore((state) => state.theme);
+
+  return (
+    <ThemeProvider theme={localTheme}>
+      <StyledCardContainer1>{children}</StyledCardContainer1>
+    </ThemeProvider>
+  );
 }

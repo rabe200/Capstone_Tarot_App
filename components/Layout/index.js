@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
+import useStore from "../../src/store/store";
 
 const StyledMain = styled.main`
   display: flex;
   position: relative;
   width: 320px;
   height: 480px;
-  background: #c5c3c3;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -53,9 +56,12 @@ const StyledMain = styled.main`
 `;
 
 export default function Layout({ children }) {
+  const localTheme = useStore((state) => state.theme);
   return (
     <>
-      <StyledMain>{children}</StyledMain>
+      <ThemeProvider theme={localTheme}>
+        <StyledMain>{children}</StyledMain>
+      </ThemeProvider>
     </>
   );
 }

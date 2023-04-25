@@ -26,8 +26,8 @@ const StyledList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-  background-color: black;
-  color: white;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   height: 90%;
   overflow: scroll;
   border-radius: 8px;
@@ -37,7 +37,9 @@ const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
   margin: 0.3rem 0;
-  color: yellow;
+  color: ${(p) => p.theme.colorLink};
+  border: ${(p) => p.theme.border};
+
   text-decoration: none;
   &:hover {
     color: magenta;

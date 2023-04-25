@@ -4,6 +4,7 @@ import Link from "next/link";
 import AppContainer from "../components/Styled/StyledAppContainer";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import useStore from "../src/store/store";
+import { ThemeProvider } from "styled-components";
 
 const MenuLink = styled(Link)`
     font-size: 2rem;
@@ -16,7 +17,7 @@ const MenuLink = styled(Link)`
   color: #04120e;
   &:hover {color: red;},
   &:focus {
-    color: black;
+    color: ${(p) => p.theme.colorText};
   }
   `;
 
@@ -29,32 +30,35 @@ const StyledHeadline = styled.h1`
 const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px hotpink solid;
+  border: ${(p) => p.theme.border};
   height: 100%;
   width: 100%;
   position: relative;
   justify-content: center;
   align-items: center;
+  color: "white";
 `;
 
 export default function HomePage() {
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
-
+  const localTheme = useStore((state) => state.theme);
   setComingFromHistory(false);
 
   const mid = "version 0.2";
   return (
-    <AppContainer>
-      {" "}
-      <StyledCardContainer>
-        <StyledLinkContainer>
-          <StyledHeadline>TAROT</StyledHeadline>
-          <MenuLink href={"/DailyCard"}>START</MenuLink>
-          <MenuLink href={"/options"}>OPTIONS</MenuLink>
-          <MenuLink href={"/credits"}>CREDITS</MenuLink>
-        </StyledLinkContainer>
-      </StyledCardContainer>
-      <TopMenuBar menu={"/"} mid={mid} back={"/"} />
-    </AppContainer>
+    <ThemeProvider theme={localTheme}>
+      <AppContainer>
+        {" "}
+        <StyledCardContainer>
+          <StyledLinkContainer>
+            <StyledHeadline>TAROT</StyledHeadline>
+            <MenuLink href={"/DailyCard"}>START</MenuLink>
+            <MenuLink href={"/options"}>OPTIONS</MenuLink>
+            <MenuLink href={"/credits"}>CREDITS</MenuLink>
+          </StyledLinkContainer>
+        </StyledCardContainer>
+        <TopMenuBar menu={"/"} mid={mid} back={"/"} />
+      </AppContainer>
+    </ThemeProvider>
   );
 }

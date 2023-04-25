@@ -9,11 +9,12 @@ import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import Link from "next/link";
+
 const StyledCategories = styled.div`
   display: flex;
   flex-direction: column;
-  background: black;
-  color: white;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   height: 100%;
   overflow: auto;
   justify-content: center;
