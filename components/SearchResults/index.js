@@ -1,20 +1,27 @@
 import { useStore } from "../../src/store/store";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { cards } from "../../lib/data";
 import TopMenuBar from "../Styled/StyledTopMenuBar";
 import StyledNavbar from "../Styled/StyledNavbar";
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
 
-const ListContainer = styled.div`
+const ListContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  background: orange;
-  height: 30em;
-  overflow: hidden;
+  background: black;
+  height: 18em;
+  overflow: auto;
+  color: white;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 36px;
+  padding-right: 36px;
+  font-size: 1.2em;
 `;
 
-const StyledList = styled.ul`
+const StyledResults = styled.div`
   height: 100%;
   margin: 0;
   padding: 0;
@@ -22,29 +29,51 @@ const StyledList = styled.ul`
   overflow: auto;
 `;
 
-const StyledListItem = styled.ul`
-  display: block;
-  overflow: hidden;
-  height: 100%;
+const StyledResultHeader = styled.div`
+  &:hover {
+    color: magenta;
+    transition: all 0.2s;
+    transform: scale(1.5);
+  }
+`;
+
+const StyledLink = styled(Link)`
+  color: yellow;
+  text-decoration: none;
+`;
+
+const StyledBoldText = styled.b`
+  color: white;
+`;
+
+const StyledSearchStats = styled.div`
+  font-size: 0.7em;
 `;
 
 export default function SearchResults() {
-  const [hasMounted, setHasMounted] = useState(false);
   const searchQuery = useStore((state) => state.searchQuery);
-  const nameList = document.getElementById("nameList");
-  const descriptionList = document.getElementById("descriptionList");
-  const meaningUpList = document.getElementById("meaningUpList");
-  const meaningRevList = document.getElementById("meaningRevList");
   const cardByName = getCardByProp(searchQuery, "name");
-
-  const [selectOption, setSelectOption] = useState("name");
-  const [resultList, setResultList] = useState(cardByName);
-
-  const [hidden1, setHidden1] = useState(false);
-  const [hidden2, setHidden2] = useState(true);
   const cardByDesc = getCardByProp(searchQuery, "desc");
   const cardByMeaningUp = getCardByProp(searchQuery, "meaning_up");
   const cardByMeaningRev = getCardByProp(searchQuery, "meaning_rev");
+  const [selectOption, setSelectOption] = useState("name");
+
+  const cardByShortDesc = cardByDesc.map((card) => {
+    const index = card.desc
+      .toLocaleLowerCase()
+      .indexOf(searchQuery.toLocaleLowerCase());
+    const start = Math.max(0, index - 50);
+    const end = Math.min(index + 100, card.desc.length);
+    const content = card.desc.substring(start, end);
+    return { ...card, content };
+  });
+
+  const [hidden, setHidden] = useState({
+    name: false,
+    desc: true,
+    meaningUp: true,
+    meaningRev: true,
+  });
 
   function getCardByProp(searchQuery, property) {
     let queryWords = searchQuery
@@ -67,29 +96,33 @@ export default function SearchResults() {
   }
 
   function renderResults(event) {
-    setSelectOption(event.target.value);
-    let resultList;
-    if (selectOption === "name") {
-      setHidden1(true);
-      setHidden2(false);
-    } else if (selectOption === "description") {
-      setHidden1(true);
-      setHidden2(false);
-    } else if (selectOption === "meaningUp") {
-      setHidden1(true);
-      setHidden2(false);
-    } else if (selectOption === "meaningRev") {
-      setHidden1(true);
-      setHidden2(false);
-    }
+    const selectedOption = event.target.value;
+    setSelectOption(selectedOption);
+  }
+
+  const [listElement, setListElement] = useState(false);
+
+  function toggleListElement() {
+    setListElement(!listElement);
   }
 
   useEffect(() => {
-    setHasMounted(true);
-  }, []);
-  if (!hasMounted) {
-    return null;
-  }
+    setHidden({
+      name: true,
+      desc: true,
+      meaningUp: true,
+      meaningRev: true,
+    });
+    if (selectOption === "name") {
+      setHidden((prev) => ({ ...prev, name: false }));
+    } else if (selectOption === "description") {
+      setHidden((prev) => ({ ...prev, desc: false }));
+    } else if (selectOption === "meaningUp") {
+      setHidden((prev) => ({ ...prev, meaningUp: false }));
+    } else if (selectOption === "meaningRev") {
+      setHidden((prev) => ({ ...prev, meaningRev: false }));
+    }
+  }, [selectOption]);
 
   if (searchQuery === "") {
     return (
@@ -104,43 +137,132 @@ export default function SearchResults() {
   return (
     <>
       <div>
-        for input: <b>{searchQuery}</b>
+        searchresults for input: <StyledBoldText>{searchQuery}</StyledBoldText>
+        <StyledSearchStats>
+          <i>
+            Name: <StyledBoldText>{cardByName.length}</StyledBoldText>
+          </i>
+          <i>
+            Description: <StyledBoldText>{cardByDesc.length}</StyledBoldText>
+          </i>
+          <i>
+            Meaning reversed:
+            <StyledBoldText>{cardByMeaningRev.length}</StyledBoldText>
+          </i>
+          <i>
+            Meaning upside:
+            <StyledBoldText>{cardByMeaningUp.length}</StyledBoldText>
+          </i>
+        </StyledSearchStats>
+        <select
+          onChange={(e) => renderResults(e)}
+          style={{
+            width: "100%",
+            background: "black",
+            color: "#FFFFE0",
+            textAlignLast: "center",
+            height: "40px",
+            fontSize: "1.2rem",
+          }}
+          id={"filterSelection"}
+          value={selectOption}
+        >
+          <option value="name">
+            by name {": "}
+            {cardByName.length > 0 && cardByName.length}
+          </option>
+          <option value="description">
+            by description {": "}
+            {cardByDesc.length > 0 && cardByDesc.length}
+          </option>
+          <option value="meaningUp">
+            by meaning upright{": "}
+            {cardByMeaningUp.length > 0 && cardByMeaningUp.length}
+          </option>
+          <option value="meaningRev">
+            by meaning reversed{": "}
+            {cardByMeaningRev.length > 0 && cardByMeaningRev.length}
+          </option>
+        </select>
         <ListContainer>
-          <StyledList id="resultList" hidden={hidden2}>
-            <li>
-              hidden2{" "}
-              {cardByDesc.map((card) => (
-                <StyledList>
+          <StyledResults id="resultsByDescription" hidden={hidden.desc}>
+            {cardByShortDesc.map((card) => {
+              return (
+                <Fragment key={card.name}>
                   <li>
-                    {" "}
-                    <u>
-                      {" "}
-                      <Link href={`/cards/${card.id}`}>{card.name}</Link>{" "}
-                    </u>
+                    <StyledResultHeader>
+                      <StyledLink href={`/cards/${card.id}`}>
+                        {card.name}
+                      </StyledLink>
+                    </StyledResultHeader>
                   </li>
-                  <li> {card.desc} </li>
-                </StyledList>
-              ))}
-            </li>
-          </StyledList>
+                  <li onClick={() => toggleListElement()} hidden={!listElement}>
+                    {card.content}
+                  </li>
+                  <li onClick={() => toggleListElement()} hidden={listElement}>
+                    {card.desc}
+                  </li>
+                </Fragment>
+              );
+            })}
+          </StyledResults>
 
-          <StyledList id="intitalResultList" hidden={hidden1}>
-            <li>hidden1</li>
-          </StyledList>
+          <StyledResults id="resultsByName" hidden={hidden.name}>
+            {cardByName.map((card) => (
+              <Fragment key={card.name}>
+                <li>
+                  <StyledResultHeader>
+                    <StyledLink href={`/cards/${card.id}`}>
+                      {card.name}
+                    </StyledLink>
+                  </StyledResultHeader>
+                </li>
+                <li>
+                  <Link href={`/cards/${card.id}`}>
+                    <Image
+                      src={card.image}
+                      width={200}
+                      height={350}
+                      alt={card.name}
+                      priority
+                    ></Image>
+                  </Link>
+                </li>
+              </Fragment>
+            ))}
+          </StyledResults>
+
+          <StyledResults id="resultsMeaningUp" hidden={hidden.meaningUp}>
+            {cardByMeaningUp.map((card) => (
+              <Fragment key={card.name}>
+                <li>
+                  <StyledResultHeader>
+                    <StyledLink href={`/cards/${card.id}`}>
+                      {card.name}
+                    </StyledLink>
+                  </StyledResultHeader>
+                </li>
+                <li>{card.meaning_up}</li>
+              </Fragment>
+            ))}
+          </StyledResults>
+
+          <StyledResults id="resultsMeaningRev" hidden={hidden.meaningRev}>
+            {cardByMeaningRev.map((card) => (
+              <Fragment key={card.name}>
+                <li>
+                  <StyledResultHeader>
+                    <StyledLink href={`/cards/${card.id}`}>
+                      {card.name}
+                    </StyledLink>
+                  </StyledResultHeader>
+                </li>
+                <li>{card.meaning_rev}</li>
+              </Fragment>
+            ))}
+          </StyledResults>
         </ListContainer>
       </div>
-      <form>
-        <select
-          name="options"
-          id="option-select"
-          onChange={(event) => renderResults(event)}
-        >
-          <option value="name">name</option>
-          <option value="description">description</option>
-          <option value="meaningUp">meaningUp</option>
-          <option value="meaningRev">meaningRev</option>
-        </select>
-      </form>
     </>
   );
 }
