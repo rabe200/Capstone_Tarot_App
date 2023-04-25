@@ -220,7 +220,13 @@ export default function SearchResults() {
                 <li>{card.name}</li>
                 <li>
                   <Link href={`/cards/${card.id}`}>
-                    <CardPreviewImage card={card}></CardPreviewImage>
+                    <Image
+                      src={card.image}
+                      width={200}
+                      height={350}
+                      alt={card.name}
+                      priority
+                    ></Image>
                   </Link>
                 </li>
               </Fragment>
