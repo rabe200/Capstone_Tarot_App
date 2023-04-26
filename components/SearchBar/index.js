@@ -23,8 +23,10 @@ const StyledFormular = styled.form`
 `;
 
 const StyledSearchContainer = styled.div`
-  width: 90%;
+  width: 100%;
   position: relative;
+  margin: 0;
+  padding: 0;
 `;
 
 const Navbar = styled.div`
@@ -36,7 +38,7 @@ const Navbar = styled.div`
 
 const StyledButton = styled.button`
   background: #293133;
-  border: 1px white solid;
+  border: 2px white solid;
   color: #fcffec;
   height: 100%;
   width: 100%;

@@ -16,7 +16,7 @@ const MenuLink = styled(Link)`
   color: #04120e;
   &:hover {color: red;},
   &:focus {
-    color: black;
+    color: ${(p) => p.theme.colorText};
   }
   `;
 
@@ -29,23 +29,23 @@ const StyledHeadline = styled.h1`
 const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px hotpink solid;
+  border: ${(p) => p.theme.border};
   height: 100%;
   width: 100%;
   position: relative;
   justify-content: center;
   align-items: center;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
 `;
 
 export default function HomePage() {
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
-
   setComingFromHistory(false);
 
   const mid = "version 0.2";
   return (
     <AppContainer>
-      {" "}
       <StyledCardContainer>
         <StyledLinkContainer>
           <StyledHeadline>TAROT</StyledHeadline>

@@ -59,7 +59,7 @@ const MenuLink2 = styled(Link)`
   gap: 20rem;
   margin: 0.3rem 0;
   color: #04120e;
-  border-top-left-radius: 8px;
+
   border-bottom-left-radius: 8px;
 
   &:hover,
@@ -80,7 +80,7 @@ const MenuLink3 = styled(Link)`
   gap: 20rem;
   margin: 0.3rem 0;
   color: #04120e;
-  border-top-right-radius: 8px;
+
   border-bottom-right-radius: 8px;
   &:hover,
   &:focus {

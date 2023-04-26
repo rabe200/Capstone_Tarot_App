@@ -4,13 +4,14 @@ const StyledAppContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: black;
   height: 100%;
   justify-content: center;
   align-items: center;
   margin: 0;
   padding: 0;
   border-radius: 8px;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   @media only screen and (min-width: 360px) {
     width: 360px;
     height: 740px;

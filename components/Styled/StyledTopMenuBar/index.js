@@ -6,7 +6,7 @@ import NoteNotifier from "../../NoteNotifier";
 
 const StyledMenuLink = styled(Link)`
   text-decoration: none;
-  color: white;
+  color: ${(p) => p.theme.colorText};
   font-style: italic;
   font-size: 1rem;
 `;
@@ -18,12 +18,13 @@ const StyledTopBarContainer = styled.div`
   height: 40px;
   margin: 0;
   padding: 0;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
 `;
 
 const StyledTopBarLeft = styled.div`
   width: 100%;
   display: flex;
-  background-color: black;
   justify-content: center;
   align-items: center;
 `;
@@ -33,13 +34,11 @@ const StyledTopBarMiddle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
 `;
 
 const StyledTopBarRight = styled.div`
   width: 100%;
   display: flex;
-  background-color: black;
   align-items: center;
   justify-content: center;
 `;

@@ -14,14 +14,18 @@ const StyledSubmitButton = styled.button`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: hotpink;
+  background-color: black;
+  color: white;
   text-align: center;
   height: 40px;
   border-radius: 8px;
   font-size: 2rem;
   font-family: pixelOperator;
   &:hover {
-    background-color: red;
+    background-color: yellow;
+    color: black;
+    border: 2px solid white;
+    font-size: 3rem;
   }
 `;
 

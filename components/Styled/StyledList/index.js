@@ -4,8 +4,8 @@ const GoodList = styled.ul`
   padding: 0;
   margin: 0;
   list-style-type: none;
-  background-color: black;
-  color: white;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   height: 90%;
   overflow: auto;
   border-radius: 8px;

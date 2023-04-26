@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const CardBody = styled.figure`
   display: flex;
   flex-direction: column;
@@ -18,8 +19,8 @@ const DescriptionContainer = styled.div`
   max-height: 80%;
   padding: 0;
   margin: 0;
-  background: black;
-  color: white;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   overflow: auto;
   border-radius: 8px;
   padding: 8px;
@@ -47,11 +48,9 @@ export default function CardDescription({ card, desc }) {
   return (
     <Container>
       {desc === true ? (
-        <>
-          <CardBody>
-            <DescriptionContainer>{card.desc}</DescriptionContainer>
-          </CardBody>
-        </>
+        <CardBody>
+          <DescriptionContainer>{card.desc}</DescriptionContainer>
+        </CardBody>
       ) : (
         <CardBody>
           <DescriptionContainer>
