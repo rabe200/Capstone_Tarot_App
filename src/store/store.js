@@ -31,8 +31,6 @@ export const useStore = createLocalStorageStore(
     lastPageVisited: "",
     currentPage: "",
     comingFromHistory: false,
-    theme: { id: "dark", colorBackground: "black", colorText: "white" },
-    setTheme: (input) => set(() => ({ theme: input })),
     setComingFromHistory: (boolean) =>
       set(() => ({ comingFromHistory: boolean })),
     setLastPageVisited: (string) => set(() => ({ lastPageVisited: string })),

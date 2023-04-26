@@ -20,6 +20,8 @@ export default createGlobalStyle`
     justify-content: center;
     font-family: pixelOperator;
     overflow: auto;
+    background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
     @media only screen and (min-width: 360px) {
     width: 360px;
     height: 740px;

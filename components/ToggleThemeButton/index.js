@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import useStore from "../../src/store/store";
+import { useState } from "react";
+import useLocalStorage from "use-local-storage";
 
 const ToggleButton = styled.div`
   width: 100%;
@@ -28,11 +29,6 @@ const themeLight = {
   border: "2px black solid",
 };
 
-const StyledWrapper = styled.div`
-  background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorText};
-`;
-
 const ToggleText = styled.div`
   &:hover {
     background: red;
@@ -42,27 +38,27 @@ const ToggleText = styled.div`
 `;
 
 export default function ButtonThemeToggle() {
-  const localTheme = useStore((state) => state.theme);
-  const setLocalTheme = useStore((state) => state.setTheme);
+  const [localTheme, setLocalTheme] = useLocalStorage("localTheme", themeDark);
+
   function handleThemeToggle() {
-    if (localTheme.id === "dark") {
-      setLocalTheme({
-        ...themeDefault,
-        ...themeLight,
-      });
-    } else {
-      setLocalTheme({
-        ...themeDefault,
-        ...themeDark,
-      });
-    }
+    if (localTheme.id === "dark") setLocalTheme(themeLight);
+    else setLocalTheme(themeDark);
+    // if (localStorage.getItem("localTheme".id) === "dark") {
+    //   setLocalTheme({
+    //     ...themeDefault,
+    //     ...themeLight,
+    //   });
+    // } else {
+    //   setLocalTheme({
+    //     ...themeDefault,
+    //     ...themeDark,
+    //   });
+    // }
   }
 
   return (
-    <StyledWrapper>
-      <ToggleButton onClick={() => handleThemeToggle()}>
-        <ToggleText>TOGGLE THEME</ToggleText>
-      </ToggleButton>
-    </StyledWrapper>
+    <ToggleButton onClick={() => handleThemeToggle()}>
+      <ToggleText>TOGGLE THEME</ToggleText>
+    </ToggleButton>
   );
 }

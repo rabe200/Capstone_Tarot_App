@@ -35,7 +35,8 @@ const StyledLinkContainer = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
-  color: "white";
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
 `;
 
 export default function HomePage() {
@@ -45,7 +46,6 @@ export default function HomePage() {
   const mid = "version 0.2";
   return (
     <AppContainer>
-      {" "}
       <StyledCardContainer>
         <StyledLinkContainer>
           <StyledHeadline>TAROT</StyledHeadline>

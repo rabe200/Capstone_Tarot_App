@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ThemeProvider } from "styled-components";
 import useStore from "../../src/store/store";
 
 const StyledMain = styled.main`
@@ -14,6 +13,7 @@ const StyledMain = styled.main`
   margin: 0;
   padding: 0;
   border-radius: 8px;
+
   @media only screen and (min-width: 360px) {
     width: 360px;
     height: 740px;
@@ -59,9 +59,7 @@ export default function Layout({ children }) {
   const localTheme = useStore((state) => state.theme);
   return (
     <>
-      <ThemeProvider theme={localTheme}>
-        <StyledMain>{children}</StyledMain>
-      </ThemeProvider>
+      <StyledMain>{children}</StyledMain>
     </>
   );
 }
