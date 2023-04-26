@@ -10,6 +10,7 @@ import AppContainer from "../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import styled from "styled-components";
+import CatApi from "../../../components/CatApi";
 
 const StyledOptionsMenu = styled.ul`
   display: flex;
@@ -58,7 +59,8 @@ export default function Details() {
       <TopMenuBar mid={"404"} back={"/cards/0"} />
       <StyledCardContainer>
         <StyledOptionsMenu>
-          <h1>404 PAGE NOT FOUND</h1>
+          <h1>404 PAGE NOT MEOW</h1>
+          <CatApi />
         </StyledOptionsMenu>
       </StyledCardContainer>
       <StyledNavbar />
