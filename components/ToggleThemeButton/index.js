@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 import useLocalStorage from "use-local-storage";
 
 const ToggleButton = styled.div`
@@ -12,13 +11,6 @@ const themeDark = {
   colorBackground: "black",
   colorText: "white",
   colorLink: "yellow",
-};
-
-const themeDefault = {
-  id: "default",
-  colorText: "white",
-  colorPrimary: "rebeccapurple",
-  colorLink: "black",
 };
 
 const themeLight = {
@@ -43,17 +35,6 @@ export default function ButtonThemeToggle() {
   function handleThemeToggle() {
     if (localTheme.id === "dark") setLocalTheme(themeLight);
     else setLocalTheme(themeDark);
-    // if (localStorage.getItem("localTheme".id) === "dark") {
-    //   setLocalTheme({
-    //     ...themeDefault,
-    //     ...themeLight,
-    //   });
-    // } else {
-    //   setLocalTheme({
-    //     ...themeDefault,
-    //     ...themeDark,
-    //   });
-    // }
   }
 
   return (

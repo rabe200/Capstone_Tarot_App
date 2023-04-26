@@ -3,8 +3,6 @@ import Layout from "../components/Layout";
 import localFont from "@next/font/local";
 import { ThemeProvider } from "styled-components";
 import useLocalStorage from "use-local-storage";
-import { useEffect } from "react";
-import { useState } from "react";
 export const pixelOperator = localFont({
   src: "../styles/fonts/PixelOperatorMono.ttf",
 });
@@ -35,7 +33,6 @@ export default function App({ Component, pageProps }) {
 
   const currentTheme = getCurrentTheme();
 
-  console.log(currentTheme);
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle />
