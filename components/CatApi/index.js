@@ -12,7 +12,6 @@ export default function CatApi() {
 
   const dataPage = getRandomInt(1, 10);
   const dataIndex = getRandomInt(0, 9);
-  console.log("page", dataPage);
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
