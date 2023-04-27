@@ -9,6 +9,17 @@ import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
+import styled from "styled-components";
+import CatApi from "../../../components/CatApi";
+
+const StyledOptionsMenu = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
 
 export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -31,19 +42,28 @@ export default function Details() {
     return null;
   }
 
-  return (
-    id < 78 && (
-      <AppContainer>
-        <SearchBar />
+  return id < 78 ? (
+    <AppContainer>
+      <SearchBar />
 
-        <StyledCardContainer>
-          <GridLayout3Columns query1={previousPage} query2={nextPage}>
-            <CardPreviewImage card={card} clickable={true} />
-          </GridLayout3Columns>
-        </StyledCardContainer>
-        <TopMenuBar mid={card.name} card={card} />
-        <StyledNavbar />
-      </AppContainer>
-    )
+      <StyledCardContainer>
+        <GridLayout3Columns query1={previousPage} query2={nextPage}>
+          <CardPreviewImage card={card} clickable={true} />
+        </GridLayout3Columns>
+      </StyledCardContainer>
+      <TopMenuBar mid={card.name} card={card} />
+      <StyledNavbar />
+    </AppContainer>
+  ) : (
+    <AppContainer>
+      <TopMenuBar mid={"404"} back={"/cards/0"} />
+      <StyledCardContainer>
+        <StyledOptionsMenu>
+          <h1>404 PAGE NOT MEOW</h1>
+          <CatApi />
+        </StyledOptionsMenu>
+      </StyledCardContainer>
+      <StyledNavbar />
+    </AppContainer>
   );
 }
