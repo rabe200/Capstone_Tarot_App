@@ -18,7 +18,7 @@ const ArrowContainer = styled.div`
   grid-template-rows: 70% 30%;
   height: 100%;
   align-items: center;
-  background: ${(p) => p.theme.colorContainer};
+  background: ${(p) => p.theme.colorDeep};
 `;
 
 export default function GridLayout3Columns({

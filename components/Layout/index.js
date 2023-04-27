@@ -6,7 +6,7 @@ const StyledMain = styled.main`
   position: relative;
   width: 320px;
   height: 480px;
-  background: ${(p) => p.theme.colorBackground};
+  background: ${(p) => p.theme.colorDeep};
   color: ${(p) => p.theme.colorText};
   justify-content: center;
   align-items: center;

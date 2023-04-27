@@ -41,7 +41,7 @@ const DeleteButtonToggleBox = styled.div`
 const StyledNotes = styled.div`
   -moz-appearance: textfield-multiline;
   -webkit-appearance: textarea;
-  background: ${(p) => p.theme.colorBackground};
+  background: ${(p) => p.theme.colorContainer};
   color: ${(p) => p.theme.colorText};
   align-self: center;
   width: 100%;

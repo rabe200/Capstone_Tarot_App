@@ -10,7 +10,8 @@ const StyledAppContainer = styled.div`
   margin: 0;
   padding: 0;
   border-radius: 8px;
-  background: ${(p) => p.theme.colorContainer};
+  /* background: ${(p) => p.theme.colorDeep}; */
+  background: black;
   color: ${(p) => p.theme.colorText};
   @media only screen and (min-width: 360px) {
     width: 360px;

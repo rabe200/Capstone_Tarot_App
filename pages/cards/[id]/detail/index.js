@@ -13,8 +13,8 @@ import Link from "next/link";
 const StyledCategories = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorText};
+  border: ${(p) => p.theme.colorText} 2px solid;
+  background: ${(p) => p.theme.colorDeep};
   height: 100%;
   overflow: auto;
   justify-content: center;

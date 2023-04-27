@@ -12,6 +12,8 @@ const themeDark = {
   colorText: "white",
   colorLink: "yellow",
   border: "2px white solid",
+  colorDeep: "black",
+  colorFront: "#D2D2D2",
 };
 
 const themeLight = {
@@ -20,6 +22,8 @@ const themeLight = {
   colorText: "black",
   colorLink: "purple",
   border: "2px black solid",
+  colorDeep: "white",
+  colorFront: "#D2D2D2",
 };
 
 export const feldspar = {
@@ -29,6 +33,8 @@ export const feldspar = {
   colorText: "black",
   colorLink: "purple",
   border: "2px black solid",
+  colorDeep: "black",
+  colorFront: "#D2D2D2",
 };
 
 export const gossip = {
@@ -38,6 +44,8 @@ export const gossip = {
   colorText: "black",
   colorLink: "purple",
   border: "2px black solid",
+  colorDeep: "black",
+  colorFront: "yellow",
 };
 
 export const mediumpurple = {
@@ -47,15 +55,19 @@ export const mediumpurple = {
   colorText: "black",
   colorLink: "purple",
   border: "2px black solid",
+  colorDeep: "purple",
+  colorFront: "yellow",
 };
 
 export const palevioletred = {
   id: "palevioletred",
   colorBackground: "#DB7093",
-  colorContainer: "white",
-  colorText: "black",
+  colorContainer: "black",
+  colorText: "yellow",
   colorLink: "purple",
   border: "2px black solid",
+  colorDeep: "yellow",
+  colorFront: "aqua",
 };
 
 export const ToggleText = styled.div`

@@ -11,7 +11,7 @@ const StyledCardContainer1 = styled.div`
   overflow: auto;
 
   background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorContainer};
+  color: ${(p) => p.theme.colorText};
   border: 5px solid #000000;
   border-top-right-radius: 13px;
   border-top-left-radius: 13px;
