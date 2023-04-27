@@ -12,8 +12,8 @@ export default createGlobalStyle`
     flex-direction: column;
     margin: 0;
     font-family: system-ui;
-    width: 320px;
-    height: 480px;
+    width: 375px;
+    height: 667px;
     position: relative;
     display: flex;
     align-items: center;
@@ -22,11 +22,7 @@ export default createGlobalStyle`
     overflow: auto;
     background: ${(p) => p.theme.colorDeep};
   color: ${(p) => p.theme.colorText};
-    @media only screen and (min-width: 360px) {
-    width: 360px;
-    height: 740px;
-    border-radius: 8px;
-  }
+ 
 
     @media only screen and (min-width: 375px) {
     width: 375px;
@@ -67,5 +63,5 @@ export default createGlobalStyle`
     width: 99vw;
     height: 99vh;
   }
-
+  }
 `;

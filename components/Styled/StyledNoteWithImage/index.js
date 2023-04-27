@@ -7,8 +7,8 @@ import DeleteButton from "../../DeleteButton";
 
 const StyledImage = styled(Image)`
   border-radius: 8px;
-
   border: ${(p) => p.theme.colorText};
+  box-shadow: 0px 22px 13px ${(p) => p.theme.colorFront};
 `;
 
 const NoteWithImageContainer = styled.div`
@@ -16,6 +16,9 @@ const NoteWithImageContainer = styled.div`
   grid-template-columns: 4fr 1fr;
   grid-template-rows: 4fr 1fr;
   width: 100%;
+  height: 200px;
+  padding-top: 50px;
+  border: 2px black solid;
 `;
 
 const StyledButton = styled.div`
@@ -49,12 +52,14 @@ const StyledNotes = styled.div`
   font-size: 1.2em;
   overflow-wrap: break-word;
   border: ${(p) => p.theme.border};
+  box-shadow: 0px 22px 13px ${(p) => p.theme.colorFront};
 
-  height: ${(props) => (props.noteOverflow === "hidden" ? "120px" : "100%")};
+  height: ${(props) => (props.noteOverflow === "hidden" ? "60px" : "140px")};
   overflow: ${(props) => (props.noteOverflow === "hidden" ? "hidden" : "auto")};
   border: ${(p) => {
     p.theme.border;
   }};
+  z-index: 2000;
 `;
 
 export default function NoteWithImage({ card, toggle }) {

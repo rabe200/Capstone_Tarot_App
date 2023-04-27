@@ -5,16 +5,15 @@ import CardDescription from "../CardDescription";
 
 const CardBody = styled.figure`
   display: flex;
-  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   left: 0;
   margin: 0;
   padding: 0;
-  height: 420px;
+  height: 480px;
   width: 100%;
-  @media only screen and (min-height: 896px) {
+  @media only screen and (min-height: 895px) {
     height: 900px;
   }
 `;
@@ -25,15 +24,14 @@ const Container = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+
   justify-content: center;
   align-items: center;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 `;
 
-const StyledImage = styled(Image)`
+export const StyledImage = styled(Image)`
   &:hover {
     border: black solid 6px;
     border-radius: 8px;
@@ -45,8 +43,8 @@ const StyledImage = styled(Image)`
   }
 
   @media only screen and (min-width: 360px) {
-    width: 200px;
-    height: 350px;
+    width: 160px;
+    height: 320px;
   }
 
   @media only screen and (min-width: 540px) {
@@ -80,8 +78,8 @@ export default function CardPreviewImage({ card, clickable }) {
         <CardBody>
           <StyledImage
             src={card.image}
-            width="200"
-            height="350"
+            width="100"
+            height="210"
             alt={card.name}
           />
         </CardBody>

@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
 const StyledSvg = styled.svg`
-  fill: white;
-  stroke: #fcffec;
+  stroke: ${(prop) => prop.theme.colorArrow};
+  fill: ${(prop) => prop.theme.colorArrow};
+
   &:hover {
     stroke: aqua;
-    fill: white;
+    fill: aqua;
   }
 `;
+
 export default function ArrowIconLeft(props) {
   return (
     <StyledSvg
+      transform="skew(2deg 2deg)"
       width={21}
       height={24}
       xmlns="http://www.w3.org/2000/svg"

@@ -6,19 +6,14 @@ import StyledCardContainer from "../../../components/Styled/StyledCardContainer"
 import styled from "styled-components";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
-import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
-import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import { useCallback } from "react";
 import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";
-
-const ListContainer = styled.div`
-  width: 100%;
-`;
 
 const StyledCardName = styled.h1`
   display: flex;
   width: 100%;
-  background: yellow;
+  background: ${(p) => p.theme.colorFront};
+  box-shadow: 0px 20px 30px ${(p) => p.theme.colorFront};
   justify-content: center;
   font-size: 1.4em;
 `;
@@ -31,15 +26,20 @@ const StyledNavi = styled.div`
 const StyledFormular = styled.form`
   height: 100%;
   width: 100%;
+  box-shadow: 0px 0px 60px ${(p) => p.theme.colorBackground} inset;
 `;
-
+const ListContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 const StyledList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  box-shadow: 0px 0px 60px ${(p) => p.theme.colorFront};
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
-  height: 90%;
+  height: 100%;
   overflow: auto;
   border-radius: 8px;
   width: 100%;
@@ -57,6 +57,8 @@ const StyledBarContainer = styled.div`
 `;
 
 const StyledFooter = styled.footer`
+  box-shadow: 0px 0px 60px ${(p) => p.theme.colorFront};
+
   position: relative;
   display: flex;
   flex-direction: row;
@@ -150,7 +152,6 @@ export default function History() {
       <StyledFooter>
         <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
         <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
-
         <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
       </StyledFooter>
       <StyledBarContainer>
@@ -177,57 +178,49 @@ export default function History() {
       </StyledBarContainer>
 
       <StyledCardContainer>
-        <GridLayout3Columns
-          query1={"null"}
-          query2={"null"}
-          navigation={"hidden"}
-        >
-          <ListContainer>
-            <StyledList>
-              {sortedItems.map((card) => {
-                return (
-                  <Fragment key={card.uuid}>
-                    <li>
-                      <b>{new Date(card.date).toLocaleDateString()}</b>
-                    </li>
-                    <li>
-                      <StyledCardName>
-                        <StyledLink href={`/cards/${card.id}`}>
-                          {card.name}
-                        </StyledLink>
-                      </StyledCardName>
-                    </li>
-                    <li>
-                      {dayNames[card.day]}{" "}
-                      {card.hour === 0
-                        ? "midnight"
-                        : card.hour < 4
-                        ? "night"
-                        : card.hour < 7
-                        ? "early morning"
-                        : card.hour < 12
-                        ? "morning"
-                        : card.hour < 13
-                        ? "midday"
-                        : card.hour < 17
-                        ? "afternoon"
-                        : card.hour < 20
-                        ? "early evening"
-                        : card.hour < 25
-                        ? "late evening"
-                        : "out of time"}
-                    </li>
-                    <NoteWithImage card={card} toggle={showButtons} />
-                  </Fragment>
-                );
-              })}
-            </StyledList>
-          </ListContainer>
-        </GridLayout3Columns>
+        <ListContainer>
+          <StyledList>
+            {sortedItems.map((card) => {
+              return (
+                <Fragment key={card.uuid}>
+                  <li>
+                    <b>{new Date(card.date).toLocaleDateString()}</b>
+                  </li>
+                  <li>
+                    <StyledCardName>
+                      <StyledLink href={`/cards/${card.id}`}>
+                        {card.name}
+                      </StyledLink>
+                    </StyledCardName>
+                  </li>
+                  <li>
+                    {dayNames[card.day]}
+                    {card.hour === 0
+                      ? "midnight"
+                      : card.hour < 4
+                      ? "night"
+                      : card.hour < 7
+                      ? "early morning"
+                      : card.hour < 12
+                      ? "morning"
+                      : card.hour < 13
+                      ? "midday"
+                      : card.hour < 17
+                      ? "afternoon"
+                      : card.hour < 20
+                      ? "early evening"
+                      : card.hour < 25
+                      ? "late evening"
+                      : "out of time"}
+                  </li>
+                  <NoteWithImage card={card} toggle={showButtons} />{" "}
+                </Fragment>
+              );
+            })}
+          </StyledList>
+        </ListContainer>
       </StyledCardContainer>
-
-      <TopMenuBar mid={"history"} />
-      <StyledNavbar />
+      <TopMenuBar query2={"/dailyCard"} mid={"history"} />
     </AppContainer>
   );
 }

@@ -26,7 +26,6 @@ export default function NoteFormular() {
     color: white;
     text-align: center;
     height: 40px;
-    border-radius: 8px;
     font-size: 2rem;
     font-family: pixelOperator;
     &:hover {
@@ -60,50 +59,43 @@ export default function NoteFormular() {
   return (
     <>
       <AppContainer>
-        <TopMenuBar mid={"how do you feel"} />
         <StyledCardContainer>
-          <GridLayout3Columns
-            query1={"null"}
-            query2={"null"}
-            navigation={"hidden"}
+          <div
+            style={{
+              display: "flex",
+              height: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            <div
-              style={{
-                display: "flex",
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+            <form
+              id="textInput"
+              aria-label="formular"
+              onSubmit={handleSubmit}
+              style={{ height: "80%" }}
             >
-              <form
-                id="textInput"
-                aria-label="formular"
-                onSubmit={handleSubmit}
-                style={{ height: "80%" }}
-              >
-                <label htmlFor="note">
-                  <textarea
-                    required
-                    type="text"
-                    id="note"
-                    name="note"
-                    placeholder="type here"
-                    aria-label="note"
-                    value={inputValue}
-                    onChange={(event) => {
-                      setInputValue(event.target.value);
-                    }}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      fontSize: "2rem",
-                      borderRadius: 8,
-                    }}
-                  />
-                </label>
-              </form>
-            </div>
-          </GridLayout3Columns>
+              <label htmlFor="note">
+                <textarea
+                  required
+                  type="text"
+                  id="note"
+                  name="note"
+                  placeholder="type here"
+                  aria-label="note"
+                  value={inputValue}
+                  onChange={(event) => {
+                    setInputValue(event.target.value);
+                  }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    fontSize: "2rem",
+                    borderRadius: 8,
+                  }}
+                />
+              </label>
+            </form>
+          </div>
         </StyledCardContainer>
         <StyledSubmitButton
           form="textInput"
@@ -113,6 +105,7 @@ export default function NoteFormular() {
         >
           SUBMIT
         </StyledSubmitButton>
+        <TopMenuBar mid={"how do you feel"} />
       </AppContainer>
     </>
   );

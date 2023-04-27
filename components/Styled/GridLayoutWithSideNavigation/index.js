@@ -8,17 +8,50 @@ const Styled3Grid = styled.div`
   grid-template-columns: 0.1fr 0.8fr 0.1fr;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 375px;
   height: 100%;
+  box-shadow: 20px 0px 151px ${(p) => p.theme.colorFront} inset;
+  overflow: hidden;
+
   color: ${(p) => p.theme.colorContainer};
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+    height: 100%;
+  }
+
+  @media only screen and (min-width: 480px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const ArrowContainer = styled.div`
   display: grid;
-  grid-template-rows: 70% 30%;
-  height: 100%;
+  grid-template-rows: 50% 30% 20%;
+  height: 480px;
   align-items: center;
   background: ${(p) => p.theme.colorDeep};
+  box-shadow: 0px 22px 15px ${(p) => p.theme.colorFront};
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+    height: 100%;
+  }
+
+  @media only screen and (min-height: 800px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export default function GridLayout3Columns({
@@ -34,12 +67,7 @@ export default function GridLayout3Columns({
       <ArrowContainer onClick={onClick1}>
         <div></div>
         <Link href={query1} hidden={navigation}>
-          <ArrowIconLeft
-            style={{
-              stroke: `${(p) => p.theme.colorText}`,
-              fill: `${(p) => p.theme.colorText}`,
-            }}
-          />
+          <ArrowIconLeft />
         </Link>
       </ArrowContainer>
 
@@ -48,12 +76,7 @@ export default function GridLayout3Columns({
       <ArrowContainer onClick={onClick2}>
         <div></div>
         <Link href={query2} hidden={navigation}>
-          <ArrowIconRight
-            style={{
-              stroke: `${(p) => p.theme.colorText}`,
-              fill: `${(p) => p.theme.colorText}`,
-            }}
-          />
+          <ArrowIconRight />
         </Link>
       </ArrowContainer>
     </Styled3Grid>

@@ -8,7 +8,6 @@ import SearchBar from "../../../components/SearchBar";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
-import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import styled from "styled-components";
 import CatApi from "../../../components/CatApi";
 
@@ -41,7 +40,6 @@ export default function Details() {
   if (!hasMounted) {
     return null;
   }
-
   return id < 78 ? (
     <AppContainer>
       <SearchBar />
@@ -52,18 +50,16 @@ export default function Details() {
         </GridLayout3Columns>
       </StyledCardContainer>
       <TopMenuBar mid={card.name} card={card} />
-      <StyledNavbar />
     </AppContainer>
   ) : (
     <AppContainer>
-      <TopMenuBar mid={"404"} back={"/cards/0"} />
       <StyledCardContainer>
         <StyledOptionsMenu>
           <h1>404 PAGE NOT MEOW</h1>
           <CatApi />
         </StyledOptionsMenu>
       </StyledCardContainer>
-      <StyledNavbar />
+      <TopMenuBar mid={"404"} back={"/cards/0"} />
     </AppContainer>
   );
 }

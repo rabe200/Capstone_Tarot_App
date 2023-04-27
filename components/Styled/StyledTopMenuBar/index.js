@@ -1,10 +1,16 @@
 import styled from "styled-components";
 import Link from "next/link";
-import useStore from "../../../src/store/store";
 import { useRouter } from "next/router";
 import NoteNotifier from "../../NoteNotifier";
-
+import StyledNavbar from "../StyledNavbar";
 const StyledMenuLink = styled(Link)`
+  text-decoration: none;
+  color: ${(p) => p.theme.colorText};
+  font-style: italic;
+  font-size: 1rem;
+`;
+
+const StyledMenuBack = styled.div`
   text-decoration: none;
   color: ${(p) => p.theme.colorText};
   font-style: italic;
@@ -15,7 +21,7 @@ const StyledTopBarContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  height: 40px;
+  height: 52px;
   margin: 0;
   padding: 0;
   background: ${(p) => p.theme.colorBackground};
@@ -43,53 +49,44 @@ const StyledTopBarRight = styled.div`
   justify-content: center;
 `;
 
-export default function TopMenuBar({ menu, mid, back, card }) {
-  if (!menu) {
-    menu = "/";
-  }
-  if (!back) {
-    back = "/DailyCard";
-  }
+export default function TopMenuBar({ mid, card, hidden }) {
   const router = useRouter();
-  const currentPage = router.pathname;
-
-  const comingFromHistory = useStore((state) => state.comingFromHistory);
-
-  if (comingFromHistory === true) {
-    back = "/cards/history";
-  } else {
-    back = back;
-  }
-
-  if (currentPage === "/cards/history") {
-    back = "/DailyCard";
-  }
 
   return card ? (
-    <StyledTopBarContainer>
-      <StyledTopBarLeft>
-        <StyledMenuLink href={`${menu}`}>MENU</StyledMenuLink>{" "}
-      </StyledTopBarLeft>
-      <StyledTopBarMiddle>
-        {mid} <NoteNotifier currentCard={card} />
-      </StyledTopBarMiddle>
-      <StyledTopBarRight>
-        <StyledMenuLink href={`${back}`}>
-          {comingFromHistory ? "CLOSE" : "BACK"}
-        </StyledMenuLink>{" "}
-      </StyledTopBarRight>
-    </StyledTopBarContainer>
+    <>
+      <StyledTopBarContainer>
+        <StyledTopBarLeft>
+          <StyledMenuLink href={`/`} hidden={hidden}>
+            MENU
+          </StyledMenuLink>{" "}
+        </StyledTopBarLeft>
+        <StyledTopBarMiddle>
+          {mid} <NoteNotifier currentCard={card} />
+        </StyledTopBarMiddle>
+        <StyledTopBarRight>
+          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
+            back
+          </StyledMenuBack>
+        </StyledTopBarRight>
+      </StyledTopBarContainer>
+      <StyledNavbar />
+    </>
   ) : (
-    <StyledTopBarContainer>
-      <StyledTopBarLeft>
-        <StyledMenuLink href={`${menu}`}>MENU</StyledMenuLink>{" "}
-      </StyledTopBarLeft>
-      <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
-      <StyledTopBarRight>
-        <StyledMenuLink href={`${back}`}>
-          {comingFromHistory ? "CLOSE" : "BACK"}
-        </StyledMenuLink>{" "}
-      </StyledTopBarRight>
-    </StyledTopBarContainer>
+    <>
+      <StyledTopBarContainer>
+        <StyledTopBarLeft>
+          <StyledMenuLink hidden={hidden} href={`${"/"}`}>
+            MENU
+          </StyledMenuLink>{" "}
+        </StyledTopBarLeft>
+        <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
+        <StyledTopBarRight>
+          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
+            {"back"}
+          </StyledMenuBack>
+        </StyledTopBarRight>
+      </StyledTopBarContainer>
+      <StyledNavbar />
+    </>
   );
 }

@@ -3,18 +3,17 @@ import useStore from "../../src/store/store";
 import styled from "styled-components";
 
 const StyledButton = styled.div`
-  border: ${(p) => p.theme.border};
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
   border-radius: 8px;
-  width: 3em;
+  width: 100%;
 `;
 const StyledSection = styled.section`
   display: flex;
   align-items: center;
   justify-items: center;
   height: 100%;
-  width: 20%;
+  width: 100%;
 `;
 
 export default function DeleteButton({ uuid }) {

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const StyledSvg = styled.svg`
-  fill: white;
-  stroke: #fcffec;
+  stroke: ${(prop) => prop.theme.colorArrow};
+  fill: ${(prop) => prop.theme.colorArrow};
   &:hover {
-    stroke: yellow;
-    fill: white;
+    stroke: magenta;
+    fill: magenta;
   }
 `;
 
@@ -14,9 +14,10 @@ export default function ArrowIconRight(props) {
     <StyledSvg
       width={21}
       height={24}
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      stroke={`${(props) => props.theme.colorArrow}`}
+      fill={`${(props) => props.theme.colorArrow}`}
     >
       <path
         fillRule="evenodd"

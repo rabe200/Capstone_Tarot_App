@@ -7,15 +7,11 @@ const StyledCardContainer1 = styled.div`
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 80%;
+  height: 99vh;
   overflow: auto;
-
+  position: relative;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
-  border: 5px solid #000000;
-  border-top-right-radius: 13px;
-  border-top-left-radius: 13px;
-  position: relative;
   margin: 0;
   padding: 0;
 `;

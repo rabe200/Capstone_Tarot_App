@@ -1,6 +1,5 @@
 import AppContainer from "../components/Styled/StyledAppContainer";
 import StyledCardContainer from "../components/Styled/StyledCardContainer";
-import StyledNavbar from "../components/Styled/StyledNavbar";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import styled from "styled-components";
 import ButtonThemeToggle from "../components/ToggleThemeButton";
@@ -25,8 +24,6 @@ const StyledH1 = styled.h1`
 export default function OptionsMenu() {
   return (
     <AppContainer>
-      <TopMenuBar mid={"credits"} back={"/"} />
-
       <StyledCardContainer>
         <StyledOptionsMenu>
           <StyledH1>
@@ -34,7 +31,7 @@ export default function OptionsMenu() {
           </StyledH1>
         </StyledOptionsMenu>
       </StyledCardContainer>
-      <StyledNavbar />
+      <TopMenuBar mid={"credits"} back={"/"} />
     </AppContainer>
   );
 }

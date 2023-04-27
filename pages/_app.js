@@ -2,7 +2,8 @@ import GlobalStyle from "../styles/styles";
 import Layout from "../components/Layout";
 import localFont from "@next/font/local";
 import { ThemeProvider } from "styled-components";
-import useLocalStorage from "use-local-storage";
+import useLocalStorageState from "use-local-storage-state";
+
 import { gossip } from "../components/ToggleThemeButton";
 import { palevioletred } from "../components/ToggleThemeButton";
 import { mediumpurple } from "../components/ToggleThemeButton";
@@ -27,8 +28,9 @@ export default function App({ Component, pageProps }) {
     border: "2px black solid",
   };
 
-  const [localTheme] = useLocalStorage("localTheme", themeLight);
-
+  const [localTheme, setLocalTheme] = useLocalStorageState("localTheme", {
+    defaultValue: themeLight,
+  });
   function getCurrentTheme() {
     let currentTheme = "";
     if (localTheme.id === "dark") return (currentTheme = themeDark);

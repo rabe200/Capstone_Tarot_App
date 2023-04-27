@@ -14,6 +14,7 @@ const themeDark = {
   border: "2px white solid",
   colorDeep: "black",
   colorFront: "#D2D2D2",
+  colorArrow: "white",
 };
 
 const themeLight = {
@@ -24,39 +25,45 @@ const themeLight = {
   border: "2px black solid",
   colorDeep: "white",
   colorFront: "#D2D2D2",
+  colorArrow: "black",
 };
 
 export const feldspar = {
   id: "feldspar",
-  colorBackground: "#D08F76",
-  colorContainer: "white",
-  colorText: "black",
+  colorBackground:
+    "radial-gradient(circle, rgba(250,93,85,1) 0%, rgba(240,147,60,1) 85%, rgba(240,195,60,1) 100%);",
+  colorContainer: "crimson",
+  colorText: "aqua",
   colorLink: "purple",
   border: "2px black solid",
-  colorDeep: "black",
-  colorFront: "#D2D2D2",
+  colorDeep: "orange",
+  colorFront:
+    "radial-gradient(circle, rgba(250,93,85,1) 0%, rgba(240,147,60,1) 85%, rgba(240,195,60,1) 100%);",
+  colorArrow: "black",
 };
 
 export const gossip = {
   id: "gossip",
   colorBackground: "#91E567",
-  colorContainer: "white",
-  colorText: "black",
-  colorLink: "purple",
-  border: "2px black solid",
-  colorDeep: "black",
-  colorFront: "yellow",
-};
-
-export const mediumpurple = {
-  id: "mediumpurple",
-  colorBackground: "mediumpurple",
   colorContainer: "yellow",
   colorText: "black",
   colorLink: "purple",
   border: "2px black solid",
-  colorDeep: "purple",
+  colorDeep: "#91E567",
   colorFront: "yellow",
+  colorArrow: "white",
+};
+
+export const mediumpurple = {
+  id: "mediumpurple",
+  colorBackground: "yellow",
+  colorContainer: "white",
+  colorText: "black",
+  colorLink: "purple",
+  border: "2px black solid",
+  colorDeep: "transparent",
+  colorFront: "yellow",
+  colorArrow: "",
 };
 
 export const palevioletred = {
@@ -66,8 +73,9 @@ export const palevioletred = {
   colorText: "yellow",
   colorLink: "purple",
   border: "2px black solid",
-  colorDeep: "yellow",
-  colorFront: "aqua",
+  colorDeep: "transparent",
+  colorFront: "palevioletred",
+  colorArrow: "",
 };
 
 export const ToggleText = styled.div`

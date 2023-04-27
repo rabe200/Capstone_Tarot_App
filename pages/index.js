@@ -4,7 +4,7 @@ import Link from "next/link";
 import AppContainer from "../components/Styled/StyledAppContainer";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 
-const MenuLink = styled(Link)`
+export const MenuLink = styled(Link)`
     font-size: 2rem;
     text-decoration: none;
     color: black
@@ -50,7 +50,7 @@ export default function HomePage() {
           <MenuLink href={"/credits"}>CREDITS</MenuLink>
         </StyledLinkContainer>
       </StyledCardContainer>
-      <TopMenuBar menu={"/"} mid={mid} back={"/"} />
+      <TopMenuBar hidden={"hidden"} menu={"/"} mid={mid} back={"/"} />
     </AppContainer>
   );
 }

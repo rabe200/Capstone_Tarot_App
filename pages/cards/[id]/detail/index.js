@@ -7,35 +7,53 @@ import SearchBar from "../../../../components/SearchBar";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
-import StyledNavbar from "../../../../components/Styled/StyledNavbar";
-import Link from "next/link";
-
-const StyledCategories = styled.div`
+import { MenuLink } from "../../..";
+export const StyledCategories = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   border: ${(p) => p.theme.colorText} 2px solid;
   background: ${(p) => p.theme.colorDeep};
-  height: 100%;
+  color: ${(p) => p.theme.colorText};
+  height: 90%;
   overflow: auto;
-  justify-content: center;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0px 35px 22px ${(p) => p.theme.colorFront};
 `;
 
-const StyledCategoryName = styled.u`
+export const StyledCategoryName = styled.div`
   font-size: 2rem;
+  border: ${(p) => p.theme.colorText} 2px solid;
+  background: ${(p) => p.theme.colorFront};
+  color: ${(p) => p.theme.colorText};
+  height: 100%;
+  width: 100%;
 `;
 
-const StyledCategoryContent = styled.section`
+export const StyledCategoryContent = styled.div`
   margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  border: ${(p) => p.theme.colorText} 2px solid;
+  background: ${(p) => p.theme.colorContainer};
+  color: ${(p) => p.theme.colorText};
+  font-size: 1.4em;
+  height: 100%;
+  width: 100%;
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
 `;
 
 export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
 
-  const queryName = router.query.optionSelect;
-  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
-
-  setLastPageVisited(queryName);
   const id = router ? router.query.id : null;
   const cards = useStore((state) => state.allCards);
   const card = cards.find((card) => card.id === `${id}`);
@@ -60,28 +78,32 @@ export default function Details() {
         <StyledCardContainer>
           <GridLayout3Columns query1={previousPage} query2={nextPage}>
             <StyledCategories>
-              <div>
-                <StyledCategoryName>meaning upside</StyledCategoryName>
-                <StyledCategoryContent>{card.meaning_up}</StyledCategoryContent>
-              </div>
-              <div>
+              <StyledCategoryName>meaning upside</StyledCategoryName>
+              <StyledCategoryContent>{card.meaning_up}</StyledCategoryContent>
+
+              <ContentContainer>
                 <StyledCategoryName>meaning reversed</StyledCategoryName>
                 <StyledCategoryContent>
                   {card.meaning_rev}
                 </StyledCategoryContent>
-              </div>
-              <div>
-                <StyledCategoryName>notes</StyledCategoryName>
-                <StyledCategoryContent>
-                  <Link href={`/cards/${card.id}/notes/`}>click</Link>
-                </StyledCategoryContent>
-              </div>
+              </ContentContainer>
+              <StyledCategoryContent>
+                <StyledCategoryName>
+                  <MenuLink href={`/cards/${card.id}/notes/`}>NOTES</MenuLink>
+                </StyledCategoryName>
+                <StyledCategoryName>
+                  <MenuLink href={`/cards/${card.id}/stats/`}>STATS</MenuLink>
+                </StyledCategoryName>
+                <StyledCategoryName>
+                  <MenuLink href={`/cards/${card.id}/description/`}>
+                    DESCRIPTION
+                  </MenuLink>
+                </StyledCategoryName>
+              </StyledCategoryContent>
             </StyledCategories>
           </GridLayout3Columns>
         </StyledCardContainer>
         <TopMenuBar card={card} mid={card.name} back={`/cards/${card.id}`} />
-
-        <StyledNavbar />
       </AppContainer>
     )
   );
