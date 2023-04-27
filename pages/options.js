@@ -32,9 +32,6 @@ export default function OptionsMenu() {
           <StyledH1>
             <ButtonThemeToggle />
           </StyledH1>
-          <StyledH1>UNDER CONSTRUCTION</StyledH1>
-          <StyledH1>UNDER CONSTRUCTION</StyledH1>
-          <StyledH1>UNDER CONSTRUCTION</StyledH1>
         </StyledOptionsMenu>
       </StyledCardContainer>
       <StyledNavbar />

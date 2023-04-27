@@ -7,7 +7,6 @@ import styled from "styled-components";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
-import { useRouter } from "next/router";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import { useCallback } from "react";
 import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";
@@ -103,8 +102,6 @@ export default function History() {
   );
   const drawnCards = useStore((state) => state.drawnCards);
   const cardsDrawn = useStore((state) => state.cardsDrawn);
-  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
-  const router = useRouter();
   const [selectedOption, setSelectedOption] = useState("nameUp");
   const [showButtons, setShowButtons] = useState(false);
   const dayNames = [
@@ -121,8 +118,6 @@ export default function History() {
     setShowButtons(!showButtons);
   }
 
-  setLastPageVisited(router.pathname);
-
   const sortedItems = drawnCards.sort((a, b) => {
     if (selectedOption === "dateUp") {
       return new Date(a.date) - new Date(b.date);
@@ -138,8 +133,6 @@ export default function History() {
       return a.second - b.second;
     }
   });
-
-  const setComingFromHistory = useStore((state) => state.setComingFromHistory);
 
   useEffect(() => {
     updateCardsDrawn();
@@ -199,10 +192,7 @@ export default function History() {
                     </li>
                     <li>
                       <StyledCardName>
-                        <StyledLink
-                          href={`/cards/${card.id}`}
-                          onClick={setComingFromHistory(true)}
-                        >
+                        <StyledLink href={`/cards/${card.id}`}>
                           {card.name}
                         </StyledLink>
                       </StyledCardName>

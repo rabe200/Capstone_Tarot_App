@@ -19,7 +19,7 @@ const DescriptionContainer = styled.div`
   max-height: 80%;
   padding: 0;
   margin: 0;
-  background: ${(p) => p.theme.colorBackground};
+  background: ${(p) => p.theme.colorContainer};
   color: ${(p) => p.theme.colorText};
   overflow: auto;
   border-radius: 8px;

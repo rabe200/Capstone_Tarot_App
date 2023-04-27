@@ -10,6 +10,7 @@ const Styled3Grid = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  color: ${(p) => p.theme.colorContainer};
 `;
 
 const ArrowContainer = styled.div`
@@ -17,6 +18,7 @@ const ArrowContainer = styled.div`
   grid-template-rows: 70% 30%;
   height: 100%;
   align-items: center;
+  background: ${(p) => p.theme.colorContainer};
 `;
 
 export default function GridLayout3Columns({

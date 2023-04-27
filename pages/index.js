@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Link from "next/link";
 import AppContainer from "../components/Styled/StyledAppContainer";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
-import useStore from "../src/store/store";
 
 const MenuLink = styled(Link)`
     font-size: 2rem;
@@ -40,9 +39,6 @@ const StyledLinkContainer = styled.div`
 `;
 
 export default function HomePage() {
-  const setComingFromHistory = useStore((state) => state.setComingFromHistory);
-  setComingFromHistory(false);
-
   const mid = "version 0.2";
   return (
     <AppContainer>
