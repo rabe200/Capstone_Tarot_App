@@ -8,7 +8,7 @@ const StyledCardContainer1 = styled.div`
   text-align: center;
   width: 100%;
   height: 80%;
-  overflow: hidden;
+  overflow: auto;
   background: #fcfcfc;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};

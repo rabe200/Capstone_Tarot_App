@@ -229,7 +229,7 @@ export const useStore = createLocalStorageStore(
               description: get().currentCard.desc,
               meaning_up: get().currentCard.meaning_up,
               meaning_rev: get().currentCard.meaning_rev,
-              notes: "",
+              notes: "no note yet",
               arrayIndex: state.cardsDrawn,
             },
           ],

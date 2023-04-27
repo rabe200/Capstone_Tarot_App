@@ -6,7 +6,6 @@ import ArrowIconRight from "../ArrowIconRight";
 const Styled3Grid = styled.div`
   display: grid;
   grid-template-columns: 0.1fr 0.8fr 0.1fr;
-  background: palevioletred;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -33,7 +32,12 @@ export default function GridLayout3Columns({
       <ArrowContainer onClick={onClick1}>
         <div></div>
         <Link href={query1} hidden={navigation}>
-          <ArrowIconLeft />
+          <ArrowIconLeft
+            style={{
+              stroke: `${(p) => p.theme.colorText}`,
+              fill: `${(p) => p.theme.colorText}`,
+            }}
+          />
         </Link>
       </ArrowContainer>
 
@@ -42,7 +46,12 @@ export default function GridLayout3Columns({
       <ArrowContainer onClick={onClick2}>
         <div></div>
         <Link href={query2} hidden={navigation}>
-          <ArrowIconRight />
+          <ArrowIconRight
+            style={{
+              stroke: `${(p) => p.theme.colorText}`,
+              fill: `${(p) => p.theme.colorText}`,
+            }}
+          />
         </Link>
       </ArrowContainer>
     </Styled3Grid>

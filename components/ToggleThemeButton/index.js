@@ -11,6 +11,7 @@ const themeDark = {
   colorBackground: "black",
   colorText: "white",
   colorLink: "yellow",
+  border: "2px white solid",
 };
 
 const themeLight = {

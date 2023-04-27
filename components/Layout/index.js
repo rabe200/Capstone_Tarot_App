@@ -53,6 +53,11 @@ const StyledMain = styled.main`
     width: 768px;
     height: 1024px;
   }
+
+  @media only screen and (min-height: 1025px) {
+    width: 99vw;
+    height: 99vh;
+  }
 `;
 
 export default function Layout({ children }) {
