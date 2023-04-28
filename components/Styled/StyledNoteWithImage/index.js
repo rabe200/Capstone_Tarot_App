@@ -22,12 +22,11 @@ const NoteWithImageContainer = styled.div`
 `;
 
 const StyledButton = styled.div`
-  border: white solid 2px;
   background: black;
-  background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorText};
-  border-radius: 8px;
+  background: ${(p) => p.theme.colorText};
+  color: ${(p) => p.theme.colorBackground};
   width: 3em;
+  border-radius: 8px;
 `;
 
 const ButtonBox = styled.div`
@@ -44,6 +43,7 @@ const DeleteButtonToggleBox = styled.div`
 const StyledNotes = styled.div`
   -moz-appearance: textfield-multiline;
   -webkit-appearance: textarea;
+  border-radius: 8px;
   background: ${(p) => p.theme.colorContainer};
   color: ${(p) => p.theme.colorText};
   align-self: center;
@@ -52,10 +52,9 @@ const StyledNotes = styled.div`
   font-size: 1.2em;
   overflow-wrap: break-word;
   border: ${(p) => p.theme.border};
-  box-shadow: 0px 22px 13px ${(p) => p.theme.colorFront};
-
-  height: ${(props) => (props.noteOverflow === "hidden" ? "60px" : "140px")};
-  overflow: ${(props) => (props.noteOverflow === "hidden" ? "hidden" : "auto")};
+  max-height: ${(props) =>
+    props.noteOverflow === "hidden" ? "120px" : "70px"};
+  overflow: ${(props) => (props.noteOverflow === "hidden" ? "auto" : "hidden")};
   border: ${(p) => {
     p.theme.border;
   }};

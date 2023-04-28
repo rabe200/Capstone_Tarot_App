@@ -3,14 +3,13 @@ import CardPreviewImage from "../../../components/CardPreviewImage";
 import { useState, useEffect } from "react";
 import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import useStore from "../../../src/store/store";
-
 import SearchBar from "../../../components/SearchBar";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
 import styled from "styled-components";
 import CatApi from "../../../components/CatApi";
-
+import StyledNavbar from "../../../components/Styled/StyledNavbar";
 const StyledOptionsMenu = styled.ul`
   display: flex;
   flex-direction: column;
@@ -42,6 +41,7 @@ export default function Details() {
   }
   return id < 78 ? (
     <AppContainer>
+      <TopMenuBar mid={card.name} card={card} />
       <SearchBar />
 
       <StyledCardContainer>
@@ -49,17 +49,19 @@ export default function Details() {
           <CardPreviewImage card={card} clickable={true} />
         </GridLayout3Columns>
       </StyledCardContainer>
-      <TopMenuBar mid={card.name} card={card} />
+      <StyledNavbar />
     </AppContainer>
   ) : (
     <AppContainer>
+      <TopMenuBar mid={"404"} back={"/cards/0"} />
+
       <StyledCardContainer>
         <StyledOptionsMenu>
           <h1>404 PAGE NOT MEOW</h1>
           <CatApi />
         </StyledOptionsMenu>
       </StyledCardContainer>
-      <TopMenuBar mid={"404"} back={"/cards/0"} />
+      <StyledNavbar />
     </AppContainer>
   );
 }

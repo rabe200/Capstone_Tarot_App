@@ -5,9 +5,12 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import FlipCard from "../../../components/FlipCard";
+import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
+import StyledNavbar from "../../../components/Styled/StyledNavbar";
 
 const StyledContinueButton = styled.div`
   display: flex;
+  position: sticky;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -19,6 +22,11 @@ const StyledContinueButton = styled.div`
   &:hover {
     background-color: magenta;
   }
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledLink = styled(Link)`
@@ -41,12 +49,17 @@ export default function ShowCard() {
     return (
       <>
         <AppContainer>
+          <TopMenuBar />
           <StyledCardContainer>
-            <FlipCard card={currentCard} />
+            <CardContainer>
+              <FlipCard card={currentCard} />
+              <StyledLink href={"/cards/dailycard/notes"}>
+                <StyledContinueButton>CONTINUE</StyledContinueButton>
+              </StyledLink>
+            </CardContainer>
           </StyledCardContainer>
-          <StyledLink href={"/cards/dailycard/notes"}>
-            <StyledContinueButton>CONTINUE</StyledContinueButton>
-          </StyledLink>
+
+          <StyledNavbar />
         </AppContainer>
       </>
     );

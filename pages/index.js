@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import AppContainer from "../components/Styled/StyledAppContainer";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
+import StyledNavbar from "../components/Styled/StyledNavbar";
 
 export const MenuLink = styled(Link)`
     font-size: 2rem;
@@ -42,6 +43,8 @@ export default function HomePage() {
   const mid = "version 0.2";
   return (
     <AppContainer>
+      <TopMenuBar hidden={"hidden"} menu={"/"} mid={mid} back={"/"} />
+
       <StyledCardContainer>
         <StyledLinkContainer>
           <StyledHeadline>TAROT</StyledHeadline>
@@ -50,7 +53,7 @@ export default function HomePage() {
           <MenuLink href={"/credits"}>CREDITS</MenuLink>
         </StyledLinkContainer>
       </StyledCardContainer>
-      <TopMenuBar hidden={"hidden"} menu={"/"} mid={mid} back={"/"} />
+      <StyledNavbar />
     </AppContainer>
   );
 }

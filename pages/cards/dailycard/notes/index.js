@@ -4,8 +4,13 @@ import StyledCardContainer from "../../../../components/Styled/StyledCardContain
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
-import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default function NoteFormular() {
   const [inputValue, setInputValue] = useState();
@@ -59,8 +64,9 @@ export default function NoteFormular() {
   return (
     <>
       <AppContainer>
+        <TopMenuBar mid={"how do you feel"} />
         <StyledCardContainer>
-          <div
+          <FormContainer
             style={{
               display: "flex",
               height: "100%",
@@ -95,17 +101,18 @@ export default function NoteFormular() {
                 />
               </label>
             </form>
-          </div>
+            <StyledSubmitButton
+              form="textInput"
+              type="submit"
+              name="submit"
+              aria-label="submit button"
+            >
+              SUBMIT
+            </StyledSubmitButton>
+          </FormContainer>
         </StyledCardContainer>
-        <StyledSubmitButton
-          form="textInput"
-          type="submit"
-          name="submit"
-          aria-label="submit button"
-        >
-          SUBMIT
-        </StyledSubmitButton>
-        <TopMenuBar mid={"how do you feel"} />
+
+        <StyledNavbar />
       </AppContainer>
     </>
   );

@@ -2,10 +2,10 @@ import { useStore } from "../../../../src/store/store";
 import { useEffect, useState } from "react";
 import SearchResults from "../../../../components/SearchResults";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
-import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import SearchBar from "../../../../components/SearchBar";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
 export default function SearchResult() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -21,24 +21,20 @@ export default function SearchResult() {
   if (searchQuery === "") {
     return (
       <>
-        <p>no results</p>
+        <p>provide a search term</p>
       </>
     );
   }
 
   return (
     <AppContainer>
+      <TopMenuBar mid={"searchResults"}></TopMenuBar>
+
       <SearchBar />
       <StyledCardContainer>
-        <GridLayout3Columns
-          query1={"null"}
-          query2={"null"}
-          navigation={"hidden"}
-        >
-          <SearchResults />
-        </GridLayout3Columns>
+        <SearchResults />
       </StyledCardContainer>
-      <TopMenuBar mid={"searchResults"}></TopMenuBar>
+      <StyledNavbar />
     </AppContainer>
   );
 }

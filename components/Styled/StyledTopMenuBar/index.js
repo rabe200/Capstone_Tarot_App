@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import NoteNotifier from "../../NoteNotifier";
-import StyledNavbar from "../StyledNavbar";
+
 const StyledMenuLink = styled(Link)`
   text-decoration: none;
   color: ${(p) => p.theme.colorText};
@@ -18,6 +18,8 @@ const StyledMenuBack = styled.div`
 `;
 
 const StyledTopBarContainer = styled.div`
+  position: relative;
+  bottom: 0;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -69,7 +71,6 @@ export default function TopMenuBar({ mid, card, hidden }) {
           </StyledMenuBack>
         </StyledTopBarRight>
       </StyledTopBarContainer>
-      <StyledNavbar />
     </>
   ) : (
     <>
@@ -86,7 +87,6 @@ export default function TopMenuBar({ mid, card, hidden }) {
           </StyledMenuBack>
         </StyledTopBarRight>
       </StyledTopBarContainer>
-      <StyledNavbar />
     </>
   );
 }

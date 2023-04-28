@@ -10,7 +10,6 @@ const Styled3Grid = styled.div`
   align-items: center;
   width: 375px;
   height: 100%;
-  box-shadow: 20px 0px 151px ${(p) => p.theme.colorFront} inset;
   overflow: hidden;
 
   color: ${(p) => p.theme.colorContainer};
@@ -34,8 +33,7 @@ const ArrowContainer = styled.div`
   grid-template-rows: 50% 30% 20%;
   height: 480px;
   align-items: center;
-  background: ${(p) => p.theme.colorDeep};
-  box-shadow: 0px 22px 15px ${(p) => p.theme.colorFront};
+  background: ${(p) => p.theme.colorBackground};
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   justify-content: center;

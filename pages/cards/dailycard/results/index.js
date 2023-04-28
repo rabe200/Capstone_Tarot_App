@@ -6,6 +6,7 @@ import styled from "styled-components";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import StyledList from "../../../../components/Styled/StyledList";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
 const StyledSubmitButton = styled.button`
   display: flex;
@@ -67,6 +68,8 @@ export default function Results() {
   if (drawnCards.length > 0) {
     return (
       <AppContainer>
+        <TopMenuBar mid={"results"} />
+
         <StyledCardContainer>
           <ListContainer>
             <StyledList>
@@ -86,16 +89,15 @@ export default function Results() {
         <StyledLink href={"/"}>
           <StyledSubmitButton>END SESSION</StyledSubmitButton>
         </StyledLink>
-        <TopMenuBar mid={"results"} />
+        <StyledNavbar />
       </AppContainer>
     );
   } else {
     return (
       <AppContainer>
-        <StyledCardContainer>
-          no cards to review
-          <TopMenuBar />
-        </StyledCardContainer>
+        <TopMenuBar />
+        <StyledCardContainer>no cards to review</StyledCardContainer>
+        <StyledNavbar />
       </AppContainer>
     );
   }

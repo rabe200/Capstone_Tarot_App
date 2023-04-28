@@ -7,13 +7,21 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 
+const SearchResultsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  height: 100%;
+`;
+
 const ListContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  background: black;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   height: 18em;
   overflow: auto;
-  color: white;
+  border-radius: 8px;
   list-style-type: none;
   margin: 0;
   padding-left: 36px;
@@ -38,7 +46,7 @@ const StyledResultHeader = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: yellow;
+  color: ${(p) => p.theme.colorText};
   text-decoration: none;
 `;
 
@@ -136,7 +144,7 @@ export default function SearchResults() {
 
   return (
     <>
-      <div>
+      <SearchResultsContainer>
         searchresults for input: <StyledBoldText>{searchQuery}</StyledBoldText>
         <StyledSearchStats>
           <i>
@@ -154,36 +162,6 @@ export default function SearchResults() {
             <StyledBoldText>{cardByMeaningUp.length}</StyledBoldText>
           </i>
         </StyledSearchStats>
-        <select
-          onChange={(e) => renderResults(e)}
-          style={{
-            width: "100%",
-            background: "black",
-            color: "#FFFFE0",
-            textAlignLast: "center",
-            height: "40px",
-            fontSize: "1.2rem",
-          }}
-          id={"filterSelection"}
-          value={selectOption}
-        >
-          <option value="name">
-            by name {": "}
-            {cardByName.length > 0 && cardByName.length}
-          </option>
-          <option value="description">
-            by description {": "}
-            {cardByDesc.length > 0 && cardByDesc.length}
-          </option>
-          <option value="meaningUp">
-            by meaning upright{": "}
-            {cardByMeaningUp.length > 0 && cardByMeaningUp.length}
-          </option>
-          <option value="meaningRev">
-            by meaning reversed{": "}
-            {cardByMeaningRev.length > 0 && cardByMeaningRev.length}
-          </option>
-        </select>
         <ListContainer>
           <StyledResults id="resultsByDescription" hidden={hidden.desc}>
             {cardByShortDesc.map((card) => {
@@ -221,8 +199,8 @@ export default function SearchResults() {
                   <Link href={`/cards/${card.id}`}>
                     <Image
                       src={card.image}
-                      width={200}
-                      height={350}
+                      width={160}
+                      height={250}
                       alt={card.name}
                       priority
                     ></Image>
@@ -262,7 +240,37 @@ export default function SearchResults() {
             ))}
           </StyledResults>
         </ListContainer>
-      </div>
+      </SearchResultsContainer>
+      <select
+        onChange={(e) => renderResults(e)}
+        style={{
+          width: "100%",
+          background: `${(p) => p.theme.colorBackground}`,
+          color: `${(p) => p.theme.colorText}`,
+          textAlignLast: "center",
+          height: "40px",
+          fontSize: "1.2rem",
+        }}
+        id={"filterSelection"}
+        value={selectOption}
+      >
+        <option value="name">
+          by name {": "}
+          {cardByName.length > 0 && cardByName.length}
+        </option>
+        <option value="description">
+          by description {": "}
+          {cardByDesc.length > 0 && cardByDesc.length}
+        </option>
+        <option value="meaningUp">
+          by meaning upright{": "}
+          {cardByMeaningUp.length > 0 && cardByMeaningUp.length}
+        </option>
+        <option value="meaningRev">
+          by meaning reversed{": "}
+          {cardByMeaningRev.length > 0 && cardByMeaningRev.length}
+        </option>
+      </select>
     </>
   );
 }

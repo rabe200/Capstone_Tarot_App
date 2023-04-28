@@ -8,14 +8,15 @@ import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
 import { MenuLink } from "../../..";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 export const StyledCategories = styled.div`
   display: flex;
-  position: relative;
+  position: sticky;
   flex-direction: column;
   border: ${(p) => p.theme.colorText} 2px solid;
   background: ${(p) => p.theme.colorDeep};
   color: ${(p) => p.theme.colorText};
-  height: 90%;
+  height: 100%;
   overflow: auto;
   justify-content: start;
   align-items: center;
@@ -73,10 +74,10 @@ export default function Details() {
   return (
     id < 78 && (
       <AppContainer>
+        <TopMenuBar card={card} mid={card.name} back={`/cards/${card.id}`} />
         <SearchBar />
-
-        <StyledCardContainer>
-          <GridLayout3Columns query1={previousPage} query2={nextPage}>
+        <GridLayout3Columns query1={previousPage} query2={nextPage}>
+          <StyledCardContainer>
             <StyledCategories>
               <StyledCategoryName>meaning upside</StyledCategoryName>
               <StyledCategoryContent>{card.meaning_up}</StyledCategoryContent>
@@ -101,9 +102,9 @@ export default function Details() {
                 </StyledCategoryName>
               </StyledCategoryContent>
             </StyledCategories>
-          </GridLayout3Columns>
-        </StyledCardContainer>
-        <TopMenuBar card={card} mid={card.name} back={`/cards/${card.id}`} />
+          </StyledCardContainer>
+        </GridLayout3Columns>
+        <StyledNavbar />
       </AppContainer>
     )
   );

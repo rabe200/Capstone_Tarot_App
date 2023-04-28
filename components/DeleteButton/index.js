@@ -3,11 +3,16 @@ import useStore from "../../src/store/store";
 import styled from "styled-components";
 
 const StyledButton = styled.div`
-  background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorText};
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background: black;
+  color: white;
   border-radius: 8px;
-  width: 100%;
+  padding: 1px;
 `;
+
 const StyledSection = styled.section`
   display: flex;
   align-items: center;

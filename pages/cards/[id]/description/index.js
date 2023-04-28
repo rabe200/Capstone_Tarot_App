@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
 import useStore from "../../../../src/store/store";
 import styled from "styled-components";
-import SearchBar from "../../../../components/SearchBar";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
-import Link from "next/link";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
-const StyledCategoryName = styled.u`
+const StyledCategoryName = styled.div`
+  display: flex;
   font-size: 2rem;
   border: ${(p) => p.theme.colorText} 2px solid;
   background: ${(p) => p.theme.colorContainer};
@@ -28,37 +28,10 @@ const StyledCategoryContent = styled.div`
   color: ${(p) => p.theme.colorText};
   font-size: 1.4em;
   overflow: auto;
-  height: 60%;
+  height: 480px;
   box-shadow: 0 0px 10px 15px silver;
 `;
 
-const MenuLink = styled(Link)`
-    font-size: 2rem;
-    text-decoration: none;
-    color: black
-    display: flex;
-  justify-content: center;
-  background: ${(p) => p.theme.colorBackground};
-  gap: 20rem;
-  margin: 0.3rem 0;
-  color: #04120e;
-  &:hover {color: red;},
-  &:focus {
-    color: ${(p) => p.theme.colorText};
-  }
-  width: 100%;
-  height: 50px;
-  margin: 0;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  `;
-const LinkContainer = styled.div`
-display: flex;
-flex-direction: column;
-  width: 100vw,
-  height: 100px;
-`;
 export default function Details() {
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
@@ -86,18 +59,15 @@ export default function Details() {
   return (
     id < 78 && (
       <AppContainer>
+        <TopMenuBar card={card} mid={card.name} back={`/cards/${card.id}`} />
+
         <GridLayout3Columns query1={previousPage} query2={nextPage}>
           <StyledCardContainer>
             <StyledCategoryName>description</StyledCategoryName>
             <StyledCategoryContent>{card.desc}</StyledCategoryContent>
           </StyledCardContainer>
         </GridLayout3Columns>
-        <LinkContainer>
-          <MenuLink href={`/cards/${id}/stats/`}>STATS</MenuLink>
-          <MenuLink href={`/cards/${id}/description/`}>DESCRIPTION</MenuLink>
-        </LinkContainer>
-
-        <TopMenuBar card={card} mid={card.name} back={`/cards/${card.id}`} />
+        <StyledNavbar />
       </AppContainer>
     )
   );

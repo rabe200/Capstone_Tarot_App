@@ -3,6 +3,7 @@ import StyledCardContainer from "../components/Styled/StyledCardContainer";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import styled from "styled-components";
 import CatApi from "../components/CatApi";
+import StyledNavbar from "../components/Styled/StyledNavbar";
 
 const StyledOptionsMenu = styled.ul`
   display: flex;
@@ -17,6 +18,8 @@ export default function FourOhFour() {
   return (
     <>
       <AppContainer>
+        <TopMenuBar mid={"404"} back={"/"} />
+
         <StyledCardContainer>
           <StyledOptionsMenu>
             <h1>404 PAGE NOT MEOW</h1>
@@ -24,7 +27,7 @@ export default function FourOhFour() {
             <CatApi />
           </StyledOptionsMenu>
         </StyledCardContainer>
-        <TopMenuBar mid={"404"} back={"/"} />
+        <StyledNavbar />
       </AppContainer>
     </>
   );

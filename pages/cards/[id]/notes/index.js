@@ -6,30 +6,7 @@ import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSide
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import styled from "styled-components";
 import { useState } from "react";
-import Link from "next/link";
-
-const MenuLink = styled(Link)`
-    font-size: 2rem;
-    text-decoration: none;
-    color: black
-    display: flex;
-  justify-content: center;
-  background: ${(p) => p.theme.colorBackground};
-  gap: 20rem;
-  margin: 0.3rem 0;
-  color: #04120e;
-  &:hover {color: red;},
-  &:focus {
-    color: ${(p) => p.theme.colorText};
-  }
-  width: 100%;
-  height: 30px;
-  margin: 0;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  `;
-
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 const NoteText = styled.div`
   height: 100%;
   overflow: auto;
@@ -71,12 +48,6 @@ const StyledHistory = styled.div`
   overflow-wrap: breakword;
 `;
 
-const LinkContainer = styled.div`
-display: flex;
-flex-direction: column;
-  width: 100vw,
-  height: 100px;
-`;
 export default function CardNotes() {
   const [clicked, setClicked] = useState(false);
 
@@ -102,6 +73,11 @@ export default function CardNotes() {
   {
     return (
       <AppContainer>
+        <TopMenuBar
+          back={`/cards/${id}/detail`}
+          mid={cardForIndex && cardForIndex.name}
+          card={card[0] && card[0]}
+        />
         <GridLayout3Columns query1={previousPage} query2={nextPage}>
           <StyledCardContainer>
             <Container>
@@ -128,16 +104,7 @@ export default function CardNotes() {
             </Container>
           </StyledCardContainer>
         </GridLayout3Columns>
-        <LinkContainer>
-          <MenuLink href={`/cards/${id}/stats/`}>STATS</MenuLink>
-          <MenuLink href={`/cards/${id}/description/`}>DESCRIPTION</MenuLink>
-        </LinkContainer>
-
-        <TopMenuBar
-          back={`/cards/${id}/detail`}
-          mid={cardForIndex && cardForIndex.name}
-          card={card[0] && card[0]}
-        />
+        <StyledNavbar />
       </AppContainer>
     );
   }

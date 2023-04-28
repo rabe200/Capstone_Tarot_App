@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const StyledSvg = styled.svg`
-  fill: white;
-  stroke: white;
+  stroke: ${(prop) => prop.theme.colorText};
+  fill: ${(prop) => prop.theme.colorText};
   &:hover {
     stroke: lime;
     fill: lime;

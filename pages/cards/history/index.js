@@ -8,12 +8,12 @@ import AppContainer from "../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import { useCallback } from "react";
 import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";
+import StyledNavbar from "../../../components/Styled/StyledNavbar";
 
 const StyledCardName = styled.h1`
   display: flex;
   width: 100%;
   background: ${(p) => p.theme.colorFront};
-  box-shadow: 0px 20px 30px ${(p) => p.theme.colorFront};
   justify-content: center;
   font-size: 1.4em;
 `;
@@ -24,9 +24,8 @@ const StyledNavi = styled.div`
 `;
 
 const StyledFormular = styled.form`
-  height: 100%;
+  height: 50px;
   width: 100%;
-  box-shadow: 0px 0px 60px ${(p) => p.theme.colorBackground} inset;
 `;
 const ListContainer = styled.div`
   width: 100%;
@@ -36,7 +35,6 @@ const StyledList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
-  box-shadow: 0px 0px 60px ${(p) => p.theme.colorFront};
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
   height: 100%;
@@ -65,9 +63,9 @@ const StyledFooter = styled.footer`
   justify-content: space-between;
   align-items: center;
   bottom: 0;
-  font-size: 1.4rem;
+  font-size: 1rem;
   width: 100%;
-  height: 1.25em;
+  height: 1.1em;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
 `;
@@ -91,8 +89,7 @@ const StyledButton = styled.div`
   background: black;
   color: white;
   border-bottom-left-radius: 8px;
-  border: white solid 2px;
-  height: 1.2em;
+  height: 1em;
 `;
 
 export default function History() {
@@ -149,32 +146,14 @@ export default function History() {
 
   return (
     <AppContainer>
+      <TopMenuBar query2={"/dailyCard"} mid={"history"} />
       <StyledFooter>
         <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
         <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
         <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
       </StyledFooter>
       <StyledBarContainer>
-        <StyledNavi>
-          <StyledFormular>
-            <select
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                fontSize: "1.05rem",
-                fontSize: "1.2em",
-              }}
-              name="filter results by"
-              onChange={(event) => setSelectedOption(event.target.value)}
-            >
-              <option value="dateUp">date up</option>
-              <option value="dateDown">date down</option>
-              <option value="nameUp">name up</option>
-              <option value="nameDown">name down</option>
-            </select>
-          </StyledFormular>
-        </StyledNavi>
+        <StyledNavi></StyledNavi>
       </StyledBarContainer>
 
       <StyledCardContainer>
@@ -196,22 +175,22 @@ export default function History() {
                   <li>
                     {dayNames[card.day]}
                     {card.hour === 0
-                      ? "midnight"
+                      ? " midnight"
                       : card.hour < 4
-                      ? "night"
+                      ? " night"
                       : card.hour < 7
-                      ? "early morning"
+                      ? " early morning"
                       : card.hour < 12
-                      ? "morning"
+                      ? " morning"
                       : card.hour < 13
-                      ? "midday"
+                      ? " midday"
                       : card.hour < 17
-                      ? "afternoon"
+                      ? " afternoon"
                       : card.hour < 20
-                      ? "early evening"
+                      ? " early evening"
                       : card.hour < 25
-                      ? "late evening"
-                      : "out of time"}
+                      ? " late evening"
+                      : " out of time"}
                   </li>
                   <NoteWithImage card={card} toggle={showButtons} />{" "}
                 </Fragment>
@@ -220,7 +199,26 @@ export default function History() {
           </StyledList>
         </ListContainer>
       </StyledCardContainer>
-      <TopMenuBar query2={"/dailyCard"} mid={"history"} />
+
+      <StyledFormular>
+        <select
+          style={{
+            width: "100%",
+            height: "100%",
+            textAlign: "center",
+            fontSize: "1.05rem",
+            fontSize: "1.2em",
+          }}
+          name="filter results by"
+          onChange={(event) => setSelectedOption(event.target.value)}
+        >
+          <option value="dateUp">date up</option>
+          <option value="dateDown">date down</option>
+          <option value="nameUp">name up</option>
+          <option value="nameDown">name down</option>
+        </select>
+      </StyledFormular>
+      <StyledNavbar />
     </AppContainer>
   );
 }

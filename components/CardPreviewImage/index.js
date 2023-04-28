@@ -43,7 +43,7 @@ export const StyledImage = styled(Image)`
   }
 
   @media only screen and (min-width: 360px) {
-    width: 160px;
+    width: 200px;
     height: 320px;
   }
 
