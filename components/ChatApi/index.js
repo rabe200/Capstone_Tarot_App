@@ -65,10 +65,12 @@ export default function EntryChatGPT() {
   const setCurrentReading = useStore((state) => state.setCurrentReading);
   const setAllReadings = useStore((state) => state.setAllReadings);
   const [loading, setLoading] = useState(false);
-
+  const allReadings = useStore((state) => state.allReadings);
+  const currentNote = useStore((state) => state.currentNote);
   useEffect(() => {
-    setQuestionInput(GeneratePrompt(userData));
+    setQuestionInput(GeneratePrompt(userData, allReadings, currentNote));
   }, []);
+
   useEffect(() => {
     setHasMounted(true);
   }, []);
