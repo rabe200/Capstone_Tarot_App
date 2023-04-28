@@ -13,8 +13,6 @@ const StyledCredits = styled.ul`
 export default function Credits() {
   return (
     <AppContainer>
-      <TopMenuBar mid={"credits"} back={"/"} />
-
       <StyledCardContainer>
         <StyledCredits>
           <h1>developer</h1>
@@ -37,7 +35,7 @@ export default function Credits() {
           </li>
         </StyledCredits>
       </StyledCardContainer>
-      <StyledNavbar />
+      <TopMenuBar mid={"credits"} back={"/"} />
     </AppContainer>
   );
 }

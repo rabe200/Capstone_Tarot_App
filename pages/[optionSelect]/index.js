@@ -21,7 +21,7 @@ const ContentContainer = styled.div`
 const BackGround = styled.div`
   height: 100%;
   width: 100%;
-  background: palevioletred;
+  background: ${(p) => p.theme.colorBackground};
 `;
 
 export default function HomePage() {
@@ -106,12 +106,7 @@ export default function HomePage() {
             </GridLayout3Columns>
           </BackGround>
         </StyledCardContainer>
-        <TopMenuBar
-          menu={"/"}
-          mid={router.query.optionSelect.toLocaleLowerCase()}
-          back={"/"}
-        />
-        <StyledNavbar />
+        <TopMenuBar mid={router.query.optionSelect.toLocaleLowerCase()} />
       </AppContainer>
     );
   }

@@ -11,13 +11,13 @@ const StyledContinueButton = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: hotpink;
+  background: yellow;
   text-align: center;
   height: 40px;
   border-radius: 8px;
   font-size: 2rem;
   &:hover {
-    background-color: red;
+    background-color: magenta;
   }
 `;
 

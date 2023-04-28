@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const CardContainer = styled.div`
-  width: 250px;
-  height: 365px;
+  width: 300px;
+  height: 450px;
   perspective: 2000px;
 `;
 
@@ -53,16 +53,16 @@ const CardFlip = ({ card }) => {
             <CardImage
               src={card.image}
               alt={card.name}
-              width={200}
-              height={350}
+              width={300}
+              height={450}
             />
           </CardFront>
           <CardBack>
             <CardImage
               src={"/images/CardBacks.png"}
               alt={"cardback"}
-              width={200}
-              height={350}
+              width={300}
+              height={450}
             ></CardImage>
           </CardBack>
         </CardInner>

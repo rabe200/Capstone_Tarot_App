@@ -8,6 +8,26 @@ import styled from "styled-components";
 import { useState } from "react";
 import Link from "next/link";
 
+const StyledList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4em;
+  color: ${(p) => p.theme.colorText};
+  border: ${(p) => p.theme.colorText} 4px solid;
+  background: ${(p) => p.theme.colorFront};
+  overflow: auto;
+  border-radius: 8px;
+  overflow-wrap: break-word;
+  box-shadow: 0px 0px 60px ${(p) => p.theme.colorDeep} inset;
+`;
+
 const MenuLink = styled(Link)`
     font-size: 2rem;
     text-decoration: none;
@@ -23,12 +43,19 @@ const MenuLink = styled(Link)`
     color: ${(p) => p.theme.colorText};
   }
   width: 100%;
-  height: 30px;
+  height: 50px;
   margin: 0;
   justify-content: center;
   align-items: center;
   text-align: center;
   `;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+`;
 
 const NoteText = styled.div`
   height: 100%;
@@ -40,35 +67,11 @@ const NoteText = styled.div`
   padding: ${({ clicked }) => (clicked ? "20px" : "0px")};
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-`;
-
-const StyledList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+const StyledOverview = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  height: 100%;
-  align-items: center;
-  justify-content: start;
   font-size: 1.4em;
-  color: ${(p) => p.theme.colorText};
-  border: ${(p) => p.theme.colorText} 20px solid;
-  background: ${(p) => p.theme.colorFront};
-  overflow: auto;
-  border-radius: 8px;
-  overflow-wrap: break-word;
-  box-shadow: 0px 0px 60px ${(p) => p.theme.colorDeep} inset;
-`;
-
-const StyledHistory = styled.div`
-  overflow-wrap: breakword;
 `;
 
 const LinkContainer = styled.div`
@@ -77,6 +80,7 @@ flex-direction: column;
   width: 100vw,
   height: 100px;
 `;
+
 export default function CardNotes() {
   const [clicked, setClicked] = useState(false);
 
@@ -95,28 +99,36 @@ export default function CardNotes() {
   const currentCardIndex = cards.indexOf(cardForIndex);
   const nextCardId =
     currentCardIndex === cards.length - 1 ? 0 : currentCardIndex + 1;
-  const nextPage = `/cards/${nextCardId}/notes`;
+  const nextPage = `/cards/${nextCardId}/stats`;
   const previousCardId =
     currentCardIndex === 0 ? cards.length - 1 : currentCardIndex - 1;
-  const previousPage = `/cards/${previousCardId}/notes`;
+  const previousPage = `/cards/${previousCardId}/stats`;
+
   {
     return (
       <AppContainer>
-        <GridLayout3Columns query1={previousPage} query2={nextPage}>
+        <GridLayout3Columns
+          query1={previousPage}
+          query2={nextPage}
+          navigation={false}
+        >
           <StyledCardContainer>
             <Container>
               <StyledList>
                 {card.length > 0 ? (
-                  card.map((prop) => (
-                    <StyledHistory key={prop.date}>
-                      <li>
-                        <u>{new Date(prop.date).toLocaleDateString()}</u>
-                      </li>
-                      <li onClick={() => handleClick()}>
-                        <NoteText clicked={clicked}>{prop.notes}</NoteText>
-                      </li>
-                    </StyledHistory>
-                  ))
+                  <StyledOverview key={card[0].date}>
+                    <li>
+                      <u>{card[0].name}</u>
+                    </li>
+                    <li onClick={() => handleClick()}>
+                      <NoteText clicked={clicked}>
+                        <li>x-times drawn: {card[0].clicks}</li>
+                        <li>{new Date(card[0].date).toLocaleString()}</li>
+                        <li>mood: {card[0].averageMood}</li>
+                        <li>last mood: {card[0].currentMood}</li>
+                      </NoteText>
+                    </li>
+                  </StyledOverview>
                 ) : (
                   <>
                     <u>{cardForIndex ? cardForIndex.name : "loading"}</u>
@@ -129,7 +141,7 @@ export default function CardNotes() {
           </StyledCardContainer>
         </GridLayout3Columns>
         <LinkContainer>
-          <MenuLink href={`/cards/${id}/stats/`}>STATS</MenuLink>
+          <MenuLink href={`/cards/${id}/notes/`}>NOTES</MenuLink>
           <MenuLink href={`/cards/${id}/description/`}>DESCRIPTION</MenuLink>
         </LinkContainer>
 

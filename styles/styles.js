@@ -12,21 +12,17 @@ export default createGlobalStyle`
     flex-direction: column;
     margin: 0;
     font-family: system-ui;
-    width: 320px;
-    height: 480px;
+    width: 375px;
+    height: 667px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: pixelOperator;
     overflow: auto;
-    background: ${(p) => p.theme.colorBackground};
+    background: ${(p) => p.theme.colorDeep};
   color: ${(p) => p.theme.colorText};
-    @media only screen and (min-width: 360px) {
-    width: 360px;
-    height: 740px;
-    border-radius: 8px;
-  }
+ 
 
     @media only screen and (min-width: 375px) {
     width: 375px;
@@ -63,12 +59,9 @@ export default createGlobalStyle`
     height: 1024px;
   }
 
-
-
- 
+  @media only screen and (min-height: 1025px) {
+    width: 99vw;
+    height: 99vh;
   }
-
-  
-
-
+  }
 `;

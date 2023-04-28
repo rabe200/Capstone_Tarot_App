@@ -5,8 +5,6 @@ import StyledCardContainer from "../../../../components/Styled/StyledCardContain
 import styled from "styled-components";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
-import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSideNavigation";
-import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import StyledList from "../../../../components/Styled/StyledList";
 
 const StyledSubmitButton = styled.button`
@@ -69,32 +67,26 @@ export default function Results() {
   if (drawnCards.length > 0) {
     return (
       <AppContainer>
-        <TopMenuBar mid={"results"} />
         <StyledCardContainer>
-          <GridLayout3Columns
-            query1={"null"}
-            query2={"null"}
-            navigation={"hidden"}
-          >
-            <ListContainer>
-              <StyledList>
-                <li>Day: {dayNames[currentCard.day]}</li>
-                <li>Hour: {currentCard.hour}</li>
-                <li>Minute: {currentCard.minute}</li>
-                <li>Second: {currentCard.second}</li>
-                <li>{currentCard.name}</li>
-                <li>Note: {currentCard.notes}</li>
-                <li>Drawn: {currentCard.clicks}x times</li>
-                <li>Mood: {currentCard.mood}</li>
-                <li>currentMood: {currentCard.currentMood}</li>
-                <li>AverageMood: {currentCard.averageMood}</li>
-              </StyledList>
-            </ListContainer>
-          </GridLayout3Columns>
+          <ListContainer>
+            <StyledList>
+              <li>Day: {dayNames[currentCard.day]}</li>
+              <li>Hour: {currentCard.hour}</li>
+              <li>Minute: {currentCard.minute}</li>
+              <li>Second: {currentCard.second}</li>
+              <li>{currentCard.name}</li>
+              <li>Note: {currentCard.notes}</li>
+              <li>Drawn: {currentCard.clicks}x times</li>
+              <li>Mood: {currentCard.mood}</li>
+              <li>currentMood: {currentCard.currentMood}</li>
+              <li>AverageMood: {currentCard.averageMood}</li>
+            </StyledList>
+          </ListContainer>
         </StyledCardContainer>
         <StyledLink href={"/"}>
           <StyledSubmitButton>END SESSION</StyledSubmitButton>
         </StyledLink>
+        <TopMenuBar mid={"results"} />
       </AppContainer>
     );
   } else {
@@ -103,7 +95,6 @@ export default function Results() {
         <StyledCardContainer>
           no cards to review
           <TopMenuBar />
-          <StyledNavbar />
         </StyledCardContainer>
       </AppContainer>
     );

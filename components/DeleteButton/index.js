@@ -1,5 +1,20 @@
 import { useState, useEffect } from "react";
 import useStore from "../../src/store/store";
+import styled from "styled-components";
+
+const StyledButton = styled.div`
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
+  border-radius: 8px;
+  width: 100%;
+`;
+const StyledSection = styled.section`
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+  width: 100%;
+`;
 
 export default function DeleteButton({ uuid }) {
   const [hasMounted, setHasMounted] = useState(false);
@@ -24,12 +39,14 @@ export default function DeleteButton({ uuid }) {
 
   if (uuid)
     return (
-      <button
-        type="button"
-        onClick={() => deleteCardAndRaiseDeletedCardsCounter(uuid)}
-      >
-        delete
-      </button>
+      <StyledSection key={uuid}>
+        <StyledButton
+          type="button"
+          onClick={() => deleteCardAndRaiseDeletedCardsCounter(uuid)}
+        >
+          delete
+        </StyledButton>
+      </StyledSection>
     );
   else {
     return <button type="button">loading</button>;

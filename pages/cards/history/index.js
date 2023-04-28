@@ -1,16 +1,22 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import useStore from "../../../src/store/store";
 import Link from "next/link";
-import DeleteButton from "../../../components/DeleteButton";
-import EditButton from "../../../components/EditButton";
+
 import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import AppContainer from "../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
-import GridLayout3Columns from "../../../components/Styled/GridLayoutWithSideNavigation";
-import { useRouter } from "next/router";
-import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import { useCallback } from "react";
+import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";
+
+const StyledCardName = styled.h1`
+  display: flex;
+  width: 100%;
+  background: ${(p) => p.theme.colorFront};
+  box-shadow: 0px 20px 30px ${(p) => p.theme.colorFront};
+  justify-content: center;
+  font-size: 1.4em;
+`;
 
 const StyledNavi = styled.div`
   display: flex;
@@ -20,32 +26,29 @@ const StyledNavi = styled.div`
 const StyledFormular = styled.form`
   height: 100%;
   width: 100%;
+  box-shadow: 0px 0px 60px ${(p) => p.theme.colorBackground} inset;
 `;
-
+const ListContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 const StyledList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  box-shadow: 0px 0px 60px ${(p) => p.theme.colorFront};
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
-  height: 90%;
-  overflow: scroll;
+  height: 100%;
+  overflow: auto;
   border-radius: 8px;
+  width: 100%;
 `;
 
 const StyledLink = styled(Link)`
-  display: flex;
-  justify-content: center;
-  margin: 0.3rem 0;
   color: ${(p) => p.theme.colorLink};
-  border: ${(p) => p.theme.border};
-
+  color: black;
   text-decoration: none;
-  &:hover {
-    color: magenta;
-    transition: all 0.2s;
-    transform: scale(1.5);
-  }
 `;
 
 const StyledBarContainer = styled.div`
@@ -54,15 +57,19 @@ const StyledBarContainer = styled.div`
 `;
 
 const StyledFooter = styled.footer`
+  box-shadow: 0px 0px 60px ${(p) => p.theme.colorFront};
+
   position: relative;
-  color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   bottom: 0;
   font-size: 1.4rem;
   width: 100%;
-  bottom: 0px;
+  height: 1.25em;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
 `;
 
 const StyledFooterLeft = styled.div`
@@ -71,6 +78,21 @@ const StyledFooterLeft = styled.div`
 
 const StyledFooterRight = styled.div`
   font-size: 0.8em;
+`;
+
+const StyledButton = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 4em;
+  background: black;
+  color: white;
+  border-bottom-left-radius: 8px;
+  border: white solid 2px;
+  height: 1.2em;
 `;
 
 export default function History() {
@@ -82,11 +104,21 @@ export default function History() {
   );
   const drawnCards = useStore((state) => state.drawnCards);
   const cardsDrawn = useStore((state) => state.cardsDrawn);
-  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
-  const router = useRouter();
   const [selectedOption, setSelectedOption] = useState("nameUp");
+  const [showButtons, setShowButtons] = useState(false);
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-  setLastPageVisited(router.pathname);
+  function toggleShowButton() {
+    setShowButtons(!showButtons);
+  }
 
   const sortedItems = drawnCards.sort((a, b) => {
     if (selectedOption === "dateUp") {
@@ -104,8 +136,6 @@ export default function History() {
     }
   });
 
-  const setComingFromHistory = useStore((state) => state.setComingFromHistory);
-
   useEffect(() => {
     updateCardsDrawn();
   }, [cardsDeleted]);
@@ -120,7 +150,8 @@ export default function History() {
   return (
     <AppContainer>
       <StyledFooter>
-        <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>{" "}
+        <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
+        <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
         <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
       </StyledFooter>
       <StyledBarContainer>
@@ -132,6 +163,7 @@ export default function History() {
                 height: "100%",
                 textAlign: "center",
                 fontSize: "1.05rem",
+                fontSize: "1.2em",
               }}
               name="filter results by"
               onChange={(event) => setSelectedOption(event.target.value)}
@@ -140,19 +172,13 @@ export default function History() {
               <option value="dateDown">date down</option>
               <option value="nameUp">name up</option>
               <option value="nameDown">name down</option>
-              <option value="secondUp">second up</option>
-              <option value="secondDown">second down</option>
             </select>
           </StyledFormular>
         </StyledNavi>
       </StyledBarContainer>
 
       <StyledCardContainer>
-        <GridLayout3Columns
-          query1={"null"}
-          query2={"null"}
-          navigation={"hidden"}
-        >
+        <ListContainer>
           <StyledList>
             {sortedItems.map((card) => {
               return (
@@ -161,30 +187,40 @@ export default function History() {
                     <b>{new Date(card.date).toLocaleDateString()}</b>
                   </li>
                   <li>
-                    <StyledLink
-                      href={`/cards/${card.id}`}
-                      onClick={setComingFromHistory(true)}
-                    >
-                      {card.name}
-                    </StyledLink>
+                    <StyledCardName>
+                      <StyledLink href={`/cards/${card.id}`}>
+                        {card.name}
+                      </StyledLink>
+                    </StyledCardName>
                   </li>
-                  <li>second: {card.second} sec</li>
-                  <section>
-                    note: <i>{card.notes}</i>
-                  </section>
-                  <EditButton uuid={card.uuid} card={card} />
-                  <DeleteButton uuid={card.uuid} />
-                  <hr />
+                  <li>
+                    {dayNames[card.day]}
+                    {card.hour === 0
+                      ? "midnight"
+                      : card.hour < 4
+                      ? "night"
+                      : card.hour < 7
+                      ? "early morning"
+                      : card.hour < 12
+                      ? "morning"
+                      : card.hour < 13
+                      ? "midday"
+                      : card.hour < 17
+                      ? "afternoon"
+                      : card.hour < 20
+                      ? "early evening"
+                      : card.hour < 25
+                      ? "late evening"
+                      : "out of time"}
+                  </li>
+                  <NoteWithImage card={card} toggle={showButtons} />{" "}
                 </Fragment>
               );
             })}
           </StyledList>
-        </GridLayout3Columns>
+        </ListContainer>
       </StyledCardContainer>
-
-      <TopMenuBar mid={"history"} />
-
-      <StyledNavbar />
+      <TopMenuBar query2={"/dailyCard"} mid={"history"} />
     </AppContainer>
   );
 }

@@ -6,7 +6,6 @@ import GridLayout3Columns from "../../../../components/Styled/GridLayoutWithSide
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import SearchBar from "../../../../components/SearchBar";
-import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
 export default function SearchResult() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -40,7 +39,6 @@ export default function SearchResult() {
         </GridLayout3Columns>
       </StyledCardContainer>
       <TopMenuBar mid={"searchResults"}></TopMenuBar>
-      <StyledNavbar />
     </AppContainer>
   );
 }
