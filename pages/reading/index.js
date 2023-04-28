@@ -1,4 +1,4 @@
-import ChatApi from "../../components/chatAPI";
+import ChatApi from "../../components/ChatApi";
 import AppContainer from "../../components/Styled/StyledAppContainer";
 import StyledCardContainer from "../../components/Styled/StyledCardContainer";
 import TopMenuBar from "../../components/Styled/StyledTopMenuBar";
