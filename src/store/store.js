@@ -25,12 +25,30 @@ export const useStore = createLocalStorageStore(
     currentCard: { id: 0, name: "the fool" },
     lastCard: { id: 0, name: "the fool" },
     currentNote: "",
-    searchQuery: "testString",
+    searchQuery: "",
     cardMoods: cardMoodArray,
     localSortedHistory: [],
     lastPageVisited: "",
     currentPage: "",
     comingFromHistory: false,
+    currentReading: "",
+    lastReading: "",
+    allReadings: [],
+    setCurrentReading: (string) =>
+      set((state) => ({
+        currentReading: {
+          reading: string,
+          date: new Date(),
+          cardName: state.currentCard.name,
+          amountDrawn: state.currentCard.arrayIndex,
+          currentMood: state.currentCard.currentMood,
+          averageMoodToThatTime: state.currentCard.averageMood,
+        },
+      })),
+    setAllReadings: (string) =>
+      set((state) => {
+        return { allReadings: [...state.allReadings, state.currentReading] };
+      }),
     setComingFromHistory: (boolean) =>
       set(() => ({ comingFromHistory: boolean })),
     setLastPageVisited: (string) => set(() => ({ lastPageVisited: string })),

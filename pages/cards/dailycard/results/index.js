@@ -86,7 +86,7 @@ export default function Results() {
             </StyledList>
           </ListContainer>
         </StyledCardContainer>
-        <StyledLink href={"/"}>
+        <StyledLink href={"/reading"}>
           <StyledSubmitButton>END SESSION</StyledSubmitButton>
         </StyledLink>
         <StyledNavbar />

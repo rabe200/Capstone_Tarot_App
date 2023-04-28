@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export default async function handler(request, response, userData) {
+export default async function handler(request, response) {
   if (!configuration.apiKey) {
     response.status(500).json({
       error: {
@@ -19,7 +19,7 @@ export default async function handler(request, response, userData) {
   if (question.trim().length === 0) {
     response.status(400).json({
       error: {
-        message: "Bitte gib eine Frage ein!",
+        message: `${console.log(question)}`,
       },
     });
     return;
@@ -30,11 +30,10 @@ export default async function handler(request, response, userData) {
       model: "text-davinci-003",
       prompt: generatePrompt(question),
       temperature: 1.2,
-      max_tokens: 250,
+      max_tokens: 400,
     });
     response.status(200).json({ result: completion.data.choices[0].text });
   } catch (error) {
-    // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
       response.status(error.response.status).json(error.response.data);
@@ -42,7 +41,7 @@ export default async function handler(request, response, userData) {
       console.error(`Error with OpenAI API request: ${error.message}`);
       response.status(500).json({
         error: {
-          message: "An error occurred during your request.",
+          message: `${console.log(question)}`,
         },
       });
     }
@@ -50,12 +49,10 @@ export default async function handler(request, response, userData) {
 }
 
 function generatePrompt(question) {
-  const capitalizedQuestion =
-    question[0].toUpperCase() + question.slice(1).toLowerCase();
   return `
-  Give me an extended answer about my drawn Card. Give me a serious tarot reading.
-  
-  Question: I have drawn the Fool. What does that mean for me?
-  
-  Answer: I am asking the spirits and they are answering... ### here you complete the answer with sterotypical witchy language ###`;
+  Give me an extended answer about my drawn Card. Give me a serious tarot reading. Are harsh if you feel like something is suspicous. ### do NOT use the word "mood" and don't talk of numbers or mention any numerical value you have read in the stats of the question body. do not let the user know about the numbers. they are here for you to generate a close to a reality tarot reading experience. ###
+
+  Question: ${question}
+
+  Answer: I am asking the spirits and they are answering... ### here you complete the answer with sterotypical witchy language ### `;
 }

@@ -1,8 +1,32 @@
 import EntryChatGPT from "../../components/EntryChatGPT";
-import useStore from "../../src/store/store";
+import AppContainer from "../../components/Styled/StyledAppContainer";
+import StyledCardContainer from "../../components/Styled/StyledCardContainer";
+import TopMenuBar from "../../components/Styled/StyledTopMenuBar";
+import styled from "styled-components";
+import StyledNavbar from "../../components/Styled/StyledNavbar";
 
-export default function TheReading() {
-  const UserData = useStore((state) => state.currentCard);
-  console.log(UserData);
-  return <EntryChatGPT />;
+const StyledOptions = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+export default function FourOhFour() {
+  return (
+    <>
+      <AppContainer>
+        <TopMenuBar mid={"tarot_reading"} back={"/"} />
+
+        <StyledCardContainer>
+          <StyledOptions>
+            <EntryChatGPT />
+          </StyledOptions>
+        </StyledCardContainer>
+        <StyledNavbar />
+      </AppContainer>
+    </>
+  );
 }
