@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useStore from "../../src/store/store";
 import styled from "styled-components";
 import GeneratePrompt from "../GeneratePrompt";
@@ -13,12 +13,10 @@ const ContentContainer = styled.div`
 const StyledSubmitButton = styled.button`
   display: flex;
   position: relative;
-  top: 0;
-  justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: black;
-  color: white;
+  background: black;
+  color: withe;
   text-align: center;
   height: 40 px;
   border-radius: 8 px;
@@ -55,7 +53,6 @@ const StyledText = styled.div`
 
 export default function EntryChatGPT() {
   const [hasMounted, setHasMounted] = useState(false);
-
   const [questionInput, setQuestionInput] = useState("");
   const [result, setResult] = useState();
   const userData = useStore((state) => state.currentCard);
@@ -67,13 +64,12 @@ export default function EntryChatGPT() {
   const [loading, setLoading] = useState(false);
   const allReadings = useStore((state) => state.allReadings);
   const currentNote = useStore((state) => state.currentNote);
+
   useEffect(() => {
     setQuestionInput(GeneratePrompt(userData, allReadings, currentNote));
   }, []);
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  useEffect(() => setHasMounted(true), []);
 
   if (!hasMounted) {
     return null;
@@ -121,19 +117,21 @@ export default function EntryChatGPT() {
   console.log("buttonDisabled?", disableButton);
   return (
     userData && (
-      <ContentContainer>
-        <StyledSubmitButton
-          type={"button"}
-          id={"readingButton"}
-          onClick={() => handleSubmit()}
-          disabled={disableButton}
-        >
-          {loading ? "talking to the spirits" : "get reading"}
-        </StyledSubmitButton>
-        <ResultContainer hidden={hideReading}>
-          <StyledText>{result}</StyledText>
-        </ResultContainer>
-      </ContentContainer>
+      <Fragment>
+        <ContentContainer>
+          <StyledSubmitButton
+            type={"button"}
+            id={"readingButton"}
+            onClick={() => handleSubmit()}
+            disabled={disableButton}
+          >
+            {loading ? "talking to the spirits" : "get reading"}
+          </StyledSubmitButton>
+          <ResultContainer hidden={hideReading}>
+            <StyledText>{result}</StyledText>
+          </ResultContainer>
+        </ContentContainer>
+      </Fragment>
     )
   );
 }
