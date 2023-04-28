@@ -1,4 +1,4 @@
-import EntryChatGPT from "../../components/EntryChatGPT";
+import ChatApi from "../../components/chatAPI";
 import AppContainer from "../../components/Styled/StyledAppContainer";
 import StyledCardContainer from "../../components/Styled/StyledCardContainer";
 import TopMenuBar from "../../components/Styled/StyledTopMenuBar";
@@ -22,7 +22,7 @@ export default function FourOhFour() {
 
         <StyledCardContainer>
           <StyledOptions>
-            <EntryChatGPT />
+            <ChatApi />
           </StyledOptions>
         </StyledCardContainer>
         <StyledNavbar />
