@@ -51,7 +51,7 @@ const StyledText = styled.div`
   overflow: auto;
 `;
 
-export default function EntryChatGPT() {
+export default function ChatApi() {
   const [hasMounted, setHasMounted] = useState(false);
   const [questionInput, setQuestionInput] = useState("");
   const [result, setResult] = useState();
