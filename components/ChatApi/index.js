@@ -15,8 +15,8 @@ const StyledSubmitButton = styled.button`
   position: relative;
   align-items: center;
   width: 100%;
-  background: black;
-  color: withe;
+  background: ${(p) => p.theme.colorText};
+  color: ${(p) => p.theme.colorBackground};
   text-align: center;
   height: 40 px;
   border-radius: 8 px;
@@ -35,7 +35,7 @@ const ResultContainer = styled.div`
   display: flex;
   position: relative;
   background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorFront};
+  color: ${(p) => p.theme.colorText};
   height: 100%;
   width: 100%;
   overflow: auto;
@@ -56,7 +56,6 @@ export default function ChatApi() {
   const [questionInput, setQuestionInput] = useState("");
   const [result, setResult] = useState();
   const userData = useStore((state) => state.currentCard);
-  const [clicked, setClicked] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [hideReading, setHideReading] = useState(true);
   const setCurrentReading = useStore((state) => state.setCurrentReading);
