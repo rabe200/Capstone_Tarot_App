@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useStore from "../../src/store/store";
 import styled from "styled-components";
 
@@ -31,6 +31,8 @@ const ResultContainer = styled.div`
 `;
 
 export default function EntryChatGPT() {
+  const [hasMounted, setHasMounted] = useState(false);
+
   const [questionInput, setQuestionInput] = useState("");
   const [result, setResult] = useState();
   const userData = useStore((state) => state.currentCard);
@@ -40,9 +42,20 @@ export default function EntryChatGPT() {
   const setCurrentReading = useStore((state) => state.setCurrentReading);
   const setAllReadings = useStore((state) => state.setAllReadings);
 
+  useEffect(() => {
+    setQuestionInput(generatePrompt(userData));
+  }, []);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+
   async function handleSubmit() {
     setDisableButton(true);
-    setQuestionInput(generatePrompt(userData));
+
     console.log("wait a moment");
 
     try {
@@ -82,17 +95,15 @@ export default function EntryChatGPT() {
   return (
     userData && (
       <>
-        <p>
-          <StyledSubmitButton
-            type={"button"}
-            id={"readingButton"}
-            onClick={() => handleSubmit()}
-            disabled={disableButton}
-          >
-            get reading
-          </StyledSubmitButton>
-          <ResultContainer hidden={hideReading}>{result}</ResultContainer>
-        </p>
+        <StyledSubmitButton
+          type={"button"}
+          id={"readingButton"}
+          onClick={() => handleSubmit()}
+          disabled={disableButton}
+        >
+          get reading
+        </StyledSubmitButton>
+        <ResultContainer hidden={hideReading}>{result}</ResultContainer>
       </>
     )
   );
@@ -149,6 +160,18 @@ function generatePrompt(userData) {
       : averageCardMood === 0
       ? "not enough data"
       : null;
+
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const dayName = dayNames[day];
   prompt = `
   We have met many times. I am your customer for many years. You are a tarot reader of high talent. Give me an extra-ordinar tarot reading based on the following stats: 
 
@@ -157,6 +180,6 @@ function generatePrompt(userData) {
     If I am in good mood, you can deliver a darker reading! The average mood for the card drawn today is
     ${averageMood}. 
     Here is some data reflecting the possible meanings for the card drawn: meaning up: "${meaning_up}", meaning reversed: "${meaning_rev}". And here is a visual description of that card: "${description}"
-    If ${day} is 5 or 6 wish me a nice weekend at the end of your answer.`;
+    If ${dayName} Friday or Saturday wish me a nice weekend at the end of your answer.`;
   return prompt;
 }

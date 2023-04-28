@@ -19,7 +19,7 @@ export default async function handler(request, response) {
   if (question.trim().length === 0) {
     response.status(400).json({
       error: {
-        message: `${console.log(question)}`,
+        message: `${console.log("no data to prompt")}`,
       },
     });
     return;
@@ -41,7 +41,9 @@ export default async function handler(request, response) {
       console.error(`Error with OpenAI API request: ${error.message}`);
       response.status(500).json({
         error: {
-          message: `${console.log(question)}`,
+          message: `${console.log(
+            "something went wrong. try later or contact the developer: gh@rabe200"
+          )}`,
         },
       });
     }

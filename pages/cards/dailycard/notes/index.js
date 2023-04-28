@@ -12,6 +12,25 @@ const FormContainer = styled.div`
   flex-direction: column;
 `;
 
+const StyledSubmitButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  height: 40px;
+  font-size: 2rem;
+  font-family: pixelOperator;
+  &:hover {
+    background-color: yellow;
+    color: black;
+    border: 2px solid white;
+    font-size: 3rem;
+  }
+`;
+
 export default function NoteFormular() {
   const [inputValue, setInputValue] = useState();
   const setCurrentCard = useStore((state) => state.setCurrentCard);
@@ -21,25 +40,6 @@ export default function NoteFormular() {
   const difference = useStore((state) => state.difference);
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
-
-  const StyledSubmitButton = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background-color: black;
-    color: white;
-    text-align: center;
-    height: 40px;
-    font-size: 2rem;
-    font-family: pixelOperator;
-    &:hover {
-      background-color: yellow;
-      color: black;
-      border: 2px solid white;
-      font-size: 3rem;
-    }
-  `;
 
   function handleSubmit(event) {
     event.preventDefault();
