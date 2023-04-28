@@ -62,7 +62,7 @@ export default function GeneratePrompt(userData) {
 
   const dayName = dayNames[day];
   prompt = `
-    We have met many times. I am your customer for many years. You are a tarot reader of high talent. Give me an extra-ordinar tarot reading based on the following stats: 
+    We have met ${visits} times. If we have less than 3 times, consider me testing your skills. If we have met more than 3 times, consider me trusting in your skills. If we have met 30 times or above, act like we are best friends. I am your customer for many years. You are a tarot reader of high talent. Give me an extra-ordinar tarot reading based on the following stats: 
   
     ${greeting}, I have drawn "${card}", this is my ${visits}-th time getting your advice.
       I have drawn this Card ${timesDrawn} times already. I am in ${moodToday} today. If I am in bad mood, try to cheer me up.

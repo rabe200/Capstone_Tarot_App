@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const StyledSvg = styled.svg`
-  stroke: ${(prop) => prop.theme.colorArrow};
-  fill: ${(prop) => prop.theme.colorArrow};
+  stroke: ${(prop) => prop.theme.colorText};
+  fill: ${(prop) => prop.theme.colorText};
   &:hover {
     stroke: magenta;
     fill: magenta;

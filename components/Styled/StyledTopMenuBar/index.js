@@ -19,7 +19,6 @@ const StyledMenuBack = styled.div`
 
 const StyledTopBarContainer = styled.div`
   position: relative;
-  bottom: 0;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -55,38 +54,34 @@ export default function TopMenuBar({ mid, card, hidden }) {
   const router = useRouter();
 
   return card ? (
-    <>
-      <StyledTopBarContainer>
-        <StyledTopBarLeft>
-          <StyledMenuLink href={`/`} hidden={hidden}>
-            MENU
-          </StyledMenuLink>{" "}
-        </StyledTopBarLeft>
-        <StyledTopBarMiddle>
-          {mid} <NoteNotifier currentCard={card} />
-        </StyledTopBarMiddle>
-        <StyledTopBarRight>
-          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
-            back
-          </StyledMenuBack>
-        </StyledTopBarRight>
-      </StyledTopBarContainer>
-    </>
+    <StyledTopBarContainer>
+      <StyledTopBarLeft>
+        <StyledMenuLink href={`/`} hidden={hidden}>
+          MENU
+        </StyledMenuLink>{" "}
+      </StyledTopBarLeft>
+      <StyledTopBarMiddle>
+        {mid} <NoteNotifier currentCard={card} />
+      </StyledTopBarMiddle>
+      <StyledTopBarRight>
+        <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
+          back
+        </StyledMenuBack>
+      </StyledTopBarRight>
+    </StyledTopBarContainer>
   ) : (
-    <>
-      <StyledTopBarContainer>
-        <StyledTopBarLeft>
-          <StyledMenuLink hidden={hidden} href={`${"/"}`}>
-            MENU
-          </StyledMenuLink>{" "}
-        </StyledTopBarLeft>
-        <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
-        <StyledTopBarRight>
-          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
-            {"back"}
-          </StyledMenuBack>
-        </StyledTopBarRight>
-      </StyledTopBarContainer>
-    </>
+    <StyledTopBarContainer>
+      <StyledTopBarLeft>
+        <StyledMenuLink hidden={hidden} href={`${"/"}`}>
+          MENU
+        </StyledMenuLink>{" "}
+      </StyledTopBarLeft>
+      <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
+      <StyledTopBarRight>
+        <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
+          {"back"}
+        </StyledMenuBack>
+      </StyledTopBarRight>
+    </StyledTopBarContainer>
   );
 }

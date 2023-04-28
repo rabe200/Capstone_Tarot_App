@@ -3,23 +3,30 @@ import useStore from "../../src/store/store";
 import styled from "styled-components";
 import GeneratePrompt from "../GeneratePrompt";
 
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 580px;
+`;
+
 const StyledSubmitButton = styled.button`
   display: flex;
+  position: relative;
+  top: 0;
   justify-content: center;
   align-items: center;
   width: 100%;
   background-color: black;
   color: white;
   text-align: center;
-  height: 40px;
-  border-radius: 8px;
-  font-size: 2rem;
+  height: 40 px;
+  border-radius: 8 px;
+  font-size: 1rem;
   font-family: pixelOperator;
   &:hover {
     background-color: yellow;
     color: black;
-    border: 2px solid white;
-    font-size: 2.1rem;
   }
   &:after {
     pointer-events: none;
@@ -27,8 +34,23 @@ const StyledSubmitButton = styled.button`
 `;
 
 const ResultContainer = styled.div`
+  display: flex;
+  position: relative;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorFront};
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+`;
+
+const StyledText = styled.div`
+  display: flex;
+  position: relative;
+  top: 0;
+  font-size: 1.6rem;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 `;
 
 export default function EntryChatGPT() {
@@ -47,17 +69,17 @@ export default function EntryChatGPT() {
   useEffect(() => {
     setQuestionInput(GeneratePrompt(userData));
   }, []);
-
   useEffect(() => {
     setHasMounted(true);
   }, []);
+
   if (!hasMounted) {
     return null;
   }
 
   async function handleSubmit() {
     setDisableButton(true);
-
+    setLoading(true);
     console.log("wait a moment");
 
     try {
@@ -87,6 +109,7 @@ export default function EntryChatGPT() {
       setCurrentReading(data.result);
       setResult(data.result);
       setAllReadings(data.result);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -96,17 +119,19 @@ export default function EntryChatGPT() {
   console.log("buttonDisabled?", disableButton);
   return (
     userData && (
-      <>
+      <ContentContainer>
         <StyledSubmitButton
           type={"button"}
           id={"readingButton"}
           onClick={() => handleSubmit()}
           disabled={disableButton}
         >
-          get reading
+          {loading ? "talking to the spirits" : "get reading"}
         </StyledSubmitButton>
-        <ResultContainer hidden={hideReading}>{result}</ResultContainer>
-      </>
+        <ResultContainer hidden={hideReading}>
+          <StyledText>{result}</StyledText>
+        </ResultContainer>
+      </ContentContainer>
     )
   );
 }
