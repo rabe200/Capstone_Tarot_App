@@ -33,7 +33,7 @@ export const useStore = createLocalStorageStore(
     comingFromHistory: false,
     currentReading: "",
     lastReading: "",
-    allReadings: [],
+    allReadings: [{ reading: "null" }],
     setCurrentReading: (string) =>
       set((state) => ({
         currentReading: {

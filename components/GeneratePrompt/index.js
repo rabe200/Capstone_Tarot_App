@@ -59,8 +59,15 @@ export default function GeneratePrompt(userData, allReadings) {
     "Friday",
     "Saturday",
   ];
-  const length = allReadings.length - 1;
-  const pastReading = allReadings[length].reading;
+
+  function getLastNote() {
+    if (allReadings !== null) {
+      let length = allReadings.length - 1;
+      let pastReading = allReadings[length].reading;
+      return pastReading;
+    }
+  }
+  const pastReading = getLastNote();
   const note = userData.notes;
   const dayName = dayNames[day];
   prompt = `
@@ -78,7 +85,9 @@ Request:
     "${averageMood}" . "
     ### Here is some data reflecting the possible meanings for the card drawn: meaning up: "${meaning_up}", meaning reversed: "${meaning_rev}". And here is a visual description of that card: "${description}". 
     ### i have also left a note in my diary. if my note is to random too handle, skip it. but if it fits your reading, consider referring to it. the note is: "${note}" ###
-    ### consider to compare the current situation with the last readings you had with me. the data for the last readings is here: ${pastReading}### 
+    ### consider to compare the current situation with the last readings you had with me. the data for the last readings is here: ${
+      pastReading && pastReading
+    }### 
  special note: do not repeat phrases used in that last reading###
     Today is ${dayName}. React accordingly. 
 
