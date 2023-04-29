@@ -2,7 +2,7 @@ import styled from "styled-components";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
-import ChatApi from "../../../../components/chatAPI";
+import ChatApi from "../../../../components/ChatApi";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
 const StyledOptions = styled.ul`
