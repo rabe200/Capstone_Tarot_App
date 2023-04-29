@@ -1,5 +1,4 @@
 export default function GeneratePrompt(userData, allReadings) {
-  console.log(allReadings);
   let prompt;
   const card = userData.name;
   const averageCardMood = userData.averageMood;

@@ -1,9 +1,9 @@
-import AppContainer from "../components/Styled/StyledAppContainer";
-import StyledCardContainer from "../components/Styled/StyledCardContainer";
-import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import styled from "styled-components";
-import StyledNavbar from "../components/Styled/StyledNavbar";
-import ChatApi from "../components/ChatApi";
+import AppContainer from "../../../../components/Styled/StyledAppContainer";
+import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
+import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
+import ChatApi from "../../../../components/chatAPI";
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 
 const StyledOptions = styled.ul`
   display: flex;

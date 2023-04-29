@@ -48,7 +48,7 @@ export default function NoteFormular() {
       setInputValue("");
       copyCurrentNote();
       setCurrentCard(difference - 1);
-      router.push("/cardreading");
+      router.push("/cards/dailycard/cardreading");
     } else {
       alert("no cards in history - add some cards to enable saving");
     }
