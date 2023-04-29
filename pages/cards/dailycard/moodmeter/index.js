@@ -76,7 +76,6 @@ export default function MoodMeter() {
 
   const randomCardIndex = randomIndex(0, 77);
   const randomCard = getCardById(randomCardIndex);
-  console.log(randomCard);
 
   useEffect(() => {
     setHasMounted(true);

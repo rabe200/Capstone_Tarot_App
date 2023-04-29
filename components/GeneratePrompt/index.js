@@ -1,4 +1,5 @@
-export default function GeneratePrompt(userData, allReadings, currentNote) {
+export default function GeneratePrompt(userData, allReadings) {
+  console.log(allReadings);
   let prompt;
   const card = userData.name;
   const averageCardMood = userData.averageMood;
@@ -9,7 +10,7 @@ export default function GeneratePrompt(userData, allReadings, currentNote) {
   const day = userData.day;
   const hour = userData.hour;
   const visits = userData.arrayIndex;
-  const description = userData.description;
+  const description = userData.desc;
   const greeting =
     hour < 4
       ? "hey vamp"
@@ -59,9 +60,9 @@ export default function GeneratePrompt(userData, allReadings, currentNote) {
     "Friday",
     "Saturday",
   ];
-
-  const lastReadings = allReadings;
-  const note = currentNote;
+  const length = allReadings.length - 1;
+  const pastReading = allReadings[length].reading;
+  const note = userData.notes;
   const dayName = dayNames[day];
   prompt = `
   Context: Give me an extended answer about my drawn Card. Give me a serious tarot reading. Are harsh if you feel like something is suspicous. ### do NOT use the word "mood" and don't talk of numbers or mention any numerical value you have read in the stats of the question body. do not let the user know about the numbers. they are here for you to generate a close to a reality tarot reading experience. ###
@@ -77,14 +78,13 @@ Request:
      The average mood for the card drawn today is
     "${averageMood}" . "
     ### Here is some data reflecting the possible meanings for the card drawn: meaning up: "${meaning_up}", meaning reversed: "${meaning_rev}". And here is a visual description of that card: "${description}". 
-    ### i have also left a note in my diary. it could be very random. if it is too random, then just ignore it. but if it fits your reading, consider referring to it. the note is: "${note}" ###
-    ### consider to compare the current situation with the last readings you had with me. the data for the last readings is here: ### 
-${lastReadings} special note: do not repeat phrases used in that last reading###
-    Today is ${dayName}. If today is Friday or Saturday wish me a nice weekend at the end of your answer. If it is Monday wish me a good start into the week. If it is wednesday refer "es ist mittwoch meine kerle" 
+    ### i have also left a note in my diary. if my note is to random too handle, skip it. but if it fits your reading, consider referring to it. the note is: "${note}" ###
+    ### consider to compare the current situation with the last readings you had with me. the data for the last readings is here: ${pastReading}### 
+ special note: do not repeat phrases used in that last reading###
+    Today is ${dayName}. React accordingly. 
 
    ;
   
   `;
-  console.log(prompt);
   return prompt;
 }

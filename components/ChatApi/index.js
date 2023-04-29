@@ -62,12 +62,9 @@ export default function ChatApi() {
   const setAllReadings = useStore((state) => state.setAllReadings);
   const [loading, setLoading] = useState(false);
   const allReadings = useStore((state) => state.allReadings);
-  const currentNote = useStore((state) => state.currentNote);
-
-  const pastReadings = allReadings[allReadings.length - 1].reading;
 
   useEffect(() => {
-    setQuestionInput(GeneratePrompt(userData, pastReadings, currentNote));
+    setQuestionInput(GeneratePrompt(userData, allReadings));
   }, []);
 
   useEffect(() => setHasMounted(true), []);
@@ -113,6 +110,8 @@ export default function ChatApi() {
           prev !== undefined ? prev + chunkValue : chunkValue
         );
       }
+      setCurrentReading(result);
+      setAllReadings(result);
       setLoading(false);
     }
   }
