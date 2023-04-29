@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@next/font": "^13.3.1",
+    "edge-runtime": "^2.2.0",
     "eslint": "8.29.0",
     "eslint-config-next": "^13.3.1",
     "eventsource-parser": "^1.0.0",
