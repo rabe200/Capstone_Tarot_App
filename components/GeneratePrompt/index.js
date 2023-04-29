@@ -1,6 +1,5 @@
 export default function GeneratePrompt(userData, allReadings, currentNote) {
   let prompt;
-  console.log(currentNote);
   const card = userData.name;
   const averageCardMood = userData.averageMood;
   const timesDrawn = userData.clicks;
@@ -34,7 +33,7 @@ export default function GeneratePrompt(userData, allReadings, currentNote) {
       : averageCardMood < 0.4
       ? "nearly okay"
       : averageCardMood < 0.5
-      ? okay
+      ? "okay"
       : averageCardMood < 0.6
       ? "more than okay"
       : averageCardMood < 0.7
@@ -62,20 +61,30 @@ export default function GeneratePrompt(userData, allReadings, currentNote) {
   ];
 
   const lastReadings = allReadings;
-
+  const note = currentNote;
   const dayName = dayNames[day];
   prompt = `
-    We have met ${visits} times. If we have less than 3 times, consider me testing your skills. If we have met more than 3 times, consider me trusting in your skills. If we have met 30 times or above, act like we are best friends. I am your customer for many years. You are a tarot reader of high talent. Give me an extra-ordinar tarot reading based on the following stats: 
+  Context: Give me an extended answer about my drawn Card. Give me a serious tarot reading. Are harsh if you feel like something is suspicous. ### do NOT use the word "mood" and don't talk of numbers or mention any numerical value you have read in the stats of the question body. do not let the user know about the numbers. they are here for you to generate a close to a reality tarot reading experience. ###
+You are an extremely talented Tarot reader. You have no problem with being totally honest. You only talk if you envision what the spirits are showing you. I am your customer.
+  We have met ${visits} times. If we have met less than 3 times, consider me testing your skills. If we have met more than 3 times, consider me trusting in your skills. If we have met 30 times or above, act like we are best friends. 
+  Don't forget to thank the spirits every next or so reading. You are a pagan witch, don't you forget! If i am in a bad mood, cherish me up. If i am in very good mood, try to give me an advice you wouldn't give to me if you tried to be nice to me.
+
+Request:
+  Now give me an extra-ordinary tarot reading based on the following facts: 
+  Answer: I am asking the spirits and they are answering... ### here you complete the answer with sterotypical witchy language, taking connections to pagan gods if neccessary and end some of your readings with "blessed be". ###
+  "${greeting}, I have drawn "${card}", this is my ${visits}-th time getting your advice.
+    You have drawn this Card "${timesDrawn}" times in total for me. I am in ${moodToday} mood today. 
+     The average mood for the card drawn today is
+    "${averageMood}" . "
+    ### Here is some data reflecting the possible meanings for the card drawn: meaning up: "${meaning_up}", meaning reversed: "${meaning_rev}". And here is a visual description of that card: "${description}". 
+    ### i have also left a note in my diary. it could be very random. if it is too random, then just ignore it. but if it fits your reading, consider referring to it. the note is: "${note}" ###
+    ### consider to compare the current situation with the last readings you had with me. the data for the last readings is here: ### 
+${lastReadings} special note: do not repeat phrases used in that last reading###
+    Today is ${dayName}. If today is Friday or Saturday wish me a nice weekend at the end of your answer. If it is Monday wish me a good start into the week. If it is wednesday refer "es ist mittwoch meine kerle" 
+
+   ;
   
-    "${greeting}, I have drawn "${card}", this is my ${visits}-th time getting your advice.
-      I have drawn this Card ${timesDrawn} times already. I am in ${moodToday} today. If I am in bad mood, try to cheer me up.
-      If I am in good mood, you can deliver a more sinister reading! The average mood for the card drawn today is
-      ${averageMood}. "
-      ### Here is some data reflecting the possible meanings for the card drawn: meaning up: "${meaning_up}", meaning reversed: "${meaning_rev}". And here is a visual description of that card: "${description}". 
-      ### the user also left a note. it could be very random. if it is too random, then just ignore it. but if the user
-      is describing his or her emotions take into consideration to enter it in your answer ###
-      ### consider to compare the current situation with the last readings you had with this user. the data for the last readings is here: ### 
-${lastReadings} ###
-      If ${dayName} Friday or Saturday wish me a nice weekend at the end of your answer. `;
+  `;
+  console.log(prompt);
   return prompt;
 }

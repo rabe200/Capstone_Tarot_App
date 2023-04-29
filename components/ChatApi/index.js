@@ -45,7 +45,7 @@ const StyledText = styled.div`
   display: flex;
   position: relative;
   top: 0;
-  font-size: 1.6rem;
+  font-size: 1rem;
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -64,8 +64,10 @@ export default function ChatApi() {
   const allReadings = useStore((state) => state.allReadings);
   const currentNote = useStore((state) => state.currentNote);
 
+  const pastReadings = allReadings[allReadings.length - 1].reading;
+
   useEffect(() => {
-    setQuestionInput(GeneratePrompt(userData, allReadings, currentNote));
+    setQuestionInput(GeneratePrompt(userData, pastReadings, currentNote));
   }, []);
 
   useEffect(() => setHasMounted(true), []);
@@ -79,41 +81,42 @@ export default function ChatApi() {
     setLoading(true);
     console.log("wait a moment");
 
-    try {
-      const response = await fetch("/api/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question: questionInput }),
-      });
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: questionInput,
+      }),
+    });
 
-      const data = await response.json();
-      if (response.status === 400) {
-        throw setDisableButton(false);
+    if (!response.ok) {
+      setDisableButton(false);
+      throw new Error(response.statusText);
+    }
+
+    if (response.status === 200) {
+      const data = response.body;
+      if (!data) {
+        return console.log("no data");
       }
+      const reader = data.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
 
-      if (response.status !== 200) {
-        throw (
-          data.error ||
-          new Error(`Request failed with status ${response.status}`)
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        const chunkValue = decoder.decode(value);
+        setResult((prev) =>
+          prev !== undefined ? prev + chunkValue : chunkValue
         );
       }
-
-      if (response.status === 200) {
-        setHideReading(false);
-      }
-      setCurrentReading(data.result);
-      setResult(data.result);
-      setAllReadings(data.result);
       setLoading(false);
-    } catch (error) {
-      console.log(error);
     }
-    return;
   }
 
-  console.log("buttonDisabled?", disableButton);
   return (
     userData && (
       <Fragment>
