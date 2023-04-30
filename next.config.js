@@ -14,6 +14,9 @@ const nextConfig = {
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
+    config.externals.push({
+      sharp: "commonjs.sharp",
+    });
 
     // add alias for root (use <__dirname, "src">) if you want a subfolder
     config.resolve.alias["~"] = path.resolve(__dirname);

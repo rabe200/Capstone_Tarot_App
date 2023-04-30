@@ -8,8 +8,6 @@ import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
 
-// const sharp = require("sharp");
-
 const Frame = styled.div`
   width: 375px;
   height: 667px;
