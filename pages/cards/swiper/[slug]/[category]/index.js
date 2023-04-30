@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
-import { Navigation, A11y, Thumbs, Scrollbar } from "swiper";
+import "swiper/swiper-bundle.min.css";
+
+import { Navigation, A11y, Thumbs, Lazy } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { cards } from "../../../../../lib/data";
 import styled from "styled-components";
 import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const Frame = styled.div`
   background: palevioletred;
@@ -34,10 +36,11 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
 `;
 
 const StyledFlexBoxForText = styled.div`
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   height: 80%;
@@ -55,31 +58,41 @@ const StyledText = styled.div`
   overflow: auto;
 `;
 
-const StyledLink = styled(Link)`
-  color: yellow;
-`;
-
 export default function Category() {
   const router = useRouter();
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
-  console.log(slug);
+  const setStoreSlug = useStore((state) => state.setSlug);
+
+  useEffect(() => setStoreSlug(slug), []);
+
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+  if (!hasMounted) {
+    return null;
+  }
+
   return (
     slug && (
       <Frame>
-        <TopMenuBar mid={card[0].name} />
-
+        <TopMenuBar
+          mid={card[0].name}
+          backbutton={`/cards/swiper/${card[0].id}`}
+        />
         <StyledSwiper
           loop={true}
-          speed={667}
-          modules={[Thumbs, Navigation, Scrollbar, A11y]}
+          speed={300}
+          modules={[Thumbs, Navigation, A11y]}
           spaceBetween={250}
           slidesPerView={1}
           navigation={true}
-          scrollbar={{ draggable: true }}
-          // onSwipe={(swiper) => console.log(swiper)}
           onSlideChange={(event) => {
+            console.log(event);
+
             router.replace(`/cards/swiper/${event.realIndex}/description`);
           }}
           grabCursor={true}
@@ -90,12 +103,7 @@ export default function Category() {
           {cards.map((card) => (
             <StyledSwiperSlide key={card.name}>
               <StyledFlexBoxForText>
-                <StyledText>
-                  <StyledLink href={`/cards/swiper/${slug}/description`}>
-                    Description
-                  </StyledLink>
-                  {card.desc}
-                </StyledText>
+                <StyledText>{card.desc}</StyledText>
               </StyledFlexBoxForText>
             </StyledSwiperSlide>
           ))}

@@ -11,6 +11,7 @@ import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../src/store/store";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const Frame = styled.div`
   background: palevioletred;
@@ -75,12 +76,15 @@ export default function ProductImagesSlider(props) {
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
+  const storeSlug = useStore((state) => state.slug);
+  const setStoreSlug = useStore((state) => state.setSlug);
+
+  useEffect(() => setStoreSlug(slug), []);
 
   return (
     slug && (
       <Frame>
         <TopMenuBar mid={card[0].name} />
-
         <StyledSwiper
           loop={true}
           speed={300}
@@ -89,6 +93,8 @@ export default function ProductImagesSlider(props) {
           slidesPerView={1}
           navigation={true}
           onSlideChange={(event) => {
+            console.log(event);
+
             router.replace(`/cards/swiper/${event.realIndex}`);
           }}
           grabCursor={true}
@@ -109,7 +115,10 @@ export default function ProductImagesSlider(props) {
                 ></StyledImage>
                 <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                 <StyledText>
-                  <StyledLink href={`/cards/swiper/${slug}/description`}>
+                  <StyledLink
+                    onClick={() => setStoreSlug(slug)}
+                    href={`/cards/swiper/${slug}/description`}
+                  >
                     Description
                   </StyledLink>
                   {card.desc}

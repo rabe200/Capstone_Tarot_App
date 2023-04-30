@@ -51,7 +51,7 @@ const StyledTopBarRight = styled.div`
   justify-content: center;
 `;
 
-export default function TopMenuBar({ mid, card, hidden }) {
+export default function TopMenuBar({ mid, card, hidden, backbutton }) {
   const router = useRouter();
 
   return card ? (
@@ -65,9 +65,15 @@ export default function TopMenuBar({ mid, card, hidden }) {
         {mid} <NoteNotifier currentCard={card} />
       </StyledTopBarMiddle>
       <StyledTopBarRight>
-        <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
-          back
-        </StyledMenuBack>
+        {backbutton ? (
+          <StyledMenuBack hidden={hidden}>
+            <Link href={`${backbutton}`}> back</Link>
+          </StyledMenuBack>
+        ) : (
+          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
+            back
+          </StyledMenuBack>
+        )}
       </StyledTopBarRight>
     </StyledTopBarContainer>
   ) : (
@@ -79,9 +85,15 @@ export default function TopMenuBar({ mid, card, hidden }) {
       </StyledTopBarLeft>
       <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
       <StyledTopBarRight>
-        <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
-          {"back"}
-        </StyledMenuBack>
+        {backbutton ? (
+          <StyledMenuBack hidden={hidden}>
+            <Link href={`${backbutton}`}> back</Link>
+          </StyledMenuBack>
+        ) : (
+          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
+            back
+          </StyledMenuBack>
+        )}
       </StyledTopBarRight>
     </StyledTopBarContainer>
   );

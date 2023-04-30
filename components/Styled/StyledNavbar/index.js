@@ -90,7 +90,7 @@ const MenuLink3 = styled(Link)`
 
 export default function StyledNavbar() {
   const lastCard = useStore((state) => state.lastCard);
-  const [hidden, setHiddenToggle] = useState(false);
+  const [hidden] = useState(false);
   const setLastPageVisited = useStore((state) => state.setLastPageVisited);
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
   const router = useRouter();
@@ -99,14 +99,6 @@ export default function StyledNavbar() {
   function resetComingFromHistory() {
     setComingFromHistory(false);
     setLastPageVisited(queryName);
-  }
-
-  function toggle() {
-    if (hidden === false) {
-      setHiddenToggle(true);
-    } else {
-      setHiddenToggle(false);
-    }
   }
 
   return (
@@ -122,7 +114,7 @@ export default function StyledNavbar() {
           <MenuLink1
             onClick={() => resetComingFromHistory()}
             hidden={"hidden"}
-            href={`/cards/${lastCard.id}`}
+            href={`/cards/swiper/${lastCard.id}`}
           >
             CARDS
           </MenuLink1>

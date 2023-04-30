@@ -8,7 +8,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
