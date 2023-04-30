@@ -1,12 +1,20 @@
-import "swiper/swiper-bundle.min.css";
 import { useRouter } from "next/router";
-import { Navigation, Scrollbar, A11y, Thumbs } from "swiper";
+import "swiper/swiper-bundle.min.css";
+import { Navigation, A11y, Thumbs } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { cards } from "../../../../../lib/data";
 import Image from "next/image";
 import styled from "styled-components";
 import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
+
+const StyledImageContainerIndex = styled.div`
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: auto;
+`;
 
 const Frame = styled.div`
   width: 375px;
@@ -50,52 +58,46 @@ export default function ProductImagesSlider(props) {
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
-  const cards = useStore((state) => state.allCards);
 
-  return slug ? (
-    <Frame>
-      <TopMenuBar mid={card[0].name} />
+  return (
+    slug && (
+      <Frame>
+        <TopMenuBar mid={card[0].name} />
 
-      <StyledSwiper
-        loop={true}
-        speed={667}
-        modules={[Thumbs, Navigation, Scrollbar, A11y]}
-        spaceBetween={250}
-        slidesPerView={1}
-        navigation={true}
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        onSwipe={(swiper) => console.log(swiper)}
-        onSlideChange={(event) => {
-          console.log("slide change", event.realIndex);
-          router.replace(`/cards/swiper/${event.realIndex}/zoom`);
-        }}
-        grabCursor={true}
-        centeredSlides={true}
-        initialSlide={slug}
-        lazyPreloadPrevNext={8}
-      >
-        {cards.map((card) => (
-          <StyledSwiperSlide key={card.name}>
-            <StyledImage
-              priority
-              placeholder="blur"
-              blurDataURL="/images/placeholder.jpg"
-              src={card.image}
-              alt={card.name}
-              width={300}
-              height={450}
-              onClick={() => router.push(`/cards/swiper/${slug}`)}
-            ></StyledImage>
-          </StyledSwiperSlide>
-        ))}
-      </StyledSwiper>
-      <StyledNavbar />
-    </Frame>
-  ) : (
-    <p>
-      {"where is my slug"}
-      {console.log()}
-    </p>
+        <StyledSwiper
+          loop={true}
+          speed={300}
+          modules={[Thumbs, Navigation, A11y]}
+          spaceBetween={250}
+          slidesPerView={1}
+          navigation={true}
+          onSlideChange={(event) => {
+            router.replace(`/cards/swiper/${event.realIndex}/zoom`);
+          }}
+          grabCursor={true}
+          centeredSlides={true}
+          initialSlide={slug}
+          lazyPreloadPrevNext={8}
+        >
+          {cards.map((card) => (
+            <StyledSwiperSlide key={card.name}>
+              <StyledImageContainerIndex>
+                <StyledImage
+                  loading="eager"
+                  placeholder="blur"
+                  blurDataURL="/images/placeholder.jpg"
+                  src={card.image}
+                  alt={card.name}
+                  width={120}
+                  height={200}
+                  onClick={() => router.push(`/cards/swiper/${slug}`)}
+                ></StyledImage>
+              </StyledImageContainerIndex>
+            </StyledSwiperSlide>
+          ))}
+        </StyledSwiper>
+        <StyledNavbar />
+      </Frame>
+    )
   );
 }

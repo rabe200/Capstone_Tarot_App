@@ -5,18 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NEXT_SHARP_PATH=\"YOUR_PATH_TO_SHARP\" next start",
     "lint": "next lint --dir .",
     "test": "jest --watchAll"
   },
   "dependencies": {
-    "@next/font": "^13.3.1",
     "commonjs": "^0.0.1",
     "edge-runtime": "^2.2.0",
     "eslint": "8.29.0",
     "eslint-config-next": "^13.3.1",
     "eventsource-parser": "^1.0.0",
-    "next": "^13.3.1",
+    "next": "^13.3.2",
     "node-http": "^0.0.5",
     "openai": "^3.2.1",
     "react": "^18.2.0",

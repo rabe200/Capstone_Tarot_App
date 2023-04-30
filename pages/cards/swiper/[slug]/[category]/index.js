@@ -1,14 +1,12 @@
 import { useRouter } from "next/router";
-import { Navigation, A11y, Thumbs } from "swiper";
+import { Navigation, A11y, Thumbs, Scrollbar } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import { cards } from "../../../../../lib/data";
 import styled from "styled-components";
 import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
 import Link from "next/link";
-import { useState } from "react";
 
 const Frame = styled.div`
   background: palevioletred;
@@ -66,7 +64,7 @@ export default function Category() {
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
-
+  console.log(slug);
   return (
     slug && (
       <Frame>
@@ -79,11 +77,9 @@ export default function Category() {
           spaceBetween={250}
           slidesPerView={1}
           navigation={true}
-          pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwipe={(swiper) => console.log(swiper)}
+          // onSwipe={(swiper) => console.log(swiper)}
           onSlideChange={(event) => {
-            console.log("slide change", event.realIndex);
             router.replace(`/cards/swiper/${event.realIndex}/description`);
           }}
           grabCursor={true}

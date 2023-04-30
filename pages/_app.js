@@ -1,6 +1,6 @@
 import GlobalStyle from "../styles/styles";
 import Layout from "../components/Layout";
-import localFont from "@next/font/local";
+import localFont from "next/font/local";
 import { ThemeProvider } from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
 

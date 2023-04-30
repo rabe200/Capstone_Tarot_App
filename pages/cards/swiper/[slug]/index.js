@@ -76,9 +76,6 @@ export default function ProductImagesSlider(props) {
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
 
-  {
-    console.log(typeof parseInt(slug), parseInt(slug));
-  }
   return (
     slug && (
       <Frame>
@@ -91,9 +88,6 @@ export default function ProductImagesSlider(props) {
           spaceBetween={250}
           slidesPerView={1}
           navigation={true}
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-          onSwipe={(swiper) => console.log(swiper)}
           onSlideChange={(event) => {
             router.replace(`/cards/swiper/${event.realIndex}`);
           }}
@@ -105,7 +99,6 @@ export default function ProductImagesSlider(props) {
           {cards.map((card) => (
             <StyledSwiperSlide key={card.name}>
               <StyledImageContainerIndex>
-                {" "}
                 <StyledImage
                   loading="eager"
                   src={card.image}
