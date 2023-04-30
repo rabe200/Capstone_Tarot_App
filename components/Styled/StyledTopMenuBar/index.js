@@ -19,6 +19,7 @@ const StyledMenuBack = styled.div`
 
 const StyledTopBarContainer = styled.div`
   position: relative;
+  top: 0;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
