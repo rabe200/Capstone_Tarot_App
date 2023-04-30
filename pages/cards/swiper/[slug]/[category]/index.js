@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import "swiper/swiper-bundle.min.css";
+import { useDoubleTap } from "use-double-tap";
 
 import { Navigation, A11y, Thumbs, Lazy } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -58,6 +59,10 @@ export default function Category() {
   const card = getCardById(slug);
   const setStoreSlug = useStore((state) => state.setSlug);
   const category = router ? router.query.category : 0;
+  const doubleTap = useDoubleTap((event) => {
+    router.push(`/cards/swiper/${slug}`);
+    console.log(event.target);
+  });
 
   useEffect(() => setStoreSlug(slug), []);
 
@@ -74,7 +79,7 @@ export default function Category() {
           modules={[Thumbs, Navigation, A11y]}
           spaceBetween={250}
           slidesPerView={1}
-          navigation={true}
+          navigation={false}
           onSlideChange={(event) => {
             router.replace(`/cards/swiper/${event.realIndex}/${category}`);
           }}
@@ -85,7 +90,10 @@ export default function Category() {
         >
           {cards.map((card) => (
             <StyledSwiperSlide key={card.name}>
-              <StyledBoxForText>
+              <StyledBoxForText
+                {...doubleTap}
+                onDoubleClick={() => router.push(`/cards/swiper/${slug}/`)}
+              >
                 {category === "description" ? (
                   <StyledText>{card.desc}</StyledText>
                 ) : category === "meaning_up" ? (

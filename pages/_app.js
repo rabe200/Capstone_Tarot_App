@@ -11,10 +11,12 @@ import { mediumpurple } from "../components/ToggleThemeButton";
 import { feldspar } from "../components/ToggleThemeButton";
 export const pixelOperator = localFont({
   src: "../styles/fonts/PixelOperatorMono.ttf",
+  weight: "400",
+  style: "normal",
 });
 
 export default function App({ Component, pageProps }) {
-  const [localTheme, setLocalTheme] = useLocalStorageState("localTheme", {
+  const [localTheme] = useLocalStorageState("localTheme", {
     defaultValue: themeDark,
   });
   function getCurrentTheme() {

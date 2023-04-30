@@ -37,7 +37,7 @@ export const feldspar = {
   colorText: "#e6fcef",
   colorLink: "black",
   border: "2px black solid",
-  colorDeep: "orange",
+  colorDeep: "white",
   colorFront:
     "radial-gradient(circle, rgba(250,93,85,1) 0%, rgba(240,147,60,1) 85%, rgba(240,195,60,1) 100%);",
   colorArrow: "black",

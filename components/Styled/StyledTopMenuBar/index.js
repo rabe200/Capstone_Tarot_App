@@ -18,7 +18,7 @@ const StyledMenuBack = styled.div`
 `;
 
 const StyledTopBarContainer = styled.div`
-  position: relative;
+  position: sticky;
   top: 0;
   width: 100%;
   display: grid;

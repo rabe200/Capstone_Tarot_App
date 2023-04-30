@@ -9,7 +9,7 @@ import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import { useCallback } from "react";
 import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
-
+import Frame from "../../../components/Frame";
 const StyledEntry = styled.div`
   padding: 2px;
   background: white;
@@ -18,14 +18,6 @@ const StyledEntry = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 20px;
-`;
-
-const StyledCardName = styled.h1`
-  display: flex;
-  width: 100%;
-  background: ${(p) => p.theme.colorFront};
-  justify-content: center;
-  font-size: 1.4em;
 `;
 
 const StyledNavi = styled.div`
@@ -38,19 +30,11 @@ const StyledFormular = styled.form`
   width: 100%;
 `;
 const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 100%;
-`;
-const StyledList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorText};
-  height: 100%;
+  height: 77vh;
   overflow: auto;
-  border-radius: 8px;
-  width: 100%;
 `;
 
 const StyledLink = styled(Link)`
@@ -103,6 +87,8 @@ const StyledButton = styled.div`
 `;
 
 export default function History() {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   const [hasMounted, setHasMounted] = useState(false);
 
   const cardsDeleted = useStore((state) => state.cardsDeleted);
@@ -148,6 +134,17 @@ export default function History() {
   }, [cardsDeleted]);
 
   useEffect(() => {
+    function onFullscreenChange() {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    }
+
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+
+    return () =>
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+  }, []);
+
+  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -155,57 +152,44 @@ export default function History() {
   }
 
   return (
-    <AppContainer>
+    <Frame>
       <TopMenuBar query2={"/dailyCard"} mid={"history"} />
-      <StyledFooter>
+      {/* <StyledFooter>
         <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
         <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
         <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
-      </StyledFooter>
-      <StyledBarContainer>
-        <StyledNavi></StyledNavi>
-      </StyledBarContainer>
-
-      <StyledCardContainer>
-        <ListContainer>
-          <StyledList>
-            {sortedItems.map((card) => {
-              return (
-                <StyledEntry key={card.uuid}>
-                  <li>
-                    <StyledLink href={`/cards/swiper/${card.id}`}>
-                      <b>{new Date(card.date).toLocaleDateString()}</b>{" "}
-                      {card.name}
-                    </StyledLink>
-                  </li>
-                  <li>
-                    {dayNames[card.day]}
-                    {card.hour === 0
-                      ? " midnight"
-                      : card.hour < 4
-                      ? " night"
-                      : card.hour < 7
-                      ? " early morning"
-                      : card.hour < 12
-                      ? " morning"
-                      : card.hour < 13
-                      ? " midday"
-                      : card.hour < 17
-                      ? " afternoon"
-                      : card.hour < 20
-                      ? " early evening"
-                      : card.hour < 25
-                      ? " late evening"
-                      : " out of time"}
-                  </li>
-                  <NoteWithImage card={card} toggle={showButtons} />{" "}
-                </StyledEntry>
-              );
-            })}
-          </StyledList>
-        </ListContainer>
-      </StyledCardContainer>
-
+      </StyledFooter> */}
+      {/* <StyledBarContainer /> */}
+      <ListContainer>
+        {sortedItems.map((card) => {
+          return (
+            <StyledEntry key={card.uuid}>
+              <StyledLink href={`/cards/swiper/${card.id}`}>
+                <b>{new Date(card.date).toLocaleDateString()}</b> {card.name}
+              </StyledLink>
+              {dayNames[card.day]}
+              {card.hour === 0
+                ? " midnight"
+                : card.hour < 4
+                ? " night"
+                : card.hour < 7
+                ? " early morning"
+                : card.hour < 12
+                ? " morning"
+                : card.hour < 13
+                ? " midday"
+                : card.hour < 17
+                ? " afternoon"
+                : card.hour < 20
+                ? " early evening"
+                : card.hour < 25
+                ? " late evening"
+                : " out of time"}
+              <NoteWithImage card={card} toggle={showButtons} />{" "}
+            </StyledEntry>
+          );
+        })}
+      </ListContainer>
       <StyledFormular>
         <select
           style={{
@@ -225,6 +209,6 @@ export default function History() {
         </select>
       </StyledFormular>
       <StyledNavbar />
-    </AppContainer>
+    </Frame>
   );
 }

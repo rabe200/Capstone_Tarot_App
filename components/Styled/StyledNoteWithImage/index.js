@@ -1,18 +1,18 @@
 import styled from "styled-components";
-import Image from "next/image";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import useStore from "../../../src/store/store";
 import DeleteButton from "../../DeleteButton";
 
 const NoteWithImageContainer = styled.div`
   display: grid;
   width: 100%;
+  height: 100%;
   border: 2px black solid;
   background: ${(p) => p.theme.colorBackground};
   border-radius: 8px;
   background: white;
   padding-top: 20px;
+  overflow: auto;
 `;
 
 const StyledButton = styled.div`
@@ -50,7 +50,6 @@ const StyledNotes = styled.div`
   border: ${(p) => {
     p.theme.border;
   }};
-  z-index: 2000;
 `;
 
 export default function NoteWithImage({ card, toggle }) {
@@ -58,7 +57,9 @@ export default function NoteWithImage({ card, toggle }) {
   const [inputValue, setInputValue] = useState("");
   const editSelectedNote = useStore((state) => state.editSelectedNote);
   const setCurrentNote = useStore((state) => state.setCurrentNote);
-  function handleClick() {
+  function handleClick() {}
+
+  function enlargeContent() {
     if (noteOverflow === "hidden") {
       setNoteOverflow("auto");
     } else {
@@ -87,9 +88,10 @@ export default function NoteWithImage({ card, toggle }) {
     <NoteWithImageContainer>
       <form id="myForm">
         <StyledNotes
-          onClick={handleClick}
+          onClick={enlargeContent}
+          onDoubleClick={handleClick}
           noteOverflow={noteOverflow}
-          contentEditable
+          contentEditable={false}
           suppressContentEditableWarning={true}
           id={`${card.uuid}`}
           name="textBox"

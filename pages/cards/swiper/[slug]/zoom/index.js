@@ -9,6 +9,7 @@ import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
 import Frame from "../../../../../components/Frame";
+import { useDoubleTap } from "use-double-tap";
 
 const StyledImageContainerIndex = styled.div`
   width: 99%;
@@ -46,6 +47,10 @@ export default function ProductImagesSlider(props) {
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
+  const doubleTapImage = useDoubleTap((event) => {
+    router.push(`/cards/swiper/${slug}`);
+    console.log(event.target);
+  });
 
   return (
     slug && (
@@ -61,7 +66,7 @@ export default function ProductImagesSlider(props) {
           modules={[Thumbs, Navigation, A11y]}
           spaceBetween={250}
           slidesPerView={1}
-          navigation={true}
+          navigation={false}
           onSlideChange={(event) => {
             router.replace(`/cards/swiper/${event.realIndex}/zoom`);
           }}
@@ -74,6 +79,7 @@ export default function ProductImagesSlider(props) {
             <StyledSwiperSlide key={card.name}>
               <StyledImageContainerIndex>
                 <StyledImage
+                  {...doubleTapImage}
                   loading="eager"
                   placeholder="blur"
                   blurDataURL="/images/placeholder.jpg"
@@ -81,7 +87,7 @@ export default function ProductImagesSlider(props) {
                   alt={card.name}
                   width={300}
                   height={527}
-                  onClick={() => router.push(`/cards/swiper/${slug}`)}
+                  onDoubleClick={() => router.push(`/cards/swiper/${slug}`)}
                 ></StyledImage>
               </StyledImageContainerIndex>
             </StyledSwiperSlide>

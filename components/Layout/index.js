@@ -4,7 +4,7 @@ const StyledMain = styled.main`
   display: flex;
   position: relative;
   width: 375px;
-  height: 667px;
+  height: 100vh;
   background: ${(p) => p.theme.colorDeep};
   color: ${(p) => p.theme.colorText};
   justify-content: center;

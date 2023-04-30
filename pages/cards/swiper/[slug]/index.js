@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import "swiper/swiper-bundle.min.css";
-
+import { useDoubleTap } from "use-double-tap";
 import { Navigation, A11y, Thumbs, Lazy } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -16,15 +16,15 @@ import CardStats from "../../../../components/Stats/stats";
 import CardNotes from "../../../../components/Notes";
 import SearchBar from "../../../../components/SearchBar";
 import Frame from "../../../../components/Frame";
-
+import ArrowUp from "../../../../components/Styled/ArrowUp";
+import ArrowDown from "../../../../components/Styled/ArrowDown";
 const StyledImageContainerIndex = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 0.7fr 0.25fr 0.25fr;
+  grid-template-rows: 0.7fr 0.5fr 0.5fr;
   grid-template-columns: 1fr 1fr;
   overflow: auto;
-  /* align-items: center; */
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -35,6 +35,7 @@ const StyledSwiper = styled(Swiper)`
   width: 100%;
   height: 100%;
   text-align: center;
+  background: black;
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -45,12 +46,9 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 `;
 
 const StyledImage = styled(Image)`
-  padding-top: 20px;
-
-  width: 181px;
-  height: 290px;
   border-radius: 8px;
-  justify-self: center;
+  z-index: 100;
+  background: ${(p) => p.theme.colorBackground};
 `;
 
 const StyledLink = styled(Link)`
@@ -62,22 +60,59 @@ const StyledLink = styled(Link)`
   &:active: {
     color: white;
   }
+  visibility: hidden;
+`;
+
+const ShadowBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  /* opacity: 100%; */
+  /* background: black; */
+  box-shadow: inset 1px 0px 10px 1px ${(p) => p.theme.colorLink},
+    inset -1px 0px 10px 1px ${(p) => p.theme.colorLink};
 `;
 
 const StyledText = styled.div`
-  justify-self: center;
   display: flex;
   flex-direction: column;
+  justify-content: auto;
   align-items: center;
   width: 90%;
-  height: 90%;
+  height: 80%;
+  overflow: hidden;
+`;
+const StyledTextContainer = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
   border: ${(p) => p.theme.border};
   border-radius: 8px;
   text-overflow: hidden;
   overflow: hidden;
-  /* box-shadow: 2px 2px 2px 2px silver; */
+  box-shadow: inset 2px 2px 100px 1px ${(p) => p.theme.colorBackground},
+    inset -2px -2px 10px 10px ${(p) => p.theme.colorLink};
+`;
+
+const StyledImageContainer = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
+  border: ${(p) => p.theme.border};
+  border-radius: 8px;
+  text-overflow: hidden;
+  overflow: hidden;
+  box-shadow: inset 2px 2px 100px 1px ${(p) => p.theme.colorBackground},
+    inset -2px -2px 10px 10px ${(p) => p.theme.colorLink};
 `;
 
 export default function ProductImagesSlider(props) {
@@ -86,6 +121,30 @@ export default function ProductImagesSlider(props) {
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
   const setStoreSlug = useStore((state) => state.setSlug);
+  const doubleTapNotes = useDoubleTap((event) => {
+    router.push(`/cards/swiper/${slug}/notes`);
+    console.log(event.target);
+  });
+  const doubleTapStats = useDoubleTap((event) => {
+    router.push(`/cards/swiper/${slug}/stats`);
+    console.log(event.target);
+  });
+  const doubleTapMeaningUp = useDoubleTap((event) => {
+    router.push(`/cards/swiper/${slug}/meaning_up`);
+    console.log(event.target);
+  });
+  const doubleTapMeaningRev = useDoubleTap((event) => {
+    router.push(`/cards/swiper/${slug}/meaning_rev`);
+    console.log(event.target);
+  });
+  const doubleTapDescription = useDoubleTap((event) => {
+    router.push(`/cards/swiper/${slug}/description`);
+    console.log(event.target);
+  });
+  const doubleTapImage = useDoubleTap((event) => {
+    router.push(`/cards/swiper/${slug}/zoom`);
+    console.log(event.target);
+  });
 
   useEffect(() => setStoreSlug(slug), []);
 
@@ -100,7 +159,7 @@ export default function ProductImagesSlider(props) {
           modules={[Thumbs, Navigation, A11y]}
           spaceBetween={250}
           slidesPerView={1}
-          navigation={true}
+          navigation={false}
           onSlideChange={(event) => {
             router.replace(`/cards/swiper/${event.realIndex}`);
           }}
@@ -112,55 +171,78 @@ export default function ProductImagesSlider(props) {
           {cards.map((card) => (
             <StyledSwiperSlide key={card.name}>
               <StyledImageContainerIndex>
-                <StyledImage
-                  loading="eager"
-                  src={card.image}
-                  alt={card.name}
-                  width={120}
-                  height={200}
-                  onClick={() => router.push(`/cards/swiper/${slug}/zoom`)}
-                ></StyledImage>
-                <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-                <StyledText
-                  onDoubleClick={(event) =>
-                    router.push(event.target.children[0].href)
-                  }
-                  onTouchEnd={(event) =>
-                    router.push(event.target.children[0].href)
+                <StyledImageContainer>
+                  <ShadowBox>
+                    <StyledImage
+                      {...doubleTapImage}
+                      loading="eager"
+                      src={card.image}
+                      alt={card.name}
+                      width={120}
+                      height={200}
+                      onDoubleClick={() =>
+                        router.push(`/cards/swiper/${slug}/zoom`)
+                      }
+                    />
+                  </ShadowBox>
+                </StyledImageContainer>
+                <div className="swiper-lazy-preloader swiper-lazy-preloader-white" />
+
+                <StyledTextContainer
+                  {...doubleTapDescription}
+                  onDoubleClick={() =>
+                    router.push(`/cards/swiper/${slug}/description`)
                   }
                 >
-                  <StyledLink
-                    onClick={() => setStoreSlug(slug)}
-                    href={`/cards/swiper/${slug}/description`}
-                  >
-                    Description
-                  </StyledLink>
-                  {card.desc}
-                </StyledText>
-                <StyledText>
-                  <StyledLink href={`/cards/swiper/${slug}/meaning_up`}>
-                    Meaning Up
-                  </StyledLink>
-                  {card.meaning_up}
-                </StyledText>
-                <StyledText>
-                  <StyledLink href={`/cards/swiper/${slug}/meaning_rev`}>
-                    Meaning Reversed
-                  </StyledLink>
-                  {card.meaning_rev}
-                </StyledText>
-                <StyledText>
-                  <StyledLink href={`/cards/swiper/${slug}/stats`}>
-                    stats{" "}
-                  </StyledLink>
-                  <CardStats slug={slug} />
-                </StyledText>
-                <StyledText>
-                  <StyledLink href={`/cards/swiper/${slug}/notes`}>
-                    notes
-                  </StyledLink>
-                  <CardNotes slug={slug} />
-                </StyledText>
+                  <ShadowBox>
+                    <StyledText>{card.desc}</StyledText>
+                  </ShadowBox>
+                </StyledTextContainer>
+
+                <StyledTextContainer
+                  {...doubleTapMeaningUp}
+                  onDoubleClick={() =>
+                    router.push(`/cards/swiper/${slug}/meaning_up`)
+                  }
+                >
+                  <ShadowBox>
+                    <ArrowUp />
+                    <StyledText>{card.meaning_up}</StyledText>
+                  </ShadowBox>
+                </StyledTextContainer>
+
+                <StyledTextContainer
+                  {...doubleTapMeaningRev}
+                  onDoubleClick={() =>
+                    router.push(`/cards/swiper/${slug}/meaning_rev`)
+                  }
+                >
+                  <ShadowBox>
+                    <ArrowDown />
+                    <StyledText>{card.meaning_rev}</StyledText>
+                  </ShadowBox>
+                </StyledTextContainer>
+
+                <StyledTextContainer {...doubleTapStats}>
+                  <ShadowBox>
+                    <StyledText>
+                      <CardStats slug={slug} />
+                    </StyledText>
+                  </ShadowBox>
+                </StyledTextContainer>
+
+                <StyledTextContainer
+                  {...doubleTapNotes}
+                  onDoubleClick={() =>
+                    router.push(`/cards/swiper/${slug}/notes`)
+                  }
+                >
+                  <ShadowBox>
+                    <StyledText>
+                      <CardNotes slug={slug} />
+                    </StyledText>
+                  </ShadowBox>
+                </StyledTextContainer>
               </StyledImageContainerIndex>
             </StyledSwiperSlide>
           ))}

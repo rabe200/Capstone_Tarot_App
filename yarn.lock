@@ -1353,6 +1353,11 @@
   dependencies:
     glob "7.1.7"
 
+"@next/font@^13.3.2":
+  version "13.3.2"
+  resolved "https://registry.yarnpkg.com/@next/font/-/font-13.3.2.tgz#0691750f426dd05d22debee1efa6ba509bb02e6c"
+  integrity sha512-gQICS3IZIbITqxqBVD0K8ng9ib0bxsOxVhTLeQyBlL773sNQoWIhJOyUHhYw1kSaOWP5BiFEmTvjNQNKwYuVKQ==
+
 "@next/swc-darwin-arm64@13.3.2":
   version "13.3.2"
   resolved "https://registry.yarnpkg.com/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.3.2.tgz#4def23ae8e162722140598bc8846013073d15285"
@@ -4631,6 +4636,11 @@ normalize-path@^3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
 
+normalize.css@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
+  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
+
 npm-run-path@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-4.0.1.tgz#b7ecd1e5ed53da8e37a55e1c2269e0b97ed748ea"
@@ -4717,6 +4727,13 @@ object.values@^1.1.6:
     call-bind "^1.0.2"
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
+
+official-fontface@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/official-fontface/-/official-fontface-1.6.2.tgz#07b1442223e0cc9d2ad5786642c31ae7682d8c01"
+  integrity sha512-14FpWewPVuHRGJiTqmo/kOZMXcsiSXmyg7hQqf1uM/9DFFbJV3VM3ngGP9ecZeTfI7nHBcXqm0M4xYKKojrY4Q==
+  dependencies:
+    normalize.css "^8.0.1"
 
 once@^1.3.0, once@^1.3.1, once@^1.4.0:
   version "1.4.0"

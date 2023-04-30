@@ -4,7 +4,7 @@ import useStore from "../../../src/store/store";
 import { useState } from "react";
 import { useRouter } from "next/router";
 const StyledSpace = styled.div`
-  position: relative;
+  position: sticky;
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -12,6 +12,7 @@ const StyledSpace = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
+  z-index: 1000;
 `;
 
 const StyledMenu = styled.div`
@@ -90,7 +91,7 @@ const MenuLink3 = styled(Link)`
 
 export default function StyledNavbar() {
   const lastCard = useStore((state) => state.lastCard);
-  const [hidden] = useState(false);
+  const [hidden, setHiddenToggle] = useState(false);
   const setLastPageVisited = useStore((state) => state.setLastPageVisited);
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
   const router = useRouter();
