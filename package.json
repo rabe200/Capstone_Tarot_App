@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@next/font": "^13.3.1",
+    "commonjs": "^0.0.1",
     "edge-runtime": "^2.2.0",
     "eslint": "8.29.0",
     "eslint-config-next": "^13.3.1",
@@ -39,8 +40,5 @@
     "jest-environment-jsdom": "^29.3.1",
     "typescript": "^5.0.4"
   },
-  "description": "Next.js (incl. Styled Components and Jest)",
-  "nf": {
-    "template": "next"
-  }
+  "description": "Next.js (incl. Styled Components and Jest)"
 }
