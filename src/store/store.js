@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { useState, useEffect } from "react";
-import { v4 as uuidv4, v4 } from "uuid";
+import { v4 as v4 } from "uuid";
 import { cards } from "../../lib/data";
 
 const cardMoodArray = cards.map((card) => {
@@ -34,6 +34,11 @@ export const useStore = createLocalStorageStore(
     currentReading: "",
     lastReading: "",
     allReadings: [{ reading: "null" }],
+    slug: "",
+    setSlug: (string) =>
+      set(() => ({
+        slug: string,
+      })),
     setCurrentReading: (string) =>
       set((state) => ({
         currentReading: {
