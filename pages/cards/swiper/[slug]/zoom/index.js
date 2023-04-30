@@ -62,7 +62,10 @@ export default function ProductImagesSlider(props) {
   return (
     slug && (
       <Frame>
-        <TopMenuBar mid={card[0].name} />
+        <TopMenuBar
+          mid={card[0].name}
+          backbutton={`/cards/swiper/${card[0].id}`}
+        />
 
         <StyledSwiper
           loop={true}
