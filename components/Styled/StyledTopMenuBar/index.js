@@ -28,6 +28,8 @@ const StyledTopBarContainer = styled.div`
   padding: 0;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 `;
 
 const StyledTopBarLeft = styled.div`

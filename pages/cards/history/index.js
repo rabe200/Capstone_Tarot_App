@@ -10,6 +10,16 @@ import { useCallback } from "react";
 import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
 
+const StyledEntry = styled.div`
+  padding: 2px;
+  background: white;
+  border: black 2px solid;
+  border-radius: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+`;
+
 const StyledCardName = styled.h1`
   display: flex;
   width: 100%;
@@ -161,16 +171,12 @@ export default function History() {
           <StyledList>
             {sortedItems.map((card) => {
               return (
-                <Fragment key={card.uuid}>
+                <StyledEntry key={card.uuid}>
                   <li>
-                    <b>{new Date(card.date).toLocaleDateString()}</b>
-                  </li>
-                  <li>
-                    <StyledCardName>
-                      <StyledLink href={`/cards/${card.id}`}>
-                        {card.name}
-                      </StyledLink>
-                    </StyledCardName>
+                    <StyledLink href={`/cards/swiper/${card.id}`}>
+                      <b>{new Date(card.date).toLocaleDateString()}</b>{" "}
+                      {card.name}
+                    </StyledLink>
                   </li>
                   <li>
                     {dayNames[card.day]}
@@ -193,7 +199,7 @@ export default function History() {
                       : " out of time"}
                   </li>
                   <NoteWithImage card={card} toggle={showButtons} />{" "}
-                </Fragment>
+                </StyledEntry>
               );
             })}
           </StyledList>

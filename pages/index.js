@@ -29,7 +29,6 @@ const StyledHeadline = styled.h1`
 const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: ${(p) => p.theme.border};
   height: 100%;
   width: 100%;
   position: relative;
@@ -37,6 +36,7 @@ const StyledLinkContainer = styled.div`
   align-items: center;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
+  border: ${(p) => p.theme.border};
 `;
 
 export default function HomePage() {
@@ -48,7 +48,7 @@ export default function HomePage() {
       <StyledCardContainer>
         <StyledLinkContainer>
           <StyledHeadline>TAROT</StyledHeadline>
-          <MenuLink href={"/DailyCard"}>START</MenuLink>
+          <MenuLink href={"/cards/dailycard/moodmeter"}>START</MenuLink>
           <MenuLink href={"/options"}>OPTIONS</MenuLink>
           <MenuLink href={"/credits"}>CREDITS</MenuLink>
         </StyledLinkContainer>

@@ -5,25 +5,18 @@ import Link from "next/link";
 import useStore from "../../../src/store/store";
 import DeleteButton from "../../DeleteButton";
 
-const StyledImage = styled(Image)`
-  border-radius: 8px;
-  border: ${(p) => p.theme.colorText};
-  box-shadow: 0px 22px 13px ${(p) => p.theme.colorFront};
-`;
-
 const NoteWithImageContainer = styled.div`
   display: grid;
-  grid-template-columns: 4fr 1fr;
-  grid-template-rows: 4fr 1fr;
   width: 100%;
-  height: 200px;
-  padding-top: 50px;
   border: 2px black solid;
+  background: ${(p) => p.theme.colorBackground};
+  border-radius: 8px;
+  background: white;
+  padding-top: 20px;
 `;
 
 const StyledButton = styled.div`
-  background: black;
-  background: ${(p) => p.theme.colorText};
+  background: ${(p) => p.theme.colorContainer};
   color: ${(p) => p.theme.colorBackground};
   width: 3em;
   border-radius: 8px;
@@ -43,7 +36,7 @@ const DeleteButtonToggleBox = styled.div`
 const StyledNotes = styled.div`
   -moz-appearance: textfield-multiline;
   -webkit-appearance: textarea;
-  border-radius: 8px;
+  border-radius: 0px;
   background: ${(p) => p.theme.colorContainer};
   color: ${(p) => p.theme.colorText};
   align-self: center;
@@ -52,8 +45,7 @@ const StyledNotes = styled.div`
   font-size: 1.2em;
   overflow-wrap: break-word;
   border: ${(p) => p.theme.border};
-  max-height: ${(props) =>
-    props.noteOverflow === "hidden" ? "120px" : "70px"};
+  max-height: ${(props) => (props.noteOverflow === "hidden" ? "" : "70px")};
   overflow: ${(props) => (props.noteOverflow === "hidden" ? "auto" : "hidden")};
   border: ${(p) => {
     p.theme.border;
@@ -119,9 +111,6 @@ export default function NoteWithImage({ card, toggle }) {
           </StyledButton>
         </ButtonBox>
       </form>
-      <Link href={`/cards/${card.id}`}>
-        <StyledImage src={card.image} width="80" height="120" alt={card.name} />
-      </Link>
     </NoteWithImageContainer>
   );
 }

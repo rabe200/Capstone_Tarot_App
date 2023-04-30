@@ -6,35 +6,36 @@ const ToggleButton = styled.div`
   height: 100%;
 `;
 
-const themeDark = {
+export const themeDark = {
   id: "dark",
   colorBackground: "black",
-  colorText: "white",
-  colorLink: "yellow",
-  border: "2px white solid",
-  colorDeep: "black",
-  colorFront: "#D2D2D2",
-  colorArrow: "white",
+  colorContainer: "black",
+  colorText: "cyan",
+  colorLink: "black",
+  border: "2px black solid",
+  colorDeep: "transparent",
+  colorFront: "yellow",
+  colorArrow: "",
 };
 
-const themeLight = {
-  id: "light",
+export const themeWhite = {
+  id: "white",
   colorBackground: "white",
+  colorContainer: "white",
   colorText: "black",
-  colorLink: "purple",
+  colorLink: "cyan",
   border: "2px black solid",
-  colorDeep: "white",
-  colorFront: "#D2D2D2",
-  colorArrow: "black",
+  colorDeep: "transparent",
+  colorFront: "yellow",
+  colorArrow: "",
 };
 
 export const feldspar = {
   id: "feldspar",
-  colorBackground:
-    "radial-gradient(circle, rgba(250,93,85,1) 0%, rgba(240,147,60,1) 85%, rgba(240,195,60,1) 100%);",
-  colorContainer: "crimson",
-  colorText: "aqua",
-  colorLink: "purple",
+  colorBackground: "crimson",
+  colorContainer: "#854079",
+  colorText: "#e6fcef",
+  colorLink: "black",
   border: "2px black solid",
   colorDeep: "orange",
   colorFront:
@@ -47,7 +48,7 @@ export const gossip = {
   colorBackground: "#91E567",
   colorContainer: "yellow",
   colorText: "black",
-  colorLink: "purple",
+  colorLink: "cyan",
   border: "2px black solid",
   colorDeep: "#91E567",
   colorFront: "yellow",
@@ -59,7 +60,7 @@ export const mediumpurple = {
   colorBackground: "yellow",
   colorContainer: "white",
   colorText: "black",
-  colorLink: "purple",
+  colorLink: "mediumpurple",
   border: "2px black solid",
   colorDeep: "transparent",
   colorFront: "yellow",
@@ -70,8 +71,8 @@ export const palevioletred = {
   id: "palevioletred",
   colorBackground: "#DB7093",
   colorContainer: "black",
-  colorText: "yellow",
-  colorLink: "purple",
+  colorText: "white",
+  colorLink: "black",
   border: "2px black solid",
   colorDeep: "transparent",
   colorFront: "palevioletred",
@@ -90,12 +91,12 @@ export default function ButtonThemeToggle() {
   const [localTheme, setLocalTheme] = useLocalStorage("localTheme", themeDark);
 
   function handleThemeToggle() {
-    if (localTheme.id === "light") setLocalTheme(themeDark);
+    if (localTheme.id === "white") setLocalTheme(themeDark);
     else if (localTheme.id === "dark") setLocalTheme(feldspar);
     else if (localTheme.id === "feldspar") setLocalTheme(gossip);
     else if (localTheme.id === "gossip") setLocalTheme(mediumpurple);
     else if (localTheme.id === "mediumpurple") setLocalTheme(palevioletred);
-    else if (localTheme.id === "palevioletred") setLocalTheme(themeLight);
+    else if (localTheme.id === "palevioletred") setLocalTheme(themeWhite);
   }
 
   return (

@@ -1,8 +1,6 @@
 import { useStore } from "../../src/store/store";
 import { Fragment, useEffect, useState } from "react";
 import { cards } from "../../lib/data";
-import TopMenuBar from "../Styled/StyledTopMenuBar";
-import StyledNavbar from "../Styled/StyledNavbar";
 import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,20 +12,20 @@ const SearchResultsContainer = styled.div`
   height: 100%;
 `;
 
-const ListContainer = styled.ul`
-  display: flex;
-  flex-direction: column;
-  background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorText};
-  height: 18em;
-  overflow: auto;
-  border-radius: 8px;
-  list-style-type: none;
-  margin: 0;
-  padding-left: 36px;
-  padding-right: 36px;
-  font-size: 1.2em;
-`;
+// const ListContainer = styled.ul`
+//   display: flex;
+//   flex-direction: column;
+//   background: ${(p) => p.theme.colorBackground};
+//   color: ${(p) => p.theme.colorText};
+//   height: 100%;
+//   overflow: auto;
+//   border-radius: 8px;
+//   list-style-type: none;
+//   margin: 0;
+//   padding-left: 36px;
+//   padding-right: 36px;
+//   font-size: 1.2em;
+// `;
 
 const StyledResults = styled.div`
   height: 100%;
@@ -35,19 +33,15 @@ const StyledResults = styled.div`
   padding: 0;
   list-style-type: none;
   overflow: auto;
-`;
-
-const StyledResultHeader = styled.div`
-  &:hover {
-    color: magenta;
-    transition: all 0.2s;
-    transform: scale(1.5);
-  }
+  border: 2px black solid;
 `;
 
 const StyledLink = styled(Link)`
-  color: ${(p) => p.theme.colorText};
+  font-size: 1.2em;
+  color: ${(p) => p.theme.colorFront};
   text-decoration: none;
+  background: ${(p) => p.theme.colorContainer};
+  width: 100%;
 `;
 
 const StyledBoldText = styled.b`
@@ -135,9 +129,7 @@ export default function SearchResults() {
   if (searchQuery === "") {
     return (
       <>
-        <TopMenuBar />
         <p>no results</p>
-        <StyledNavbar />
       </>
     );
   }
@@ -145,7 +137,7 @@ export default function SearchResults() {
   return (
     <>
       <SearchResultsContainer>
-        searchresults for input: <StyledBoldText>{searchQuery}</StyledBoldText>
+        <StyledBoldText>{searchQuery}</StyledBoldText>
         <StyledSearchStats>
           <i>
             Name: <StyledBoldText>{cardByName.length}</StyledBoldText>
@@ -162,84 +154,73 @@ export default function SearchResults() {
             <StyledBoldText>{cardByMeaningUp.length}</StyledBoldText>
           </i>
         </StyledSearchStats>
-        <ListContainer>
-          <StyledResults id="resultsByDescription" hidden={hidden.desc}>
-            {cardByShortDesc.map((card) => {
-              return (
-                <Fragment key={card.name}>
-                  <li>
-                    <StyledResultHeader>
-                      <StyledLink href={`/cards/${card.id}`}>
-                        {card.name}
-                      </StyledLink>
-                    </StyledResultHeader>
-                  </li>
-                  <li onClick={() => toggleListElement()} hidden={!listElement}>
-                    {card.content}
-                  </li>
-                  <li onClick={() => toggleListElement()} hidden={listElement}>
-                    {card.desc}
-                  </li>
-                </Fragment>
-              );
-            })}
-          </StyledResults>
-
-          <StyledResults id="resultsByName" hidden={hidden.name}>
-            {cardByName.map((card) => (
+        <StyledResults id="resultsByDescription" hidden={hidden.desc}>
+          {cardByShortDesc.map((card) => {
+            return (
               <Fragment key={card.name}>
                 <li>
-                  <StyledResultHeader>
-                    <StyledLink href={`/cards/${card.id}`}>
-                      {card.name}
-                    </StyledLink>
-                  </StyledResultHeader>
+                  <StyledLink href={`/cards/swiper/${card.id}`}>
+                    {card.name}
+                  </StyledLink>
                 </li>
-                <li>
-                  <Link href={`/cards/${card.id}`}>
-                    <Image
-                      src={card.image}
-                      width={160}
-                      height={250}
-                      alt={card.name}
-                      priority
-                    ></Image>
-                  </Link>
+                <li onClick={() => toggleListElement()} hidden={!listElement}>
+                  {card.content}
+                </li>
+                <li onClick={() => toggleListElement()} hidden={listElement}>
+                  {card.desc}
                 </li>
               </Fragment>
-            ))}
-          </StyledResults>
-
-          <StyledResults id="resultsMeaningUp" hidden={hidden.meaningUp}>
-            {cardByMeaningUp.map((card) => (
-              <Fragment key={card.name}>
-                <li>
-                  <StyledResultHeader>
-                    <StyledLink href={`/cards/${card.id}`}>
-                      {card.name}
-                    </StyledLink>
-                  </StyledResultHeader>
-                </li>
-                <li>{card.meaning_up}</li>
-              </Fragment>
-            ))}
-          </StyledResults>
-
-          <StyledResults id="resultsMeaningRev" hidden={hidden.meaningRev}>
-            {cardByMeaningRev.map((card) => (
-              <Fragment key={card.name}>
-                <li>
-                  <StyledResultHeader>
-                    <StyledLink href={`/cards/${card.id}`}>
-                      {card.name}
-                    </StyledLink>
-                  </StyledResultHeader>
-                </li>
-                <li>{card.meaning_rev}</li>
-              </Fragment>
-            ))}
-          </StyledResults>
-        </ListContainer>
+            );
+          })}
+        </StyledResults>
+        <StyledResults id="resultsByName" hidden={hidden.name}>
+          {cardByName.map((card) => (
+            <Fragment key={card.name}>
+              <li>
+                <StyledLink href={`/cards/swiper/${card.id}`}>
+                  {card.name}
+                </StyledLink>
+              </li>
+              <li>
+                <StyledLink href={`/cards/swiper/${card.id}`}>
+                  <Image
+                    src={card.image}
+                    width={160}
+                    height={250}
+                    alt={card.name}
+                    priority
+                  ></Image>
+                </StyledLink>
+              </li>
+            </Fragment>
+          ))}
+        </StyledResults>
+        <StyledResults id="resultsMeaningUp" hidden={hidden.meaningUp}>
+          {cardByMeaningUp.map((card) => (
+            <Fragment key={card.name}>
+              <li>
+                <StyledLink href={`/cards/swiper/${card.id}`}>
+                  {card.name}
+                </StyledLink>
+              </li>
+              <li>{card.meaning_up}</li>
+            </Fragment>
+          ))}
+        </StyledResults>
+        <StyledResults id="resultsMeaningRev" hidden={hidden.meaningRev}>
+          {cardByMeaningRev.map((card) => (
+            <Fragment key={card.name}>
+              <li>
+                <StyledResultHeader>
+                  <StyledLink href={`/cards/swiper/${card.id}`}>
+                    {card.name}
+                  </StyledLink>
+                </StyledResultHeader>
+              </li>
+              <li>{card.meaning_rev}</li>
+            </Fragment>
+          ))}
+        </StyledResults>
       </SearchResultsContainer>
       <select
         onChange={(e) => renderResults(e)}

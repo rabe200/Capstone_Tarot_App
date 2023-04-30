@@ -14,24 +14,17 @@ import Link from "next/link";
 import { useEffect } from "react";
 import CardStats from "../../../../components/Stats/stats";
 import CardNotes from "../../../../components/Notes";
-
-const Frame = styled.div`
-  background: palevioletred;
-  width: 375px;
-  height: 667px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+import SearchBar from "../../../../components/SearchBar";
+import Frame from "../../../../components/Frame";
 
 const StyledImageContainerIndex = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr 0.5fr;
+  grid-template-rows: 0.7fr 0.25fr 0.25fr;
   grid-template-columns: 1fr 1fr;
   overflow: auto;
+  /* align-items: center; */
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -45,8 +38,6 @@ const StyledSwiper = styled(Swiper)`
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
-  background: black;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,23 +45,39 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 `;
 
 const StyledImage = styled(Image)`
-  width: 100%;
-  height: 100%;
+  padding-top: 20px;
+
+  width: 181px;
+  height: 290px;
   border-radius: 8px;
-  border: black;
+  justify-self: center;
 `;
 
 const StyledLink = styled(Link)`
-  color: yellow;
+  color: ${(p) => p.theme.colorLink};
+  background: ${(p) => p.theme.colorText};
+  width: 100%;
+  text-decoration: none;
+  font-size: 1.2em;
+  &:active: {
+    color: white;
+  }
 `;
 
 const StyledText = styled.div`
-  width: 100%;
-  height: 100%;
-  background: black;
-  color: white;
-  border: white solid 2px;
-  overflow: auto;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
+  border: ${(p) => p.theme.border};
+  border-radius: 8px;
+  text-overflow: hidden;
+  overflow: hidden;
+  /* box-shadow: 2px 2px 2px 2px silver; */
 `;
 
 export default function ProductImagesSlider(props) {
@@ -78,7 +85,6 @@ export default function ProductImagesSlider(props) {
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
-  const storeSlug = useStore((state) => state.slug);
   const setStoreSlug = useStore((state) => state.setSlug);
 
   useEffect(() => setStoreSlug(slug), []);
@@ -87,6 +93,7 @@ export default function ProductImagesSlider(props) {
     slug && (
       <Frame>
         <TopMenuBar mid={card[0].name} />
+        <SearchBar />
         <StyledSwiper
           loop={true}
           speed={300}
@@ -95,8 +102,6 @@ export default function ProductImagesSlider(props) {
           slidesPerView={1}
           navigation={true}
           onSlideChange={(event) => {
-            console.log(event);
-
             router.replace(`/cards/swiper/${event.realIndex}`);
           }}
           grabCursor={true}
@@ -115,8 +120,15 @@ export default function ProductImagesSlider(props) {
                   height={200}
                   onClick={() => router.push(`/cards/swiper/${slug}/zoom`)}
                 ></StyledImage>
-                <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-                <StyledText>
+                <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                <StyledText
+                  onDoubleClick={(event) =>
+                    router.push(event.target.children[0].href)
+                  }
+                  onTouchEnd={(event) =>
+                    router.push(event.target.children[0].href)
+                  }
+                >
                   <StyledLink
                     onClick={() => setStoreSlug(slug)}
                     href={`/cards/swiper/${slug}/description`}
@@ -138,9 +150,15 @@ export default function ProductImagesSlider(props) {
                   {card.meaning_rev}
                 </StyledText>
                 <StyledText>
+                  <StyledLink href={`/cards/swiper/${slug}/stats`}>
+                    stats{" "}
+                  </StyledLink>
                   <CardStats slug={slug} />
                 </StyledText>
                 <StyledText>
+                  <StyledLink href={`/cards/swiper/${slug}/notes`}>
+                    notes
+                  </StyledLink>
                   <CardNotes slug={slug} />
                 </StyledText>
               </StyledImageContainerIndex>

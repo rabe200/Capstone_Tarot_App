@@ -8,21 +8,13 @@ import styled from "styled-components";
 import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
+import Frame from "../../../../../components/Frame";
 
 const StyledImageContainerIndex = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 99%;
+  height: 99%;
   display: block;
-  overflow: auto;
-`;
-
-const Frame = styled.div`
-  width: 375px;
-  height: 667px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -42,15 +34,11 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   justify-content: center;
   align-items: center;
   border: 2px solid black;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
 `;
 
 const StyledImage = styled(Image)`
-  width: 100%;
-  height: 100%;
-  border: 2px solid black;
-  border-radius: 8px;
+  width: 363;
+  height: 565;
 `;
 
 export default function ProductImagesSlider(props) {
@@ -91,8 +79,8 @@ export default function ProductImagesSlider(props) {
                   blurDataURL="/images/placeholder.jpg"
                   src={card.image}
                   alt={card.name}
-                  width={120}
-                  height={200}
+                  width={300}
+                  height={527}
                   onClick={() => router.push(`/cards/swiper/${slug}`)}
                 ></StyledImage>
               </StyledImageContainerIndex>

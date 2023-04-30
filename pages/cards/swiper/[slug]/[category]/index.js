@@ -8,19 +8,10 @@ import styled from "styled-components";
 import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
-import { useState, useEffect, Fragment } from "react";
+import { useEffect } from "react";
 import CardStats from "../../../../../components/Stats/stats";
 import CardNotes from "../../../../../components/Notes";
-
-const Frame = styled.div`
-  background: palevioletred;
-  width: 375px;
-  height: 667px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+import Frame from "../../../../../components/Frame";
 
 const StyledSwiper = styled(Swiper)`
   display: block;
@@ -33,7 +24,7 @@ const StyledSwiper = styled(Swiper)`
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
-  background: black;
+  background: ${(p) => p.theme.colorContainer};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,8 +42,9 @@ const StyledBoxForText = styled.div`
 const StyledText = styled.div`
   width: 100%;
   height: 100%;
-  background: black;
-  color: white;
+  font-size: 1.4em;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
   border: white solid 2px;
   display: flex;
   flex-direction: column;

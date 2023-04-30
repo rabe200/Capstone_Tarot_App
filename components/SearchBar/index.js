@@ -73,7 +73,7 @@ export default function SearchBar() {
     event.preventDefault();
     setSearchQuery(inputValue);
     setInputValue("");
-    router.push("/cards/search/results");
+    router.push("/cards/swiper/search/results");
   }
 
   return (
