@@ -8,7 +8,8 @@ import styled from "styled-components";
 import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
+import CardStats from "../../../../../components/Stats/stats";
 
 const Frame = styled.div`
   background: palevioletred;
@@ -39,12 +40,11 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   color: white;
 `;
 
-const StyledFlexBoxForText = styled.div`
-  display: block;
-  justify-content: center;
-  align-items: center;
+const StyledBoxForText = styled.div`
+  display: grid;
   height: 80%;
   width: 80%;
+  overflow: auto;
 `;
 
 const StyledText = styled.div`
@@ -64,17 +64,18 @@ export default function Category() {
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
   const setStoreSlug = useStore((state) => state.setSlug);
+  const category = router ? router.query.category : 0;
 
   useEffect(() => setStoreSlug(slug), []);
 
-  const [hasMounted, setHasMounted] = useState(false);
+  // const [hasMounted, setHasMounted] = useState(false);
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-  if (!hasMounted) {
-    return null;
-  }
+  // useEffect(() => {
+  //   setHasMounted(true);
+  // }, []);
+  // if (!hasMounted) {
+  //   return null;
+  // }
 
   return (
     slug && (
@@ -91,9 +92,7 @@ export default function Category() {
           slidesPerView={1}
           navigation={true}
           onSlideChange={(event) => {
-            console.log(event);
-
-            router.replace(`/cards/swiper/${event.realIndex}/description`);
+            router.replace(`/cards/swiper/${event.realIndex}/${category}`);
           }}
           grabCursor={true}
           centeredSlides={true}
@@ -102,12 +101,24 @@ export default function Category() {
         >
           {cards.map((card) => (
             <StyledSwiperSlide key={card.name}>
-              <StyledFlexBoxForText>
-                <StyledText>{card.desc}</StyledText>
-              </StyledFlexBoxForText>
+              <StyledBoxForText>
+                {category === "description" ? (
+                  <StyledText>{card.desc}</StyledText>
+                ) : category === "meaning_up" ? (
+                  <StyledText>{card.meaning_up}</StyledText>
+                ) : category === "meaning_rev" ? (
+                  <StyledText>{card.meaning_rev}</StyledText>
+                ) : category === "stats" ? (
+                  <StyledText>
+                    <CardStats />
+                  </StyledText>
+                ) : null}
+              </StyledBoxForText>
             </StyledSwiperSlide>
           ))}
         </StyledSwiper>
+        {/* {category} */}
+
         <StyledNavbar />
       </Frame>
     )

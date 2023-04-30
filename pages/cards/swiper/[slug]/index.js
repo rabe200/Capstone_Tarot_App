@@ -12,6 +12,8 @@ import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../src/store/store";
 import Link from "next/link";
 import { useEffect } from "react";
+import CardStats from "../../../../components/Stats/stats";
+import CardNotes from "../../../../components/Notes";
 
 const Frame = styled.div`
   background: palevioletred;
@@ -27,7 +29,7 @@ const StyledImageContainerIndex = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 0.5fr;
   grid-template-columns: 1fr 1fr;
   overflow: auto;
 `;
@@ -134,6 +136,12 @@ export default function ProductImagesSlider(props) {
                     Meaning Reversed
                   </StyledLink>
                   {card.meaning_rev}
+                </StyledText>
+                <StyledText>
+                  <CardStats slug={slug} />
+                </StyledText>
+                <StyledText>
+                  <CardNotes slug={slug} />
                 </StyledText>
               </StyledImageContainerIndex>
             </StyledSwiperSlide>
