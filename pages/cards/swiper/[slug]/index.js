@@ -147,6 +147,8 @@ export default function ProductImagesSlider(props) {
             </StyledSwiperSlide>
           ))}
         </StyledSwiper>
+        {"overview"}
+
         <StyledNavbar />
       </Frame>
     )

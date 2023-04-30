@@ -10,6 +10,7 @@ import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
 import { useState, useEffect, Fragment } from "react";
 import CardStats from "../../../../../components/Stats/stats";
+import CardNotes from "../../../../../components/Notes";
 
 const Frame = styled.div`
   background: palevioletred;
@@ -68,15 +69,6 @@ export default function Category() {
 
   useEffect(() => setStoreSlug(slug), []);
 
-  // const [hasMounted, setHasMounted] = useState(false);
-
-  // useEffect(() => {
-  //   setHasMounted(true);
-  // }, []);
-  // if (!hasMounted) {
-  //   return null;
-  // }
-
   return (
     slug && (
       <Frame>
@@ -110,14 +102,18 @@ export default function Category() {
                   <StyledText>{card.meaning_rev}</StyledText>
                 ) : category === "stats" ? (
                   <StyledText>
-                    <CardStats />
+                    <CardStats slug={slug} />
+                  </StyledText>
+                ) : category === "notes" ? (
+                  <StyledText>
+                    <CardNotes slug={slug} />
                   </StyledText>
                 ) : null}
               </StyledBoxForText>
             </StyledSwiperSlide>
           ))}
         </StyledSwiper>
-        {/* {category} */}
+        {category}
 
         <StyledNavbar />
       </Frame>
