@@ -26,7 +26,6 @@ const StyledSwiper = styled(Swiper)`
   height: 100%;
   text-align: center;
   /* background: ${(p) => p.theme.colorContainer}; */
-  overflow: hidden;
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`

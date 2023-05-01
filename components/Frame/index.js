@@ -10,7 +10,6 @@ const StyledFrame = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  overflow: hidden;
 
   @media only screen and (min-width: 414px) {
     width: 414px;

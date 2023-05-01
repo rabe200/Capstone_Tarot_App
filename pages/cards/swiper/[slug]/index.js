@@ -12,7 +12,6 @@ import useStore from "../../../../src/store/store";
 import { useEffect } from "react";
 import CardStats from "../../../../components/Stats/stats";
 import CardNotes from "../../../../components/Notes";
-import SearchBar from "../../../../components/SearchBar";
 import Frame from "../../../../components/Frame";
 import ArrowUp from "../../../../components/Styled/ArrowUp";
 import ArrowDown from "../../../../components/Styled/ArrowDown";
@@ -30,7 +29,6 @@ const StyledImageContainerIndex = styled.div`
 `;
 
 const StyledSwiper = styled(Swiper)`
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
