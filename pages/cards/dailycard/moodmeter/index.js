@@ -97,6 +97,7 @@ export default function MoodMeter() {
         <MoodButtonGood
           type="button"
           aria-label="plus button"
+          onTouchEnd={() => handlePlusClick()}
           onClick={() => handlePlusClick()}
         >
           <GoodMoodIcon />
@@ -104,6 +105,7 @@ export default function MoodMeter() {
         <MoodButtonBad
           type="button"
           aria-label="minus button"
+          onTouchEnd={() => handleMinusClick()}
           onClick={() => handleMinusClick()}
         >
           <BadMoodIcon />
