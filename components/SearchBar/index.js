@@ -9,13 +9,13 @@ const StyledInput = styled.input`
   height: 40px;
   margin: 0;
   padding: 0;
-  background: ${(p) => p.theme.colorText};
+  width: 300px;
+  /* background: ${(p) => p.theme.colorText}; */
   textalign: "center";
-  color: ${(p) => p.theme.colorBackground};
+  /* color: ${(p) => p.theme.colorBackground}; */
   _webkituserselect: "none";
   _msuserselect: "none";
   userselect: "none";
-  width: 50%;
   @media only screen and (min-width: 414px) {
     width: 359px;
     height: 50px;
@@ -27,15 +27,18 @@ const StyledInput = styled.input`
 `;
 
 const Navbar = styled.div`
-  position: fixed;
-  bottom: 60px;
+  position: relative;
+  width: 375px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 const StyledButton = styled.button`
-  position: fixed;
-
+  position: relative;
+  box-shadow: 0px 2px 2px;
   background: ${(p) => p.theme.colorContainer};
   color: ${(p) => p.theme.colorText};
   height: 20px;

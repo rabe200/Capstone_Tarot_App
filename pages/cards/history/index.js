@@ -9,13 +9,31 @@ import HistoryNotes from "../../../components/Styled/StyledHistoryNotes";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import Frame from "../../../components/Frame";
 const StyledEntry = styled.div`
-  padding: 2px;
-  background: white;
-  border: black 2px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
   border-radius: 8px;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-bottom: 20px;
+  width: 375px;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledFormular = styled.form`
@@ -24,16 +42,36 @@ const StyledFormular = styled.form`
   height: 30px;
   width: 100%;
 `;
+
 const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: start;
+  align-items: center;
   position: fixed;
   top: 20px;
-  width: 100%;
+  width: 375px;
   height: 80%;
   overflow: auto;
   background: ${(p) => p.theme.colorBackground};
   z-index: 1000;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -49,7 +87,7 @@ const StyledFooter = styled.footer`
   justify-content: space-between;
   align-items: center;
   bottom: 90px;
-  width: 100%;
+  width: 375px;
   height: 10px;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
@@ -166,7 +204,7 @@ export default function History() {
       <StyledFormular>
         <select
           style={{
-            width: "100%",
+            width: "375px",
             height: "100%",
             textAlign: "center",
             fontSize: "1.05rem",

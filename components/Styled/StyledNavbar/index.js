@@ -129,7 +129,7 @@ export default function StyledNavbar() {
           <MenuLink1
             onClick={() => resetComingFromHistory()}
             hidden={"hidden"}
-            href={`/cards/swiper/${lastCard.id}`}
+            href={`/cards/swiper/${lastCard.id}/zoom`}
           >
             CARDS
           </MenuLink1>

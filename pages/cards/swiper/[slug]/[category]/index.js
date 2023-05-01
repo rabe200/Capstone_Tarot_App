@@ -25,7 +25,6 @@ const StyledSwiper = styled(Swiper)`
   width: 100%;
   height: 100%;
   text-align: center;
-  /* background: ${(p) => p.theme.colorContainer}; */
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -90,7 +89,9 @@ const StyledCategoryName = styled.div`
   width: 100%;
   height: 20px;
   position: fixed;
-  bottom: 80px;
+  top: 22px;
+  background: ${(p) => p.theme.colorFront};
+  color: ${(p) => p.theme.colorBackground};
   text-align: center;
   z-index: 10000px;
 `;

@@ -10,8 +10,8 @@ import { useDoubleTap } from "use-double-tap";
 
 const NoteContainer = styled.div`
   display: grid;
-  width: 100%;
-  height: 100%;
+  width: 375px;
+  height: 160px;
   border: 2px black solid;
   background: ${(p) => p.theme.colorBackground};
   border-radius: 8px;
@@ -19,6 +19,25 @@ const NoteContainer = styled.div`
   padding-top: 20px;
   overflow: auto;
   z-index: 1000;
+  font-size: 1.3em;
+  text-align: center;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledButton = styled.div`
@@ -27,17 +46,20 @@ const StyledButton = styled.div`
   width: 4em;
   border-radius: 8px;
   text-align: center;
+  box-shadow: 0px 2px 2px;
 `;
 
 const ButtonBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   width: 100%;
   align-items: center;
 `;
 
 const DeleteButtonToggleBox = styled.div`
   visibility: ${(props) => (props.showButtons ? "visible" : "hidden")};
+  padding-top: 2px;
+  width: 80%;
 `;
 
 const StyledNotes = styled.div`
@@ -45,14 +67,12 @@ const StyledNotes = styled.div`
   -webkit-appearance: textarea;
   border-radius: 0px;
   background: ${(p) => p.theme.colorBackground};
-
   align-self: center;
   width: 100%;
-  min-height: 120px;
-  font-size: 1.4em;
+  font-size: 1em;
   overflow-wrap: break-word;
-  border: ${(p) => p.theme.border};
-  max-height: ${(props) => (props.noteOverflow === "hidden" ? "" : "70px")};
+  box-shadow: 0px 2px 2px;
+
   overflow: ${(props) => (props.noteOverflow === "hidden" ? "auto" : "hidden")};
   color: ${(props) =>
     props.contentEditable === true
@@ -70,9 +90,11 @@ const StyledNotes = styled.div`
 const StyledToastContainer = styled(ToastContainer)`
   z-index: 2000;
   position: sticky;
+  font-size: 1.2em;
+  box-shadow: 0px 2px 2px;
 
   .Toastify__progress-bar {
-    display: none;
+    background: black;
   }
   .Toastify__toast {
     background: ${(p) => p.theme.colorContainer};

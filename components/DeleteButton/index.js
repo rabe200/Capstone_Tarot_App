@@ -9,6 +9,7 @@ const StyledButton = styled.div`
   position: relative;
   background: black;
   color: white;
+  width: 100px;
   border-radius: 8px;
   padding: 1px;
 `;
@@ -17,8 +18,6 @@ const StyledSection = styled.section`
   display: flex;
   align-items: center;
   justify-items: center;
-  height: 100%;
-  width: 100%;
 `;
 
 export default function DeleteButton({ uuid }) {
