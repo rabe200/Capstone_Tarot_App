@@ -3,6 +3,7 @@ import Link from "next/link";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../components/Styled/StyledNavbar";
 import Frame from "../components/Frame";
+import SearchBar from "../components/SearchBar";
 
 const TopSpacer = styled.div`
   display: flex;
@@ -28,9 +29,9 @@ position: relative;
   `;
 
 const StyledHeadline = styled.h1`
+  position: fixed;
   color: red;
-  top: 0;
-  position: absolute;
+  top: 10%;
 `;
 
 const StyledLinkContainer = styled.div`
@@ -52,12 +53,15 @@ export default function HomePage() {
     <Frame>
       <TopSpacer />
       <TopMenuBar hidden={"hidden"} menu={"/"} mid={mid} back={"/"} />
+
       <StyledLinkContainer>
         <StyledHeadline>TAROT</StyledHeadline>
         <MenuLink href={"/cards/dailycard/moodmeter"}>START</MenuLink>
         <MenuLink href={"/options"}>OPTIONS</MenuLink>
         <MenuLink href={"/credits"}>CREDITS</MenuLink>
       </StyledLinkContainer>
+      <SearchBar />
+
       <StyledNavbar />
     </Frame>
   );

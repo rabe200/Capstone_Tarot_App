@@ -36,7 +36,7 @@ const StyledTopBarContainer = styled.div`
     width: 414px;
   }
 
-  @nedia only screen and (mind-width: 585px) {
+  @media only screen and (min-width: 585px) {
     width: 585px;
   }
   @media only screen and (min-width: 834px) {

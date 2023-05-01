@@ -24,7 +24,6 @@ export default function SearchResult() {
 
         <p>provide a search term</p>
         <SearchBar />
-
         <StyledNavbar />
       </Frame>
     );
@@ -33,7 +32,6 @@ export default function SearchResult() {
   return (
     <Frame>
       <TopMenuBar mid={"searchResults"}></TopMenuBar>
-      <SearchBar />
       <SearchResults />
       <StyledNavbar />
     </Frame>

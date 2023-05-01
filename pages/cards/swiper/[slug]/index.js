@@ -27,31 +27,6 @@ const StyledImageContainerIndex = styled.div`
   grid-template-rows: 0.7fr 0.4fr 0.2fr;
   grid-template-columns: 0.7fr 1fr;
   overflow: auto;
-
-  @media only screen and (min-width: 414px) {
-    width: 414px;
-    height: 780px;
-  }
-
-  @media only screen and (min-width: 585px) {
-    width: 585px;
-    height: 1161px;
-  }
-
-  @media only screen and (min-width: 834px) {
-    width: 834px;
-    height: 800px;
-  }
-
-  @media only screen and (min-width: 1194px) {
-    width: 1194px;
-    height: 764px;
-  }
-
-  @media only screen and (min-width: 1400px) {
-    width: 1400px;
-    height: 834px;
-  }
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -66,30 +41,6 @@ const StyledSwiper = styled(Swiper)`
   background: black;
   position: fixed;
   top: 20px;
-
-  @media only screen and (min-width: 414px) {
-    width: 414px;
-    height: 780px;
-  }
-
-  @media only screen and (min-width: 585px) {
-    width: 585px;
-    height: 1161px;
-  }
-  @media only screen and (min-width: 834px) {
-    width: 834px;
-    height: 800px;
-  }
-
-  @media only screen and (min-width: 1194px) {
-    width: 1194px;
-    height: 764px;
-  }
-
-  @media only screen and (min-width: 1400px) {
-    width: 1400px;
-    height: 834px;
-  }
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -97,33 +48,6 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 375px;
-  height: 540px;
-
-  @media only screen and (min-width: 414px) {
-    width: 414px;
-    height: 896px;
-  }
-
-  @media only screen and (min-width: 585px) {
-    width: 585px;
-    height: 1161px;
-  }
-
-  @media only screen and (min-width: 834px) {
-    width: 834px;
-    height: 800px;
-  }
-
-  @media only screen and (min-width: 1194px) {
-    width: 1194px;
-    height: 764px;
-  }
-
-  @media only screen and (min-width: 1400px) {
-    width: 1400px;
-    height: 834px;
-  }
 `;
 
 const StyledImage = styled(Image)`
@@ -319,7 +243,6 @@ export default function ProductImagesSlider(props) {
               </StyledImageContainerIndex>
             </StyledSwiperSlide>
           ))}
-          <SearchBar />
         </StyledSwiper>
         <TopMenuBar mid={card[0].name} />
         <StyledNavbar />

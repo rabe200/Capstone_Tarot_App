@@ -8,26 +8,38 @@ import Frame from "../Frame";
 
 const SearchResultsContainer = styled.div`
   display: flex;
+  height: 520px;
+  width: 375px;
   flex-direction: column;
   position: fixed;
   top: 0px;
   height: 80%;
+  align-items: center;
+  justify-content: center;
 `;
 
-const StyledResults = styled.div`
+const StyledResults = styled.ul`
   height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin: 0;
   padding: 0;
   list-style-type: none;
   overflow: auto;
   border: 2px black solid;
-  background: ${(p) => p.theme.colorLink};
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
+  @media only screen and (min-width: 834px) {
+    font-size: 1.2em;
+  }
 `;
 
 const StyledLink = styled(Link)`
-  color: ${(p) => p.theme.colorFront};
+  color: ${(p) => p.theme.colorBackground};
   text-decoration: none;
-  background: ${(p) => p.theme.colorLink};
+  background: ${(p) => p.theme.colorText};
   width: 100%;
 `;
 
@@ -35,10 +47,20 @@ const StyledBoldText = styled.b`
   color: white;
 `;
 
-const StyledSearchStats = styled.div`
-  font-size: 1em;
+const StyledSelect = styled.select`
+  position: "fixed";
+  bottom: "100px";
+  width: "";
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
+  textalignlast: "center";
+  height: "30px";
+  fontsize: "1.2rem";
 `;
 
+const StyledListElement = styled.li`
+  padding: 10px;
+`;
 export default function SearchResults() {
   const searchQuery = useStore((state) => state.searchQuery);
   const cardByName = getCardByProp(searchQuery, "name");
@@ -89,12 +111,6 @@ export default function SearchResults() {
     setSelectOption(selectedOption);
   }
 
-  const [listElement, setListElement] = useState(false);
-
-  function toggleListElement() {
-    setListElement(!listElement);
-  }
-
   useEffect(() => {
     setHidden({
       name: true,
@@ -125,37 +141,16 @@ export default function SearchResults() {
     <Fragment>
       <SearchResultsContainer>
         <StyledBoldText>{searchQuery}</StyledBoldText>
-        <StyledSearchStats>
-          <i>
-            Name: <StyledBoldText>{cardByName.length}</StyledBoldText>
-          </i>
-          <i>
-            Description: <StyledBoldText>{cardByDesc.length}</StyledBoldText>
-          </i>
-          <i>
-            Meaning reversed:
-            <StyledBoldText>{cardByMeaningRev.length}</StyledBoldText>
-          </i>
-          <i>
-            Meaning upside:
-            <StyledBoldText>{cardByMeaningUp.length}</StyledBoldText>
-          </i>
-        </StyledSearchStats>
         <StyledResults id="resultsByDescription" hidden={hidden.desc}>
           {cardByShortDesc.map((card) => {
             return (
               <Fragment key={card.name}>
-                <li>
+                <StyledListElement>
                   <StyledLink href={`/cards/swiper/${card.id}`}>
                     {card.name}
                   </StyledLink>
-                </li>
-                <li onClick={() => toggleListElement()} hidden={!listElement}>
-                  {card.content}
-                </li>
-                <li onClick={() => toggleListElement()} hidden={listElement}>
-                  {card.desc}
-                </li>
+                </StyledListElement>
+                <li>"[...] {card.content} [...]"</li>
               </Fragment>
             );
           })}
@@ -169,13 +164,16 @@ export default function SearchResults() {
                 </StyledLink>
               </li>
               <li>
-                <Image
-                  src={card.image}
-                  width={160}
-                  height={250}
-                  alt={card.name}
-                  priority
-                />
+                <Link href={`/cards/swiper/${card.id}`}>
+                  {" "}
+                  <Image
+                    src={card.image}
+                    width={160}
+                    height={250}
+                    alt={card.name}
+                    priority
+                  />
+                </Link>
               </li>
             </Fragment>
           ))}
@@ -205,16 +203,16 @@ export default function SearchResults() {
           ))}
         </StyledResults>
       </SearchResultsContainer>
-      <select
+      <StyledSelect
         onChange={(e) => renderResults(e)}
         style={{
           position: "fixed",
-          bottom: "70px",
-          width: "100%",
+          bottom: "100px",
+          width: "",
           background: `${(p) => p.theme.colorBackground}`,
           color: `${(p) => p.theme.colorText}`,
           textAlignLast: "center",
-          height: "40px",
+          height: "30px",
           fontSize: "1.2rem",
         }}
         id={"filterSelection"}
@@ -236,7 +234,7 @@ export default function SearchResults() {
           by meaning reversed{": "}
           {cardByMeaningRev.length > 0 && cardByMeaningRev.length}
         </option>
-      </select>
+      </StyledSelect>
     </Fragment>
   );
 }
