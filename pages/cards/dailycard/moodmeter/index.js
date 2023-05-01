@@ -20,6 +20,8 @@ const MoodButtonBad = styled.div`
 `;
 
 const MoodContainer = styled.div`
+  position: fixed;
+  top: 0px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 15% 33fr 33fr;

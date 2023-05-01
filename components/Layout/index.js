@@ -40,12 +40,13 @@ const StyledMain = styled.main`
     width: 768px;
     height: 1024px;
   }
+
+  @media only screen and (min-width: 820px) {
+    width: 820px;
+    height: 1180px;
+  }
 `;
 
 export default function Layout({ children }) {
-  return (
-    <>
-      <StyledMain>{children}</StyledMain>
-    </>
-  );
+  return <StyledMain>{children}</StyledMain>;
 }

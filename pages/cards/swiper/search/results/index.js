@@ -1,20 +1,11 @@
 import useStore from "../../../../../src/store/store";
 import { useEffect, useState } from "react";
 import SearchResults from "../../../../../components/SearchResults";
-
+import Frame from "../../../../../components/Frame";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import SearchBar from "../../../../../components/SearchBar";
 import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
-import styled from "styled-components";
-const Frame = styled.div`
-  background: palevioletred;
-  width: 375px;
-  height: 667px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
+
 export default function SearchResult() {
   const [hasMounted, setHasMounted] = useState(false);
   const searchQuery = useStore((state) => state.searchQuery);
@@ -29,7 +20,12 @@ export default function SearchResult() {
   if (searchQuery === "") {
     return (
       <Frame>
+        <TopMenuBar mid={"searchResults"}></TopMenuBar>
+
         <p>provide a search term</p>
+        <SearchBar />
+
+        <StyledNavbar />
       </Frame>
     );
   }

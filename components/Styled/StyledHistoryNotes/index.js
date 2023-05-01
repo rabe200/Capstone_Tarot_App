@@ -8,7 +8,7 @@ import { injectStyle } from "react-toastify/dist/inject-style";
 import "react-toastify/dist/ReactToastify.css";
 import { useDoubleTap } from "use-double-tap";
 
-const NoteWithImageContainer = styled.div`
+const NoteContainer = styled.div`
   display: grid;
   width: 100%;
   height: 100%;
@@ -72,7 +72,7 @@ const StyledToastContainer = styled(ToastContainer)`
   position: sticky;
 
   .Toastify__progress-bar {
-    background: white;
+    display: none;
   }
   .Toastify__toast {
     background: ${(p) => p.theme.colorContainer};
@@ -83,11 +83,11 @@ const StyledToastContainer = styled(ToastContainer)`
   .Toastify__toast-icon {
     display: none;
   }
-  .Toastify__toast-container--bottom-center {
+  .Toastify__toast-container--top-center {
   }
 `;
 
-export default function NoteWithImage({ card, toggle }) {
+export default function HistoryNotes({ card, toggle }) {
   const [noteOverflow, setNoteOverflow] = useState();
   const [inputValue, setInputValue] = useState("");
   const editSelectedNote = useStore((state) => state.editSelectedNote);
@@ -121,7 +121,7 @@ export default function NoteWithImage({ card, toggle }) {
 
   function showToastMessage() {
     toast.success("Note Saved", {
-      position: toast.POSITION.BOTTOM_RIGHT,
+      position: toast.POSITION.TOP_CENTER,
     });
   }
 
@@ -136,7 +136,7 @@ export default function NoteWithImage({ card, toggle }) {
   }
 
   return (
-    <NoteWithImageContainer>
+    <NoteContainer>
       <StyledToastContainer onClick={(event) => console.log(event)} />
       <form id="myForm">
         <StyledNotes
@@ -167,6 +167,6 @@ export default function NoteWithImage({ card, toggle }) {
           <StyledToastContainer />
         </ButtonBox>
       </form>
-    </NoteWithImageContainer>
+    </NoteContainer>
   );
 }

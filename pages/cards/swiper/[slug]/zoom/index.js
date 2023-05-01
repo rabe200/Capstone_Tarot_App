@@ -12,34 +12,34 @@ import Frame from "../../../../../components/Frame";
 import { useDoubleTap } from "use-double-tap";
 
 const StyledImageContainerIndex = styled.div`
-  width: 99%;
-  height: 99%;
   display: block;
   overflow: hidden;
 `;
 
 const StyledSwiper = styled(Swiper)`
   display: block;
+  position: fixed;
+  top: 0px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   text-align: center;
+  background: ${(p) => p.theme.colorBackground};
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
-  background: black;
+  background: ${(p) => p.theme.colorBackground};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid black;
 `;
 
 const StyledImage = styled(Image)`
-  width: 363;
-  height: 565;
+  width: 363px;
+  height: 565px;
 `;
 
 export default function ProductImagesSlider(props) {

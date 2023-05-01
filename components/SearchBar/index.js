@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const StyledSpacer = styled.div`
-  /* display: none; */
   height: 50px;
   width: 100%;
   text-align: center;
@@ -31,6 +30,8 @@ const StyledSearchContainer = styled.div`
 `;
 
 const Navbar = styled.div`
+  position: fixed;
+  bottom: 40px;
   display: grid;
   grid-template-columns: 4fr 1fr;
   height: 40px;
@@ -38,21 +39,19 @@ const Navbar = styled.div`
 `;
 
 const StyledButton = styled.button`
-  background: #293133;
-  border: 2px white solid;
-  color: #fcffec;
-  height: 100%;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorText};
+  height: 40px;
   width: 100%;
   font-size: 1em;
   weight: 400;
   margin: 0;
   padding: 0;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
   font-family: pixelOperator;
   &:hover {
     background: yellow;
-    color: #293133;
+    color: ${(p) => p.theme.colorBackground};
+    background: ${(p) => p.theme.colorText};
   }
 `;
 
@@ -60,15 +59,7 @@ export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const setSearchQuery = useStore((state) => state.setSearchQuery);
   const router = useRouter();
-  const [hidden, setHiddenToggle] = useState(false);
-
-  function toggle() {
-    if (hidden === false) {
-      setHiddenToggle(true);
-    } else {
-      setHiddenToggle(false);
-    }
-  }
+  const [hidden] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -78,56 +69,49 @@ export default function SearchBar() {
   }
 
   return (
-    <>
-      <StyledSpacer>
-        <StyledToggle onClick={() => toggle()}>search</StyledToggle>
-      </StyledSpacer>
-      <StyledSearchContainer>
-        <Navbar>
-          <StyledFormular
-            hidden={hidden}
-            id="searchFormular"
-            aria-label="search formular"
-          >
-            <input
-              onChange={(event) => {
-                return (
-                  event.preventDefault(), setInputValue(event.target.value)
-                );
-              }}
-              type="text"
-              id="searchbar"
-              name="searchbar"
-              placeholder="search..."
-              aria-label="search bar"
-              value={inputValue}
-              style={{
-                fontSize: "0.8rem",
-                width: "100%",
-                height: "100%",
-                margin: 0,
-                padding: 0,
-                background: "#293133",
-                border: "1px solid white",
-                textAlign: "center",
-                color: "white",
-                borderTopLeftRadius: "8px",
-                borderBottomLeftRadius: "8px",
-              }}
-            />
-          </StyledFormular>
-          <StyledButton
-            hidden={hidden}
-            form="searchFormular"
-            type="submit"
-            name="submit"
-            aria-label="submit search query"
-            onClick={handleSubmit}
-          >
-            SUBMIT{" "}
-          </StyledButton>
-        </Navbar>
-      </StyledSearchContainer>
-    </>
+    <StyledSearchContainer>
+      <Navbar>
+        <StyledFormular
+          hidden={hidden}
+          id="searchFormular"
+          aria-label="search formular"
+        >
+          <input
+            onChange={(event) => {
+              return event.preventDefault(), setInputValue(event.target.value);
+            }}
+            type="text"
+            id="searchbar"
+            name="searchbar"
+            placeholder="search..."
+            aria-label="search bar"
+            value={inputValue}
+            style={{
+              fontSize: "0.8rem",
+              width: "100%",
+              height: "40px",
+              margin: 0,
+              padding: 0,
+              background: `${(p) => p.theme.colorText}`,
+              textAlign: "center",
+              color: `${(p) => p.theme.colorBackground}`,
+              _webkitUserSelect: "none",
+              _msUserSelect: "none",
+              userSelect: "none",
+            }}
+          />
+        </StyledFormular>
+        <StyledButton
+          hidden={hidden}
+          form="searchFormular"
+          type="submit"
+          name="submit"
+          aria-label="submit search query"
+          onClick={handleSubmit}
+        >
+          SUBMIT{" "}
+        </StyledButton>
+      </Navbar>
+    </StyledSearchContainer>
   );
 }

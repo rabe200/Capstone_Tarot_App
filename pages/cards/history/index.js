@@ -5,7 +5,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import { useCallback } from "react";
-import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";
+import HistoryNotes from "../../../components/Styled/StyledHistoryNotes";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import Frame from "../../../components/Frame";
 const StyledEntry = styled.div`
@@ -19,14 +19,18 @@ const StyledEntry = styled.div`
 `;
 
 const StyledFormular = styled.form`
-  height: 50px;
+  position: fixed;
+  bottom: 50px;
+  height: 30px;
   width: 100%;
 `;
 const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 20px;
   width: 100%;
-  height: 77vh;
+  height: 80%;
   overflow: auto;
   background: ${(p) => p.theme.colorBackground};
   z-index: 1000;
@@ -39,15 +43,15 @@ const StyledLink = styled(Link)`
 `;
 
 const StyledFooter = styled.footer`
-  position: sticky;
+  position: fixed;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  top: 0;
+  bottom: 90px;
   width: 100%;
-  height: 100px;
-  /* background: ${(p) => p.theme.colorBackground}; */
+  height: 10px;
+  background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
 `;
 
@@ -128,29 +132,7 @@ export default function History() {
   return (
     <Frame>
       <TopMenuBar query2={"/dailyCard"} mid={"history"} />
-      <StyledFooter>
-        <StyledFormular>
-          <select
-            style={{
-              width: "100%",
-              height: "100%",
-              textAlign: "center",
-              fontSize: "1.05rem",
-              fontSize: "1.2em",
-            }}
-            name="filter results by"
-            onChange={(event) => setSelectedOption(event.target.value)}
-          >
-            <option value="dateUp">date up</option>
-            <option value="dateDown">date down</option>
-            <option value="nameUp">name up</option>
-            <option value="nameDown">name down</option>
-          </select>
-        </StyledFormular>
-        <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
-        <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
-        <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
-      </StyledFooter>
+
       <ListContainer>
         {sortedItems.map((card) => {
           return (
@@ -176,12 +158,34 @@ export default function History() {
                 : card.hour < 25
                 ? " late evening"
                 : " out of time"}
-              <NoteWithImage card={card} toggle={showButtons} />{" "}
+              <HistoryNotes card={card} toggle={showButtons} />{" "}
             </StyledEntry>
           );
         })}
       </ListContainer>
-
+      <StyledFormular>
+        <select
+          style={{
+            width: "100%",
+            height: "100%",
+            textAlign: "center",
+            fontSize: "1.05rem",
+            fontSize: "1.2em",
+          }}
+          name="filter results by"
+          onChange={(event) => setSelectedOption(event.target.value)}
+        >
+          <option value="dateUp">date up</option>
+          <option value="dateDown">date down</option>
+          <option value="nameUp">name up</option>
+          <option value="nameDown">name down</option>
+        </select>
+      </StyledFormular>
+      <StyledFooter>
+        <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
+        <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
+        <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
+      </StyledFooter>
       <StyledNavbar />
     </Frame>
   );

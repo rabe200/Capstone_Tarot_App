@@ -4,28 +4,15 @@ import { cards } from "../../lib/data";
 import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
+import Frame from "../Frame";
 
 const SearchResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  position: sticky;
-  height: 100%;
+  position: fixed;
+  top: 0px;
+  height: 80%;
 `;
-
-// const ListContainer = styled.ul`
-//   display: flex;
-//   flex-direction: column;
-//   background: ${(p) => p.theme.colorBackground};
-//   color: ${(p) => p.theme.colorText};
-//   height: 100%;
-//   overflow: auto;
-//   border-radius: 8px;
-//   list-style-type: none;
-//   margin: 0;
-//   padding-left: 36px;
-//   padding-right: 36px;
-//   font-size: 1.2em;
-// `;
 
 const StyledResults = styled.div`
   height: 100%;
@@ -34,13 +21,13 @@ const StyledResults = styled.div`
   list-style-type: none;
   overflow: auto;
   border: 2px black solid;
+  background: ${(p) => p.theme.colorLink};
 `;
 
 const StyledLink = styled(Link)`
-  font-size: 1.2em;
   color: ${(p) => p.theme.colorFront};
   text-decoration: none;
-  background: ${(p) => p.theme.colorContainer};
+  background: ${(p) => p.theme.colorLink};
   width: 100%;
 `;
 
@@ -49,7 +36,7 @@ const StyledBoldText = styled.b`
 `;
 
 const StyledSearchStats = styled.div`
-  font-size: 0.7em;
+  font-size: 1em;
 `;
 
 export default function SearchResults() {
@@ -128,14 +115,14 @@ export default function SearchResults() {
 
   if (searchQuery === "") {
     return (
-      <>
+      <Frame>
         <p>no results</p>
-      </>
+      </Frame>
     );
   }
 
   return (
-    <>
+    <Fragment>
       <SearchResultsContainer>
         <StyledBoldText>{searchQuery}</StyledBoldText>
         <StyledSearchStats>
@@ -225,6 +212,8 @@ export default function SearchResults() {
       <select
         onChange={(e) => renderResults(e)}
         style={{
+          position: "fixed",
+          bottom: "70px",
           width: "100%",
           background: `${(p) => p.theme.colorBackground}`,
           color: `${(p) => p.theme.colorText}`,
@@ -252,6 +241,6 @@ export default function SearchResults() {
           {cardByMeaningRev.length > 0 && cardByMeaningRev.length}
         </option>
       </select>
-    </>
+    </Fragment>
   );
 }

@@ -25,6 +25,5 @@ root {
     justify-content: center;
     font-family: pixelOperator;
     overflow: hidden;
-
   }
 `;

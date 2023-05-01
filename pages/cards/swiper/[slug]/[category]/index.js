@@ -13,20 +13,23 @@ import { useEffect } from "react";
 import CardStats from "../../../../../components/Stats/stats";
 import CardNotes from "../../../../../components/Notes";
 import Frame from "../../../../../components/Frame";
+import SearchBar from "../../../../../components/SearchBar";
 
 const StyledSwiper = styled(Swiper)`
   display: block;
+  position: fixed;
+  top: 20px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 80%;
   text-align: center;
   overflow: hidden;
+  background: ${(p) => p.theme.colorContainer};
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
-  background: ${(p) => p.theme.colorContainer};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,6 +41,8 @@ const StyledBoxForText = styled.div`
   display: grid;
   height: 80%;
   width: 80%;
+  padding: 20px;
+  background: ${(p) => p.theme.colorFront};
   overflow: auto;
 `;
 
@@ -47,10 +52,18 @@ const StyledText = styled.div`
   font-size: 1.4em;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
-  border: white solid 2px;
   display: flex;
   flex-direction: column;
   overflow: auto;
+`;
+
+const StyledCategoryName = styled.div`
+  width: 100%;
+  height: 20px;
+  position: fixed;
+  bottom: 80px;
+  text-align: center;
+  z-index: 10000px;
 `;
 
 export default function Category() {
@@ -74,6 +87,8 @@ export default function Category() {
           mid={card[0].name}
           backbutton={`/cards/swiper/${card[0].id}`}
         />
+        <StyledCategoryName> {category}</StyledCategoryName>
+
         <StyledSwiper
           loop={true}
           speed={300}
@@ -111,11 +126,17 @@ export default function Category() {
                   </StyledText>
                 ) : null}
               </StyledBoxForText>
+              <button
+                type="button"
+                onClick={() => router.push(`/cards/swiper/${slug}/`)}
+              >
+                return
+              </button>
             </StyledSwiperSlide>
           ))}
         </StyledSwiper>
-        {category}
 
+        <SearchBar />
         <StyledNavbar />
       </Frame>
     )

@@ -7,25 +7,27 @@ import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import Frame from "../../../components/Frame";
 
-const StyledContinueButton = styled.div`
-  display: flex;
-  position: sticky;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: yellow;
+const Container = styled.div`
+  display: grid;
+  flex-direction: column;
+  position: fixed;
+  top: 10%;
+  height: 80%;
+  justify-items: center;
   text-align: center;
+`;
+
+const StyledContinueButton = styled.div`
+  width: 100%;
   height: 40px;
+  background: ${(props) => props.theme.colorText};
+  color: ${(props) => props.theme.colorBackground};
+  text-align: center;
   border-radius: 8px;
   font-size: 2rem;
   &:hover {
     background-color: magenta;
   }
-`;
-
-const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 const StyledLink = styled(Link)`
@@ -34,9 +36,26 @@ const StyledLink = styled(Link)`
     color: black;
   }
 `;
+
+const DisplayCardName = styled.div`
+  position: relative;
+  height: 20px;
+`;
+
+const SpacerName = styled.div`
+  position: relative;
+  height: 20px;
+`;
+
+const SpacerButton = styled.div`
+  position: relative;
+  height: 40px;
+`;
+
 export default function ShowCard() {
   const currentCard = useStore((state) => state.currentCard);
   const [hasMounted, setHasMounted] = useState(false);
+  const [turned, setTurned] = useState(true);
 
   useEffect(() => {
     setHasMounted(true);
@@ -47,12 +66,19 @@ export default function ShowCard() {
   if (currentCard) {
     return (
       <Frame>
-        <TopMenuBar />
-        <FlipCard card={currentCard} />
-        <StyledLink href={"/cards/dailycard/notes"}>
-          <StyledContinueButton>CONTINUE</StyledContinueButton>
-        </StyledLink>
+        <TopMenuBar mid={"your card"} />
 
+        <Container onClick={() => setTurned(false)}>
+          <SpacerName hidden={!turned} />
+          <DisplayCardName hidden={turned}>{currentCard.name}</DisplayCardName>
+          <FlipCard card={currentCard} />
+          <StyledLink href={"/cards/dailycard/notes"}>
+            <SpacerButton hidden={!turned} />
+            <StyledContinueButton hidden={turned}>
+              CONTINUE
+            </StyledContinueButton>
+          </StyledLink>
+        </Container>
         <StyledNavbar />
       </Frame>
     );

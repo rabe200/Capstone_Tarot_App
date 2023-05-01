@@ -3,7 +3,7 @@ import "swiper/swiper-bundle.min.css";
 import { useDoubleTap } from "use-double-tap";
 import { Navigation, A11y, Thumbs, Lazy } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { useState } from "react";
 import { cards } from "../../../../lib/data";
 import Image from "next/image";
 import styled from "styled-components";
@@ -17,10 +17,6 @@ import SearchBar from "../../../../components/SearchBar";
 import Frame from "../../../../components/Frame";
 import ArrowUp from "../../../../components/Styled/ArrowUp";
 import ArrowDown from "../../../../components/Styled/ArrowDown";
-
-const StyledSearchBar = styled(SearchBar)`
-  display: flex;
-`;
 
 const StyledImageContainerIndex = styled.div`
   width: 100%;
@@ -37,10 +33,11 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 85%;
   text-align: center;
   background: black;
   position: fixed;
+  top: 20px;
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -48,6 +45,8 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const StyledImage = styled(Image)`
@@ -75,6 +74,7 @@ const StyledText = styled.div`
   width: 90%;
   height: 80%;
   overflow: hidden;
+  opacity: 85%;
 `;
 const StyledTextContainer = styled.div`
   position: relative;
@@ -142,6 +142,7 @@ export default function ProductImagesSlider(props) {
   return (
     slug && (
       <Frame>
+        <SearchBar />
         <StyledSwiper
           loop={true}
           speed={300}
@@ -164,6 +165,7 @@ export default function ProductImagesSlider(props) {
                   <ShadowBox>
                     <StyledImage
                       {...doubleTapImage}
+                      id="StyledImage"
                       loading="eager"
                       src={card.image}
                       alt={card.name}
@@ -184,7 +186,7 @@ export default function ProductImagesSlider(props) {
                   }
                 >
                   <ShadowBox>
-                    <StyledText>{card.desc}</StyledText>
+                    <StyledText id="styledDescription">{card.desc}</StyledText>
                   </ShadowBox>
                 </StyledTextContainer>
 
@@ -196,7 +198,9 @@ export default function ProductImagesSlider(props) {
                 >
                   <ShadowBox>
                     <ArrowUp />
-                    <StyledText>{card.meaning_up}</StyledText>
+                    <StyledText id="styledMeaningUp">
+                      {card.meaning_up}
+                    </StyledText>
                   </ShadowBox>
                 </StyledTextContainer>
 
@@ -208,13 +212,20 @@ export default function ProductImagesSlider(props) {
                 >
                   <ShadowBox>
                     <ArrowDown />
-                    <StyledText>{card.meaning_rev}</StyledText>
+                    <StyledText id="styledMeaningRev">
+                      {card.meaning_rev}
+                    </StyledText>
                   </ShadowBox>
                 </StyledTextContainer>
 
-                <StyledTextContainer {...doubleTapStats}>
+                <StyledTextContainer
+                  {...doubleTapStats}
+                  onDoubleClick={() =>
+                    router.push(`/cards/swiper/${slug}/stats`)
+                  }
+                >
                   <ShadowBox>
-                    <StyledText>
+                    <StyledText id="styledStats">
                       <CardStats slug={slug} />
                     </StyledText>
                   </ShadowBox>
@@ -227,7 +238,7 @@ export default function ProductImagesSlider(props) {
                   }
                 >
                   <ShadowBox>
-                    <StyledText>
+                    <StyledText id="styledNotes">
                       <CardNotes slug={slug} />
                     </StyledText>
                   </ShadowBox>
@@ -237,7 +248,6 @@ export default function ProductImagesSlider(props) {
           ))}
         </StyledSwiper>
         <TopMenuBar mid={card[0].name} />
-        <StyledSearchBar />
 
         <StyledNavbar />
       </Frame>

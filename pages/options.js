@@ -1,9 +1,8 @@
-import AppContainer from "../components/Styled/StyledAppContainer";
-import StyledCardContainer from "../components/Styled/StyledCardContainer";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import styled from "styled-components";
 import ButtonThemeToggle from "../components/ToggleThemeButton";
 import StyledNavbar from "../components/Styled/StyledNavbar";
+import Frame from "../components/Frame";
 
 const StyledOptionsMenu = styled.ul`
   display: flex;
@@ -24,17 +23,15 @@ const StyledH1 = styled.h1`
 
 export default function OptionsMenu() {
   return (
-    <AppContainer>
+    <Frame>
       <TopMenuBar mid={"credits"} back={"/"} />
 
-      <StyledCardContainer>
-        <StyledOptionsMenu>
-          <StyledH1>
-            <ButtonThemeToggle />
-          </StyledH1>
-        </StyledOptionsMenu>
-      </StyledCardContainer>
+      <StyledOptionsMenu>
+        <StyledH1>
+          <ButtonThemeToggle />
+        </StyledH1>
+      </StyledOptionsMenu>
       <StyledNavbar />
-    </AppContainer>
+    </Frame>
   );
 }
