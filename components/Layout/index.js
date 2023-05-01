@@ -14,7 +14,6 @@ const StyledMain = styled.main`
   padding: 0;
   top: 0;
   left: 0;
-  overflow: hidden;
 
   @media only screen and (min-width: 414px) {
     width: 414px;

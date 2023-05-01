@@ -25,7 +25,6 @@ root {
     justify-content: center;
     font-family: pixelOperator;
     background: black;
-    overflow: hidden;;
 
   @media only screen and (min-width: 414px) {
     width: 414px;
