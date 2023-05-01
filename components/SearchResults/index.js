@@ -169,15 +169,13 @@ export default function SearchResults() {
                 </StyledLink>
               </li>
               <li>
-                <StyledLink href={`/cards/swiper/${card.id}`}>
-                  <Image
-                    src={card.image}
-                    width={160}
-                    height={250}
-                    alt={card.name}
-                    priority
-                  ></Image>
-                </StyledLink>
+                <Image
+                  src={card.image}
+                  width={160}
+                  height={250}
+                  alt={card.name}
+                  priority
+                />
               </li>
             </Fragment>
           ))}
@@ -198,11 +196,9 @@ export default function SearchResults() {
           {cardByMeaningRev.map((card) => (
             <Fragment key={card.name}>
               <li>
-                <StyledResultHeader>
-                  <StyledLink href={`/cards/swiper/${card.id}`}>
-                    {card.name}
-                  </StyledLink>
-                </StyledResultHeader>
+                <StyledLink href={`/cards/swiper/${card.id}`}>
+                  {card.name}
+                </StyledLink>
               </li>
               <li>{card.meaning_rev}</li>
             </Fragment>
