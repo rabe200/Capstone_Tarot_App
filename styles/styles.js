@@ -17,13 +17,47 @@ root {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 667px;
+    width: 375px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: pixelOperator;
-    overflow: hidden;
+    background: black;
+    overflow: hidden;;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+    height: 896px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+    height: 1266px;
+    
+  }
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+    height: 1266px;
+    
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+    height: 900px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+    height: 834px;
+ 
+  }
+
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+    height: 834px;
+  }
+
   }
 `;

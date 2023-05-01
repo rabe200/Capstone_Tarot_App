@@ -21,7 +21,7 @@ const StyledTopBarContainer = styled.div`
   position: fixed;
   z-index: 2000;
   top: 0;
-  width: 100%;
+  width: 375px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   height: 20px;
@@ -31,6 +31,20 @@ const StyledTopBarContainer = styled.div`
   color: ${(p) => p.theme.colorText};
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @nedia only screen and (mind-width: 585px) {
+    width: 585px;
+  }
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledTopBarLeft = styled.div`

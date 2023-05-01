@@ -11,8 +11,22 @@ const StyledSpace = styled.div`
   height: 45px;
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 375px;
   z-index: 1000;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+  }
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledMenu = styled.div`

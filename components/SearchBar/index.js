@@ -3,18 +3,27 @@ import useStore from "../../src/store/store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
-const StyledSpacer = styled.div`
-  height: 50px;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-  position: ;
-`;
+const StyledInput = styled.input`
+  fontsize: 1em;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  width: 320px;
+  background: ${(p) => p.theme.colorText};
+  textalign: "center";
+  color: ${(p) => p.theme.colorBackground};
+  _webkituserselect: "none";
+  _msuserselect: "none";
+  userselect: "none";
 
-const StyledToggle = styled.div`
-  display: none;
-  color: #fcffec;
-  font-size: 1.2em;
+  @media only screen and (min-width: 414px) {
+    width: 359px;
+    height: 50px;
+  }
+  @media only screen and (min-width: 585px) {
+    width: 530px;
+    height: 50px;
+  }
 `;
 
 const StyledFormular = styled.form`
@@ -23,10 +32,21 @@ const StyledFormular = styled.form`
 `;
 
 const StyledSearchContainer = styled.div`
-  width: 100%;
+  width: 375px;
+  height: 40px;
+  display: flex;
   position: relative;
   margin: 0;
   padding: 0;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+  }
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const Navbar = styled.div`
@@ -34,15 +54,14 @@ const Navbar = styled.div`
   bottom: 40px;
   display: grid;
   grid-template-columns: 4fr 1fr;
-  height: 40px;
-  width: 100%;
+  width: 300px;
 `;
 
 const StyledButton = styled.button`
-  background: ${(p) => p.theme.colorBackground};
+  background: ${(p) => p.theme.colorContainer};
   color: ${(p) => p.theme.colorText};
   height: 40px;
-  width: 100%;
+  width: 55px;
   font-size: 1em;
   weight: 400;
   margin: 0;
@@ -50,8 +69,11 @@ const StyledButton = styled.button`
   font-family: pixelOperator;
   &:hover {
     background: yellow;
-    color: ${(p) => p.theme.colorBackground};
-    background: ${(p) => p.theme.colorText};
+    color: ${(p) => p.theme.colorText};
+    background: ${(p) => p.theme.colorBackground};
+  }
+  @media only screen and (min-width: 414px) {
+    height: 46px;
   }
 `;
 
@@ -76,7 +98,7 @@ export default function SearchBar() {
           id="searchFormular"
           aria-label="search formular"
         >
-          <input
+          <StyledInput
             onChange={(event) => {
               return event.preventDefault(), setInputValue(event.target.value);
             }}
@@ -88,7 +110,6 @@ export default function SearchBar() {
             value={inputValue}
             style={{
               fontSize: "0.8rem",
-              width: "100%",
               height: "40px",
               margin: 0,
               padding: 0,

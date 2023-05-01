@@ -34,7 +34,7 @@ const MoodContainer = styled.div`
   align-content: space-evenly;
   justify-items: center;
   align-items: center;
-  height: 100%;
+  height: 80%;
 `;
 
 export default function MoodMeter() {

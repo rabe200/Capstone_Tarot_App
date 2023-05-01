@@ -4,7 +4,9 @@ import styled from "styled-components";
 import averageMood from "../averageMood";
 
 const StyledList = styled.ul`
-  text-decoration: none;
+  position: relative;
+  top: 15px;
+  list-style-type: none;
   margin: 0;
   padding: 0;
 `;

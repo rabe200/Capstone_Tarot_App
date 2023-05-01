@@ -14,6 +14,8 @@ const ContentContainer = styled.div`
 const StyledSubmitButton = styled.button`
   display: flex;
   position: relative;
+  top: 200px;
+  z-index: 1000;
   align-items: center;
   width: 100%;
   background: ${(p) => p.theme.colorText};
@@ -52,6 +54,8 @@ const StyledText = styled.div`
   overflow: auto;
 `;
 
+const ButtonHideContainer = styled.div``;
+
 export default function ChatApi() {
   const [hasMounted, setHasMounted] = useState(false);
   const [questionInput, setQuestionInput] = useState("");
@@ -63,6 +67,7 @@ export default function ChatApi() {
   const setAllReadings = useStore((state) => state.setAllReadings);
   const [loading, setLoading] = useState(false);
   const allReadings = useStore((state) => state.allReadings);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     setQuestionInput(GeneratePrompt(userData, allReadings));
@@ -95,6 +100,7 @@ export default function ChatApi() {
     }
 
     if (response.status === 200) {
+      setHidden(true);
       const data = response.body;
       if (!data) {
         return console.log("no data");
@@ -121,14 +127,17 @@ export default function ChatApi() {
     userData && (
       <Fragment>
         <ContentContainer>
-          <StyledSubmitButton
-            type={"button"}
-            id={"readingButton"}
-            onClick={() => handleSubmit()}
-            disabled={disableButton}
-          >
-            {loading ? "talking to the spirits" : "get reading"}
-          </StyledSubmitButton>
+          <ButtonHideContainer hidden={hidden}>
+            <StyledSubmitButton
+              type={"button"}
+              id={"readingButton"}
+              onClick={() => handleSubmit()}
+              disabled={disableButton}
+            >
+              {loading ? "talking to the spirits" : "get reading"}
+            </StyledSubmitButton>
+          </ButtonHideContainer>
+
           <ResultContainer hidden={hideReading}>
             <StyledText>{result}</StyledText>
           </ResultContainer>

@@ -18,25 +18,78 @@ import ArrowUp from "../../../../components/Styled/ArrowUp";
 import ArrowDown from "../../../../components/Styled/ArrowDown";
 
 const StyledImageContainerIndex = styled.div`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: 0.7fr 0.5fr 0.5fr;
-  grid-template-columns: 1fr 1fr;
   overflow: auto;
+  position: fixed;
+  top: 0px;
+  width: 375px;
+  height: 567px;
+  display: grid;
+  grid-template-rows: 0.7fr 0.4fr 0.2fr;
+  grid-template-columns: 0.7fr 1fr;
+  overflow: auto;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+    height: 780px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+    height: 1161px;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+    height: 800px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+    height: 764px;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+    height: 834px;
+  }
 `;
 
 const StyledSwiper = styled(Swiper)`
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 85%;
+  width: 375px;
+  height: 567px;
   text-align: center;
   background: black;
   position: fixed;
   top: 20px;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+    height: 780px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+    height: 1161px;
+  }
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+    height: 800px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+    height: 764px;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+    height: 834px;
+  }
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -44,8 +97,33 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 375px;
+  height: 540px;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+    height: 896px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+    height: 1161px;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+    height: 800px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+    height: 764px;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+    height: 834px;
+  }
 `;
 
 const StyledImage = styled(Image)`
@@ -84,7 +162,6 @@ const StyledTextContainer = styled.div`
   color: ${(p) => p.theme.colorText};
   border: ${(p) => p.theme.border};
   border-radius: 8px;
-  text-overflow: hidden;
   overflow: hidden;
   box-shadow: inset 2px 2px 100px 1px ${(p) => p.theme.colorBackground},
     inset -2px -2px 10px 10px ${(p) => p.theme.colorLink};
@@ -99,8 +176,6 @@ const StyledImageContainer = styled.div`
   color: ${(p) => p.theme.colorText};
   border: ${(p) => p.theme.border};
   border-radius: 8px;
-  text-overflow: hidden;
-  overflow: hidden;
   box-shadow: inset 2px 2px 100px 1px ${(p) => p.theme.colorBackground},
     inset -2px -2px 10px 10px ${(p) => p.theme.colorLink};
 `;
@@ -141,7 +216,6 @@ export default function ProductImagesSlider(props) {
   return (
     slug && (
       <Frame>
-        <SearchBar />
         <StyledSwiper
           loop={true}
           speed={300}
@@ -245,9 +319,9 @@ export default function ProductImagesSlider(props) {
               </StyledImageContainerIndex>
             </StyledSwiperSlide>
           ))}
+          <SearchBar />
         </StyledSwiper>
         <TopMenuBar mid={card[0].name} />
-
         <StyledNavbar />
       </Frame>
     )

@@ -7,7 +7,7 @@ import useStore from "../../../../src/store/store";
 
 const StyledOptions = styled.div`
   width: 80%;
-  height: 85%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;

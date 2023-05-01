@@ -13,7 +13,6 @@ import { useEffect } from "react";
 import CardStats from "../../../../../components/Stats/stats";
 import CardNotes from "../../../../../components/Notes";
 import Frame from "../../../../../components/Frame";
-import SearchBar from "../../../../../components/SearchBar";
 import Image from "next/image";
 
 const StyledSwiper = styled(Swiper)`
@@ -24,24 +23,31 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80%;
+  height: 100%;
   text-align: center;
+  /* background: ${(p) => p.theme.colorContainer}; */
   overflow: hidden;
-  background: ${(p) => p.theme.colorContainer};
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
   display: flex;
+
   width: 80%;
-  height: 100%;
+  height: 540px;
   top: 0px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  overflow: auto;
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+    height: 800px;
+  }
 `;
 const StyledImage = styled(Image)`
   position: sticky;
-  top: 0px;
+  top: 20px;
   width: 100px;
   height: 150px;
   align-self: right;
@@ -49,13 +55,23 @@ const StyledImage = styled(Image)`
 `;
 
 const StyledBoxForText = styled.div`
+  position: fixed;
+  top: 30px;
   display: flex;
-  background: ${(p) => p.theme.colorFront};
-  height: 80%;
+  height: 500px;
   width: 80%;
+  justify-content: start;
   overflow: auto;
   border-radius: 8px;
   padding: 5px;
+  font-size: 1.2em;
+
+  @media only screen and (min-width: 834px) {
+    font-size: 1.4em;
+    top: 60px;
+    width: 834px;
+    height: 800px;
+  }
 `;
 
 const StyledText = styled.div`
@@ -63,11 +79,12 @@ const StyledText = styled.div`
   width: 80%;
   height: 100%;
   font-size: 1em;
-  background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
   text-align: left;
-  margin-left: 5px;
+  margin-left: 15px;
   margin-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 const StyledCategoryName = styled.div`
@@ -81,7 +98,7 @@ const StyledCategoryName = styled.div`
 
 const ButtonContainer = styled.div`
   position: fixed;
-  bottom: 0px;
+  bottom: 80px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -90,13 +107,14 @@ const ButtonContainer = styled.div`
 
 const ToggleButton = styled.div`
   width: 50%;
-  height: 1em;
-  padding: 1em;
+  height: 18px;
+  padding: 10px;
   background: black;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px white solid;
 `;
 
 const ReturnButton = styled.div`
@@ -108,6 +126,8 @@ const ReturnButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 `;
 
 export default function Category() {
@@ -205,7 +225,6 @@ export default function Category() {
           ))}
         </StyledSwiper>
 
-        <SearchBar />
         <StyledNavbar />
       </Frame>
     )
