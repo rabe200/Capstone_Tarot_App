@@ -14,6 +14,7 @@ import CardStats from "../../../../../components/Stats/stats";
 import CardNotes from "../../../../../components/Notes";
 import Frame from "../../../../../components/Frame";
 import SearchBar from "../../../../../components/SearchBar";
+import Image from "next/image";
 
 const StyledSwiper = styled(Swiper)`
   display: block;
@@ -31,30 +32,42 @@ const StyledSwiper = styled(Swiper)`
 
 const StyledSwiperSlide = styled(SwiperSlide)`
   display: flex;
-  flex-direction: column;
+  width: 80%;
+  height: 100%;
+  top: 0px;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: white;
+`;
+const StyledImage = styled(Image)`
+  position: sticky;
+  top: 0px;
+  width: 100px;
+  height: 150px;
+  align-self: right;
+  border-top-left-radius: 4px;
 `;
 
 const StyledBoxForText = styled.div`
-  display: grid;
+  display: flex;
+  background: ${(p) => p.theme.colorFront};
   height: 80%;
   width: 80%;
-  padding: 20px;
-  background: ${(p) => p.theme.colorFront};
   overflow: auto;
+  border-radius: 8px;
+  padding: 5px;
 `;
 
 const StyledText = styled.div`
-  width: 100%;
+  display: flex;
+  width: 80%;
   height: 100%;
-  font-size: 1.4em;
+  font-size: 1em;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
+  text-align: left;
+  margin-left: 5px;
+  margin-right: 5px;
 `;
 
 const StyledCategoryName = styled.div`
@@ -66,11 +79,35 @@ const StyledCategoryName = styled.div`
   z-index: 10000px;
 `;
 
+const ButtonContainer = styled.div`
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const ToggleButton = styled.div`
-  width: 4rem;
+  width: 50%;
   height: 1em;
   padding: 1em;
   background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ReturnButton = styled.div`
+  width: 50%;
+  height: 1em;
+  padding: 1em;
+  background: white;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default function Category() {
@@ -82,7 +119,6 @@ export default function Category() {
   const category = router ? router.query.category : 0;
   const doubleTap = useDoubleTap((event) => {
     router.push(`/cards/swiper/${slug}`);
-    console.log(event.target);
   });
   const [toggleCategory, setToggleCategory] = useState(category);
 
@@ -104,6 +140,7 @@ export default function Category() {
           mid={card[0].name}
           backbutton={`/cards/swiper/${card[0].id}`}
         />
+
         <StyledCategoryName> {category}</StyledCategoryName>
 
         <StyledSwiper
@@ -127,6 +164,12 @@ export default function Category() {
                 {...doubleTap}
                 onDoubleClick={() => router.push(`/cards/swiper/${slug}/`)}
               >
+                <StyledImage
+                  src={card.image}
+                  width={"200"}
+                  height={"350"}
+                  alt={card.name}
+                />
                 {category === "description" ? (
                   <StyledText>{card.desc}</StyledText>
                 ) : category === "meaning_up" ? (
@@ -141,20 +184,23 @@ export default function Category() {
                   <StyledText>
                     <CardNotes slug={slug} />
                   </StyledText>
-                ) : null}
+                ) : null}{" "}
               </StyledBoxForText>
-              <button
-                type="button"
-                onClick={() => router.push(`/cards/swiper/${slug}/`)}
-              >
-                return
-              </button>
-              <ToggleButton
-                onTouchEnd={() => handleToggle()}
-                onClick={() => handleToggle()}
-              >
-                toggle
-              </ToggleButton>
+
+              <ButtonContainer>
+                <ReturnButton
+                  type="button"
+                  onClick={() => router.push(`/cards/swiper/${slug}/`)}
+                >
+                  return
+                </ReturnButton>
+                <ToggleButton
+                  onTouchEnd={() => handleToggle()}
+                  onClick={() => handleToggle()}
+                >
+                  toggle
+                </ToggleButton>
+              </ButtonContainer>
             </StyledSwiperSlide>
           ))}
         </StyledSwiper>

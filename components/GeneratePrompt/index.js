@@ -1,7 +1,9 @@
+import averageMood from "../averageMood";
+
 export default function GeneratePrompt(userData, allReadings) {
   let prompt;
   const card = userData.name;
-  const averageCardMood = userData.averageMood;
+  // const averageCardMood = userData.averageMood;
   const timesDrawn = userData.clicks;
   const moodClickedToday = userData.mood;
   const meaning_up = userData.meaning_up;
@@ -23,32 +25,32 @@ export default function GeneratePrompt(userData, allReadings) {
       ? "good, spooky midnight"
       : null;
   const moodToday = moodClickedToday === 1 ? "good" : "bad";
-  const averageMood =
-    averageCardMood < 0.1
-      ? "extremely bad"
-      : averageCardMood < 0.2
-      ? "very bad"
-      : averageCardMood < 0.3
-      ? "bad"
-      : averageCardMood < 0.4
-      ? "nearly okay"
-      : averageCardMood < 0.5
-      ? "okay"
-      : averageCardMood < 0.6
-      ? "more than okay"
-      : averageCardMood < 0.7
-      ? "quite good"
-      : averageCardMood < 0.8
-      ? "really good"
-      : averageCardMood < 0.9
-      ? "very good"
-      : averageCardMood < 1
-      ? "extremley good"
-      : averageCardMood === 1
-      ? "not enough data"
-      : averageCardMood === 0
-      ? "not enough data"
-      : null;
+  // const averageMood =
+  //   averageCardMood < 0.1
+  //     ? "extremely bad"
+  //     : averageCardMood < 0.2
+  //     ? "very bad"
+  //     : averageCardMood < 0.3
+  //     ? "bad"
+  //     : averageCardMood < 0.4
+  //     ? "nearly okay"
+  //     : averageCardMood < 0.5
+  //     ? "okay"
+  //     : averageCardMood < 0.6
+  //     ? "more than okay"
+  //     : averageCardMood < 0.7
+  //     ? "quite good"
+  //     : averageCardMood < 0.8
+  //     ? "really good"
+  //     : averageCardMood < 0.9
+  //     ? "very good"
+  //     : averageCardMood < 1
+  //     ? "extremley good"
+  //     : averageCardMood === 1
+  //     ? "not enough data"
+  //     : averageCardMood === 0
+  //     ? "not enough data"
+  //     : null;
 
   const dayNames = [
     "Sunday",
@@ -82,17 +84,17 @@ Request:
   "${greeting}, I have drawn "${card}", this is my ${visits}-th time getting your advice.
     You have drawn this Card "${timesDrawn}" times in total for me. I am in ${moodToday} mood today. 
      The average mood for the card drawn today is
-    "${averageMood}" . "
+    "${averageMood(userData)}" . "
     ### Here is some data reflecting the possible meanings for the card drawn: meaning up: "${meaning_up}", meaning reversed: "${meaning_rev}". And here is a visual description of that card: "${description}". 
     ### i have also left a note in my diary. if my note is to random too handle, skip it. but if it fits your reading, consider referring to it. the note is: "${note}" ###
-    ### consider to compare the current situation with the last readings you had with me. the data for the last readings is here: ${
-      pastReading && pastReading
-    }### 
- special note: do not repeat phrases used in that last reading###
+    ### consider to compare the current situation with the last readings you had with me. 
+    ### do not repeat phrases used in these last readings###
+    ### do not mention the last readings if it is just an empty string ###
+    the data for the last readings is here: "${pastReading && pastReading} "### 
+ 
     Today is ${dayName}. React accordingly. 
 
-   ;
-  
   `;
+  console.log(prompt);
   return prompt;
 }
