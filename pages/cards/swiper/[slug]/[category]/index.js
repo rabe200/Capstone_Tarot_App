@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import "swiper/swiper-bundle.min.css";
 import { useDoubleTap } from "use-double-tap";
-
-import { Navigation, A11y, Thumbs, Lazy } from "swiper";
+import { useState } from "react";
+import { Navigation, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { cards } from "../../../../../lib/data";
 import styled from "styled-components";
@@ -66,6 +66,13 @@ const StyledCategoryName = styled.div`
   z-index: 10000px;
 `;
 
+const ToggleButton = styled.div`
+  width: 4rem;
+  height: 1em;
+  padding: 1em;
+  background: black;
+`;
+
 export default function Category() {
   const router = useRouter();
   const slug = router ? router.query.slug : 0;
@@ -77,6 +84,16 @@ export default function Category() {
     router.push(`/cards/swiper/${slug}`);
     console.log(event.target);
   });
+  const [toggleCategory, setToggleCategory] = useState(category);
+
+  function handleToggle() {
+    if (category === "description") setToggleCategory("meaning_up");
+    else if (category === "meaning_up") setToggleCategory("meaning_rev");
+    else if (category === "meaning_rev") setToggleCategory("stats");
+    else if (category === "stats") setToggleCategory("notes");
+    else if (category === "notes") setToggleCategory("description");
+    router.push(`/cards/swiper/${slug}/${toggleCategory}`);
+  }
 
   useEffect(() => setStoreSlug(slug), []);
 
@@ -92,7 +109,7 @@ export default function Category() {
         <StyledSwiper
           loop={true}
           speed={300}
-          modules={[Thumbs, Navigation, A11y]}
+          modules={[Navigation, A11y]}
           spaceBetween={250}
           slidesPerView={1}
           navigation={false}
@@ -132,6 +149,12 @@ export default function Category() {
               >
                 return
               </button>
+              <ToggleButton
+                onTouchEnd={() => handleToggle()}
+                onClick={() => handleToggle()}
+              >
+                toggle
+              </ToggleButton>
             </StyledSwiperSlide>
           ))}
         </StyledSwiper>

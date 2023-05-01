@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import "swiper/swiper-bundle.min.css";
-import { Navigation, A11y, Thumbs } from "swiper";
+import { Navigation, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { cards } from "../../../../../lib/data";
 import Image from "next/image";
@@ -63,7 +63,7 @@ export default function ProductImagesSlider(props) {
         <StyledSwiper
           loop={true}
           speed={300}
-          modules={[Thumbs, Navigation, A11y]}
+          modules={[Navigation, A11y]}
           spaceBetween={250}
           slidesPerView={1}
           navigation={false}
