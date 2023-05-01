@@ -18,12 +18,13 @@ const StyledMenuBack = styled.div`
 `;
 
 const StyledTopBarContainer = styled.div`
-  position: sticky;
+  position: fixed;
+  z-index: 2000;
   top: 0;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  height: 52px;
+  height: 20px;
   margin: 0;
   padding: 0;
   background: ${(p) => p.theme.colorBackground};

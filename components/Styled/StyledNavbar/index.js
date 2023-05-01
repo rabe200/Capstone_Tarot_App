@@ -4,7 +4,7 @@ import useStore from "../../../src/store/store";
 import { useState } from "react";
 import { useRouter } from "next/router";
 const StyledSpace = styled.div`
-  position: sticky;
+  position: fixed;
   bottom: 0;
   display: flex;
   flex-direction: column;

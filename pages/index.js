@@ -1,11 +1,18 @@
-import StyledCardContainer from "../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import Link from "next/link";
-import AppContainer from "../components/Styled/StyledAppContainer";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../components/Styled/StyledNavbar";
+import Frame from "../components/Frame";
+
+const TopSpacer = styled.div`
+  display: flex;
+  position: relative;
+  top: 150px;
+  background: red;
+`;
 
 export const MenuLink = styled(Link)`
+position: relative;
     font-size: 2rem;
     text-decoration: none;
     color: black
@@ -42,18 +49,16 @@ const StyledLinkContainer = styled.div`
 export default function HomePage() {
   const mid = "version 0.2";
   return (
-    <AppContainer>
+    <Frame>
+      <TopSpacer />
       <TopMenuBar hidden={"hidden"} menu={"/"} mid={mid} back={"/"} />
-
-      <StyledCardContainer>
-        <StyledLinkContainer>
-          <StyledHeadline>TAROT</StyledHeadline>
-          <MenuLink href={"/cards/dailycard/moodmeter"}>START</MenuLink>
-          <MenuLink href={"/options"}>OPTIONS</MenuLink>
-          <MenuLink href={"/credits"}>CREDITS</MenuLink>
-        </StyledLinkContainer>
-      </StyledCardContainer>
+      <StyledLinkContainer>
+        <StyledHeadline>TAROT</StyledHeadline>
+        <MenuLink href={"/cards/dailycard/moodmeter"}>START</MenuLink>
+        <MenuLink href={"/options"}>OPTIONS</MenuLink>
+        <MenuLink href={"/credits"}>CREDITS</MenuLink>
+      </StyledLinkContainer>
       <StyledNavbar />
-    </AppContainer>
+    </Frame>
   );
 }

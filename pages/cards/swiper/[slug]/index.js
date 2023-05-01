@@ -18,6 +18,11 @@ import SearchBar from "../../../../components/SearchBar";
 import Frame from "../../../../components/Frame";
 import ArrowUp from "../../../../components/Styled/ArrowUp";
 import ArrowDown from "../../../../components/Styled/ArrowDown";
+
+const StyledSearchBar = styled(SearchBar)`
+  display: flex;
+`;
+
 const StyledImageContainerIndex = styled.div`
   width: 100%;
   height: 100%;
@@ -28,7 +33,7 @@ const StyledImageContainerIndex = styled.div`
 `;
 
 const StyledSwiper = styled(Swiper)`
-  display: block;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -36,6 +41,7 @@ const StyledSwiper = styled(Swiper)`
   height: 100%;
   text-align: center;
   background: black;
+  position: fixed;
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -51,18 +57,6 @@ const StyledImage = styled(Image)`
   background: ${(p) => p.theme.colorBackground};
 `;
 
-const StyledLink = styled(Link)`
-  color: ${(p) => p.theme.colorLink};
-  background: ${(p) => p.theme.colorText};
-  width: 100%;
-  text-decoration: none;
-  font-size: 1.2em;
-  &:active: {
-    color: white;
-  }
-  visibility: hidden;
-`;
-
 const ShadowBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,8 +64,6 @@ const ShadowBox = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  /* opacity: 100%; */
-  /* background: black; */
   box-shadow: inset 1px 0px 10px 1px ${(p) => p.theme.colorLink},
     inset -1px 0px 10px 1px ${(p) => p.theme.colorLink};
 `;
@@ -151,8 +143,6 @@ export default function ProductImagesSlider(props) {
   return (
     slug && (
       <Frame>
-        <TopMenuBar mid={card[0].name} />
-        <SearchBar />
         <StyledSwiper
           loop={true}
           speed={300}
@@ -247,7 +237,8 @@ export default function ProductImagesSlider(props) {
             </StyledSwiperSlide>
           ))}
         </StyledSwiper>
-        {"overview"}
+        <TopMenuBar mid={card[0].name} />
+        <StyledSearchBar />
 
         <StyledNavbar />
       </Frame>

@@ -9,6 +9,7 @@ import BadMoodIcon from "../../../../components/Styled/BadMoodIcon";
 import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
+import Frame from "../../../../components/Frame";
 
 const MoodButtonGood = styled.div`
   width: 100%;
@@ -88,29 +89,27 @@ export default function MoodMeter() {
   }
 
   return (
-    <AppContainer>
+    <Frame>
       <TopMenuBar mid={"moodmeter"} />
 
-      <StyledCardContainer>
-        <MoodContainer>
-          <h1>pick ya mood now</h1>
-          <MoodButtonGood
-            type="button"
-            aria-label="plus button"
-            onClick={() => handlePlusClick()}
-          >
-            <GoodMoodIcon />
-          </MoodButtonGood>
-          <MoodButtonBad
-            type="button"
-            aria-label="minus button"
-            onClick={() => handleMinusClick()}
-          >
-            <BadMoodIcon />
-          </MoodButtonBad>
-        </MoodContainer>
-      </StyledCardContainer>
+      <MoodContainer>
+        <h1>pick ya mood now</h1>
+        <MoodButtonGood
+          type="button"
+          aria-label="plus button"
+          onClick={() => handlePlusClick()}
+        >
+          <GoodMoodIcon />
+        </MoodButtonGood>
+        <MoodButtonBad
+          type="button"
+          aria-label="minus button"
+          onClick={() => handleMinusClick()}
+        >
+          <BadMoodIcon />
+        </MoodButtonBad>
+      </MoodContainer>
       <StyledNavbar />
-    </AppContainer>
+    </Frame>
   );
 }

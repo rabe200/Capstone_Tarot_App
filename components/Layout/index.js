@@ -4,8 +4,12 @@ const StyledMain = styled.main`
   display: flex;
   position: relative;
   width: 375px;
-  height: 100vh;
-  background: ${(p) => p.theme.colorDeep};
+  height: 667px;
+  min-height: 667px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
   justify-content: center;
   align-items: center;
@@ -35,11 +39,6 @@ const StyledMain = styled.main`
   @media only screen and (min-width: 768px) {
     width: 768px;
     height: 1024px;
-  }
-
-  @media only screen and (min-height: 1025px) {
-    width: 100%;
-    height: 100%;
   }
 `;
 

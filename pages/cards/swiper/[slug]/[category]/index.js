@@ -22,6 +22,7 @@ const StyledSwiper = styled(Swiper)`
   width: 100%;
   height: 100%;
   text-align: center;
+  overflow: hidden;
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`

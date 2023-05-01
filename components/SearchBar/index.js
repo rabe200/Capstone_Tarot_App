@@ -4,11 +4,12 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const StyledSpacer = styled.div`
-  display: none;
-  height: 20px;
+  /* display: none; */
+  height: 50px;
   width: 100%;
   text-align: center;
   justify-content: center;
+  position: ;
 `;
 
 const StyledToggle = styled.div`

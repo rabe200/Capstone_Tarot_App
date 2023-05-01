@@ -23,7 +23,7 @@ export const themeWhite = {
   colorBackground: "white",
   colorContainer: "white",
   colorText: "black",
-  colorLink: "cyan",
+  colorLink: "darkgrey",
   border: "2px black solid",
   colorDeep: "transparent",
   colorFront: "yellow",
@@ -32,14 +32,13 @@ export const themeWhite = {
 
 export const feldspar = {
   id: "feldspar",
-  colorBackground: "crimson",
-  colorContainer: "#854079",
-  colorText: "#e6fcef",
+  colorBackground: "white",
+  colorContainer: "white",
+  colorText: "black",
   colorLink: "black",
   border: "2px black solid",
   colorDeep: "white",
-  colorFront:
-    "radial-gradient(circle, rgba(250,93,85,1) 0%, rgba(240,147,60,1) 85%, rgba(240,195,60,1) 100%);",
+  colorFront: "crimson",
   colorArrow: "black",
 };
 

@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import useStore from "../../../../src/store/store";
-import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
-import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
+import Frame from "../../../../components/Frame";
 
 const FormContainer = styled.div`
   display: flex;
@@ -62,58 +61,54 @@ export default function NoteFormular() {
   }
 
   return (
-    <>
-      <AppContainer>
-        <TopMenuBar mid={"how do you feel"} />
-        <StyledCardContainer>
-          <FormContainer
-            style={{
-              display: "flex",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <form
-              id="textInput"
-              aria-label="formular"
-              onSubmit={handleSubmit}
-              style={{ height: "80%" }}
-            >
-              <label htmlFor="note">
-                <textarea
-                  required
-                  type="text"
-                  id="note"
-                  name="note"
-                  placeholder="type here"
-                  aria-label="note"
-                  value={inputValue}
-                  onChange={(event) => {
-                    setInputValue(event.target.value);
-                  }}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    fontSize: "2rem",
-                    borderRadius: 8,
-                  }}
-                />
-              </label>
-            </form>
-            <StyledSubmitButton
-              form="textInput"
-              type="submit"
-              name="submit"
-              aria-label="submit button"
-            >
-              SUBMIT
-            </StyledSubmitButton>
-          </FormContainer>
-        </StyledCardContainer>
+    <Frame>
+      <TopMenuBar mid={"how do you feel"} />
+      <FormContainer
+        style={{
+          display: "flex",
+          height: "60%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <form
+          id="textInput"
+          aria-label="formular"
+          onSubmit={handleSubmit}
+          style={{ height: "80%" }}
+        >
+          <label htmlFor="note">
+            <textarea
+              required
+              type="text"
+              id="note"
+              name="note"
+              placeholder="type here"
+              aria-label="note"
+              value={inputValue}
+              onChange={(event) => {
+                setInputValue(event.target.value);
+              }}
+              style={{
+                width: "100%",
+                height: "100%",
+                fontSize: "2rem",
+                borderRadius: 8,
+              }}
+            />
+          </label>
+        </form>
+        <StyledSubmitButton
+          form="textInput"
+          type="submit"
+          name="submit"
+          aria-label="submit button"
+        >
+          SUBMIT
+        </StyledSubmitButton>
+      </FormContainer>
 
-        <StyledNavbar />
-      </AppContainer>
-    </>
+      <StyledNavbar />
+    </Frame>
   );
 }

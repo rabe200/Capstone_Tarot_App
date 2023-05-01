@@ -20,11 +20,6 @@ const StyledEntry = styled.div`
   margin-bottom: 20px;
 `;
 
-const StyledNavi = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
 const StyledFormular = styled.form`
   height: 50px;
   width: 100%;
@@ -35,6 +30,8 @@ const ListContainer = styled.div`
   width: 100%;
   height: 77vh;
   overflow: auto;
+  background: ${(p) => p.theme.colorBackground};
+  z-index: 1000;
 `;
 
 const StyledLink = styled(Link)`
@@ -43,24 +40,16 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const StyledBarContainer = styled.div`
-  background: none;
-  width: 100%;
-`;
-
 const StyledFooter = styled.footer`
-  box-shadow: 0px 0px 60px ${(p) => p.theme.colorFront};
-
-  position: relative;
+  position: sticky;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  bottom: 0;
-  font-size: 1rem;
+  top: 0;
   width: 100%;
-  height: 1.1em;
-  background: ${(p) => p.theme.colorBackground};
+  height: 100px;
+  /* background: ${(p) => p.theme.colorBackground}; */
   color: ${(p) => p.theme.colorText};
 `;
 
@@ -87,8 +76,6 @@ const StyledButton = styled.div`
 `;
 
 export default function History() {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
   const [hasMounted, setHasMounted] = useState(false);
 
   const cardsDeleted = useStore((state) => state.cardsDeleted);
@@ -134,17 +121,6 @@ export default function History() {
   }, [cardsDeleted]);
 
   useEffect(() => {
-    function onFullscreenChange() {
-      setIsFullscreen(Boolean(document.fullscreenElement));
-    }
-
-    document.addEventListener("fullscreenchange", onFullscreenChange);
-
-    return () =>
-      document.removeEventListener("fullscreenchange", onFullscreenChange);
-  }, []);
-
-  useEffect(() => {
     setHasMounted(true);
   }, []);
   if (!hasMounted) {
@@ -154,12 +130,29 @@ export default function History() {
   return (
     <Frame>
       <TopMenuBar query2={"/dailyCard"} mid={"history"} />
-      {/* <StyledFooter>
+      <StyledFooter>
+        <StyledFormular>
+          <select
+            style={{
+              width: "100%",
+              height: "100%",
+              textAlign: "center",
+              fontSize: "1.05rem",
+              fontSize: "1.2em",
+            }}
+            name="filter results by"
+            onChange={(event) => setSelectedOption(event.target.value)}
+          >
+            <option value="dateUp">date up</option>
+            <option value="dateDown">date down</option>
+            <option value="nameUp">name up</option>
+            <option value="nameDown">name down</option>
+          </select>
+        </StyledFormular>
         <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
         <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
         <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
-      </StyledFooter> */}
-      {/* <StyledBarContainer /> */}
+      </StyledFooter>
       <ListContainer>
         {sortedItems.map((card) => {
           return (
@@ -190,24 +183,7 @@ export default function History() {
           );
         })}
       </ListContainer>
-      <StyledFormular>
-        <select
-          style={{
-            width: "100%",
-            height: "100%",
-            textAlign: "center",
-            fontSize: "1.05rem",
-            fontSize: "1.2em",
-          }}
-          name="filter results by"
-          onChange={(event) => setSelectedOption(event.target.value)}
-        >
-          <option value="dateUp">date up</option>
-          <option value="dateDown">date down</option>
-          <option value="nameUp">name up</option>
-          <option value="nameDown">name down</option>
-        </select>
-      </StyledFormular>
+
       <StyledNavbar />
     </Frame>
   );

@@ -7,7 +7,8 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 580px;
+  height: 100%;
+  width: 100%;
 `;
 
 const StyledSubmitButton = styled.button`
@@ -45,7 +46,7 @@ const StyledText = styled.div`
   display: flex;
   position: relative;
   top: 0;
-  font-size: 1rem;
+  font-size: 1.4rem;
   width: 100%;
   height: 100%;
   overflow: auto;
