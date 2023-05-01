@@ -1,10 +1,8 @@
-import { Fragment, useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import useStore from "../../../src/store/store";
 import Link from "next/link";
 
-import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
-import AppContainer from "../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import { useCallback } from "react";
 import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";

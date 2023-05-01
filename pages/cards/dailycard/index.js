@@ -1,12 +1,11 @@
 import useStore from "../../../src/store/store";
-import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import AppContainer from "../../../components/Styled/StyledAppContainer";
 import FlipCard from "../../../components/FlipCard";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../../../components/Styled/StyledNavbar";
+import Frame from "../../../components/Frame";
 
 const StyledContinueButton = styled.div`
   display: flex;
@@ -47,21 +46,15 @@ export default function ShowCard() {
   }
   if (currentCard) {
     return (
-      <>
-        <AppContainer>
-          <TopMenuBar />
-          <StyledCardContainer>
-            <CardContainer>
-              <FlipCard card={currentCard} />
-              <StyledLink href={"/cards/dailycard/notes"}>
-                <StyledContinueButton>CONTINUE</StyledContinueButton>
-              </StyledLink>
-            </CardContainer>
-          </StyledCardContainer>
+      <Frame>
+        <TopMenuBar />
+        <FlipCard card={currentCard} />
+        <StyledLink href={"/cards/dailycard/notes"}>
+          <StyledContinueButton>CONTINUE</StyledContinueButton>
+        </StyledLink>
 
-          <StyledNavbar />
-        </AppContainer>
-      </>
+        <StyledNavbar />
+      </Frame>
     );
   } else {
     return null;

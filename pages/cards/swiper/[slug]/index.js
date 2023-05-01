@@ -10,7 +10,6 @@ import styled from "styled-components";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../src/store/store";
-import Link from "next/link";
 import { useEffect } from "react";
 import CardStats from "../../../../components/Stats/stats";
 import CardNotes from "../../../../components/Notes";

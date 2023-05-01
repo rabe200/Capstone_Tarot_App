@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import useStore from "../../../../src/store/store";
 import { getCardById } from "../../../../lib/data";
-import StyledCardContainer from "../../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import GoodMoodIcon from "../../../../components/Styled/GoodMoodIcon";
 import BadMoodIcon from "../../../../components/Styled/BadMoodIcon";
-import AppContainer from "../../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import Frame from "../../../../components/Frame";
