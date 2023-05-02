@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import "swiper/swiper-bundle.min.css";
 import { useDoubleTap } from "use-double-tap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigation, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { cards } from "../../../../../lib/data";
@@ -183,21 +183,37 @@ export default function Category() {
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
   const setStoreSlug = useStore((state) => state.setSlug);
-  const category = router ? router.query.category : 0;
+  const [category, setCategory] = useState(router ? router.query.category : 0);
   const { safePush } = useSafePush();
   const [clicked, setClicked] = useState(false);
+  console.log(category);
+  // const doubleTap = useDoubleTap(() => {
+  //   safePush(`/cards/swiper/${slug}/zoom`);
+  // });
+  // const [toggleCategory, setToggleCategory] = useState(category);
 
-  const doubleTap = useDoubleTap(() => {
-    safePush(`/cards/swiper/${slug}/zoom`);
-  });
-  const [toggleCategory, setToggleCategory] = useState(category);
+  // function handleToggle() {
+  //   if (category === "description") setToggleCategory("meaning_up");
+  //   else if (category === "meaning_up") setToggleCategory("meaning_rev");
+  //   else if (category === "meaning_rev") setToggleCategory("description");
+  //   router.push(`/cards/swiper/${slug}/${toggleCategory}`);
+  // }
+
+  // useEffect(() => {
+  //   setCategory(router.query.category);
+  // }, []);
 
   function handleToggle() {
-    if (category === "description") setToggleCategory("meaning_up");
-    else if (category === "meaning_up") setToggleCategory("meaning_rev");
-    else if (category === "meaning_rev") setToggleCategory("description");
-    setClicked(!clicked);
-    safePush(`/cards/swiper/${slug}/${toggleCategory}`);
+    if (category === "description") {
+      setCategory("meaning_up");
+      router.push(`/cards/swiper/${slug}/meaning_up`);
+    } else if (category === "meaning_up") {
+      setCategory("meaning_rev");
+      router.push(`/cards/swiper/${slug}/meaning_rev`);
+    } else if (category === "meaning_rev") {
+      router.push(`/cards/swiper/${slug}/description`);
+      setCategory("description");
+    }
   }
 
   return (
@@ -229,7 +245,7 @@ export default function Category() {
           {cards.map((card) => (
             <StyledSwiperSlide key={card.name}>
               <StyledBoxForText
-                {...doubleTap}
+                // {...doubleTap}
                 onDoubleClick={() => safePush(`/cards/swiper/${slug}/zoom`)}
               >
                 <StyledImage
