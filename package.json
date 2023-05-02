@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "NEXT_SHARP_PATH=\"YOUR_PATH_TO_SHARP\" next start",
+    "start": "next start",
     "lint": "next lint --dir .",
     "test": "jest --watchAll"
   },

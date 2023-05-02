@@ -3,6 +3,15 @@ import useStore from "../../src/store/store";
 import styled from "styled-components";
 import GeneratePrompt from "../GeneratePrompt";
 import Frame from "../Frame";
+import Overflow, { useOverflow } from "../OverFlowIndicator";
+
+const StyledOverFlow = styled(Overflow)`
+  max-height: 90%;
+  Overflow.Indicator {
+    background: white;
+    color: white;
+  }
+`;
 
 const ContentContainer = styled.div`
   display: flex;
@@ -11,25 +20,25 @@ const ContentContainer = styled.div`
   justify-content: center;
   position: relative;
   width: 247px;
-  top: 15px;
+  top: 32px;
   overflow: auto;
-  min-height: 400px;
+  min-height: 300px;
   @media only screen and (min-width: 414px) {
     width: 333px;
-    top: 25px;
+    top: 42px;
   }
 
   @media only screen and (min-width: 585px) {
     width: 444px;
-    top: 50px;
+    top: 52px;
   }
   @media only screen and (min-width: 834px) {
     width: 666px;
-    top: 75px;
+    top: 77px;
   }
   @media only screen and (min-width: 1194px) {
     width: 888px;
-    top: 100px;
+    top: 111px;
   }
   @media only screen and (min-width: 1400px) {
     width: 1111px;
@@ -64,7 +73,6 @@ const StyledSubmitButton = styled.button`
 const ResultContainer = styled.div`
   display: flex;
   position: relative;
-  background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
   height: 100%;
   width: 100%;
@@ -75,13 +83,36 @@ const StyledText = styled.div`
   display: flex;
   position: relative;
   top: 0;
-  font-size: 1.8rem;
+  font-size: 1rem;
   width: 100%;
   height: 100%;
   overflow: auto;
+  @media only screen and (min-width: 414px) {
+    font-size: 1.05rem;
+  }
+
+  @media only screen and (min-width: 585px) {
+    font-size: 1.15rem;
+  }
+  @media only screen and (min-width: 834px) {
+    font-size: 1.25rem;
+  }
+  @media only screen and (min-width: 1194px) {
+    font-size: 1.35rem;
+  }
+  @media only screen and (min-width: 1400px) {
+    font-size: 1.45rem;
+  }
 `;
 
 const ButtonHideContainer = styled.div``;
+
+const OverFlowIndicatorIcon = styled.div`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: ${(props) => props.theme.colorText};
+`;
 
 export default function ChatApi() {
   const [hasMounted, setHasMounted] = useState(false);
@@ -166,7 +197,27 @@ export default function ChatApi() {
           </ButtonHideContainer>
 
           <ResultContainer hidden={hideReading}>
-            <StyledText>{result}</StyledText>
+            <StyledOverFlow>
+              <Overflow.Content>
+                <StyledText>{result}</StyledText>
+              </Overflow.Content>
+
+              <Overflow.Indicator direction={"down"}>
+                {(canScroll, refs) => (
+                  <OverFlowIndicatorIcon
+                    type="button"
+                    onClick={() => {
+                      refs.viewport.current.scrollBy({
+                        top: refs.viewport.current.clientHeight,
+                        behaviour: "smooth",
+                      });
+                    }}
+                  >
+                    {canScroll ? "⇩" : "ᛝ"}
+                  </OverFlowIndicatorIcon>
+                )}
+              </Overflow.Indicator>
+            </StyledOverFlow>
           </ResultContainer>
         </ContentContainer>
       </Frame>

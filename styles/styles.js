@@ -33,23 +33,17 @@ root {
 
   @media only screen and (min-width: 585px) {
     width: 585px;
-    height: 1266px;
-    
-  }
-  @media only screen and (min-width: 585px) {
-    width: 585px;
-    height: 1266px;
+   min-height: 900px;
     
   }
 
   @media only screen and (min-width: 834px) {
     width: 834px;
-    height: 900px;
   }
 
   @media only screen and (min-width: 1194px) {
     width: 1194px;
-    height: 834px;
+    height: 1024px;
  
   }
 

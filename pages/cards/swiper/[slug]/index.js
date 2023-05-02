@@ -23,7 +23,7 @@ const StyledImageContainerIndex = styled.div`
   width: 375px;
   height: 567px;
   display: grid;
-  grid-template-rows: 0.7fr 0.4fr 0.2fr;
+  grid-template-rows: 1fr 0.7fr 0.5fr;
   grid-template-columns: 0.7fr 1fr;
   overflow: auto;
   @media only screen and (min-width: 414px) {
@@ -32,7 +32,6 @@ const StyledImageContainerIndex = styled.div`
 
   @media only screen and (min-width: 585px) {
     width: 585px;
-
     font-size: 1.2em;
   }
 
@@ -69,7 +68,7 @@ const StyledSwiper = styled(Swiper)`
 
   @media only screen and (min-width: 834px) {
     width: 834px;
-    height: 800px;
+    min-height: 800px;
   }
 
   @media only screen and (min-width: 1194px) {
@@ -94,7 +93,11 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 
   @media only screen and (min-width: 834px) {
     width: 834px;
-    height: 800px;
+    height: 880px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
   }
 `;
 
