@@ -10,7 +10,6 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
-    "babel-cli": "^6.26.0",
     "commonjs": "^0.0.1",
     "edge-runtime": "^2.2.0",
     "eslint": "8.29.0",
