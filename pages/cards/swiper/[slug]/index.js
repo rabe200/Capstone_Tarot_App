@@ -26,6 +26,24 @@ const StyledImageContainerIndex = styled.div`
   grid-template-rows: 0.7fr 0.4fr 0.2fr;
   grid-template-columns: 0.7fr 1fr;
   overflow: auto;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+    height: 800px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -51,6 +69,7 @@ const StyledSwiper = styled(Swiper)`
 
   @media only screen and (min-width: 834px) {
     width: 834px;
+    height: 800px;
   }
 
   @media only screen and (min-width: 1194px) {
@@ -75,6 +94,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 
   @media only screen and (min-width: 834px) {
     width: 834px;
+    height: 800px;
   }
 `;
 
