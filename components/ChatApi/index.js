@@ -3,7 +3,7 @@ import useStore from "../../src/store/store";
 import styled from "styled-components";
 import GeneratePrompt from "../GeneratePrompt";
 import Frame from "../Frame";
-import Overflow, { useOverflow } from "../OverFlowIndicator";
+import Overflow from "../OverFlowIndicator";
 
 const StyledOverFlow = styled(Overflow)`
   max-height: 90%;
@@ -111,7 +111,9 @@ const OverFlowIndicatorIcon = styled.div`
   position: absolute;
   right: 10px;
   bottom: 10px;
-  color: ${(props) => props.theme.colorText};
+  font-size: 2em;
+  opacity: 77%;
+  color: ${(props) => props.theme.colorAscii};
 `;
 
 export default function ChatApi() {
@@ -140,7 +142,6 @@ export default function ChatApi() {
   async function handleSubmit() {
     setDisableButton(true);
     setLoading(true);
-    console.log("wait a moment");
 
     const response = await fetch("/api/generate", {
       method: "POST",

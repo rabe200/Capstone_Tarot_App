@@ -4,7 +4,7 @@ import useStore from "../../../src/store/store";
 import DeleteButton from "../../DeleteButton";
 import { ToastContainer, toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
-
+import useSafePush from "../../useSafePush";
 import "react-toastify/dist/ReactToastify.css";
 import { useDoubleTap } from "use-double-tap";
 
@@ -93,36 +93,31 @@ const StyledNotes = styled.div`
 `;
 
 const StyledToastContainer = styled(ToastContainer)`
-  z-index: 2000;
+  /* z-index: 2000; */
   position: sticky;
-  font-size: 1.2em;
-  box-shadow: 0px 2px 2px;
-
+  font-size: 1em;
   .Toastify__progress-bar {
     background: black;
   }
   .Toastify__toast {
     background: ${(p) => p.theme.colorContainer};
     color: ${(p) => p.theme.colorText};
-    cursor: inherit;
     font-family: "pixelOperator";
   }
   .Toastify__toast-icon {
     display: none;
   }
-  .Toastify__toast-container--top-center {
-  }
 `;
 
 export default function HistoryNotes({ card, toggle }) {
   const [noteOverflow, setNoteOverflow] = useState();
-  const [inputValue, setInputValue] = useState("");
+  const [, setInputValue] = useState("");
   const editSelectedNote = useStore((state) => state.editSelectedNote);
   const setCurrentNote = useStore((state) => state.setCurrentNote);
   const [editable, setEditable] = useState(false);
-  const doubleTap = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}`);
-    console.log(event.target);
+  const { safePush } = useSafePush();
+  const doubleTap = useDoubleTap(() => {
+    safePush(`/cards/swiper/${slug}`);
   });
   function handleClick() {
     setEditable(!editable);
@@ -164,7 +159,7 @@ export default function HistoryNotes({ card, toggle }) {
 
   return (
     <NoteContainer>
-      <StyledToastContainer onClick={(event) => console.log(event)} />
+      <StyledToastContainer />
       <StyledForm id="myForm">
         <StyledNotes
           {...doubleTap}

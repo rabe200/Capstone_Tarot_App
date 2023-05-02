@@ -16,18 +16,20 @@ export const themeDark = {
   colorDeep: "transparent",
   colorFront: "yellow",
   colorArrow: "",
+  colorAscii: "red",
 };
 
 export const themeWhite = {
   id: "white",
   colorBackground: "white",
   colorContainer: "white",
-  colorText: "black",
+  colorText: "red",
   colorLink: "darkgrey",
   border: "2px black solid",
   colorDeep: "transparent",
   colorFront: "yellow",
   colorArrow: "",
+  colorAscii: "white",
 };
 
 export const feldspar = {
@@ -35,11 +37,12 @@ export const feldspar = {
   colorBackground: "white",
   colorContainer: "white",
   colorText: "black",
-  colorLink: "black",
+  colorLink: "darkgray",
   border: "2px black solid",
   colorDeep: "white",
   colorFront: "crimson",
   colorArrow: "black",
+  colorAscii: "red",
 };
 
 export const gossip = {
@@ -52,6 +55,7 @@ export const gossip = {
   colorDeep: "#91E567",
   colorFront: "yellow",
   colorArrow: "white",
+  colorAscii: "white",
 };
 
 export const mediumpurple = {
@@ -64,6 +68,7 @@ export const mediumpurple = {
   colorDeep: "transparent",
   colorFront: "yellow",
   colorArrow: "",
+  colorAscii: "mediumpurple",
 };
 
 export const palevioletred = {
@@ -76,15 +81,8 @@ export const palevioletred = {
   colorDeep: "transparent",
   colorFront: "palevioletred",
   colorArrow: "",
+  colorAscii: "white",
 };
-
-export const ToggleText = styled.div`
-  &:hover {
-    background: red;
-    border-radius: 8px;
-    padding: -8px;
-  }
-`;
 
 export default function ButtonThemeToggle() {
   const [localTheme, setLocalTheme] = useLocalStorage("localTheme", themeDark);
@@ -100,7 +98,7 @@ export default function ButtonThemeToggle() {
 
   return (
     <ToggleButton onClick={() => handleThemeToggle()}>
-      <ToggleText>TOGGLE THEME</ToggleText>
+      TOGGLE THEME
     </ToggleButton>
   );
 }

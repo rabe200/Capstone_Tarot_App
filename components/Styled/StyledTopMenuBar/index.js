@@ -5,9 +5,7 @@ import NoteNotifier from "../../NoteNotifier";
 
 const StyledMenuLink = styled(Link)`
   text-decoration: none;
-  color: ${(p) => p.theme.colorText};
-  font-style: italic;
-  font-size: 1rem;
+  color: white;
   &:hover {
     background: darkgrey;
     padding: 4px;
@@ -17,9 +15,7 @@ const StyledMenuLink = styled(Link)`
 
 const StyledMenuBack = styled.div`
   text-decoration: none;
-  color: ${(p) => p.theme.colorText};
-  font-style: italic;
-  font-size: 1rem;
+  color: white;
 `;
 
 const StyledTopBarContainer = styled.div`
@@ -104,7 +100,7 @@ export default function TopMenuBar({ mid, card, hidden, backbutton }) {
     <StyledTopBarContainer>
       <StyledTopBarLeft>
         <StyledMenuLink hidden={hidden} href={`${"/"}`}>
-          MENU
+          menu
         </StyledMenuLink>{" "}
       </StyledTopBarLeft>
       <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>

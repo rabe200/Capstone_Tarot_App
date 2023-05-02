@@ -2,6 +2,7 @@ import { useState } from "react";
 import useStore from "../../src/store/store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import useSafePush from "../useSafePush";
 
 const StyledInput = styled.input`
   border-radius: 40px;
@@ -10,9 +11,7 @@ const StyledInput = styled.input`
   margin: 0;
   padding: 0;
   width: 300px;
-  /* background: ${(p) => p.theme.colorText}; */
   textalign: "center";
-  /* color: ${(p) => p.theme.colorBackground}; */
   _webkituserselect: "none";
   _msuserselect: "none";
   userselect: "none";
@@ -64,11 +63,12 @@ export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const setSearchQuery = useStore((state) => state.setSearchQuery);
   const router = useRouter();
+  const { safePush } = useSafePush();
   function handleSubmit(event) {
     event.preventDefault();
     setSearchQuery(inputValue);
     setInputValue("");
-    router.push("/cards/swiper/search/results");
+    safePush("/cards/swiper/search/results");
   }
 
   return (

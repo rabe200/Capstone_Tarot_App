@@ -8,6 +8,7 @@ import BadMoodIcon from "../../../../components/Styled/BadMoodIcon";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import Frame from "../../../../components/Frame";
+import useSafePush from "../../../../components/useSafePush";
 
 const MoodButtonGood = styled.div`
   width: 100%;
@@ -50,6 +51,7 @@ export default function MoodMeter() {
   const difference = useStore((state) => state.difference);
   const setLastCard = useStore((state) => state.setLastCard);
   const setStoreSlug = useStore((state) => state.setSlug);
+  const { safePush } = useSafePush();
 
   function handlePlusClick() {
     increaseCardsDrawn();

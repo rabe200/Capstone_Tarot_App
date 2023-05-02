@@ -9,7 +9,7 @@ import styled from "styled-components";
 import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
-import { useEffect } from "react";
+import useSafePush from "../../../../../components/useSafePush";
 import CardStats from "../../../../../components/Stats/stats";
 import CardNotes from "../../../../../components/Notes";
 import Frame from "../../../../../components/Frame";
@@ -22,9 +22,26 @@ const StyledSwiper = styled(Swiper)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+
   height: 100%;
   text-align: center;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+    height: 800px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -38,9 +55,22 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   align-items: center;
   overflow: auto;
 
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+    font-size: 1.2em;
+  }
+
   @media only screen and (min-width: 834px) {
     width: 834px;
     height: 800px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
   }
 `;
 const StyledImage = styled(Image)`
@@ -86,7 +116,6 @@ const StyledText = styled.div`
 `;
 
 const StyledCategoryName = styled.div`
-  width: 100%;
   height: 20px;
   position: fixed;
   top: 22px;
@@ -137,8 +166,10 @@ export default function Category() {
   const card = getCardById(slug);
   const setStoreSlug = useStore((state) => state.setSlug);
   const category = router ? router.query.category : 0;
-  const doubleTap = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}`);
+  const { safePush } = useSafePush();
+
+  const doubleTap = useDoubleTap(() => {
+    safePush(`/cards/swiper/${slug}`);
   });
   const [toggleCategory, setToggleCategory] = useState(category);
 
@@ -148,7 +179,7 @@ export default function Category() {
     else if (category === "meaning_rev") setToggleCategory("stats");
     else if (category === "stats") setToggleCategory("notes");
     else if (category === "notes") setToggleCategory("description");
-    router.push(`/cards/swiper/${slug}/${toggleCategory}`);
+    safePush(`/cards/swiper/${slug}/${toggleCategory}`);
   }
 
   return (
@@ -181,7 +212,7 @@ export default function Category() {
             <StyledSwiperSlide key={card.name}>
               <StyledBoxForText
                 {...doubleTap}
-                onDoubleClick={() => router.push(`/cards/swiper/${slug}/`)}
+                onDoubleClick={() => safePush(`/cards/swiper/${slug}/`)}
               >
                 <StyledImage
                   src={card.image}
@@ -209,12 +240,12 @@ export default function Category() {
               <ButtonContainer>
                 <ReturnButton
                   type="button"
-                  onClick={() => router.push(`/cards/swiper/${slug}/`)}
+                  onClick={() => safePush(`/cards/swiper/${slug}/`)}
                 >
                   return
                 </ReturnButton>
                 <ToggleButton
-                  onTouchEnd={() => handleToggle()}
+                  onTouchStart={() => handleToggle()}
                   onClick={() => handleToggle()}
                 >
                   toggle

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import Frame from "../../../../components/Frame";
+import useSafePush from "../../../../components/useSafePush";
 
 const FormContainer = styled.div`
   display: flex;
@@ -39,6 +40,7 @@ export default function NoteFormular() {
   const difference = useStore((state) => state.difference);
   const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
+  const { safePush } = useSafePush();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -47,7 +49,7 @@ export default function NoteFormular() {
       setInputValue("");
       copyCurrentNote();
       setCurrentCard(difference - 1);
-      router.push("/cards/dailycard/cardreading");
+      safePush("/cards/dailycard/cardreading");
     } else {
       alert("no cards in history - add some cards to enable saving");
     }

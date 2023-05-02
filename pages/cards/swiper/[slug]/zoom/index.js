@@ -10,6 +10,7 @@ import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
 import Frame from "../../../../../components/Frame";
 import { useDoubleTap } from "use-double-tap";
+import useSafePush from "../../../../../components/useSafePush";
 
 const StyledImageContainerIndex = styled.div`
   display: block;
@@ -44,14 +45,14 @@ const StyledImage = styled(Image)`
 
 export default function ProductImagesSlider() {
   const router = useRouter();
+  const { safePush } = useSafePush();
+
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
-  const doubleTapImage = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}`);
-    console.log(event.target);
+  const doubleTapImage = useDoubleTap(() => {
+    safePush(`/cards/swiper/${slug}`);
   });
-  const storeSlug = useStore((state) => state.slug);
   const setStoreSlug = useStore((state) => state.setSlug);
   return (
     slug && (
@@ -89,7 +90,7 @@ export default function ProductImagesSlider() {
                   alt={card.name}
                   width={300}
                   height={527}
-                  onDoubleClick={() => router.push(`/cards/swiper/${slug}`)}
+                  onDoubleClick={() => safePush(`/cards/swiper/${slug}`)}
                 ></StyledImage>
               </StyledImageContainerIndex>
             </StyledSwiperSlide>

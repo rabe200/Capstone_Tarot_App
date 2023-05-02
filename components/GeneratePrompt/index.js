@@ -95,6 +95,5 @@ Request:
     Today is ${dayName}. React accordingly. 
 
   `;
-  console.log(prompt);
   return prompt;
 }

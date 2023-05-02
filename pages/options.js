@@ -11,11 +11,17 @@ const StyledOptionsMenu = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  color: ${(p) => p.theme.colorText};
+  &:hover {
+    background: ${(p) => p.theme.colorText};
+    color: ${(p) => p.theme.colorBackground};
+    border-radius: 8px;
+    padding: -8px;
+  }
 `;
 
 const StyledH1 = styled.h1`
   &:hover {
-    background: red;
     border-radius: 8px;
     padding: -8px;
   }

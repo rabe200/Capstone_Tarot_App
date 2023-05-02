@@ -15,6 +15,7 @@ import CardNotes from "../../../../components/Notes";
 import Frame from "../../../../components/Frame";
 import ArrowUp from "../../../../components/Styled/ArrowUp";
 import ArrowDown from "../../../../components/Styled/ArrowDown";
+import useSafePush from "../../../../components/useSafePush";
 
 const StyledImageContainerIndex = styled.div`
   overflow: auto;
@@ -156,28 +157,29 @@ const StyledImageContainer = styled.div`
 `;
 
 export default function ProductImagesSlider(props) {
+  const { safePush } = useSafePush();
   const router = useRouter();
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
   const setStoreSlug = useStore((state) => state.setSlug);
   const doubleTapNotes = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}/notes`);
+    safePush(`/cards/swiper/${slug}/notes`);
   });
   const doubleTapStats = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}/stats`);
+    safePush(`/cards/swiper/${slug}/stats`);
   });
   const doubleTapMeaningUp = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}/meaning_up`);
+    safePush(`/cards/swiper/${slug}/meaning_up`);
   });
   const doubleTapMeaningRev = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}/meaning_rev`);
+    safePush(`/cards/swiper/${slug}/meaning_rev`);
   });
   const doubleTapDescription = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}/description`);
+    safePush(`/cards/swiper/${slug}/description`);
   });
   const doubleTapImage = useDoubleTap((event) => {
-    router.push(`/cards/swiper/${slug}/zoom`);
+    safePush(`/cards/swiper/${slug}/zoom`);
   });
 
   return (
@@ -213,7 +215,7 @@ export default function ProductImagesSlider(props) {
                       width={120}
                       height={200}
                       onDoubleClick={() =>
-                        router.push(`/cards/swiper/${slug}/zoom`)
+                        safePush(`/cards/swiper/${slug}/zoom`)
                       }
                     />
                   </ShadowBox>
@@ -223,7 +225,7 @@ export default function ProductImagesSlider(props) {
                 <StyledTextContainer
                   {...doubleTapDescription}
                   onDoubleClick={() =>
-                    router.push(`/cards/swiper/${slug}/description`)
+                    safePush(`/cards/swiper/${slug}/description`)
                   }
                 >
                   <ShadowBox>
@@ -234,7 +236,7 @@ export default function ProductImagesSlider(props) {
                 <StyledTextContainer
                   {...doubleTapMeaningUp}
                   onDoubleClick={() =>
-                    router.push(`/cards/swiper/${slug}/meaning_up`)
+                    safePush(`/cards/swiper/${slug}/meaning_up`)
                   }
                 >
                   <ShadowBox>
@@ -248,7 +250,7 @@ export default function ProductImagesSlider(props) {
                 <StyledTextContainer
                   {...doubleTapMeaningRev}
                   onDoubleClick={() =>
-                    router.push(`/cards/swiper/${slug}/meaning_rev`)
+                    safePush(`/cards/swiper/${slug}/meaning_rev`)
                   }
                 >
                   <ShadowBox>
@@ -261,9 +263,7 @@ export default function ProductImagesSlider(props) {
 
                 <StyledTextContainer
                   {...doubleTapStats}
-                  onDoubleClick={() =>
-                    router.push(`/cards/swiper/${slug}/stats`)
-                  }
+                  onDoubleClick={() => safePush(`/cards/swiper/${slug}/stats`)}
                 >
                   <ShadowBox>
                     <StyledText id="styledStats">
@@ -274,9 +274,7 @@ export default function ProductImagesSlider(props) {
 
                 <StyledTextContainer
                   {...doubleTapNotes}
-                  onDoubleClick={() =>
-                    router.push(`/cards/swiper/${slug}/notes`)
-                  }
+                  onDoubleClick={() => safePush(`/cards/swiper/${slug}/notes`)}
                 >
                   <ShadowBox>
                     <StyledText id="styledNotes">

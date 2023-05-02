@@ -2,12 +2,13 @@ import styled from "styled-components";
 import { useState } from "react";
 import Image from "next/image";
 const CardContainer = styled.div`
-  width: 300px;
+  display: flex;
+  width: 220px;
   height: 450px;
 `;
 
 const CardImage = styled(Image)`
-  border-radius: 8px;
+  border-radius: 14px;
 `;
 
 const CardFlip = ({ card }) => {
