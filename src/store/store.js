@@ -14,6 +14,10 @@ const cardMoodArray = cards.map((card) => {
   };
 });
 
+function random_boolean() {
+  return Math.random() < 0.5;
+}
+
 export const useStore = createLocalStorageStore(
   (set, get) => ({
     allCards: cards,
@@ -29,12 +33,14 @@ export const useStore = createLocalStorageStore(
     cardMoods: cardMoodArray,
     localSortedHistory: [],
     lastPageVisited: "",
+    language: "english",
     currentPage: "",
     comingFromHistory: false,
     currentReading: "",
     lastReading: "",
     allReadings: [{ reading: "null" }],
     slug: "",
+    setLanguage: (string) => set(() => ({ language: string })),
     setSlug: (string) =>
       set(() => ({
         slug: string,
@@ -254,6 +260,7 @@ export const useStore = createLocalStorageStore(
               meaning_rev: get().currentCard.meaning_rev,
               notes: "",
               arrayIndex: state.cardsDrawn,
+              reversed: random_boolean(),
             },
           ],
         };

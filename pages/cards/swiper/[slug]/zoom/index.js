@@ -51,16 +51,13 @@ export default function ProductImagesSlider() {
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
   const doubleTapImage = useDoubleTap(() => {
-    safePush(`/cards/swiper/${slug}`);
+    safePush(`/cards/swiper/${slug}/description`);
   });
   const setStoreSlug = useStore((state) => state.setSlug);
   return (
     slug && (
       <Frame>
-        <TopMenuBar
-          mid={card[0].name}
-          backbutton={`/cards/swiper/${card[0].id}`}
-        />
+        <TopMenuBar mid={card[0].name} backbutton={`/`} />
 
         <StyledSwiper
           loop={true}
@@ -90,7 +87,9 @@ export default function ProductImagesSlider() {
                   alt={card.name}
                   width={300}
                   height={527}
-                  onDoubleClick={() => safePush(`/cards/swiper/${slug}`)}
+                  onDoubleClick={() =>
+                    safePush(`/cards/swiper/${slug}/description`)
+                  }
                 ></StyledImage>
               </StyledImageContainerIndex>
             </StyledSwiperSlide>

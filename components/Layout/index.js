@@ -15,6 +15,11 @@ const StyledMain = styled.main`
   top: 0;
   left: 0;
 
+  @media only screen and (min-width: 390px) {
+    width: 390px;
+    height: 769px;
+  }
+
   @media only screen and (min-width: 414px) {
     width: 414px;
     height: 780px;
@@ -27,16 +32,16 @@ const StyledMain = styled.main`
 
   @media only screen and (min-width: 834px) {
     width: 834px;
-    height: 800px;
+    min-height: 800px;
   }
 
   @media only screen and (min-width: 1194px) {
     width: 1194px;
-    height: 764px;
+    min-height: 764px;
   }
   @media only screen and (min-width: 1400px) {
     width: 1400px;
-    height: 834px;
+    min-height: 834px;
   }
 `;
 

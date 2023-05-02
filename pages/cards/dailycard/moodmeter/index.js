@@ -39,7 +39,6 @@ const MoodContainer = styled.div`
 `;
 
 export default function MoodMeter() {
-  const router = useRouter();
   const [hasMounted, setHasMounted] = useState(false);
   const drawCard = useStore((state) => state.drawCard);
   const increaseCardsDrawn = useStore((state) => state.increaseCardsDrawn);
@@ -62,7 +61,7 @@ export default function MoodMeter() {
     setCurrentCard(difference);
     setLastCard();
     setStoreSlug(randomCardIndex);
-    router.push(`/cards/dailycard/`);
+    safePush(`/cards/dailycard/`);
   }
   function handleMinusClick() {
     increaseCardsDrawn();
@@ -73,7 +72,7 @@ export default function MoodMeter() {
     setCurrentCard(difference);
     setLastCard();
     setStoreSlug(randomCardIndex);
-    router.push(`/cards/dailycard/`);
+    safePush(`/cards/dailycard/`);
   }
 
   function randomIndex(min, max) {

@@ -11,25 +11,28 @@ const StyledFrame = styled.div`
   justify-content: center;
   border-radius: 8px;
 
+  @media only screen and (min-width: 390px) {
+    width: 410px;
+    height: 769px;
+  }
+
   @media only screen and (min-width: 414px) {
     width: 414px;
-    height: 769px;
+    min-height: 769px;
   }
 
   @media only screen and (min-width: 585px) {
     width: 585px;
-    height: 1161px;
+    min-height: 1161px;
     font-size: 1.2em;
   }
 
   @media only screen and (min-width: 834px) {
     width: 834px;
-    height: 800px;
   }
 
   @media only screen and (min-width: 1194px) {
     width: 1194px;
-    height: 834px;
   }
 `;
 

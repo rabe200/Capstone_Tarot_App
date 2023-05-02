@@ -14,6 +14,10 @@ const StyledSpace = styled.div`
   width: 375px;
   z-index: 1000;
 
+  @media only screen and (min-width: 390px) {
+    width: 410px;
+  }
+
   @media only screen and (min-width: 414px) {
     width: 414px;
   }
@@ -142,7 +146,7 @@ export default function StyledNavbar() {
           >
             CARDS
           </MenuLink1>
-          <MenuLink3 href={"/cards/history"}>STATS</MenuLink3>
+          <MenuLink3 href={"/cards/history"}>NOTES</MenuLink3>
         </StyledMenu>
       </div>
     </StyledSpace>

@@ -3,25 +3,23 @@ import styled from "styled-components";
 import ButtonThemeToggle from "../components/ToggleThemeButton";
 import StyledNavbar from "../components/Styled/StyledNavbar";
 import Frame from "../components/Frame";
+import ButtonToggleLanguage from "../components/ToggleLanguageButton";
 
 const StyledOptionsMenu = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
   list-style: none;
+  width: 100%;
   margin: 0;
   padding: 0;
   color: ${(p) => p.theme.colorText};
-  &:hover {
-    background: ${(p) => p.theme.colorText};
-    color: ${(p) => p.theme.colorBackground};
-    border-radius: 8px;
-    padding: -8px;
-  }
 `;
 
 const StyledH1 = styled.h1`
   &:hover {
+    background: ${(p) => p.theme.colorText};
+    color: ${(p) => p.theme.colorBackground};
     border-radius: 8px;
     padding: -8px;
   }
@@ -36,6 +34,10 @@ export default function OptionsMenu() {
         <StyledH1>
           <ButtonThemeToggle />
         </StyledH1>
+        <StyledH1>
+          <ButtonToggleLanguage />
+        </StyledH1>
+        {/* // <ButtonCreeplevelToggle /> */}
       </StyledOptionsMenu>
       <StyledNavbar />
     </Frame>

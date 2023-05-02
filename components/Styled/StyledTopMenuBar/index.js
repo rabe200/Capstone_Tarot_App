@@ -32,9 +32,9 @@ const StyledTopBarContainer = styled.div`
   padding: 0;
   background: black;
   color: white;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-
+  @media only screen and (min-width: 390px) {
+    width: 410px;
+  }
   @media only screen and (min-width: 414px) {
     width: 414px;
   }

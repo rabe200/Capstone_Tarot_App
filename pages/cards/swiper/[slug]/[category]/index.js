@@ -10,33 +10,56 @@ import StyledNavbar from "../../../../../components/Styled/StyledNavbar";
 import TopMenuBar from "../../../../../components/Styled/StyledTopMenuBar";
 import useStore from "../../../../../src/store/store";
 import useSafePush from "../../../../../components/useSafePush";
-import CardStats from "../../../../../components/Stats/stats";
-import CardNotes from "../../../../../components/Notes";
 import Frame from "../../../../../components/Frame";
 import Image from "next/image";
+import Overflow from "../../../../../components/OverFlowIndicator";
+
+const StyledOverFlow = styled(Overflow)`
+  max-height: 80%;
+  width: 100%;
+  padding-right: 10px;
+  Overflow.Indicator {
+    background: white;
+    color: white;
+  }
+`;
+
+const OverFlowIndicatorIcon = styled.div`
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+  font-size: 2em;
+  opacity: 77%;
+  color: ${(props) => props.theme.colorAscii};
+`;
 
 const StyledSwiper = styled(Swiper)`
-  display: block;
+  display: flex;
   position: fixed;
   top: 20px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  width: 100%;
   height: 100%;
   text-align: center;
+
+  @media only screen and (min-width: 390px) {
+    width: 390px;
+  }
+
   @media only screen and (min-width: 414px) {
     width: 414px;
   }
 
   @media only screen and (min-width: 585px) {
     width: 585px;
+
     font-size: 1.2em;
   }
 
   @media only screen and (min-width: 834px) {
     width: 834px;
-    height: 800px;
   }
 
   @media only screen and (min-width: 1194px) {
@@ -46,35 +69,15 @@ const StyledSwiper = styled(Swiper)`
 
 const StyledSwiperSlide = styled(SwiperSlide)`
   display: flex;
-
-  width: 80%;
-  height: 540px;
-  top: 0px;
+  width: 99%;
+  height: 99%;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  overflow: auto;
-
-  @media only screen and (min-width: 414px) {
-    width: 414px;
-  }
-
-  @media only screen and (min-width: 585px) {
-    width: 585px;
-    font-size: 1.2em;
-  }
-
-  @media only screen and (min-width: 834px) {
-    width: 834px;
-    height: 800px;
-  }
-
-  @media only screen and (min-width: 1194px) {
-    width: 1194px;
-  }
 `;
 const StyledImage = styled(Image)`
   position: sticky;
+  padding-left: 15px;
   top: 20px;
   width: 100px;
   height: 150px;
@@ -87,25 +90,39 @@ const StyledBoxForText = styled.div`
   top: 30px;
   display: flex;
   height: 500px;
-  width: 80%;
+  width: 100%;
   justify-content: start;
-  overflow: auto;
   border-radius: 8px;
   padding: 5px;
   font-size: 1.2em;
+  @media only screen and (min-width: 390px) {
+    width: 410px;
+    height: 97%;
+  }
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+    font-size: 1.1em;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+    font-size: 1.2em;
+  }
 
   @media only screen and (min-width: 834px) {
-    font-size: 1.4em;
-    top: 60px;
     width: 834px;
-    height: 800px;
+    font-size: 1.3em;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+    font-size: 1.4em;
   }
 `;
 
 const StyledText = styled.div`
   display: flex;
-  width: 80%;
-  height: 100%;
   font-size: 1em;
   color: ${(p) => p.theme.colorText};
   text-align: left;
@@ -118,8 +135,8 @@ const StyledText = styled.div`
 const StyledCategoryName = styled.div`
   height: 20px;
   position: fixed;
-  top: 22px;
-  background: ${(p) => p.theme.colorFront};
+  top: 30px;
+  background: ${(p) => p.theme.colorText};
   color: ${(p) => p.theme.colorBackground};
   text-align: center;
   z-index: 10000px;
@@ -127,16 +144,17 @@ const StyledCategoryName = styled.div`
 
 const ButtonContainer = styled.div`
   position: fixed;
-  bottom: 80px;
+  bottom: 70px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 `;
 
 const ToggleButton = styled.div`
   width: 50%;
-  height: 18px;
+  height: 45px;
   padding: 10px;
   background: black;
   color: white;
@@ -167,18 +185,18 @@ export default function Category() {
   const setStoreSlug = useStore((state) => state.setSlug);
   const category = router ? router.query.category : 0;
   const { safePush } = useSafePush();
+  const [clicked, setClicked] = useState(false);
 
   const doubleTap = useDoubleTap(() => {
-    safePush(`/cards/swiper/${slug}`);
+    safePush(`/cards/swiper/${slug}/zoom`);
   });
   const [toggleCategory, setToggleCategory] = useState(category);
 
   function handleToggle() {
     if (category === "description") setToggleCategory("meaning_up");
     else if (category === "meaning_up") setToggleCategory("meaning_rev");
-    else if (category === "meaning_rev") setToggleCategory("stats");
-    else if (category === "stats") setToggleCategory("notes");
-    else if (category === "notes") setToggleCategory("description");
+    else if (category === "meaning_rev") setToggleCategory("description");
+    setClicked(!clicked);
     safePush(`/cards/swiper/${slug}/${toggleCategory}`);
   }
 
@@ -212,7 +230,7 @@ export default function Category() {
             <StyledSwiperSlide key={card.name}>
               <StyledBoxForText
                 {...doubleTap}
-                onDoubleClick={() => safePush(`/cards/swiper/${slug}/`)}
+                onDoubleClick={() => safePush(`/cards/swiper/${slug}/zoom`)}
               >
                 <StyledImage
                   src={card.image}
@@ -220,31 +238,82 @@ export default function Category() {
                   height={"350"}
                   alt={card.name}
                 />
+
                 {category === "description" ? (
-                  <StyledText>{card.desc}</StyledText>
+                  <StyledOverFlow>
+                    <Overflow.Content>
+                      <StyledText>{card.desc}</StyledText>{" "}
+                    </Overflow.Content>
+                    <Overflow.Indicator direction={"down"}>
+                      {(canScroll, refs) => (
+                        <OverFlowIndicatorIcon
+                          type="button"
+                          onClick={() => {
+                            refs.viewport.current.scrollBy({
+                              top: refs.viewport.current.clientHeight,
+                              behaviour: "smooth",
+                            });
+                          }}
+                        >
+                          {canScroll ? "ᛨ" : "ᛝ"}
+                        </OverFlowIndicatorIcon>
+                      )}
+                    </Overflow.Indicator>{" "}
+                  </StyledOverFlow>
                 ) : category === "meaning_up" ? (
-                  <StyledText>{card.meaning_up}</StyledText>
+                  <StyledOverFlow>
+                    <Overflow.Content>
+                      <StyledText>{card.meaning_up}</StyledText>{" "}
+                    </Overflow.Content>
+                    <Overflow.Indicator direction={"down"}>
+                      {(canScroll, refs) => (
+                        <OverFlowIndicatorIcon
+                          type="button"
+                          onClick={() => {
+                            refs.viewport.current.scrollBy({
+                              top: refs.viewport.current.clientHeight,
+                              behaviour: "smooth",
+                            });
+                          }}
+                        >
+                          {canScroll ? "ᛨ" : "ᛝ"}
+                        </OverFlowIndicatorIcon>
+                      )}
+                    </Overflow.Indicator>{" "}
+                  </StyledOverFlow>
                 ) : category === "meaning_rev" ? (
-                  <StyledText>{card.meaning_rev}</StyledText>
-                ) : category === "stats" ? (
-                  <StyledText>
-                    <CardStats slug={slug} />
-                  </StyledText>
-                ) : category === "notes" ? (
-                  <StyledText>
-                    <CardNotes slug={slug} />
-                  </StyledText>
+                  <StyledOverFlow>
+                    <Overflow.Content>
+                      <StyledText>{card.meaning_rev}</StyledText>{" "}
+                    </Overflow.Content>
+                    <Overflow.Indicator direction={"down"}>
+                      {(canScroll, refs) => (
+                        <OverFlowIndicatorIcon
+                          type="button"
+                          onClick={() => {
+                            refs.viewport.current.scrollBy({
+                              top: refs.viewport.current.clientHeight,
+                              behaviour: "smooth",
+                            });
+                          }}
+                        >
+                          {canScroll ? "ᛨ" : "ᛝ"}
+                        </OverFlowIndicatorIcon>
+                      )}
+                    </Overflow.Indicator>{" "}
+                  </StyledOverFlow>
                 ) : null}
               </StyledBoxForText>
 
               <ButtonContainer>
                 <ReturnButton
                   type="button"
-                  onClick={() => safePush(`/cards/swiper/${slug}/`)}
+                  onClick={() => safePush(`/cards/swiper/${slug}/zoom`)}
                 >
                   return
                 </ReturnButton>
                 <ToggleButton
+                  clicked={clicked}
                   onTouchStart={() => handleToggle()}
                   onClick={() => handleToggle()}
                 >

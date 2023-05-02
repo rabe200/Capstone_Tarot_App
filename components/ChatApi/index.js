@@ -4,14 +4,7 @@ import styled from "styled-components";
 import GeneratePrompt from "../GeneratePrompt";
 import Frame from "../Frame";
 import Overflow from "../OverFlowIndicator";
-
-const StyledOverFlow = styled(Overflow)`
-  max-height: 90%;
-  Overflow.Indicator {
-    background: white;
-    color: white;
-  }
-`;
+import useLocalStorageState from "use-local-storage";
 
 const ContentContainer = styled.div`
   display: flex;
@@ -22,23 +15,28 @@ const ContentContainer = styled.div`
   width: 247px;
   top: 32px;
   overflow: auto;
-  min-height: 300px;
+  height: 100%;
+  font-size: 1.1em;
   @media only screen and (min-width: 414px) {
     width: 333px;
     top: 42px;
+    font-size: 1.2em;
   }
 
   @media only screen and (min-width: 585px) {
     width: 444px;
     top: 52px;
+    font-size: 1.28em;
   }
   @media only screen and (min-width: 834px) {
     width: 666px;
     top: 77px;
+    font-size: 1.3em;
   }
   @media only screen and (min-width: 1194px) {
     width: 888px;
     top: 111px;
+    font-size: 1.4em;
   }
   @media only screen and (min-width: 1400px) {
     width: 1111px;
@@ -76,7 +74,6 @@ const ResultContainer = styled.div`
   color: ${(p) => p.theme.colorText};
   height: 100%;
   width: 100%;
-  overflow: auto;
 `;
 
 const StyledText = styled.div`
@@ -86,7 +83,6 @@ const StyledText = styled.div`
   font-size: 1rem;
   width: 100%;
   height: 100%;
-  overflow: auto;
   @media only screen and (min-width: 414px) {
     font-size: 1.05rem;
   }
@@ -106,6 +102,36 @@ const StyledText = styled.div`
 `;
 
 const ButtonHideContainer = styled.div``;
+
+const StyledOverFlow = styled(Overflow)`
+  max-height: 74%;
+  Overflow.Indicator {
+    background: white;
+    color: white;
+  }
+
+  @media only screen and (min-width: 390px) {
+    height: 80%;
+  }
+
+  @media only screen and (min-width: 414px) {
+    height: 80%;
+  }
+
+  @media only screen and (min-width: 585px) {
+    height: 90%;
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    height: 100%;
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
+`;
 
 const OverFlowIndicatorIcon = styled.div`
   position: absolute;
@@ -128,9 +154,13 @@ export default function ChatApi() {
   const [loading, setLoading] = useState(false);
   const allReadings = useStore((state) => state.allReadings);
   const [hidden, setHidden] = useState(false);
+  // const language = useStore((state) => state.language);
+  const [language] = useLocalStorageState("localLanguage", {
+    defaultValue: "english",
+  });
 
   useEffect(() => {
-    setQuestionInput(GeneratePrompt(userData, allReadings));
+    setQuestionInput(GeneratePrompt(userData, allReadings, language));
   }, []);
 
   useEffect(() => setHasMounted(true), []);
@@ -214,7 +244,7 @@ export default function ChatApi() {
                       });
                     }}
                   >
-                    {canScroll ? "⇩" : "ᛝ"}
+                    {canScroll ? "ᛨ" : "ᛝ"}
                   </OverFlowIndicatorIcon>
                 )}
               </Overflow.Indicator>

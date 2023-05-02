@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useStore from "../../src/store/store";
-import { useRouter } from "next/router";
 import styled from "styled-components";
 import useSafePush from "../useSafePush";
 
@@ -62,7 +61,6 @@ const StyledButton = styled.button`
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const setSearchQuery = useStore((state) => state.setSearchQuery);
-  const router = useRouter();
   const { safePush } = useSafePush();
   function handleSubmit(event) {
     event.preventDefault();

@@ -39,6 +39,7 @@ root {
 
   @media only screen and (min-width: 834px) {
     width: 834px;
+    min-height: 1000px;
   }
 
   @media only screen and (min-width: 1194px) {

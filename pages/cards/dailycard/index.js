@@ -70,7 +70,9 @@ export default function ShowCard() {
 
         <Container onClick={() => setTurned(false)}>
           <SpacerName hidden={!turned} />
-          <DisplayCardName hidden={turned}>{currentCard.name}</DisplayCardName>
+          <DisplayCardName hidden={turned}>
+            {currentCard.name} {currentCard.reversed ? "reversed" : "upright"}
+          </DisplayCardName>
           <FlipCard card={currentCard} />
           <StyledLink href={"/cards/dailycard/notes"}>
             <SpacerButton hidden={!turned} />
