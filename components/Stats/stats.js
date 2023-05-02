@@ -2,6 +2,7 @@ import useStore from "../../src/store/store";
 import { Fragment } from "react";
 import styled from "styled-components";
 import averageMood from "../averageMood";
+import { useRouter } from "next/router";
 
 const StyledList = styled.ul`
   position: relative;
@@ -11,9 +12,12 @@ const StyledList = styled.ul`
   padding: 0;
 `;
 
-export default function CardStats(slug) {
+export default function CardStats() {
   const getDrawnCardById = useStore((state) => state.getDrawnCardById);
-  const cardForStats = getDrawnCardById(slug.slug);
+  const router = useRouter();
+  const slug = router.query.slug;
+  const cardForStats = getDrawnCardById(slug);
+
   return (
     <StyledList>
       {cardForStats.length > 0 ? (
@@ -28,8 +32,8 @@ export default function CardStats(slug) {
           <li>
             last mood:{" "}
             {cardForStats[cardForStats.length - 1].currentMood === 1
-              ? "good"
-              : "bad"}
+              ? "plus"
+              : "minus"}
           </li>
 
           <li>

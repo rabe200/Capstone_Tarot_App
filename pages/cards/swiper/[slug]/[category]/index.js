@@ -200,15 +200,11 @@ export default function Category() {
                 //     <CardStats slug={slug} />
                 //   </StyledText>
                 // )
-
-                // category === "notes" ? (
-                //   <StyledText>
-                //     <CardNotes slug={slug} />
-                //   </StyledText>
-                // )
-
-                // :
-                null}
+                category === "notes" ? (
+                  <StyledText>
+                    <CardNotes slug={slug} />
+                  </StyledText>
+                ) : null}
               </StyledBoxForText>
 
               <ButtonContainer>

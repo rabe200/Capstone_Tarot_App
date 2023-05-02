@@ -1,11 +1,13 @@
 import useStore from "../../src/store/store";
 import { Fragment } from "react";
+import { useRouter } from "next/router";
 
-export default function CardNotes(slug) {
+export default function CardNotes() {
   {
     const getDrawnCardById = useStore((state) => state.getDrawnCardById);
-
-    const card = getDrawnCardById(slug.slug);
+    const router = useRouter();
+    const slug = router.query.slug;
+    const card = getDrawnCardById(slug);
     return (
       <>
         {card.length > 0 ? (
