@@ -151,8 +151,6 @@ export default function Category() {
     router.push(`/cards/swiper/${slug}/${toggleCategory}`);
   }
 
-  useEffect(() => setStoreSlug(slug), []);
-
   return (
     slug && (
       <Frame>
@@ -171,6 +169,7 @@ export default function Category() {
           slidesPerView={1}
           navigation={false}
           onSlideChange={(event) => {
+            setStoreSlug(event.realIndex);
             router.replace(`/cards/swiper/${event.realIndex}/${category}`);
           }}
           grabCursor={true}

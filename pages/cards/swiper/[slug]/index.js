@@ -157,8 +157,6 @@ export default function ProductImagesSlider(props) {
     router.push(`/cards/swiper/${slug}/zoom`);
   });
 
-  useEffect(() => setStoreSlug(slug), []);
-
   return (
     slug && (
       <Frame>
@@ -170,6 +168,7 @@ export default function ProductImagesSlider(props) {
           slidesPerView={1}
           navigation={false}
           onSlideChange={(event) => {
+            setStoreSlug(event.realIndex);
             router.replace(`/cards/swiper/${event.realIndex}`);
           }}
           grabCursor={true}
