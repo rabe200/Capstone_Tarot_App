@@ -196,15 +196,21 @@ export default function Category() {
                   <StyledText>{card.meaning_up}</StyledText>
                 ) : category === "meaning_rev" ? (
                   <StyledText>{card.meaning_rev}</StyledText>
-                ) : category === "stats" ? (
-                  <StyledText>
-                    <CardStats slug={slug} />
-                  </StyledText>
-                ) : category === "notes" ? (
-                  <StyledText>
-                    <CardNotes slug={slug} />
-                  </StyledText>
-                ) : null}{" "}
+                ) : // : category === "stats" ? (
+                //   <StyledText>
+                //     <CardStats slug={slug} />
+                //   </StyledText>
+                // )
+
+
+                // category === "notes" ? (
+                //   <StyledText>
+                //     <CardNotes slug={slug} />
+                //   </StyledText>
+                // ) 
+                
+                : null}
+                
               </StyledBoxForText>
 
               <ButtonContainer>

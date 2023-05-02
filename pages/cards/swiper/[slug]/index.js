@@ -39,6 +39,23 @@ const StyledSwiper = styled(Swiper)`
   background: black;
   position: fixed;
   top: 20px;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -46,6 +63,19 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
 `;
 
 const StyledImage = styled(Image)`
@@ -110,27 +140,21 @@ export default function ProductImagesSlider(props) {
   const setStoreSlug = useStore((state) => state.setSlug);
   const doubleTapNotes = useDoubleTap((event) => {
     router.push(`/cards/swiper/${slug}/notes`);
-    console.log(event.target);
   });
   const doubleTapStats = useDoubleTap((event) => {
     router.push(`/cards/swiper/${slug}/stats`);
-    console.log(event.target);
   });
   const doubleTapMeaningUp = useDoubleTap((event) => {
     router.push(`/cards/swiper/${slug}/meaning_up`);
-    console.log(event.target);
   });
   const doubleTapMeaningRev = useDoubleTap((event) => {
     router.push(`/cards/swiper/${slug}/meaning_rev`);
-    console.log(event.target);
   });
   const doubleTapDescription = useDoubleTap((event) => {
     router.push(`/cards/swiper/${slug}/description`);
-    console.log(event.target);
   });
   const doubleTapImage = useDoubleTap((event) => {
     router.push(`/cards/swiper/${slug}/zoom`);
-    console.log(event.target);
   });
 
   useEffect(() => setStoreSlug(slug), []);

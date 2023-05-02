@@ -110,12 +110,14 @@ export default function StyledNavbar() {
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
   const router = useRouter();
   const queryName = router.query.optionSelect;
+  const storeSlug = useStore((state) => state.slug);
 
   function resetComingFromHistory() {
     setComingFromHistory(false);
     setLastPageVisited(queryName);
   }
 
+  console.log(router.query);
   return (
     <StyledSpace>
       <div hidden={hidden}>
@@ -129,7 +131,13 @@ export default function StyledNavbar() {
           <MenuLink1
             onClick={() => resetComingFromHistory()}
             hidden={"hidden"}
-            href={`/cards/swiper/${lastCard.id}/zoom`}
+            href={`/cards/swiper/${
+              router.query.slug
+                ? router.query.slug
+                : storeSlug
+                ? storeSlug
+                : "0"
+            }/zoom`}
           >
             CARDS
           </MenuLink1>

@@ -42,7 +42,7 @@ const StyledImage = styled(Image)`
   height: 565px;
 `;
 
-export default function ProductImagesSlider(props) {
+export default function ProductImagesSlider() {
   const router = useRouter();
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
@@ -51,7 +51,8 @@ export default function ProductImagesSlider(props) {
     router.push(`/cards/swiper/${slug}`);
     console.log(event.target);
   });
-
+  const storeSlug = useStore((state) => state.slug);
+  const setStoreSlug = useStore((state) => state.setSlug);
   return (
     slug && (
       <Frame>
@@ -68,6 +69,7 @@ export default function ProductImagesSlider(props) {
           slidesPerView={1}
           navigation={false}
           onSlideChange={(event) => {
+            setStoreSlug(event.realIndex);
             router.replace(`/cards/swiper/${event.realIndex}/zoom`);
           }}
           grabCursor={true}
