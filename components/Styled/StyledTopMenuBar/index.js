@@ -8,6 +8,11 @@ const StyledMenuLink = styled(Link)`
   color: ${(p) => p.theme.colorText};
   font-style: italic;
   font-size: 1rem;
+  &:hover {
+    background: darkgrey;
+    padding: 4px;
+    border-radius: 8px;
+  }
 `;
 
 const StyledMenuBack = styled.div`
@@ -19,16 +24,18 @@ const StyledMenuBack = styled.div`
 
 const StyledTopBarContainer = styled.div`
   position: fixed;
+  overflow: hidden;
+
   z-index: 2000;
   top: 0;
   width: 375px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  height: 20px;
+  height: 25px;
   margin: 0;
   padding: 0;
-  background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorText};
+  background: black;
+  color: white;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 
@@ -84,7 +91,7 @@ export default function TopMenuBar({ mid, card, hidden, backbutton }) {
       <StyledTopBarRight>
         {backbutton ? (
           <StyledMenuBack hidden={hidden}>
-            <Link href={`${backbutton}`}> back</Link>
+            <StyledMenuLink href={`${backbutton}`}> back</StyledMenuLink>
           </StyledMenuBack>
         ) : (
           <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
@@ -104,7 +111,7 @@ export default function TopMenuBar({ mid, card, hidden, backbutton }) {
       <StyledTopBarRight>
         {backbutton ? (
           <StyledMenuBack hidden={hidden}>
-            <Link href={`${backbutton}`}> back</Link>
+            <StyledMenuLink href={`${backbutton}`}> back</StyledMenuLink>
           </StyledMenuBack>
         ) : (
           <StyledMenuBack hidden={hidden} onClick={() => router.back()}>

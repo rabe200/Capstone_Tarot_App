@@ -27,6 +27,9 @@ const StyledSpace = styled.div`
   @media only screen and (min-width: 1194px) {
     width: 1194px;
   }
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+  }
 `;
 
 const StyledMenu = styled.div`
@@ -104,7 +107,6 @@ const MenuLink3 = styled(Link)`
 `;
 
 export default function StyledNavbar() {
-  const lastCard = useStore((state) => state.lastCard);
   const [hidden, setHiddenToggle] = useState(false);
   const setLastPageVisited = useStore((state) => state.setLastPageVisited);
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
@@ -117,7 +119,6 @@ export default function StyledNavbar() {
     setLastPageVisited(queryName);
   }
 
-  console.log(router.query);
   return (
     <StyledSpace>
       <div hidden={hidden}>

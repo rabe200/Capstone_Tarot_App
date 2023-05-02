@@ -75,7 +75,7 @@ export default function NoteFormular() {
           id="textInput"
           aria-label="formular"
           onSubmit={handleSubmit}
-          style={{ height: "80%" }}
+          style={{ minHeight: "20%" }}
         >
           <label htmlFor="note">
             <textarea

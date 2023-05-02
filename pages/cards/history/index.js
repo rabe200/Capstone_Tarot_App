@@ -13,11 +13,9 @@ const StyledEntry = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  border-radius: 8px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 375px;
-  @media only screen and (min-width: 414px) {
+
+  /* width: 375px; */
+  /* @media only screen and (min-width: 414px) {
     width: 414px;
   }
 
@@ -34,13 +32,10 @@ const StyledEntry = styled.div`
   @media only screen and (min-width: 1194px) {
     width: 1194px;
   }
-`;
 
-const StyledFormular = styled.form`
-  position: fixed;
-  bottom: 50px;
-  height: 30px;
-  width: 100%;
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+  } */
 `;
 
 const ListContainer = styled.div`
@@ -51,9 +46,11 @@ const ListContainer = styled.div`
   position: fixed;
   top: 20px;
   width: 375px;
+  gap: 50px;
   height: 80%;
   overflow: auto;
-  background: ${(p) => p.theme.colorBackground};
+  background: ${(p) => p.theme.colorText};
+  color: ${(p) => p.theme.colorBackground};
   z-index: 1000;
   @media only screen and (min-width: 414px) {
     width: 414px;
@@ -75,8 +72,8 @@ const ListContainer = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: ${(p) => p.theme.colorLink};
-  color: black;
+  color: ${(p) => p.theme.colorBackground};
+  background: ${(p) => p.theme.colorText};
   text-decoration: none;
 `;
 
@@ -114,43 +111,14 @@ const StyledButton = styled.div`
   border-bottom-left-radius: 8px;
   height: 1em;
 `;
-
-const StyledSelect = styled.select`
-  display: flex;
-  align-self: center;
-  position: fixed;
-  width: 50%;
-  height: 20px;
-  text-align: center;
-  font-size: 1.2em;
-  bottom: 55px;
-  @media only screen and (min-width: 414px) {
-    width: 414px;
-  }
-
-  @media only screen and (min-width: 585px) {
-    width: 400px;
-    left: 150px;
-  }
-
-  @media only screen and (min-width: 834px) {
-    width: 300px;
-    left: 150px;
-  }
-
-  @media only screen and (min-width: 1194px) {
-    width: 300px;
-    left: 550px;
-  }
-`;
-
 const ContainerToPlaceSelectAndInfoBar = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   position: fixed;
   width: 375px;
-  height: 100%;
+  height: 40px;
+
   @media only screen and (min-width: 414px) {
     width: 414px;
   }
@@ -169,6 +137,27 @@ const ContainerToPlaceSelectAndInfoBar = styled.div`
   @media only screen and (min-width: 1400px) {
     width: 1400px;
   }
+`;
+
+const StyledFormular = styled.form`
+  position: fixed;
+  bottom: 50px;
+  height: 30px;
+  width: 100%;
+`;
+
+const StyledSelect = styled.select`
+  display: flex;
+  align-self: center;
+  position: relative;
+  background: ${(p) => p.theme.colorText};
+  color: ${(p) => p.theme.Background};
+  width: 30%;
+  height: 30px;
+  text-align: center;
+  font-size: 1em;
+  bottom: 55px;
+  margin: auto;
 `;
 
 export default function History() {

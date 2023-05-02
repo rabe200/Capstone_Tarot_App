@@ -2,22 +2,49 @@ import { Fragment, useEffect, useState } from "react";
 import useStore from "../../src/store/store";
 import styled from "styled-components";
 import GeneratePrompt from "../GeneratePrompt";
+import Frame from "../Frame";
 
 const ContentContainer = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
+  justify-content: center;
   position: relative;
-  height: 100%;
-  width: 100%;
+  width: 247px;
+  top: 15px;
+  overflow: auto;
+  min-height: 400px;
+  @media only screen and (min-width: 414px) {
+    width: 333px;
+    top: 25px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 444px;
+    top: 50px;
+  }
+  @media only screen and (min-width: 834px) {
+    width: 666px;
+    top: 75px;
+  }
+  @media only screen and (min-width: 1194px) {
+    width: 888px;
+    top: 100px;
+  }
+  @media only screen and (min-width: 1400px) {
+    width: 1111px;
+  }
 `;
 
 const StyledSubmitButton = styled.button`
   display: flex;
   position: relative;
-  top: 200px;
+  height: 40px;
+  box-shadow: 0 2px 2px white;
   z-index: 1000;
   align-items: center;
-  width: 100%;
+  justify-content: center;
+  width: 200px;
   background: ${(p) => p.theme.colorText};
   color: ${(p) => p.theme.colorBackground};
   text-align: center;
@@ -48,7 +75,7 @@ const StyledText = styled.div`
   display: flex;
   position: relative;
   top: 0;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -125,7 +152,7 @@ export default function ChatApi() {
 
   return (
     userData && (
-      <Fragment>
+      <Frame>
         <ContentContainer>
           <ButtonHideContainer hidden={hidden}>
             <StyledSubmitButton
@@ -142,7 +169,7 @@ export default function ChatApi() {
             <StyledText>{result}</StyledText>
           </ResultContainer>
         </ContentContainer>
-      </Fragment>
+      </Frame>
     )
   );
 }

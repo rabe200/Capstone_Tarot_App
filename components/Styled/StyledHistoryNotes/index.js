@@ -21,7 +21,7 @@ const NoteContainer = styled.div`
   z-index: 1000;
   font-size: 1.3em;
   text-align: center;
-  @media only screen and (min-width: 414px) {
+  /* @media only screen and (min-width: 414px) {
     width: 414px;
   }
 
@@ -37,7 +37,7 @@ const NoteContainer = styled.div`
 
   @media only screen and (min-width: 1194px) {
     width: 1194px;
-  }
+  } */
 `;
 
 const StyledButton = styled.div`
@@ -62,17 +62,22 @@ const DeleteButtonToggleBox = styled.div`
   width: 80%;
 `;
 
+const StyledForm = styled.form`
+  width: 80%;
+  overflow-wrap: break-word;
+`;
+
 const StyledNotes = styled.div`
   -moz-appearance: textfield-multiline;
   -webkit-appearance: textarea;
   border-radius: 0px;
   background: ${(p) => p.theme.colorBackground};
   align-self: center;
-  width: 100%;
+  widt
   font-size: 1em;
   overflow-wrap: break-word;
   box-shadow: 0px 2px 2px;
-
+  max-width: 350px;
   overflow: ${(props) => (props.noteOverflow === "hidden" ? "auto" : "hidden")};
   color: ${(props) =>
     props.contentEditable === true
@@ -160,7 +165,7 @@ export default function HistoryNotes({ card, toggle }) {
   return (
     <NoteContainer>
       <StyledToastContainer onClick={(event) => console.log(event)} />
-      <form id="myForm">
+      <StyledForm id="myForm">
         <StyledNotes
           {...doubleTap}
           onClick={enlargeContent}
@@ -188,7 +193,7 @@ export default function HistoryNotes({ card, toggle }) {
           </StyledButton>
           <StyledToastContainer />
         </ButtonBox>
-      </form>
+      </StyledForm>
     </NoteContainer>
   );
 }
