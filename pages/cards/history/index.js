@@ -115,6 +115,62 @@ const StyledButton = styled.div`
   height: 1em;
 `;
 
+const StyledSelect = styled.select`
+  display: flex;
+  align-self: center;
+  position: fixed;
+  width: 50%;
+  height: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  bottom: 55px;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 400px;
+    left: 150px;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 300px;
+    left: 150px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 300px;
+    left: 550px;
+  }
+`;
+
+const ContainerToPlaceSelectAndInfoBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 375px;
+  height: 100%;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+  }
+`;
+
 export default function History() {
   const [hasMounted, setHasMounted] = useState(false);
 
@@ -201,29 +257,25 @@ export default function History() {
           );
         })}
       </ListContainer>
-      <StyledFormular>
-        <select
-          style={{
-            width: "375px",
-            height: "100%",
-            textAlign: "center",
-            fontSize: "1.05rem",
-            fontSize: "1.2em",
-          }}
-          name="filter results by"
-          onChange={(event) => setSelectedOption(event.target.value)}
-        >
-          <option value="dateUp">date up</option>
-          <option value="dateDown">date down</option>
-          <option value="nameUp">name up</option>
-          <option value="nameDown">name down</option>
-        </select>
-      </StyledFormular>
-      <StyledFooter>
-        <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
-        <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
-        <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
-      </StyledFooter>
+      <ContainerToPlaceSelectAndInfoBar>
+        <StyledFormular>
+          <StyledSelect
+            name="filter results by"
+            onChange={(event) => setSelectedOption(event.target.value)}
+          >
+            <option value="dateUp">date up</option>
+            <option value="dateDown">date down</option>
+            <option value="nameUp">name up</option>
+            <option value="nameDown">name down</option>
+          </StyledSelect>
+        </StyledFormular>
+        <StyledFooter>
+          <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
+          <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
+          <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
+        </StyledFooter>
+      </ContainerToPlaceSelectAndInfoBar>
+
       <StyledNavbar />
     </Frame>
   );
