@@ -1,132 +1,110 @@
 import { useState } from "react";
 import useStore from "../../src/store/store";
-import { useRouter } from "next/router";
 import styled from "styled-components";
+import useSafePush from "../useSafePush";
 
-const StyledSpacer = styled.div`
-  display: none;
-  height: 20px;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-`;
-
-const StyledToggle = styled.div`
-  display: none;
-  color: #fcffec;
-  font-size: 1.2em;
-`;
-
-const StyledFormular = styled.form`
-  height: 100%;
-  width: 100%;
-`;
-
-const StyledSearchContainer = styled.div`
-  width: 100%;
-  position: relative;
+const StyledInput = styled.input`
+  border-radius: 40px;
+  font-size: 1em;
+  height: 40px;
   margin: 0;
   padding: 0;
+  width: 300px;
+  textalign: "center";
+  _webkituserselect: "none";
+  _msuserselect: "none";
+  userselect: "none";
+  @media only screen and (min-width: 414px) {
+    width: 359px;
+    height: 50px;
+  }
+  @media only screen and (min-width: 585px) {
+    width: 530px;
+    height: 50px;
+  }
 `;
 
 const Navbar = styled.div`
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  height: 40px;
-  width: 100%;
+  position: relative;
+  width: 375px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 const StyledButton = styled.button`
-  background: #293133;
-  border: 2px white solid;
-  color: #fcffec;
-  height: 100%;
-  width: 100%;
+  position: relative;
+  box-shadow: 0px 2px 2px;
+  background: ${(p) => p.theme.colorContainer};
+  color: ${(p) => p.theme.colorText};
+  height: 20px;
+  width: 80px;
   font-size: 1em;
   weight: 400;
   margin: 0;
-  padding: 0;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  padding-left: 6px;
+  padding-right: 6px;
   font-family: pixelOperator;
+  border-radius: 40px;
   &:hover {
     background: yellow;
-    color: #293133;
+    color: ${(p) => p.theme.colorText};
+    background: ${(p) => p.theme.colorBackground};
+  }
+  @media only screen and (min-width: 414px) {
+    height: 20px;
   }
 `;
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const setSearchQuery = useStore((state) => state.setSearchQuery);
-  const router = useRouter();
-  const [hidden, setHiddenToggle] = useState(false);
-
-  function toggle() {
-    if (hidden === false) {
-      setHiddenToggle(true);
-    } else {
-      setHiddenToggle(false);
-    }
-  }
-
+  const { safePush } = useSafePush();
   function handleSubmit(event) {
     event.preventDefault();
     setSearchQuery(inputValue);
     setInputValue("");
-    router.push("/cards/search/results");
+    safePush("/cards/swiper/search/results");
   }
 
   return (
-    <>
-      <StyledSpacer>
-        <StyledToggle onClick={() => toggle()}>search</StyledToggle>
-      </StyledSpacer>
-      <StyledSearchContainer>
-        <Navbar>
-          <StyledFormular
-            hidden={hidden}
-            id="searchFormular"
-            aria-label="search formular"
-          >
-            <input
-              onChange={(event) => {
-                return (
-                  event.preventDefault(), setInputValue(event.target.value)
-                );
-              }}
-              type="text"
-              id="searchbar"
-              name="searchbar"
-              placeholder="search..."
-              aria-label="search bar"
-              value={inputValue}
-              style={{
-                fontSize: "0.8rem",
-                width: "100%",
-                height: "100%",
-                margin: 0,
-                padding: 0,
-                background: "#293133",
-                border: "1px solid white",
-                textAlign: "center",
-                color: "white",
-                borderTopLeftRadius: "8px",
-                borderBottomLeftRadius: "8px",
-              }}
-            />
-          </StyledFormular>
-          <StyledButton
-            hidden={hidden}
-            form="searchFormular"
-            type="submit"
-            name="submit"
-            aria-label="submit search query"
-            onClick={handleSubmit}
-          >
-            SUBMIT{" "}
-          </StyledButton>
-        </Navbar>
-      </StyledSearchContainer>
-    </>
+    <Navbar>
+      <form id="searchFormular" aria-label="search formular">
+        <StyledInput
+          onChange={(event) => {
+            return event.preventDefault(), setInputValue(event.target.value);
+          }}
+          type="text"
+          id="searchbar"
+          name="searchbar"
+          placeholder="search..."
+          aria-label="search bar"
+          value={inputValue}
+          style={{
+            fontSize: "0.8rem",
+            height: "40px",
+            margin: 0,
+            padding: 0,
+            background: `${(p) => p.theme.colorText}`,
+            textAlign: "center",
+            color: `${(p) => p.theme.colorBackground}`,
+            _webkitUserSelect: "none",
+            _msUserSelect: "none",
+            userSelect: "none",
+          }}
+        />
+      </form>
+      <StyledButton
+        form="searchFormular"
+        type="submit"
+        name="submit"
+        aria-label="submit search query"
+        onClick={handleSubmit}
+      >
+        SUBMIT
+      </StyledButton>
+    </Navbar>
   );
 }

@@ -1,10 +1,19 @@
-import StyledCardContainer from "../components/Styled/StyledCardContainer";
 import styled from "styled-components";
 import Link from "next/link";
-import AppContainer from "../components/Styled/StyledAppContainer";
 import TopMenuBar from "../components/Styled/StyledTopMenuBar";
+import StyledNavbar from "../components/Styled/StyledNavbar";
+import Frame from "../components/Frame";
+import SearchBar from "../components/SearchBar";
+
+const TopSpacer = styled.div`
+  display: flex;
+  position: relative;
+  top: 150px;
+  background: red;
+`;
 
 export const MenuLink = styled(Link)`
+position: relative;
     font-size: 2rem;
     text-decoration: none;
     color: black
@@ -20,15 +29,14 @@ export const MenuLink = styled(Link)`
   `;
 
 const StyledHeadline = styled.h1`
+  position: fixed;
   color: red;
-  top: 0;
-  position: absolute;
+  top: 10%;
 `;
 
 const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: ${(p) => p.theme.border};
   height: 100%;
   width: 100%;
   position: relative;
@@ -36,21 +44,26 @@ const StyledLinkContainer = styled.div`
   align-items: center;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
+  border: ${(p) => p.theme.border};
 `;
 
 export default function HomePage() {
   const mid = "version 0.2";
   return (
-    <AppContainer>
-      <StyledCardContainer>
-        <StyledLinkContainer>
-          <StyledHeadline>TAROT</StyledHeadline>
-          <MenuLink href={"/DailyCard"}>START</MenuLink>
-          <MenuLink href={"/options"}>OPTIONS</MenuLink>
-          <MenuLink href={"/credits"}>CREDITS</MenuLink>
-        </StyledLinkContainer>
-      </StyledCardContainer>
+    <Frame>
+      <TopSpacer />
       <TopMenuBar hidden={"hidden"} menu={"/"} mid={mid} back={"/"} />
-    </AppContainer>
+
+      <StyledLinkContainer>
+        <StyledHeadline>TAROT</StyledHeadline>
+        <MenuLink href={"/cards/dailycard/moodmeter"}>START</MenuLink>
+        <MenuLink href={"/options"}>OPTIONS</MenuLink>
+        <MenuLink href={"/credits"}>CREDITS</MenuLink>
+        <MenuLink href={"/info"}>101</MenuLink>
+        <SearchBar />
+      </StyledLinkContainer>
+
+      <StyledNavbar />
+    </Frame>
   );
 }

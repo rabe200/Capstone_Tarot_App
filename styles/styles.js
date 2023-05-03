@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
+import { pixelOperator } from "../pages/_app";
 export default createGlobalStyle`
   *,
   *::before,
@@ -7,61 +7,51 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+root {
+ --pixelOperator-font: ${pixelOperator};
+ font-family: pixelOperator;
+}
+
   body {
     display: flex;
     flex-direction: column;
     margin: 0;
-    font-family: system-ui;
-    width: 375px;
+    padding: 0;
     height: 667px;
+    width: 375px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: pixelOperator;
-    overflow: auto;
-    background: ${(p) => p.theme.colorDeep};
-  color: ${(p) => p.theme.colorText};
- 
+    background: black;
 
-    @media only screen and (min-width: 375px) {
-    width: 375px;
-    height: 667px;
-  }
-
-  @media only screen and (min-width: 390px) {
-    width: 390px;
-    height: 844px;
-  }
-
-  @media only screen and (min-width: 393px) {
-    width: 393px;
-    height: 851px;
-  }
-
-  @media only screen and (min-width: 412px) {
-    width: 412px;
-    height: 915px;
-  }
-
-    @media only screen and (min-width: 414px) {
+  @media only screen and (min-width: 414px) {
     width: 414px;
     height: 896px;
   }
 
-  @media only screen and (min-width: 540px) {
-    width: 540px;
-    height: 720px;
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+   min-height: 900px;
+    
   }
 
-  @media only screen and (min-width: 768px) {
-    width: 768px;
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+    min-height: 1000px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
     height: 1024px;
+ 
   }
 
-  @media only screen and (min-height: 1025px) {
-    width: 99vw;
-    height: 99vh;
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+    height: 834px;
   }
+
   }
 `;

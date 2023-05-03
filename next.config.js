@@ -2,6 +2,7 @@
 
 // Add path
 const path = require("path");
+const sharp = require("sharp");
 
 const nextConfig = {
   compiler: {
@@ -13,6 +14,9 @@ const nextConfig = {
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
+    });
+    config.externals.push({
+      sharp: "commonjs sharp",
     });
 
     // add alias for root (use <__dirname, "src">) if you want a subfolder

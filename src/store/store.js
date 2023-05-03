@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { useState, useEffect } from "react";
-import { v4 as uuidv4, v4 } from "uuid";
+import { v4 as v4 } from "uuid";
 import { cards } from "../../lib/data";
 
 const cardMoodArray = cards.map((card) => {
@@ -14,6 +14,10 @@ const cardMoodArray = cards.map((card) => {
   };
 });
 
+function random_boolean() {
+  return Math.random() < 0.5;
+}
+
 export const useStore = createLocalStorageStore(
   (set, get) => ({
     allCards: cards,
@@ -25,12 +29,37 @@ export const useStore = createLocalStorageStore(
     currentCard: { id: 0, name: "the fool" },
     lastCard: { id: 0, name: "the fool" },
     currentNote: "",
-    searchQuery: "testString",
+    searchQuery: "",
     cardMoods: cardMoodArray,
     localSortedHistory: [],
     lastPageVisited: "",
+    language: "english",
     currentPage: "",
     comingFromHistory: false,
+    currentReading: "",
+    lastReading: "",
+    allReadings: [{ reading: "null" }],
+    slug: "",
+    setLanguage: (string) => set(() => ({ language: string })),
+    setSlug: (string) =>
+      set(() => ({
+        slug: string,
+      })),
+    setCurrentReading: (string) =>
+      set((state) => ({
+        currentReading: {
+          reading: string,
+          date: new Date(),
+          cardName: state.currentCard.name,
+          amountDrawn: state.currentCard.arrayIndex,
+          currentMood: state.currentCard.currentMood,
+          averageMoodToThatTime: state.currentCard.averageMood,
+        },
+      })),
+    setAllReadings: (string) =>
+      set((state) => {
+        return { allReadings: [...state.allReadings, state.currentReading] };
+      }),
     setComingFromHistory: (boolean) =>
       set(() => ({ comingFromHistory: boolean })),
     setLastPageVisited: (string) => set(() => ({ lastPageVisited: string })),
@@ -177,7 +206,7 @@ export const useStore = createLocalStorageStore(
           id: get().currentCard.id,
           name: get().currentCard.name,
           image: get().currentCard.image,
-          description: get().currentCard.desc,
+          desc: get().currentCard.desc,
           meaning_up: get().currentCard.meaning_up,
           meaning_rev: get().currentCard.meaning_rev,
           notes: get().currentNote,
@@ -226,11 +255,12 @@ export const useStore = createLocalStorageStore(
               minute: new Date().getMinutes(),
               second: new Date().getSeconds(),
               image: get().currentCard.image,
-              description: get().currentCard.desc,
+              desc: get().currentCard.desc,
               meaning_up: get().currentCard.meaning_up,
               meaning_rev: get().currentCard.meaning_rev,
               notes: "",
               arrayIndex: state.cardsDrawn,
+              reversed: random_boolean(),
             },
           ],
         };

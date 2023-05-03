@@ -1,73 +1,39 @@
 import styled from "styled-components";
 import { useState } from "react";
+import Image from "next/image";
 
 const CardContainer = styled.div`
-  width: 300px;
-  height: 450px;
-  perspective: 2000px;
+  display: flex;
+  transform: ${(p) => (p.reversed ? "scaleY(-1)" : null)};
 `;
 
-const CardInner = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  transform: ${({ isFlipped }) =>
-    isFlipped ? "rotateY(180deg)" : "rotateY(0deg)"};
-`;
-
-const CardFront = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: scaleX(-1);
-`;
-
-const CardBack = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  color: black;
-`;
-
-const CardImage = styled.img`
-  border-radius: 8px;
+const CardImage = styled(Image)`
+  border-radius: 14px;
 `;
 
 const CardFlip = ({ card }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
-  };
+  const [hidden, setHidden] = useState(true);
+  const reversed = card.reversed;
 
   return (
-    <div onClick={handleFlip}>
-      <CardContainer>
-        <CardInner isFlipped={isFlipped}>
-          <CardFront>
-            <CardImage
-              src={card.image}
-              alt={card.name}
-              width={300}
-              height={450}
-            />
-          </CardFront>
-          <CardBack>
-            <CardImage
-              src={"/images/CardBacks.png"}
-              alt={"cardback"}
-              width={300}
-              height={450}
-            ></CardImage>
-          </CardBack>
-        </CardInner>
-      </CardContainer>
-    </div>
+    <CardContainer onClick={() => setHidden(false)} reversed={reversed}>
+      <CardImage
+        hidden={hidden}
+        src={card.image}
+        alt={card.name}
+        width={300}
+        height={450}
+        onClick={() => console.log(event.target)}
+      />
+
+      <CardImage
+        hidden={!hidden}
+        src={"/images/CardBacks.png"}
+        alt={"cardback"}
+        width={300}
+        height={450}
+      />
+    </CardContainer>
   );
 };
 

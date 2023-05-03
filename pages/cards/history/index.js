@@ -1,73 +1,91 @@
-import { Fragment, useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import useStore from "../../../src/store/store";
 import Link from "next/link";
 
-import StyledCardContainer from "../../../components/Styled/StyledCardContainer";
 import styled from "styled-components";
-import AppContainer from "../../../components/Styled/StyledAppContainer";
 import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
 import { useCallback } from "react";
-import NoteWithImage from "../../../components/Styled/StyledNoteWithImage";
-
-const StyledCardName = styled.h1`
+import HistoryNotes from "../../../components/Styled/StyledHistoryNotes";
+import StyledNavbar from "../../../components/Styled/StyledNavbar";
+import Frame from "../../../components/Frame";
+const StyledEntry = styled.div`
   display: flex;
-  width: 100%;
-  background: ${(p) => p.theme.colorFront};
-  box-shadow: 0px 20px 30px ${(p) => p.theme.colorFront};
-  justify-content: center;
-  font-size: 1.4em;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  width: 375px;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+  }
 `;
 
-const StyledNavi = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-const StyledFormular = styled.form`
-  height: 100%;
-  width: 100%;
-  box-shadow: 0px 0px 60px ${(p) => p.theme.colorBackground} inset;
-`;
 const ListContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-const StyledList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  box-shadow: 0px 0px 60px ${(p) => p.theme.colorFront};
-  background: ${(p) => p.theme.colorBackground};
-  color: ${(p) => p.theme.colorText};
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  width: 375px;
+  gap: 50px;
+  height: 80%;
   overflow: auto;
-  border-radius: 8px;
-  width: 100%;
+  background: ${(p) => p.theme.colorBackground};
+  color: ${(p) => p.theme.colorBackground};
+  z-index: 1000;
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
 `;
 
 const StyledLink = styled(Link)`
-  color: ${(p) => p.theme.colorLink};
-  color: black;
+  color: ${(p) => p.theme.colorBackground};
+  background: ${(p) => p.theme.colorText};
   text-decoration: none;
 `;
 
-const StyledBarContainer = styled.div`
-  background: none;
-  width: 100%;
-`;
-
 const StyledFooter = styled.footer`
-  box-shadow: 0px 0px 60px ${(p) => p.theme.colorFront};
-
-  position: relative;
+  position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  bottom: 0;
-  font-size: 1.4rem;
-  width: 100%;
-  height: 1.25em;
+  bottom: 50px;
+  width: 375px;
+  height: 10px;
   background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorText};
 `;
@@ -91,8 +109,55 @@ const StyledButton = styled.div`
   background: black;
   color: white;
   border-bottom-left-radius: 8px;
-  border: white solid 2px;
-  height: 1.2em;
+  height: 1em;
+`;
+const ContainerToPlaceSelectAndInfoBar = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  width: 375px;
+  height: 40px;
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+  }
+
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+  }
+`;
+
+const StyledFormular = styled.form`
+  position: fixed;
+  bottom: 50px;
+  height: 30px;
+  width: 100%;
+`;
+
+const StyledSelect = styled.select`
+  display: flex;
+  align-self: center;
+  position: relative;
+  background: ${(p) => p.theme.colorText};
+  color: ${(p) => p.theme.Background};
+  width: 30%;
+  height: 30px;
+  text-align: center;
+  font-size: 1em;
+  bottom: 25px;
+  margin: auto;
 `;
 
 export default function History() {
@@ -148,79 +213,59 @@ export default function History() {
   }
 
   return (
-    <AppContainer>
-      <StyledFooter>
-        <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
-        <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
-        <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
-      </StyledFooter>
-      <StyledBarContainer>
-        <StyledNavi>
-          <StyledFormular>
-            <select
-              style={{
-                width: "100%",
-                height: "100%",
-                textAlign: "center",
-                fontSize: "1.05rem",
-                fontSize: "1.2em",
-              }}
-              name="filter results by"
-              onChange={(event) => setSelectedOption(event.target.value)}
-            >
-              <option value="dateUp">date up</option>
-              <option value="dateDown">date down</option>
-              <option value="nameUp">name up</option>
-              <option value="nameDown">name down</option>
-            </select>
-          </StyledFormular>
-        </StyledNavi>
-      </StyledBarContainer>
-
-      <StyledCardContainer>
-        <ListContainer>
-          <StyledList>
-            {sortedItems.map((card) => {
-              return (
-                <Fragment key={card.uuid}>
-                  <li>
-                    <b>{new Date(card.date).toLocaleDateString()}</b>
-                  </li>
-                  <li>
-                    <StyledCardName>
-                      <StyledLink href={`/cards/${card.id}`}>
-                        {card.name}
-                      </StyledLink>
-                    </StyledCardName>
-                  </li>
-                  <li>
-                    {dayNames[card.day]}
-                    {card.hour === 0
-                      ? "midnight"
-                      : card.hour < 4
-                      ? "night"
-                      : card.hour < 7
-                      ? "early morning"
-                      : card.hour < 12
-                      ? "morning"
-                      : card.hour < 13
-                      ? "midday"
-                      : card.hour < 17
-                      ? "afternoon"
-                      : card.hour < 20
-                      ? "early evening"
-                      : card.hour < 25
-                      ? "late evening"
-                      : "out of time"}
-                  </li>
-                  <NoteWithImage card={card} toggle={showButtons} />{" "}
-                </Fragment>
-              );
-            })}
-          </StyledList>
-        </ListContainer>
-      </StyledCardContainer>
+    <Frame>
       <TopMenuBar query2={"/dailyCard"} mid={"history"} />
-    </AppContainer>
+
+      <ListContainer>
+        {sortedItems.map((card) => {
+          return (
+            <StyledEntry key={card.uuid}>
+              <StyledLink href={`/cards/swiper/${card.id}`}>
+                <b>{new Date(card.date).toLocaleDateString()}</b> {card.name}
+              </StyledLink>
+              {dayNames[card.day]}
+              {card.hour === 0
+                ? " midnight"
+                : card.hour < 4
+                ? " night"
+                : card.hour < 7
+                ? " early morning"
+                : card.hour < 12
+                ? " morning"
+                : card.hour < 13
+                ? " midday"
+                : card.hour < 17
+                ? " afternoon"
+                : card.hour < 20
+                ? " early evening"
+                : card.hour < 25
+                ? " late evening"
+                : " out of time"}
+              <HistoryNotes card={card} toggle={showButtons} />{" "}
+            </StyledEntry>
+          );
+        })}
+      </ListContainer>
+      <ContainerToPlaceSelectAndInfoBar>
+        <StyledFormular>
+          <StyledSelect
+            name="filter results by"
+            onChange={(event) => setSelectedOption(event.target.value)}
+          >
+            <option value="dateUp">date up</option>
+            <option value="dateDown">date down</option>
+            <option value="nameUp">name up</option>
+            <option value="nameDown">name down</option>
+          </StyledSelect>
+        </StyledFormular>
+        <StyledFooter>
+          <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
+          <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
+          <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
+        </StyledFooter>
+      </ContainerToPlaceSelectAndInfoBar>
+
+      <StyledNavbar />
+    </Frame>
   );
 }

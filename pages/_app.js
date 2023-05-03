@@ -1,40 +1,32 @@
 import GlobalStyle from "../styles/styles";
 import Layout from "../components/Layout";
-import localFont from "@next/font/local";
+import localFont from "next/font/local";
 import { ThemeProvider } from "styled-components";
 import useLocalStorageState from "use-local-storage-state";
-
+import { themeWhite } from "../components/ToggleThemeButton";
+import { themeDark } from "../components/ToggleThemeButton";
 import { gossip } from "../components/ToggleThemeButton";
 import { palevioletred } from "../components/ToggleThemeButton";
 import { mediumpurple } from "../components/ToggleThemeButton";
 import { feldspar } from "../components/ToggleThemeButton";
 export const pixelOperator = localFont({
-  src: "../styles/fonts/PixelOperatorMono.ttf",
+  src: [
+    {
+      path: "../styles/fonts/PixelOperator.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
 });
 
 export default function App({ Component, pageProps }) {
-  const themeDark = {
-    id: "dark",
-    colorBackground: "black",
-    colorText: "white",
-    colorLink: "yellow",
-  };
-
-  const themeLight = {
-    id: "light",
-    colorBackground: "white",
-    colorText: "black",
-    colorLink: "purple",
-    border: "2px black solid",
-  };
-
-  const [localTheme, setLocalTheme] = useLocalStorageState("localTheme", {
-    defaultValue: themeLight,
+  const [localTheme] = useLocalStorageState("localTheme", {
+    defaultValue: themeDark,
   });
   function getCurrentTheme() {
     let currentTheme = "";
     if (localTheme.id === "dark") return (currentTheme = themeDark);
-    else if (localTheme.id === "light") return (currentTheme = themeLight);
+    else if (localTheme.id === "white") return (currentTheme = themeWhite);
     else if (localTheme.id === "feldspar") return (currentTheme = feldspar);
     else if (localTheme.id === "palevioletred")
       return (currentTheme = palevioletred);

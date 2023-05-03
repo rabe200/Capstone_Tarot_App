@@ -4,14 +4,36 @@ import useStore from "../../../src/store/store";
 import { useState } from "react";
 import { useRouter } from "next/router";
 const StyledSpace = styled.div`
-  position: relative;
+  position: fixed;
   bottom: 0;
   display: flex;
   flex-direction: column;
   height: 45px;
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 375px;
+  z-index: 1000;
+
+  @media only screen and (min-width: 390px) {
+    width: 410px;
+  }
+
+  @media only screen and (min-width: 414px) {
+    width: 414px;
+  }
+
+  @media only screen and (min-width: 585px) {
+    width: 585px;
+  }
+  @media only screen and (min-width: 834px) {
+    width: 834px;
+  }
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
+  }
+  @media only screen and (min-width: 1400px) {
+    width: 1400px;
+  }
 `;
 
 const StyledMenu = styled.div`
@@ -89,24 +111,16 @@ const MenuLink3 = styled(Link)`
 `;
 
 export default function StyledNavbar() {
-  const lastCard = useStore((state) => state.lastCard);
   const [hidden, setHiddenToggle] = useState(false);
   const setLastPageVisited = useStore((state) => state.setLastPageVisited);
   const setComingFromHistory = useStore((state) => state.setComingFromHistory);
   const router = useRouter();
   const queryName = router.query.optionSelect;
+  const storeSlug = useStore((state) => state.slug);
 
   function resetComingFromHistory() {
     setComingFromHistory(false);
     setLastPageVisited(queryName);
-  }
-
-  function toggle() {
-    if (hidden === false) {
-      setHiddenToggle(true);
-    } else {
-      setHiddenToggle(false);
-    }
   }
 
   return (
@@ -122,11 +136,17 @@ export default function StyledNavbar() {
           <MenuLink1
             onClick={() => resetComingFromHistory()}
             hidden={"hidden"}
-            href={`/cards/${lastCard.id}`}
+            href={`/cards/swiper/${
+              router.query.slug
+                ? router.query.slug
+                : storeSlug
+                ? storeSlug
+                : "0"
+            }/zoom`}
           >
             CARDS
           </MenuLink1>
-          <MenuLink3 href={"/cards/history"}>STATS</MenuLink3>
+          <MenuLink3 href={"/cards/history"}>NOTES</MenuLink3>
         </StyledMenu>
       </div>
     </StyledSpace>
