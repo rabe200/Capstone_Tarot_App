@@ -47,7 +47,7 @@ export default function InfoPage() {
           </p>
           <p>
             {
-              "dev_notes: add different reading methods, add different tarot-reader models per gpt-prompts, optimize language select, create visually appealing stats page, rework notes edit system and design."
+              "dev_notes: add different reading methods, add different tarot-reader models per gpt-prompts, optimize language select, create visually appealing stats page, rework notes edit system and design. create option to toggle nav arrows for slider to applease desktop users. "
             }
           </p>
           <p>{"this app is a work in progress and not published yet"}</p>
