@@ -11,7 +11,7 @@ import { useDoubleTap } from "use-double-tap";
 const NoteContainer = styled.div`
   display: grid;
   width: 375px;
-  height: 80px;
+  height: 100px;
   border: 2px black solid;
   background: ${(p) => p.theme.colorBackground};
   border-radius: 8px;

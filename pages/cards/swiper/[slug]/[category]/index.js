@@ -14,7 +14,7 @@ import Image from "next/image";
 import Overflow from "../../../../../components/OverFlowIndicator";
 
 const StyledOverFlow = styled(Overflow)`
-  max-height: 100%;
+  max-height: 90%;
   width: 100%;
   padding-right: 10px;
   Overflow.Indicator {
@@ -40,7 +40,7 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 90%;
   text-align: center;
 
   @media only screen and (min-width: 390px) {
@@ -204,7 +204,7 @@ export default function Category() {
       <Frame>
         <TopMenuBar
           mid={card[0].name}
-          backbutton={`/cards/swiper/${card[0].id}`}
+          backbutton={`/cards/swiper/${slug}/zoom`}
         />
 
         <StyledCategoryName> {category}</StyledCategoryName>

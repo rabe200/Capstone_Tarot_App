@@ -39,7 +39,6 @@ export default function NoteFormular() {
   const drawnCards = useStore((state) => state.drawnCards);
   const difference = useStore((state) => state.difference);
   const [hasMounted, setHasMounted] = useState(false);
-  const router = useRouter();
   const { safePush } = useSafePush();
 
   function handleSubmit(event) {

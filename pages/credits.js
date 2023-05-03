@@ -8,6 +8,8 @@ const StyledCredits = styled.ul`
   margin: 0;
   padding: 0;
   height: 80%;
+  color: ${(p) => p.theme.colorText};
+  background: ${(p) => p.theme.colorBackground};
 `;
 
 export default function Credits() {

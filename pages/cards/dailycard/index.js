@@ -8,6 +8,8 @@ import StyledNavbar from "../../../components/Styled/StyledNavbar";
 import Frame from "../../../components/Frame";
 
 const Container = styled.div`
+  color: ${(p) => p.theme.colorText};
+  background: ${(p) => p.theme.colorBackground};
   display: grid;
   flex-direction: column;
   position: fixed;

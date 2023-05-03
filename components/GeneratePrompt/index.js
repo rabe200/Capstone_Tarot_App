@@ -78,8 +78,6 @@ export default function GeneratePrompt(userData, allReadings, language) {
  
     Today is ${dayName}. React accordingly. Talk about witchy stuff, like familiars or herbs that you like to use in ceremonies.###
 
-    here is a number: ${visits}. if this number is dividable by 7 without rest, give me an anecdote about your last failed spell. 
-    If this number is dividable by 8 without rest then talk about your little black cat.
   `;
   return prompt;
 }
