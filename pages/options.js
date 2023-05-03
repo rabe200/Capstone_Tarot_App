@@ -37,7 +37,6 @@ export default function OptionsMenu() {
         <StyledH1>
           <ButtonToggleLanguage />
         </StyledH1>
-        {/* // <ButtonCreeplevelToggle /> */}
       </StyledOptionsMenu>
       <StyledNavbar />
     </Frame>

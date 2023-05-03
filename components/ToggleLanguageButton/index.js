@@ -23,29 +23,10 @@ export default function ButtonToggleLanguage() {
     else if (localLanguage === "german") setLocalLanguage("espanol");
     else if (localLanguage === "espanol") setLocalLanguage("french");
   }
-  //   const [count, setCount] = useState(
-  //     language === "english"
-  //       ? 0
-  //       : language === "german"
-  //       ? 1
-  //       : language === "espanol"
-  //       ? 2
-  //       : language === "french"
-  //       ? 3
-  //       : 0
-  //   );
-
-  //   function handleClick() {
-  //     count < 3 ? setCount(count + 1) : setCount(0);
-  //     if (count === 0) setLocalLanguage("english");
-  //     else if (count === 1) setLocalLanguage("german");
-  //     else if (count === 2) setLocalLanguage("espanol");
-  //     else if (count === 3) setLocalLanguage("french");
-  //   }
 
   return (
     <ToggleButton onClick={() => handleClick()}>
-      {localLanguage.toUpperCase()}
+      {localLanguage ? localLanguage.toUpperCase() : LANGUAGE}
     </ToggleButton>
   );
 }

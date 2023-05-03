@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import "swiper/swiper-bundle.min.css";
-import { useDoubleTap } from "use-double-tap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Navigation, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { cards } from "../../../../../lib/data";
@@ -187,21 +186,6 @@ export default function Category() {
   const { safePush } = useSafePush();
   const [clicked, setClicked] = useState(false);
   console.log(category);
-  // const doubleTap = useDoubleTap(() => {
-  //   safePush(`/cards/swiper/${slug}/zoom`);
-  // });
-  // const [toggleCategory, setToggleCategory] = useState(category);
-
-  // function handleToggle() {
-  //   if (category === "description") setToggleCategory("meaning_up");
-  //   else if (category === "meaning_up") setToggleCategory("meaning_rev");
-  //   else if (category === "meaning_rev") setToggleCategory("description");
-  //   router.push(`/cards/swiper/${slug}/${toggleCategory}`);
-  // }
-
-  // useEffect(() => {
-  //   setCategory(router.query.category);
-  // }, []);
 
   function handleToggle() {
     if (category === "description") {
