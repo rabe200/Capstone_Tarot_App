@@ -146,7 +146,7 @@ export default function SearchResults() {
             return (
               <Fragment key={card.name}>
                 <StyledListElement>
-                  <StyledLink href={`/cards/swiper/${card.id}`}>
+                  <StyledLink href={`/cards/swiper/${card.id}/zoom`}>
                     {card.name}
                   </StyledLink>
                 </StyledListElement>
@@ -159,12 +159,12 @@ export default function SearchResults() {
           {cardByName.map((card) => (
             <Fragment key={card.name}>
               <li>
-                <StyledLink href={`/cards/swiper/${card.id}`}>
+                <StyledLink href={`/cards/swiper/${card.id}/zoom`}>
                   {card.name}
                 </StyledLink>
               </li>
               <li>
-                <Link href={`/cards/swiper/${card.id}`}>
+                <Link href={`/cards/swiper/${card.id}/zoom`}>
                   {" "}
                   <Image
                     src={card.image}
@@ -182,7 +182,7 @@ export default function SearchResults() {
           {cardByMeaningUp.map((card) => (
             <Fragment key={card.name}>
               <li>
-                <StyledLink href={`/cards/swiper/${card.id}`}>
+                <StyledLink href={`/cards/swiper/${card.id}/zoom`}>
                   {card.name}
                 </StyledLink>
               </li>
@@ -194,7 +194,7 @@ export default function SearchResults() {
           {cardByMeaningRev.map((card) => (
             <Fragment key={card.name}>
               <li>
-                <StyledLink href={`/cards/swiper/${card.id}`}>
+                <StyledLink href={`/cards/swiper/${card.id}/zoom`}>
                   {card.name}
                 </StyledLink>
               </li>
