@@ -12,7 +12,6 @@ import useSafePush from "../../../../../components/useSafePush";
 import Frame from "../../../../../components/Frame";
 import Image from "next/image";
 import Overflow from "../../../../../components/OverFlowIndicator";
-import { useEffect } from "react";
 
 const StyledOverFlow = styled(Overflow)`
   max-height: 100%;
@@ -186,7 +185,6 @@ export default function Category() {
   const [category, setCategory] = useState(router ? router.query.category : 0);
   const { safePush } = useSafePush();
   const [clicked, setClicked] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
 
   function handleToggle() {
     if (category === "description") {
@@ -199,12 +197,6 @@ export default function Category() {
       router.push(`/cards/swiper/${slug}/description`);
       setCategory("description");
     }
-  }
-
-  useEffect(() => setHasMounted(true), []);
-
-  if (!hasMounted) {
-    return null;
   }
 
   return (
@@ -236,7 +228,6 @@ export default function Category() {
           {cards.map((card) => (
             <StyledSwiperSlide key={card.name}>
               <StyledBoxForText
-                // {...doubleTap}
                 onDoubleClick={() => safePush(`/cards/swiper/${slug}/zoom`)}
               >
                 <StyledImage
@@ -321,7 +312,7 @@ export default function Category() {
                 </ReturnButton>
                 <ToggleButton
                   clicked={clicked}
-                  onTouchStart={() => handleToggle()}
+                  onTouchEnd={() => handleToggle()}
                   onClick={() => handleToggle()}
                 >
                   toggle
