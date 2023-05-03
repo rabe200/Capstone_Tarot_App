@@ -14,7 +14,7 @@ import Image from "next/image";
 import Overflow from "../../../../../components/OverFlowIndicator";
 
 const StyledOverFlow = styled(Overflow)`
-  max-height: 80%;
+  max-height: 100%;
   width: 100%;
   padding-right: 10px;
   Overflow.Indicator {
@@ -185,7 +185,6 @@ export default function Category() {
   const [category, setCategory] = useState(router ? router.query.category : 0);
   const { safePush } = useSafePush();
   const [clicked, setClicked] = useState(false);
-  console.log(category);
 
   function handleToggle() {
     if (category === "description") {

@@ -11,17 +11,16 @@ import { useDoubleTap } from "use-double-tap";
 const NoteContainer = styled.div`
   display: grid;
   width: 375px;
-  height: 160px;
+  height: 80px;
   border: 2px black solid;
   background: ${(p) => p.theme.colorBackground};
   border-radius: 8px;
-  background: white;
   padding-top: 20px;
   overflow: auto;
   z-index: 1000;
   font-size: 1.3em;
   text-align: center;
-  /* @media only screen and (min-width: 414px) {
+  @media only screen and (min-width: 414px) {
     width: 414px;
   }
 
@@ -37,7 +36,7 @@ const NoteContainer = styled.div`
 
   @media only screen and (min-width: 1194px) {
     width: 1194px;
-  } */
+  }
 `;
 
 const StyledButton = styled.div`
@@ -59,12 +58,13 @@ const ButtonBox = styled.div`
 const DeleteButtonToggleBox = styled.div`
   visibility: ${(props) => (props.showButtons ? "visible" : "hidden")};
   padding-top: 2px;
-  width: 80%;
+  width: 100%;
 `;
 
 const StyledForm = styled.form`
-  width: 80%;
+  width: 100%;
   overflow-wrap: break-word;
+  background: ${(p) => p.theme.colorBackground};
 `;
 
 const StyledNotes = styled.div`
@@ -73,27 +73,24 @@ const StyledNotes = styled.div`
   border-radius: 0px;
   background: ${(p) => p.theme.colorBackground};
   align-self: center;
-  widt
-  font-size: 1em;
   overflow-wrap: break-word;
   box-shadow: 0px 2px 2px;
   max-width: 350px;
   overflow: ${(props) => (props.noteOverflow === "hidden" ? "auto" : "hidden")};
   color: ${(props) =>
     props.contentEditable === true
-      ? props.theme.colorContainer
+      ? props.theme.colorText
       : props.theme.colorText};
   background: ${(props) =>
     props.contentEditable === true
-      ? props.theme.colorText
-      : props.theme.colorContainer};
+      ? props.theme.colorBackground
+      : props.theme.colorBackground};
   border: ${(p) => {
     p.theme.border;
   }};
 `;
 
 const StyledToastContainer = styled(ToastContainer)`
-  /* z-index: 2000; */
   position: sticky;
   font-size: 1em;
   .Toastify__progress-bar {
@@ -116,9 +113,11 @@ export default function HistoryNotes({ card, toggle }) {
   const setCurrentNote = useStore((state) => state.setCurrentNote);
   const [editable, setEditable] = useState(false);
   const { safePush } = useSafePush();
+
   const doubleTap = useDoubleTap(() => {
-    safePush(`/cards/swiper/${slug}`);
+    safePush(`/cards/swiper/${slug}/zoom`);
   });
+
   function handleClick() {
     setEditable(!editable);
   }
@@ -166,7 +165,7 @@ export default function HistoryNotes({ card, toggle }) {
           onClick={enlargeContent}
           onDoubleClick={handleClick}
           noteOverflow={noteOverflow}
-          contentEditable={editable}
+          contentEditable={true}
           suppressContentEditableWarning={true}
           id={`${card.uuid}`}
           name="textBox"

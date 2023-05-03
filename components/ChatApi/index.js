@@ -104,7 +104,7 @@ const StyledText = styled.div`
 const ButtonHideContainer = styled.div``;
 
 const StyledOverFlow = styled(Overflow)`
-  max-height: 74%;
+  height: 100%;
   Overflow.Indicator {
     background: white;
     color: white;
@@ -138,7 +138,7 @@ const OverFlowIndicatorIcon = styled.div`
   right: 10px;
   bottom: 10px;
   font-size: 2em;
-  opacity: 77%;
+  opacity: 65%;
   color: ${(props) => props.theme.colorAscii};
 `;
 
@@ -154,7 +154,6 @@ export default function ChatApi() {
   const [loading, setLoading] = useState(false);
   const allReadings = useStore((state) => state.allReadings);
   const [hidden, setHidden] = useState(false);
-  // const language = useStore((state) => state.language);
   const [language] = useLocalStorageState("localLanguage", {
     defaultValue: "english",
   });

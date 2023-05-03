@@ -14,8 +14,8 @@ const StyledEntry = styled.div`
   justify-content: start;
   align-items: center;
 
-  /* width: 375px; */
-  /* @media only screen and (min-width: 414px) {
+  width: 375px;
+  @media only screen and (min-width: 414px) {
     width: 414px;
   }
 
@@ -35,7 +35,7 @@ const StyledEntry = styled.div`
 
   @media only screen and (min-width: 1400px) {
     width: 1400px;
-  } */
+  }
 `;
 
 const ListContainer = styled.div`
@@ -49,7 +49,7 @@ const ListContainer = styled.div`
   gap: 50px;
   height: 80%;
   overflow: auto;
-  background: ${(p) => p.theme.colorText};
+  background: ${(p) => p.theme.colorBackground};
   color: ${(p) => p.theme.colorBackground};
   z-index: 1000;
   @media only screen and (min-width: 414px) {
@@ -83,7 +83,7 @@ const StyledFooter = styled.footer`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  bottom: 90px;
+  bottom: 50px;
   width: 375px;
   height: 10px;
   background: ${(p) => p.theme.colorBackground};
@@ -156,7 +156,7 @@ const StyledSelect = styled.select`
   height: 30px;
   text-align: center;
   font-size: 1em;
-  bottom: 55px;
+  bottom: 25px;
   margin: auto;
 `;
 
