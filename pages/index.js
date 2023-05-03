@@ -59,6 +59,7 @@ export default function HomePage() {
         <MenuLink href={"/cards/dailycard/moodmeter"}>START</MenuLink>
         <MenuLink href={"/options"}>OPTIONS</MenuLink>
         <MenuLink href={"/credits"}>CREDITS</MenuLink>
+        <MenuLink href={"/info"}>101</MenuLink>
         <SearchBar />
       </StyledLinkContainer>
 
