@@ -215,16 +215,6 @@ export default function Category() {
     }
   }
 
-  // useEffect(() => {
-  //   if (category === "description") {
-  //     router.replace(`/cards/swiper/${slug}/description`);
-  //   } else if (category === "meaning_up") {
-  //     router.replace(`/cards/swiper/${slug}/meaning_up`);
-  //   } else if (category === "meaning_rev") {
-  //     router.replace(`/cards/swiper/${slug}/meaning_rev`);
-  //   }
-  // }, [category]);
-
   function displayCategory() {
     if (card[0]) {
       if (category === "description") {
@@ -237,6 +227,10 @@ export default function Category() {
         return card[0].meaning_rev;
       }
     }
+  }
+  function disableSwiper() {
+    document.body.querySelector(".swiper") &&
+      document.body.querySelector(".swiper").swiper.disable();
   }
 
   const display = displayCategory();

@@ -11,7 +11,6 @@ import useStore from "../../../../../src/store/store";
 import Frame from "../../../../../components/Frame";
 import { useDoubleTap } from "use-double-tap";
 import useSafePush from "../../../../../components/useSafePush";
-import { useState } from "react";
 
 const StyledImageContainerIndex = styled.div`
   display: block;
@@ -44,14 +43,6 @@ const StyledImage = styled(Image)`
   height: 565px;
 `;
 
-const StyledButton = styled.button``;
-
-const Buttons = styled.div`
-  display: flex;
-  position: fixed;
-  bottom: 55px;
-`;
-
 export default function ProductImagesSlider() {
   if (typeof window !== "undefined") {
     const router = useRouter();
@@ -60,14 +51,18 @@ export default function ProductImagesSlider() {
     const slug = router ? router.query.slug : 0;
     const getCardById = useStore((state) => state.getCardById);
     const card = getCardById(slug);
-    const doubleTapImage = useDoubleTap(() => {
-      router.push(`/cards/swiper/${slug}/description`);
-    });
-    // const swiper = document.body.querySelector(".swiper").swiper;
-    // console.log(document.body.querySelector(".swiper"));
 
-    // const swiper = document.querySelector(".swiper").swiper;
-    // console.log(swiper);
+    const doubleTapImage = useDoubleTap(() => {
+      disableSwiper();
+    });
+
+    function disableSwiper() {
+      if (document.body.querySelector(".swiper")) {
+        document.body.querySelector(".swiper").swiper.disable();
+        safePush(`/cards/swiper/${slug}/description`);
+      }
+    }
+
     return (
       slug && (
         <Frame>
@@ -85,7 +80,7 @@ export default function ProductImagesSlider() {
             onSlideChange={(event) => {
               router.replace(`/cards/swiper/${event.realIndex}/zoom`);
             }}
-            onDoubleClick={(event) => event.destroy()}
+            // onDoubleClick={(event) => event.destroy()}
             grabCursor={true}
             centeredSlides={true}
             initialSlide={slug}
@@ -103,33 +98,12 @@ export default function ProductImagesSlider() {
                     alt={card.name}
                     width={300}
                     height={527}
-                    onDoubleClick={() =>
-                      safePush(`/cards/swiper/${slug}/description`)
-                    }
+                    onDoubleClick={() => disableSwiper()}
                   ></StyledImage>
                 </StyledImageContainerIndex>
               </StyledSwiperSlide>
             ))}
           </StyledSwiper>
-
-          <Buttons>
-            <StyledButton
-              type="button"
-              onClick={() =>
-                document.body.querySelector(".swiper").swiper.disable()
-              }
-            >
-              disable
-            </StyledButton>
-            <StyledButton
-              type="button"
-              onClick={() =>
-                document.body.querySelector(".swiper").swiper.enable()
-              }
-            >
-              enable
-            </StyledButton>
-          </Buttons>
 
           <StyledNavbar />
         </Frame>
