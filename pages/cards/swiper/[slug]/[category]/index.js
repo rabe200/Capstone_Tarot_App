@@ -226,14 +226,16 @@ export default function Category() {
   // }, [category]);
 
   function displayCategory() {
-    if (category === "description") {
-      return card[0].desc;
-    }
-    if (category === "meaning_up") {
-      return card[0].meaning_up;
-    }
-    if (category === "meaning_rev") {
-      return card[0].meaning_rev;
+    if (card[0]) {
+      if (category === "description") {
+        return card[0].desc;
+      }
+      if (category === "meaning_up") {
+        return card[0].meaning_up;
+      }
+      if (category === "meaning_rev") {
+        return card[0].meaning_rev;
+      }
     }
   }
 
@@ -276,7 +278,7 @@ export default function Category() {
 
                 <StyledOverFlow>
                   <Overflow.Content>
-                    <StyledText>{display}</StyledText>{" "}
+                    <StyledText>{display}</StyledText>
                   </Overflow.Content>
                   <Overflow.Indicator direction={"down"}>
                     {(canScroll, refs) => (
