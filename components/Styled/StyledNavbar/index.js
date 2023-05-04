@@ -137,11 +137,7 @@ export default function StyledNavbar() {
             onClick={() => resetComingFromHistory()}
             hidden={"hidden"}
             href={`/cards/swiper/${
-              router.query.slug
-                ? router.query.slug
-                : storeSlug
-                ? storeSlug
-                : "0"
+              router.query.slug ? router.query.slug : "0"
             }/zoom`}
           >
             CARDS
