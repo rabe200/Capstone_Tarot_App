@@ -11,6 +11,7 @@ import useStore from "../../../../../src/store/store";
 import Frame from "../../../../../components/Frame";
 import { useDoubleTap } from "use-double-tap";
 import useSafePush from "../../../../../components/useSafePush";
+import { useState } from "react";
 
 const StyledImageContainerIndex = styled.div`
   display: block;
@@ -25,7 +26,7 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 80%;
   text-align: center;
   background: ${(p) => p.theme.colorBackground};
 `;
@@ -43,60 +44,96 @@ const StyledImage = styled(Image)`
   height: 565px;
 `;
 
+const StyledButton = styled.button``;
+
+const Buttons = styled.div`
+  display: flex;
+  position: fixed;
+  bottom: 55px;
+`;
+
 export default function ProductImagesSlider() {
-  const router = useRouter();
-  const { safePush } = useSafePush();
+  if (typeof window !== "undefined") {
+    const router = useRouter();
+    const { safePush } = useSafePush();
 
-  const slug = router ? router.query.slug : 0;
-  const getCardById = useStore((state) => state.getCardById);
-  const card = getCardById(slug);
-  const doubleTapImage = useDoubleTap(() => {
-    safePush(`/cards/swiper/${slug}/description`);
-  });
-  const setStoreSlug = useStore((state) => state.setSlug);
-  return (
-    slug && (
-      <Frame>
-        <TopMenuBar mid={card[0].name} backbutton={`/`} />
+    const slug = router ? router.query.slug : 0;
+    const getCardById = useStore((state) => state.getCardById);
+    const card = getCardById(slug);
+    const doubleTapImage = useDoubleTap(() => {
+      router.push(`/cards/swiper/${slug}/description`);
+    });
+    // const swiper = document.body.querySelector(".swiper").swiper;
+    // console.log(document.body.querySelector(".swiper"));
 
-        <StyledSwiper
-          loop={true}
-          speed={300}
-          modules={[Navigation, A11y]}
-          spaceBetween={250}
-          slidesPerView={1}
-          navigation={false}
-          onSlideChange={(event) => {
-            setStoreSlug(event.realIndex);
-            router.replace(`/cards/swiper/${event.realIndex}/zoom`);
-          }}
-          grabCursor={true}
-          centeredSlides={true}
-          initialSlide={slug}
-          lazyPreloadPrevNext={8}
-        >
-          {cards.map((card) => (
-            <StyledSwiperSlide key={card.name}>
-              <StyledImageContainerIndex>
-                <StyledImage
-                  {...doubleTapImage}
-                  loading="eager"
-                  placeholder="blur"
-                  blurDataURL="/images/placeholder.jpg"
-                  src={card.image}
-                  alt={card.name}
-                  width={300}
-                  height={527}
-                  onDoubleClick={() =>
-                    safePush(`/cards/swiper/${slug}/description`)
-                  }
-                ></StyledImage>
-              </StyledImageContainerIndex>
-            </StyledSwiperSlide>
-          ))}
-        </StyledSwiper>
-        <StyledNavbar />
-      </Frame>
-    )
-  );
+    // const swiper = document.querySelector(".swiper").swiper;
+    // console.log(swiper);
+    return (
+      slug && (
+        <Frame>
+          <TopMenuBar mid={card[0].name} backbutton={`/`} />
+
+          <StyledSwiper
+            enabled={true}
+            id={"swiper"}
+            loop={true}
+            speed={300}
+            modules={[Navigation, A11y]}
+            spaceBetween={250}
+            slidesPerView={1}
+            navigation={false}
+            onSlideChange={(event) => {
+              router.replace(`/cards/swiper/${event.realIndex}/zoom`);
+            }}
+            onDoubleClick={(event) => event.destroy()}
+            grabCursor={true}
+            centeredSlides={true}
+            initialSlide={slug}
+            lazyPreloadPrevNext={8}
+          >
+            {cards.map((card) => (
+              <StyledSwiperSlide key={card.name} id={"swiperSlide"}>
+                <StyledImageContainerIndex>
+                  <StyledImage
+                    {...doubleTapImage}
+                    loading="eager"
+                    placeholder="blur"
+                    blurDataURL="/images/placeholder.jpg"
+                    src={card.image}
+                    alt={card.name}
+                    width={300}
+                    height={527}
+                    onDoubleClick={() =>
+                      safePush(`/cards/swiper/${slug}/description`)
+                    }
+                  ></StyledImage>
+                </StyledImageContainerIndex>
+              </StyledSwiperSlide>
+            ))}
+          </StyledSwiper>
+
+          <Buttons>
+            <StyledButton
+              type="button"
+              onClick={() =>
+                document.body.querySelector(".swiper").swiper.disable()
+              }
+            >
+              disable
+            </StyledButton>
+            <StyledButton
+              type="button"
+              onClick={() =>
+                document.body.querySelector(".swiper").swiper.enable()
+              }
+            >
+              enable
+            </StyledButton>
+          </Buttons>
+
+          <StyledNavbar />
+        </Frame>
+      )
+    );
+  }
 }

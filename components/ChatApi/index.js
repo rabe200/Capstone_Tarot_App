@@ -104,14 +104,10 @@ const StyledText = styled.div`
 const ButtonHideContainer = styled.div``;
 
 const StyledOverFlow = styled(Overflow)`
-  height: 100%;
-  Overflow.Indicator {
-    background: white;
-    color: white;
-  }
+  height: 70%;
 
   @media only screen and (min-width: 390px) {
-    height: 80%;
+    height: 75%;
   }
 
   @media only screen and (min-width: 414px) {
