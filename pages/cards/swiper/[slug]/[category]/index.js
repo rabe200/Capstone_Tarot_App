@@ -211,21 +211,21 @@ export default function Category() {
     }
   }
 
-  function displayCategory() {
-    if (card[0]) {
-      if (category === "description") {
-        return card[0].desc;
-      }
-      if (category === "meaning_up") {
-        return card[0].meaning_up;
-      }
-      if (category === "meaning_rev") {
-        return card[0].meaning_rev;
-      }
-    }
-  }
+  // function displayCategory() {
+  //   if (card[0]) {
+  //     if (category === "description") {
+  //       return card[0].desc;
+  //     }
+  //     if (category === "meaning_up") {
+  //       return card[0].meaning_up;
+  //     }
+  //     if (category === "meaning_rev") {
+  //       return card[0].meaning_rev;
+  //     }
+  //   }
+  // }
 
-  const display = displayCategory();
+  // const display = displayCategory();
 
   return (
     slug && (
@@ -264,7 +264,7 @@ export default function Category() {
 
                 <StyledOverFlow>
                   <Overflow.Content>
-                    <StyledText>{display}</StyledText>
+                    <StyledText>{"display"}</StyledText>
                   </Overflow.Content>
                   <Overflow.Indicator direction={"down"}>
                     {(canScroll, refs) => (
