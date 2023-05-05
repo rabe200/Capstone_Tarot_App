@@ -118,16 +118,19 @@ const StyledBoxForText = styled.div`
   @media only screen and (min-width: 414px) {
     width: 414px;
     font-size: 1.1em;
+    max-height: 80%;
   }
 
   @media only screen and (min-width: 585px) {
     width: 585px;
     font-size: 1.2em;
+    max-height: 80%;
   }
 
   @media only screen and (min-width: 834px) {
     width: 834px;
     font-size: 1.3em;
+    max-height: 80%;
   }
 
   @media only screen and (min-width: 1194px) {
