@@ -11,7 +11,7 @@ import { useDoubleTap } from "use-double-tap";
 const NoteContainer = styled.div`
   display: grid;
   width: 375px;
-  height: 100px;
+  height: 140px;
   border: 2px black solid;
   background: ${(p) => p.theme.colorBackground};
   border-radius: 8px;
@@ -75,7 +75,8 @@ const StyledNotes = styled.div`
   align-self: center;
   overflow-wrap: break-word;
   box-shadow: 0px 2px 2px;
-  max-width: 350px;
+
+  height: 40px;
   overflow: ${(props) => (props.noteOverflow === "hidden" ? "auto" : "hidden")};
   color: ${(props) =>
     props.contentEditable === true

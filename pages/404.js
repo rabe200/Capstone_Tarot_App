@@ -14,6 +14,7 @@ const StyledOptionsMenu = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 300px;
   @media only screen and (min-width: 834px) {
     font-size: 1.4em;
     top: 60px;
@@ -25,8 +26,6 @@ const StyledOptionsMenu = styled.ul`
 export default function FourOhFour() {
   return (
     <Frame>
-      {/* <TopMenuBar mid={"404"} back={"/"} /> */}
-
       <StyledOptionsMenu>
         <h1>404 PAGE NOT MEOW</h1>
 

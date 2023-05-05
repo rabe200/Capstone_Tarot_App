@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import useStore from "../../../src/store/store";
+import useStore from "../../../../src/store/store";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 import styled from "styled-components";
-import TopMenuBar from "../../../components/Styled/StyledTopMenuBar";
+import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 import { useCallback } from "react";
-import HistoryNotes from "../../../components/Styled/StyledHistoryNotes";
-import StyledNavbar from "../../../components/Styled/StyledNavbar";
-import Frame from "../../../components/Frame";
+
+import StyledNavbar from "../../../../components/Styled/StyledNavbar";
+import Frame from "../../../../components/Frame";
 const StyledEntry = styled.div`
   display: flex;
   flex-direction: column;
@@ -160,9 +160,17 @@ const StyledSelect = styled.select`
   margin: auto;
 `;
 
+const CardText = styled.div`
+  display: flex;
+  background: ${(p) => p.theme.colorContainer};
+  color: ${(p) => p.theme.colorText};
+`;
+
 export default function History() {
   const [hasMounted, setHasMounted] = useState(false);
-
+  const router = useRouter();
+  const uuid = router.query.uuid;
+  console.log(uuid);
   const cardsDeleted = useStore((state) => state.cardsDeleted);
   const updateCardsDrawn = useStore(
     useCallback((state) => state.updateCardsDrawn, [])
@@ -180,26 +188,13 @@ export default function History() {
     "Friday",
     "Saturday",
   ];
+  console.log(drawnCards);
+  const [cardByUuid] = drawnCards.filter((card) => card.uuid === uuid);
+  console.log(cardByUuid);
 
   function toggleShowButton() {
     setShowButtons(!showButtons);
   }
-
-  const sortedItems = drawnCards.sort((a, b) => {
-    if (selectedOption === "dateUp") {
-      return new Date(a.date) - new Date(b.date);
-    } else if (selectedOption === "dateDown") {
-      return new Date(b.date) - new Date(a.date);
-    } else if (selectedOption === "nameDown") {
-      return b.name.trim().localeCompare(a.name);
-    } else if (selectedOption === "nameUp") {
-      return a.name.trim().localeCompare(b.name);
-    } else if (selectedOption === "secondDown") {
-      return b.second - a.second;
-    } else if (selectedOption === "secondUp") {
-      return a.second - b.second;
-    }
-  });
 
   useEffect(() => {
     updateCardsDrawn();
@@ -215,56 +210,14 @@ export default function History() {
   return (
     <Frame>
       <TopMenuBar query2={"/dailyCard"} mid={"history"} />
-
-      <ListContainer>
-        {sortedItems.map((card) => {
-          return (
-            <StyledEntry key={card.uuid}>
-              <StyledLink href={`/cards/history/${card.uuid}}`}>
-                <b>{new Date(card.date).toLocaleDateString()}</b> {card.name}
-              </StyledLink>
-              {dayNames[card.day]}
-              {card.hour === 0
-                ? " midnight"
-                : card.hour < 4
-                ? " night"
-                : card.hour < 7
-                ? " early morning"
-                : card.hour < 12
-                ? " morning"
-                : card.hour < 13
-                ? " midday"
-                : card.hour < 17
-                ? " afternoon"
-                : card.hour < 20
-                ? " early evening"
-                : card.hour < 25
-                ? " late evening"
-                : " out of time"}
-              <HistoryNotes card={card} toggle={showButtons} />{" "}
-            </StyledEntry>
-          );
-        })}
-      </ListContainer>
+      <CardText>{cardByUuid.notes}</CardText>
       <ContainerToPlaceSelectAndInfoBar>
-        <StyledFormular>
-          <StyledSelect
-            name="filter results by"
-            onChange={(event) => setSelectedOption(event.target.value)}
-          >
-            <option value="dateUp">date up</option>
-            <option value="dateDown">date down</option>
-            <option value="nameUp">name up</option>
-            <option value="nameDown">name down</option>
-          </StyledSelect>
-        </StyledFormular>
         <StyledFooter>
           <StyledFooterLeft>drawn:{cardsDrawn}</StyledFooterLeft>
           <StyledButton onClick={toggleShowButton}>DELETE</StyledButton>
           <StyledFooterRight>deleted: {cardsDeleted}</StyledFooterRight>
         </StyledFooter>
       </ContainerToPlaceSelectAndInfoBar>
-
       <StyledNavbar />
     </Frame>
   );
