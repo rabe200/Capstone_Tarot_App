@@ -220,7 +220,7 @@ export default function History() {
         {sortedItems.map((card) => {
           return (
             <StyledEntry key={card.uuid}>
-              <StyledLink href={`/cards/history/${card.uuid}}`}>
+              <StyledLink href={`/cards/history/${card.uuid}`}>
                 <b>{new Date(card.date).toLocaleDateString()}</b> {card.name}
               </StyledLink>
               {dayNames[card.day]}
