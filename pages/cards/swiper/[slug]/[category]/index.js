@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import "swiper/swiper-bundle.min.css";
-import { useState } from "react";
 import { Navigation, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { cards } from "../../../../../lib/data";
@@ -12,7 +11,7 @@ import useSafePush from "../../../../../components/useSafePush";
 import Frame from "../../../../../components/Frame";
 import Image from "next/image";
 import Overflow from "../../../../../components/OverFlowIndicator";
-import { useEffect } from "react";
+
 const StyledOverFlow = styled(Overflow)`
   height: 70%;
 
@@ -199,19 +198,16 @@ export default function Category() {
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
-  const [category, setCategory] = useState("description");
   const { safePush } = useSafePush();
+  const category = router && router.query.category;
 
   function handleToggle() {
     if (category === "description") {
-      setCategory("meaning_up");
-      router.replace(`/cards/swiper/${slug}/description`);
+      router.push(`/cards/swiper/${slug}/meaning_up`);
     } else if (category === "meaning_up") {
-      setCategory("meaning_rev");
-      router.replace(`/cards/swiper/${slug}/meaning_up`);
+      router.push(`/cards/swiper/${slug}/meaning_rev`);
     } else if (category === "meaning_rev") {
-      setCategory("description");
-      router.replace(`/cards/swiper/${slug}/meaning_rev`);
+      router.push(`/cards/swiper/${slug}/description`);
     }
   }
 
@@ -227,10 +223,6 @@ export default function Category() {
         return card[0].meaning_rev;
       }
     }
-  }
-  function disableSwiper() {
-    document.body.querySelector(".swiper") &&
-      document.body.querySelector(".swiper").swiper.disable();
   }
 
   const display = displayCategory();
