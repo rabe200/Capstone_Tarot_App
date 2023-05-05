@@ -25,7 +25,7 @@ const StyledOptionsMenu = styled.ul`
 export default function FourOhFour() {
   return (
     <Frame>
-      <TopMenuBar mid={"404"} back={"/"} />
+      {/* <TopMenuBar mid={"404"} back={"/"} /> */}
 
       <StyledOptionsMenu>
         <h1>404 PAGE NOT MEOW</h1>

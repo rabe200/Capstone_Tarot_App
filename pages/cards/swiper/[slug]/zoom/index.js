@@ -44,7 +44,7 @@ const StyledImage = styled(Image)`
   height: 555px;
 `;
 
-export default function ProductImagesSlider() {
+export default function CardImagesSlider() {
   if (typeof window !== "undefined") {
     const router = useRouter();
     const { safePush } = useSafePush();
@@ -60,7 +60,7 @@ export default function ProductImagesSlider() {
     function disableSwiper() {
       if (document.body.querySelector(".swiper")) {
         document.body.querySelector(".swiper").swiper.disable();
-        safePush(`/cards/swiper/${slug}/description`);
+        safePush(`/cards/swiper/${slug}/category/description`);
       }
     }
 

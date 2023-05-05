@@ -11,7 +11,7 @@ import useSafePush from "../../../../../components/useSafePush";
 import Frame from "../../../../../components/Frame";
 import Image from "next/image";
 import Overflow from "../../../../../components/OverFlowIndicator";
-
+import Link from "next/link";
 const StyledOverFlow = styled(Overflow)`
   height: 70%;
 
@@ -168,8 +168,9 @@ const ButtonContainer = styled.div`
   z-index: 1;
 `;
 
-const ToggleButton = styled.div`
-  width: 25%;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  width: 70%;
   height: 45px;
   padding: 10px;
   background: black;
@@ -193,42 +194,16 @@ const ReturnButton = styled.div`
   border-bottom-right-radius: 4px;
 `;
 
-export default function Category() {
+export default function Meaning_Rev() {
   const router = useRouter();
+  const category = router ? router.query.category : 0;
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
   const { safePush } = useSafePush();
-  const category = router && router.query.category;
-
-  function handleToggle() {
-    if (category === "description") {
-      router.push(`/cards/swiper/${slug}/meaning_up`);
-    } else if (category === "meaning_up") {
-      router.push(`/cards/swiper/${slug}/meaning_rev`);
-    } else if (category === "meaning_rev") {
-      router.push(`/cards/swiper/${slug}/description`);
-    }
-  }
-
-  // function displayCategory() {
-  //   if (card[0]) {
-  //     if (category === "description") {
-  //       return card[0].desc;
-  //     }
-  //     if (category === "meaning_up") {
-  //       return card[0].meaning_up;
-  //     }
-  //     if (category === "meaning_rev") {
-  //       return card[0].meaning_rev;
-  //     }
-  //   }
-  // }
-
-  // const display = displayCategory();
 
   return (
-    slug && (
+    card[0] && (
       <Frame>
         <TopMenuBar
           mid={card[0].name}
@@ -245,6 +220,11 @@ export default function Category() {
           spaceBetween={250}
           slidesPerView={1}
           navigation={false}
+          onSlideChange={(event) => {
+            router.replace(
+              `/cards/swiper/${event.realIndex}/category/meaning_rev`
+            );
+          }}
           grabCursor={true}
           centeredSlides={true}
           initialSlide={slug}
@@ -264,7 +244,7 @@ export default function Category() {
 
                 <StyledOverFlow>
                   <Overflow.Content>
-                    <StyledText>{"display"}</StyledText>
+                    <StyledText>{card.meaning_rev}</StyledText>
                   </Overflow.Content>
                   <Overflow.Indicator direction={"down"}>
                     {(canScroll, refs) => (
@@ -291,28 +271,9 @@ export default function Category() {
                 >
                   return
                 </ReturnButton>
-                <ToggleButton
-                  onTouchEnd={() => handleToggle()}
-                  onClick={() => handleToggle()}
-                >
-                  toggle
-                </ToggleButton>
-                <button
-                  type="button"
-                  onClick={() =>
-                    document.body.querySelector(".swiper").swiper.disable()
-                  }
-                >
-                  disable
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    document.body.querySelector(".swiper").swiper.enable()
-                  }
-                >
-                  enable
-                </button>
+                <StyledLink href={`/cards/swiper/${slug}/category/description`}>
+                  description
+                </StyledLink>{" "}
               </ButtonContainer>
             </StyledSwiperSlide>
           ))}
