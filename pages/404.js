@@ -1,4 +1,3 @@
-import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import styled from "styled-components";
 import CatApi from "../components/CatApi";
 import StyledNavbar from "../components/Styled/StyledNavbar";
