@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Link from "next/link";
-import useStore from "../../../src/store/store";
 import { useState } from "react";
 import { useRouter } from "next/router";
 const StyledSpace = styled.div`

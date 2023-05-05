@@ -72,77 +72,80 @@ const StyledTopBarRight = styled.div`
 `;
 
 export default function TopMenuBar({ mid, card, hidden, backbutton }) {
-  const router = useRouter();
+  if (typeof window !== "undefined") {
+    const router = useRouter();
 
-  function disableSwiper() {
-    console.log("woot");
-    document.body.querySelector(".swiper") &&
-      (console.log("swiper?"),
-      document.body.querySelector(".swiper").swiper.disable());
-  }
+    function disableSwiper() {
+      document.body.querySelector(".swiper") &&
+        document.body.querySelector(".swiper").swiper.disable();
+    }
 
-  return card ? (
-    <StyledTopBarContainer>
-      <StyledTopBarLeft>
-        <StyledMenuLink
-          onClick={() => disableSwiper()}
-          href={`/`}
-          hidden={hidden}
-        >
-          MENU
-        </StyledMenuLink>
-      </StyledTopBarLeft>
-      <StyledTopBarMiddle>
-        {mid} <NoteNotifier currentCard={card} />
-      </StyledTopBarMiddle>
-      <StyledTopBarRight>
-        {backbutton ? (
-          <StyledMenuBack hidden={hidden}>
-            <StyledMenuLink
-              onClick={() => disableSwiper()}
-              href={`${backbutton}`}
-            >
-              {" "}
-              back
-            </StyledMenuLink>
-          </StyledMenuBack>
-        ) : (
-          <StyledMenuBack
+    return card ? (
+      <StyledTopBarContainer>
+        <StyledTopBarLeft>
+          <StyledMenuLink
+            onClick={() => disableSwiper()}
+            href={`/`}
             hidden={hidden}
-            onClick={() => {
-              disableSwiper(), router.back();
-            }}
           >
-            back
-          </StyledMenuBack>
-        )}
-      </StyledTopBarRight>
-    </StyledTopBarContainer>
-  ) : (
-    <StyledTopBarContainer>
-      <StyledTopBarLeft>
-        <StyledMenuLink
-          onClick={disableSwiper()}
-          hidden={hidden}
-          href={`${"/"}`}
-        >
-          menu
-        </StyledMenuLink>
-      </StyledTopBarLeft>
-      <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
-      <StyledTopBarRight>
-        {backbutton ? (
-          <StyledMenuBack hidden={hidden}>
-            <StyledMenuLink onClick={disableSwiper()} href={`${backbutton}`}>
+            MENU
+          </StyledMenuLink>
+        </StyledTopBarLeft>
+        <StyledTopBarMiddle>
+          {mid} <NoteNotifier currentCard={card} />
+        </StyledTopBarMiddle>
+        <StyledTopBarRight>
+          {backbutton ? (
+            <StyledMenuBack hidden={hidden}>
+              <StyledMenuLink
+                onClick={() => disableSwiper()}
+                href={`${backbutton}`}
+              >
+                {" "}
+                back
+              </StyledMenuLink>
+            </StyledMenuBack>
+          ) : (
+            <StyledMenuBack
+              hidden={hidden}
+              onClick={() => {
+                router.back();
+              }}
+            >
               back
-            </StyledMenuLink>
-          </StyledMenuBack>
-        ) : (
-          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
-            back
-          </StyledMenuBack>
-        )}
-      </StyledTopBarRight>
-    </StyledTopBarContainer>
-  );
+            </StyledMenuBack>
+          )}
+        </StyledTopBarRight>
+      </StyledTopBarContainer>
+    ) : (
+      <StyledTopBarContainer>
+        <StyledTopBarLeft>
+          <StyledMenuLink
+            onClick={() => disableSwiper()}
+            hidden={hidden}
+            href={`${"/"}`}
+          >
+            menu
+          </StyledMenuLink>
+        </StyledTopBarLeft>
+        <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
+        <StyledTopBarRight>
+          {backbutton ? (
+            <StyledMenuBack hidden={hidden}>
+              <StyledMenuLink
+                onClick={() => disableSwiper()}
+                href={`${backbutton}`}
+              >
+                back
+              </StyledMenuLink>
+            </StyledMenuBack>
+          ) : (
+            <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
+              back
+            </StyledMenuBack>
+          )}
+        </StyledTopBarRight>
+      </StyledTopBarContainer>
+    );
+  }
 }

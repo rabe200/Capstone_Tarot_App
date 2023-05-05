@@ -7,9 +7,11 @@ import SearchBar from "../components/SearchBar";
 
 const TopSpacer = styled.div`
   display: flex;
-  position: relative;
-  top: 150px;
-  background: red;
+  position: fixed;
+  height: 10px;
+  color: white;
+  background: black;
+  top: 0px;
 `;
 
 export const MenuLink = styled(Link)`
@@ -37,7 +39,7 @@ const StyledHeadline = styled.h1`
 const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 90%;
   width: 100%;
   position: relative;
   justify-content: center;
@@ -51,8 +53,8 @@ export default function HomePage() {
   const mid = "version 0.2";
   return (
     <Frame>
-      <TopSpacer />
-      <TopMenuBar hidden={"hidden"} menu={"/"} mid={mid} back={"/"} />
+      <TopSpacer>version 0</TopSpacer>
+      {/* <TopMenuBar hidden={"hidden"} menu={"/"} mid={mid} back={"/"} /> */}
 
       <StyledLinkContainer>
         <StyledHeadline>TAROT</StyledHeadline>

@@ -25,7 +25,7 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80%;
+  height: 90%;
   text-align: center;
   background: ${(p) => p.theme.colorBackground};
 `;
@@ -39,8 +39,9 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 `;
 
 const StyledImage = styled(Image)`
-  width: 363px;
-  height: 565px;
+  padding-top: 50px;
+  width: 285px;
+  height: 555px;
 `;
 
 export default function ProductImagesSlider() {
@@ -80,7 +81,6 @@ export default function ProductImagesSlider() {
             onSlideChange={(event) => {
               router.replace(`/cards/swiper/${event.realIndex}/zoom`);
             }}
-            // onDoubleClick={(event) => event.destroy()}
             grabCursor={true}
             centeredSlides={true}
             initialSlide={slug}
