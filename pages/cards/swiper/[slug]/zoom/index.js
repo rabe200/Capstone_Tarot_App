@@ -11,6 +11,7 @@ import useStore from "../../../../../src/store/store";
 import Frame from "../../../../../components/Frame";
 import { useDoubleTap } from "use-double-tap";
 import useSafePush from "../../../../../components/useSafePush";
+import Link from "next/link";
 
 const StyledImageContainerIndex = styled.div`
   display: block;
@@ -53,10 +54,6 @@ export default function CardImagesSlider() {
     const getCardById = useStore((state) => state.getCardById);
     const card = getCardById(slug);
 
-    const doubleTapImage = useDoubleTap(() => {
-      disableSwiper();
-    });
-
     function disableSwiper() {
       if (document.body.querySelector(".swiper")) {
         document.body.querySelector(".swiper").swiper.disable();
@@ -89,17 +86,18 @@ export default function CardImagesSlider() {
             {cards.map((card) => (
               <StyledSwiperSlide key={card.name} id={"swiperSlide"}>
                 <StyledImageContainerIndex>
-                  <StyledImage
-                    {...doubleTapImage}
-                    loading="eager"
-                    placeholder="blur"
-                    blurDataURL="/images/placeholder.jpg"
-                    src={card.image}
-                    alt={card.name}
-                    width={300}
-                    height={527}
-                    onDoubleClick={() => disableSwiper()}
-                  ></StyledImage>
+                  <Link href={`/cards/swiper/${slug}/category/description`}>
+                    <Image
+                      loading="eager"
+                      placeholder="blur"
+                      blurDataURL="/images/placeholder.jpg"
+                      src={card.image}
+                      alt={card.name}
+                      width={300}
+                      height={527}
+                      onClick={() => disableSwiper()}
+                    />
+                  </Link>
                 </StyledImageContainerIndex>
               </StyledSwiperSlide>
             ))}

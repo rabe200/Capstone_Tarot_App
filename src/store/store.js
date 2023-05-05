@@ -155,6 +155,11 @@ export const useStore = createLocalStorageStore(
       card = get().drawnCards.filter((prop) => prop.id === input);
       return card;
     },
+    getDrawnCardByUuid: (input) => {
+      let card;
+      card = get().drawnCards.filter((prop) => prop.uuid === input);
+      return card;
+    },
     filterCardFromArray: (input) => {
       const newArray = get().drawnCards.filter((item) => item.uuid !== input);
       return newArray;
