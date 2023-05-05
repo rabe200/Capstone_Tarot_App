@@ -6,7 +6,6 @@ import TopMenuBar from "../../../../components/Styled/StyledTopMenuBar";
 
 import StyledNavbar from "../../../../components/Styled/StyledNavbar";
 import Frame from "../../../../components/Frame";
-import { getCardById } from "../../../../lib/data";
 
 const CardText = styled.div`
   display: flex;
