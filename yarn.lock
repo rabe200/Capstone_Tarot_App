@@ -4972,7 +4972,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.8.1:
+prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5046,6 +5046,13 @@ react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+
+react-overflow-indicator@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-overflow-indicator/-/react-overflow-indicator-0.2.2.tgz#64ce3635d98a9788693ed9d36e87e2f97f732198"
+  integrity sha512-apihBaPCetTn0Vyes0LXYB5HWkFeSUr9PMI/ycte0js9qGsw3/VcWlHnuhwJov8NhFdaDnPFeGcP/yQYxXPsTg==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-toastify@^9.1.2:
   version "9.1.2"
