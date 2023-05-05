@@ -72,49 +72,80 @@ const StyledTopBarRight = styled.div`
 `;
 
 export default function TopMenuBar({ mid, card, hidden, backbutton }) {
-  const router = useRouter();
+  if (typeof window !== "undefined") {
+    const router = useRouter();
 
-  return card ? (
-    <StyledTopBarContainer>
-      <StyledTopBarLeft>
-        <StyledMenuLink href={`/`} hidden={hidden}>
-          MENU
-        </StyledMenuLink>{" "}
-      </StyledTopBarLeft>
-      <StyledTopBarMiddle>
-        {mid} <NoteNotifier currentCard={card} />
-      </StyledTopBarMiddle>
-      <StyledTopBarRight>
-        {backbutton ? (
-          <StyledMenuBack hidden={hidden}>
-            <StyledMenuLink href={`${backbutton}`}> back</StyledMenuLink>
-          </StyledMenuBack>
-        ) : (
-          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
-            back
-          </StyledMenuBack>
-        )}
-      </StyledTopBarRight>
-    </StyledTopBarContainer>
-  ) : (
-    <StyledTopBarContainer>
-      <StyledTopBarLeft>
-        <StyledMenuLink hidden={hidden} href={`${"/"}`}>
-          menu
-        </StyledMenuLink>{" "}
-      </StyledTopBarLeft>
-      <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
-      <StyledTopBarRight>
-        {backbutton ? (
-          <StyledMenuBack hidden={hidden}>
-            <StyledMenuLink href={`${backbutton}`}> back</StyledMenuLink>
-          </StyledMenuBack>
-        ) : (
-          <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
-            back
-          </StyledMenuBack>
-        )}
-      </StyledTopBarRight>
-    </StyledTopBarContainer>
-  );
+    function disableSwiper() {
+      document.body.querySelector(".swiper") &&
+        document.body.querySelector(".swiper").swiper.disable();
+    }
+
+    return card ? (
+      <StyledTopBarContainer>
+        <StyledTopBarLeft>
+          <StyledMenuLink
+            onClick={() => disableSwiper()}
+            href={`/`}
+            hidden={hidden}
+          >
+            MENU
+          </StyledMenuLink>
+        </StyledTopBarLeft>
+        <StyledTopBarMiddle>
+          {mid} <NoteNotifier currentCard={card} />
+        </StyledTopBarMiddle>
+        <StyledTopBarRight>
+          {backbutton ? (
+            <StyledMenuBack hidden={hidden}>
+              <StyledMenuLink
+                onClick={() => disableSwiper()}
+                href={`${backbutton}`}
+              >
+                {" "}
+                back
+              </StyledMenuLink>
+            </StyledMenuBack>
+          ) : (
+            <StyledMenuBack
+              hidden={hidden}
+              onClick={() => {
+                router.back();
+              }}
+            >
+              back
+            </StyledMenuBack>
+          )}
+        </StyledTopBarRight>
+      </StyledTopBarContainer>
+    ) : (
+      <StyledTopBarContainer>
+        <StyledTopBarLeft>
+          <StyledMenuLink
+            onClick={() => disableSwiper()}
+            hidden={hidden}
+            href={`${"/"}`}
+          >
+            menu
+          </StyledMenuLink>
+        </StyledTopBarLeft>
+        <StyledTopBarMiddle>{mid}</StyledTopBarMiddle>
+        <StyledTopBarRight>
+          {backbutton ? (
+            <StyledMenuBack hidden={hidden}>
+              <StyledMenuLink
+                onClick={() => disableSwiper()}
+                href={`${backbutton}`}
+              >
+                back
+              </StyledMenuLink>
+            </StyledMenuBack>
+          ) : (
+            <StyledMenuBack hidden={hidden} onClick={() => router.back()}>
+              back
+            </StyledMenuBack>
+          )}
+        </StyledTopBarRight>
+      </StyledTopBarContainer>
+    );
+  }
 }

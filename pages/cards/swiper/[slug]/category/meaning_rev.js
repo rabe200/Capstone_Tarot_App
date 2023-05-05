@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import "swiper/swiper-bundle.min.css";
-import { useState } from "react";
 import { Navigation, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { cards } from "../../../../../lib/data";
@@ -12,14 +11,30 @@ import useSafePush from "../../../../../components/useSafePush";
 import Frame from "../../../../../components/Frame";
 import Image from "next/image";
 import Overflow from "../../../../../components/OverFlowIndicator";
-
+import Link from "next/link";
 const StyledOverFlow = styled(Overflow)`
-  max-height: 90%;
-  width: 100%;
-  padding-right: 10px;
-  Overflow.Indicator {
-    background: white;
-    color: white;
+  height: 70%;
+
+  @media only screen and (min-width: 390px) {
+    height: 75%;
+  }
+
+  @media only screen and (min-width: 414px) {
+    height: 80%;
+  }
+
+  @media only screen and (min-width: 585px) {
+    height: 90%;
+    font-size: 1.2em;
+  }
+
+  @media only screen and (min-width: 834px) {
+    height: 100%;
+    width: 834px;
+  }
+
+  @media only screen and (min-width: 1194px) {
+    width: 1194px;
   }
 `;
 
@@ -40,7 +55,7 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 90%;
+  height: 99%;
   text-align: center;
 
   @media only screen and (min-width: 390px) {
@@ -135,6 +150,8 @@ const StyledCategoryName = styled.div`
   height: 20px;
   position: fixed;
   top: 30px;
+  right: ${(p) => (p.category === "meaning_up" ? "0" : "null")};
+  left: ${(p) => (p.category === "meaning_rev" ? "0" : "null")};
   background: ${(p) => p.theme.colorText};
   color: ${(p) => p.theme.colorBackground};
   text-align: center;
@@ -151,8 +168,9 @@ const ButtonContainer = styled.div`
   z-index: 1;
 `;
 
-const ToggleButton = styled.div`
-  width: 50%;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  width: 70%;
   height: 45px;
   padding: 10px;
   background: black;
@@ -164,7 +182,7 @@ const ToggleButton = styled.div`
 `;
 
 const ReturnButton = styled.div`
-  width: 50%;
+  width: 25%;
   height: 1em;
   padding: 1em;
   background: white;
@@ -176,40 +194,26 @@ const ReturnButton = styled.div`
   border-bottom-right-radius: 4px;
 `;
 
-export default function Category() {
+export default function Meaning_Rev() {
   const router = useRouter();
+  const category = router ? router.query.category : 0;
   const slug = router ? router.query.slug : 0;
   const getCardById = useStore((state) => state.getCardById);
   const card = getCardById(slug);
-  const setStoreSlug = useStore((state) => state.setSlug);
-  const [category, setCategory] = useState(router ? router.query.category : 0);
   const { safePush } = useSafePush();
-  const [clicked, setClicked] = useState(false);
-
-  function handleToggle() {
-    if (category === "description") {
-      setCategory("meaning_up");
-      router.push(`/cards/swiper/${slug}/meaning_up`);
-    } else if (category === "meaning_up") {
-      setCategory("meaning_rev");
-      router.push(`/cards/swiper/${slug}/meaning_rev`);
-    } else if (category === "meaning_rev") {
-      router.push(`/cards/swiper/${slug}/description`);
-      setCategory("description");
-    }
-  }
 
   return (
-    slug && (
+    card[0] && (
       <Frame>
         <TopMenuBar
           mid={card[0].name}
           backbutton={`/cards/swiper/${slug}/zoom`}
         />
 
-        <StyledCategoryName> {category}</StyledCategoryName>
+        <StyledCategoryName category={category}> {category}</StyledCategoryName>
 
         <StyledSwiper
+          enabled={true}
           loop={true}
           speed={300}
           modules={[Navigation, A11y]}
@@ -217,8 +221,9 @@ export default function Category() {
           slidesPerView={1}
           navigation={false}
           onSlideChange={(event) => {
-            setStoreSlug(event.realIndex);
-            router.replace(`/cards/swiper/${event.realIndex}/${category}`);
+            router.replace(
+              `/cards/swiper/${event.realIndex}/category/meaning_rev`
+            );
           }}
           grabCursor={true}
           centeredSlides={true}
@@ -237,70 +242,26 @@ export default function Category() {
                   alt={card.name}
                 />
 
-                {category === "description" ? (
-                  <StyledOverFlow>
-                    <Overflow.Content>
-                      <StyledText>{card.desc}</StyledText>{" "}
-                    </Overflow.Content>
-                    <Overflow.Indicator direction={"down"}>
-                      {(canScroll, refs) => (
-                        <OverFlowIndicatorIcon
-                          type="button"
-                          onClick={() => {
-                            refs.viewport.current.scrollBy({
-                              top: refs.viewport.current.clientHeight,
-                              behaviour: "smooth",
-                            });
-                          }}
-                        >
-                          {canScroll ? "ᛨ" : "ᛝ"}
-                        </OverFlowIndicatorIcon>
-                      )}
-                    </Overflow.Indicator>{" "}
-                  </StyledOverFlow>
-                ) : category === "meaning_up" ? (
-                  <StyledOverFlow>
-                    <Overflow.Content>
-                      <StyledText>{card.meaning_up}</StyledText>{" "}
-                    </Overflow.Content>
-                    <Overflow.Indicator direction={"down"}>
-                      {(canScroll, refs) => (
-                        <OverFlowIndicatorIcon
-                          type="button"
-                          onClick={() => {
-                            refs.viewport.current.scrollBy({
-                              top: refs.viewport.current.clientHeight,
-                              behaviour: "smooth",
-                            });
-                          }}
-                        >
-                          {canScroll ? "ᛨ" : "ᛝ"}
-                        </OverFlowIndicatorIcon>
-                      )}
-                    </Overflow.Indicator>{" "}
-                  </StyledOverFlow>
-                ) : category === "meaning_rev" ? (
-                  <StyledOverFlow>
-                    <Overflow.Content>
-                      <StyledText>{card.meaning_rev}</StyledText>{" "}
-                    </Overflow.Content>
-                    <Overflow.Indicator direction={"down"}>
-                      {(canScroll, refs) => (
-                        <OverFlowIndicatorIcon
-                          type="button"
-                          onClick={() => {
-                            refs.viewport.current.scrollBy({
-                              top: refs.viewport.current.clientHeight,
-                              behaviour: "smooth",
-                            });
-                          }}
-                        >
-                          {canScroll ? "ᛨ" : "ᛝ"}
-                        </OverFlowIndicatorIcon>
-                      )}
-                    </Overflow.Indicator>{" "}
-                  </StyledOverFlow>
-                ) : null}
+                <StyledOverFlow>
+                  <Overflow.Content>
+                    <StyledText>{card.meaning_rev}</StyledText>
+                  </Overflow.Content>
+                  <Overflow.Indicator direction={"down"}>
+                    {(canScroll, refs) => (
+                      <OverFlowIndicatorIcon
+                        type="button"
+                        onClick={() => {
+                          refs.viewport.current.scrollBy({
+                            top: refs.viewport.current.clientHeight,
+                            behaviour: "smooth",
+                          });
+                        }}
+                      >
+                        {canScroll ? "ᛨ" : "ᛝ"}
+                      </OverFlowIndicatorIcon>
+                    )}
+                  </Overflow.Indicator>{" "}
+                </StyledOverFlow>
               </StyledBoxForText>
 
               <ButtonContainer>
@@ -310,13 +271,9 @@ export default function Category() {
                 >
                   return
                 </ReturnButton>
-                <ToggleButton
-                  clicked={clicked}
-                  onTouchEnd={() => handleToggle()}
-                  onClick={() => handleToggle()}
-                >
-                  toggle
-                </ToggleButton>
+                <StyledLink href={`/cards/swiper/${slug}/category/description`}>
+                  meaning_rev
+                </StyledLink>{" "}
               </ButtonContainer>
             </StyledSwiperSlide>
           ))}

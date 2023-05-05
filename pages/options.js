@@ -28,7 +28,7 @@ const StyledH1 = styled.h1`
 export default function OptionsMenu() {
   return (
     <Frame>
-      <TopMenuBar mid={"credits"} back={"/"} />
+      <TopMenuBar mid={"options"} back={"/"} />
 
       <StyledOptionsMenu>
         <StyledH1>

@@ -10,10 +10,12 @@ const StyledOptionsMenu = styled.ul`
   flex-direction: column;
   align-items: center;
   list-style: none;
-  width: 100%;
+  height: 70%;
+  width: 80%;
   margin: 0;
   padding: 0;
   color: ${(p) => p.theme.colorText};
+  overflow: auto;
 `;
 
 const StyledH1 = styled.h1`

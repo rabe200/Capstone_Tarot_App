@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Link from "next/link";
-import useStore from "../../../src/store/store";
 import { useState } from "react";
 import { useRouter } from "next/router";
 const StyledSpace = styled.div`
@@ -112,15 +111,12 @@ const MenuLink3 = styled(Link)`
 
 export default function StyledNavbar() {
   const [hidden, setHiddenToggle] = useState(false);
-  const setLastPageVisited = useStore((state) => state.setLastPageVisited);
-  const setComingFromHistory = useStore((state) => state.setComingFromHistory);
-  const router = useRouter();
-  const queryName = router.query.optionSelect;
-  const storeSlug = useStore((state) => state.slug);
 
-  function resetComingFromHistory() {
-    setComingFromHistory(false);
-    setLastPageVisited(queryName);
+  const router = useRouter();
+
+  function disableSwiper() {
+    document.body.querySelector(".swiper") &&
+      document.body.querySelector(".swiper").swiper.disable();
   }
 
   return (
@@ -128,25 +124,22 @@ export default function StyledNavbar() {
       <div hidden={hidden}>
         <StyledMenu>
           <MenuLink2
-            onClick={() => resetComingFromHistory()}
+            onClick={() => disableSwiper()}
             href={"/cards/dailycard/moodmeter"}
           >
             PLAY
           </MenuLink2>
           <MenuLink1
-            onClick={() => resetComingFromHistory()}
             hidden={"hidden"}
             href={`/cards/swiper/${
-              router.query.slug
-                ? router.query.slug
-                : storeSlug
-                ? storeSlug
-                : "0"
+              router.query.slug ? router.query.slug : "0"
             }/zoom`}
           >
             CARDS
           </MenuLink1>
-          <MenuLink3 href={"/cards/history"}>NOTES</MenuLink3>
+          <MenuLink3 onClick={() => disableSwiper()} href={"/cards/history"}>
+            NOTES
+          </MenuLink3>
         </StyledMenu>
       </div>
     </StyledSpace>

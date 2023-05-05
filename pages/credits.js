@@ -3,6 +3,7 @@ import TopMenuBar from "../components/Styled/StyledTopMenuBar";
 import styled from "styled-components";
 import Link from "next/link";
 import Frame from "../components/Frame";
+
 const StyledCredits = styled.ul`
   list-style: none;
   margin: 0;
@@ -12,12 +13,21 @@ const StyledCredits = styled.ul`
   background: ${(p) => p.theme.colorBackground};
 `;
 
+const StyledH1 = styled.h1`
+  &:hover {
+    background: ${(p) => p.theme.colorText};
+    color: ${(p) => p.theme.colorBackground};
+    border-radius: 8px;
+    padding: -8px;
+  }
+`;
+
 export default function Credits() {
   return (
     <Frame>
       <TopMenuBar mid={"OPTIONS"} />
       <StyledCredits>
-        <h1>developer</h1>
+        <StyledH1>developer</StyledH1>
         <li>github: rabe200</li>
         <li>IG: @rabentinte</li>
         <h1>resources</h1>
