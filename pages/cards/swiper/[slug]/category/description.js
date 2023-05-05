@@ -274,7 +274,7 @@ export default function Description() {
                   return
                 </ReturnButton>
                 <StyledLink href={`/cards/swiper/${slug}/category/meaning_up`}>
-                  meaning up
+                  description
                 </StyledLink>
               </ButtonContainer>
             </StyledSwiperSlide>

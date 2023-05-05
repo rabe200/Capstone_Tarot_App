@@ -274,7 +274,7 @@ export default function Meaning_Up() {
                   return
                 </ReturnButton>
                 <StyledLink href={`/cards/swiper/${slug}/category/meaning_rev`}>
-                  meaning rev
+                  meaning up
                 </StyledLink>
               </ButtonContainer>
             </StyledSwiperSlide>
