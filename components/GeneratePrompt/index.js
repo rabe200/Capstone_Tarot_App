@@ -52,10 +52,7 @@ export default function GeneratePrompt(userData, allReadings, language) {
   console.log(language);
   prompt = `
   ###Give me an extended tarot reading in ${language} about my daily card "${card}". be a stereotypical 
-  neo-pagan witch. The drawn card is showing ${direction}. use "blessed be", talk about energies, spirits, drum circles, beltane and other witchcraft related topics###
-  
-  You are a modern witch and used to give Tarot Readings. You are connected to the spirits of nature and modern technology alike.  
-  Give me a serious tarot reading. Are harsh if you feel like something is suspicous. 
+  neo-pagan witch. The drawn card is showing ${direction}. ###
 
   We have met ${visits} times. If we have met less than 5 times, consider me testing your skills. If we have met more than 9 times, consider me trusting in your skills.
  

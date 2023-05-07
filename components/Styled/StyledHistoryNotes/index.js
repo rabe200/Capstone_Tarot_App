@@ -39,7 +39,7 @@ const NoteContainer = styled.div`
   }
 `;
 
-const StyledButton = styled.div`
+export const StyledButton = styled.div`
   background: ${(p) => p.theme.colorContainer};
   color: ${(p) => p.theme.colorText};
   width: 4em;
@@ -91,7 +91,7 @@ const StyledNotes = styled.div`
   }};
 `;
 
-const StyledToastContainer = styled(ToastContainer)`
+export const StyledToastContainer = styled(ToastContainer)`
   position: sticky;
   font-size: 1em;
   .Toastify__progress-bar {
@@ -122,6 +122,7 @@ export default function HistoryNotes({ card, toggle }) {
   function handleClick() {
     setEditable(!editable);
   }
+
   injectStyle();
 
   function enlargeContent() {
@@ -131,7 +132,9 @@ export default function HistoryNotes({ card, toggle }) {
       setNoteOverflow("hidden");
     }
   }
+
   const styledNotesListener = document.getElementById(`${card.uuid}`);
+
   useEffect(() => {
     if (styledNotesListener)
       styledNotesListener.addEventListener("listener", function () {
